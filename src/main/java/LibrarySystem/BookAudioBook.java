@@ -1,4 +1,4 @@
-package LibraryCatalogue;
+package LibrarySystem;
 
 import java.util.Date;
 
@@ -7,11 +7,11 @@ public class BookAudioBook extends WrittenThing{
     private String isbn;
 
     public BookAudioBook(Date publishedDate) {
-        super(publishedDate);
+        super(String.valueOf(publishedDate));
     }
 
     public BookAudioBook(Date publishedDate, String title, String isbn) {
-        super(publishedDate);
+        super(String.valueOf(publishedDate));
         this.title = title;
         this.isbn = isbn;
     }

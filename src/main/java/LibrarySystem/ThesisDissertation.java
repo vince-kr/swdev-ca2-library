@@ -1,4 +1,4 @@
-package LibraryCatalogue;
+package LibrarySystem;
 
 import java.util.Date;
 
@@ -7,11 +7,11 @@ public class ThesisDissertation extends WrittenThing{
     private String summary;
 
     public ThesisDissertation(Date publishedDate) {
-        super(publishedDate);
+        super(String.valueOf(publishedDate));
     }
 
     public ThesisDissertation(Date publishedDate, String title, String summary) {
-        super(publishedDate);
+        super(String.valueOf(publishedDate));
         this.title = title;
         this.summary = summary;
     }
