@@ -7,6 +7,10 @@ public class BookAudioBook extends WrittenThing{
     private String isbn;
 
     public BookAudioBook(Date publishedDate) {
+       
+    }
+
+    public BookAudioBook(Date publishedDate) {
         super(String.valueOf(publishedDate));
     }
 

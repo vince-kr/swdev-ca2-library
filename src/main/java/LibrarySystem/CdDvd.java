@@ -8,8 +8,7 @@ public class CdDvd extends Asset{
     public CdDvd(String title) {
         super(title);
     }
-
-    public CdDvd(String title, Producer producer, Director director, int playtimeInSeconds) {
+    public CdDvd(String title,  Producer producer, Director director, int playtimeInSeconds) {
         super(title);
         this.producer = producer;
         this.director = director;
@@ -43,5 +42,6 @@ public class CdDvd extends Asset{
     @Override
     public String toString() {
         return String.format("Title: %s, Producer: %s, PlayTime: %d", getTitle(),producer.getName(),playtimeInSeconds);
+
     }
 }

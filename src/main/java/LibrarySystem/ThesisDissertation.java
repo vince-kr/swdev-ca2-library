@@ -10,6 +10,7 @@ public class ThesisDissertation extends WrittenThing{
         super(String.valueOf(publishedDate));
     }
 
+
     public ThesisDissertation(Date publishedDate, String title, String summary) {
         super(String.valueOf(publishedDate));
         this.title = title;

@@ -2,7 +2,7 @@ package LibrarySystem;
 
 import java.util.Date;
 
-public abstract class WrittenThing extends Asset{
+public abstract class WrittenThing extends Asset {
     private Date publishedDate;
     private Author author;
     private String title;
@@ -11,7 +11,7 @@ public abstract class WrittenThing extends Asset{
         super(title);
     }
 
-    public WrittenThing(Date publishedDate,String title) {
+    public WrittenThing(Date publishedDate, String title) {
         super(title);
         this.publishedDate = publishedDate;
     }
@@ -33,6 +33,4 @@ public abstract class WrittenThing extends Asset{
     }
 
     public abstract String toString();
-
-
 }
