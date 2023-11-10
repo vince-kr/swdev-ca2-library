@@ -3,17 +3,15 @@ package LibrarySystem.library.catalogue;
 public class CdDvd extends Asset{
     private Producer producer;
     private Director director;
-    private int playtimeInSeconds;
+    private int playTime;
+    private String productionYear;
 
-    public CdDvd(String title) {
-        super(title);
-    }
-
-    public CdDvd(String title,  Producer producer, Director director, int playtimeInSeconds) {
-        super(title);
+    public CdDvd(int id, String title, Producer producer, Director director, int playTime, String productionYear) {
+        super(id, title);
         this.producer = producer;
         this.director = director;
-        this.playtimeInSeconds = playtimeInSeconds;
+        this.playTime = playTime;
+        this.productionYear = productionYear;
     }
 
     public Producer getProducer() {
@@ -32,16 +30,26 @@ public class CdDvd extends Asset{
         this.director = director;
     }
 
-    public int getPlaytimeInSeconds() {
-        return playtimeInSeconds;
+
+    public int getPlayTime() {
+        return playTime;
     }
 
-    public void setPlaytimeInSeconds(int playtimeInSeconds) {
-        this.playtimeInSeconds = playtimeInSeconds;
+    public void setPlayTime(int playTime) {
+        this.playTime = playTime;
+    }
+
+    public String getProductionYear() {
+        return productionYear;
+    }
+
+    public void setProductionYear(String productionYear) {
+        this.productionYear = productionYear;
     }
 
     @Override
     public String toString() {
-        return String.format("Title: %s, Producer: %s, PlayTime: %d", getTitle(),producer,playtimeInSeconds);
+
+        return String.format("Tile: %s, Producer: %s, ProductionYear: %s",getTitle(),producer.getName(),productionYear);
     }
 }

@@ -2,26 +2,18 @@ package LibrarySystem.library.catalogue;
 
 import java.util.Date;
 
-public class BookAudioBook extends WrittenThing{
-    private String title;
+public class BookAudioBook extends Asset{
+    private Author author;
     private String isbn;
+    private String publishedYear;
 
-    public BookAudioBook(Date publishedDate) {
-        super(String.valueOf(publishedDate));
-    }
 
-    public BookAudioBook(Date publishedDate, String title, String isbn) {
-        super(String.valueOf(publishedDate));
-        this.title = title;
+
+    public BookAudioBook(int id, String title, String isbn,  String publishedYear, Author author) {
+        super(id, title);
         this.isbn = isbn;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+        this.publishedYear = publishedYear;
+        this.author = author;
     }
 
     public String getIsbn() {
@@ -32,8 +24,26 @@ public class BookAudioBook extends WrittenThing{
         this.isbn = isbn;
     }
 
+
+    public String getPublishedYear() {
+        return publishedYear;
+    }
+
+    public void setPublishedYear(String publishedYear) {
+        this.publishedYear = publishedYear;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
     @Override
     public String toString() {
-        return String.format("Title: %s, ISBN: %s", title, isbn);
+
+        return String.format("Title: %s, Author: %s", getTitle(),author.getName());
     }
 }

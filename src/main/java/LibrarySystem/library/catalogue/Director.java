@@ -4,40 +4,24 @@ import LibrarySystem.library.Person;
 
 import java.util.ArrayList;
 
-public class Director extends Person {
-    private  String name;
-    private ArrayList<Asset> thingsDirected;
+public class Director extends Person{
+    private ArrayList<Asset> assetsDirected;
 
-    public Director(String name) {
-        super(name);
+    public Director(int id, String name) {
+        super(id, name);
+        this.assetsDirected = new ArrayList<>();
     }
 
-    public Director(String name, String name1, ArrayList<Asset> thingsDirected) {
-        super(name);
-        this.name = name1;
-        this.thingsDirected = thingsDirected;
+    public ArrayList<Asset> getAssetsDirected() {
+        return assetsDirected;
     }
 
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ArrayList<Asset> getThingsDirected() {
-        return thingsDirected;
-    }
-
-    public void setThingsDirected(ArrayList<Asset> thingsDirected) {
-        this.thingsDirected = thingsDirected;
+    public void setAssetsDirected(ArrayList<Asset> assetsDirected) {
+        this.assetsDirected = assetsDirected;
     }
 
     @Override
     public String toString() {
-        return null;
+        return String.format("DirectorId: %d, DirectorName: %s", getId(), getName());
     }
 }

@@ -1,34 +1,38 @@
 package LibrarySystem.library.catalogue;
 
 public abstract class Asset {
+    private int id;
     private String title;
-    private boolean available;
+    private String status;
 
 
-
-    public Asset(String title) {
+    public Asset(int id, String title) {
+        this.id = id;
         this.title = title;
-        this.available = true;
+        this.status = "available";
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
-    //borrow asset
-    public void borrowAsset(){
-        if (available){
-            available = false;
-        }else{
-            System.out.println("Item is already borrowed");
-        }
+    public void setTitle(String title) {
+        this.title = title;
     }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-
-
     public abstract String toString();
 }

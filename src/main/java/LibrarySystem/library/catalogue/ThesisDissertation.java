@@ -2,27 +2,36 @@ package LibrarySystem.library.catalogue;
 
 import java.util.Date;
 
-public class ThesisDissertation extends WrittenThing{
-    private String title;
+public class ThesisDissertation extends Asset{
+    private Author author;
+    private String topic;
     private String summary;
+    private String publishedDate;
 
-    public ThesisDissertation(Date publishedDate) {
-        super(String.valueOf(publishedDate));
-    }
-
-    public ThesisDissertation(Date publishedDate, String title, String summary) {
-        super(String.valueOf(publishedDate));
-        this.title = title;
+    public ThesisDissertation(int id, String title, Author author, String topic, String summary, String publishedDate) {
+        super(id, title);
+        this.author = author;
+        this.topic = topic;
         this.summary = summary;
+        this.publishedDate = publishedDate;
     }
 
-    public String getTitle() {
-        return title;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
 
     public String getSummary() {
         return summary;
@@ -32,8 +41,16 @@ public class ThesisDissertation extends WrittenThing{
         this.summary = summary;
     }
 
+    public String getPublishedDate() {
+        return publishedDate;
+    }
+
+    public void setPublishedDate(String publishedDate) {
+        this.publishedDate = publishedDate;
+    }
+
     @Override
     public String toString() {
-        return String.format("Title: %s, Summary: %s", title, summary);
+        return String.format("Author: %s, Topic: %s, Date: %s", author.getName(),topic,getPublishedDate());
     }
 }
