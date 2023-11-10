@@ -1,7 +1,7 @@
-package library;
+package LibrarySystem.library;
 
-import library.catalogue.Catalogue;
-import library.catalogue.CatalogueFactory;
+import LibrarySystem.library.catalogue.Catalogue;
+import LibrarySystem.library.catalogue.CatalogueFactory;
 
 class LibraryManagement implements Library {
     Catalogue catalogue;

@@ -1,6 +1,7 @@
-package LibrarySystem;
+package LibrarySystem.library.catalogue;
 
 import java.util.ArrayList;
+import LibrarySystem.library.Person;
 
 public class Producer extends Person{
     private String name;

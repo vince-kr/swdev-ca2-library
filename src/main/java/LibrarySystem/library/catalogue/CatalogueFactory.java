@@ -1,4 +1,4 @@
-package library.catalogue;
+package LibrarySystem.library.catalogue;
 
 // Similar to the LibraryFactory, the CatalogueFactory is a public class with a single static method
 // which returns a new CatalogueManagement instance. The Catalogue needs CSV data to populate its

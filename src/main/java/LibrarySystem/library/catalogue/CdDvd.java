@@ -1,4 +1,4 @@
-package LibrarySystem;
+package LibrarySystem.library.catalogue;
 
 public class CdDvd extends Asset{
     private Producer producer;

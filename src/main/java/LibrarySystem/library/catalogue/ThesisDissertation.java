@@ -1,4 +1,4 @@
-package LibrarySystem;
+package LibrarySystem.library.catalogue;
 
 import java.util.Date;
 

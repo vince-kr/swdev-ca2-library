@@ -1,4 +1,4 @@
-package LibrarySystem;
+package LibrarySystem.library;
 
 public abstract class Person {
     private String name;

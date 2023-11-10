@@ -1,8 +1,10 @@
-package LibrarySystem;
+package LibrarySystem.library.catalogue;
+
+import LibrarySystem.library.Person;
 
 import java.util.ArrayList;
 
-public class Director extends Person{
+public class Director extends Person {
     private  String name;
     private ArrayList<Asset> thingsDirected;
 

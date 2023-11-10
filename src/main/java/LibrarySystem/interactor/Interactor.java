@@ -1,6 +1,6 @@
-package interactor;
+package LibrarySystem.interactor;
 
-import library.Library;
+import LibrarySystem.library.Library;
 
 class Interactor {
     boolean isFinished;

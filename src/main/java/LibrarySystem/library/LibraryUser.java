@@ -1,4 +1,6 @@
-package LibrarySystem;
+package LibrarySystem.library;
+
+import LibrarySystem.library.catalogue.Asset;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package library.catalogue;
+package LibrarySystem.library.catalogue;
 
 class CatalogueManagement implements Catalogue {
     public CatalogueManagement(String csvCatalogueData) {};

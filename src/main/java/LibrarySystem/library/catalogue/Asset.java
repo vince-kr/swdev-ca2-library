@@ -1,4 +1,4 @@
-package LibrarySystem;
+package LibrarySystem.library.catalogue;
 
 public abstract class Asset {
     private String title;

@@ -3,7 +3,7 @@ package LibrarySystem.interactor;
 import LibrarySystem.library.Library;
 import LibrarySystem.library.LibraryFactory;
 
-public class Main {
+public class Start {
     public static void main(String[] args) {
         // First things first: tell the user what the system is for
         System.out.println("===========================\n" +

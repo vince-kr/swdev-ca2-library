@@ -1,4 +1,4 @@
-package library;
+package LibrarySystem.library;
 
 // The library package only needs two public classes: the Library interface, and the LibraryFactory
 // class below. This only has a single static method which simply returns a new LibraryManagement
