@@ -1,10 +1,10 @@
-package interactor;
+package LibrarySystem.interactor;
 
-import library.Library;
-import library.LibraryFactory;
+import LibrarySystem.library.Library;
+import LibrarySystem.library.LibraryFactory;
 
-public class Start {
-    public static void Main(String[] args) {
+public class Main {
+    public static void main(String[] args) {
         // First things first: tell the user what the system is for
         System.out.println("===========================\n" +
                 "!!  LIBRARY  MANAGEMENT  !!\n" +
