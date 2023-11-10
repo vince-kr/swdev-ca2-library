@@ -6,9 +6,11 @@ import LibrarySystem.library.LibraryFactory;
 public class Start {
     public static void main(String[] args) {
         // First things first: tell the user what the system is for
-        System.out.println("===========================\n" +
-                "!!  LIBRARY  MANAGEMENT  !!\n" +
-                "===========================\n");
+        System.out.println("""
+                ===========================
+                !!  LIBRARY  MANAGEMENT  !!
+                ===========================
+                """);
 
         // Create a new object that implements the Library interface
         // This is coming from another package, so we're using a static factory to avoid having
