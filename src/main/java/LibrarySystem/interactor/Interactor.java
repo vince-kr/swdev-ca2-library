@@ -17,6 +17,7 @@ class Interactor {
     private HashMap<String, GetUpdateContinue> loadAllInteractions() {
         var allInteractions = new HashMap<String, GetUpdateContinue>();
         allInteractions.put("main", new MainMenu());
+        allInteractions.put("add-author", new AddAuthor());
         return allInteractions;
     }
 

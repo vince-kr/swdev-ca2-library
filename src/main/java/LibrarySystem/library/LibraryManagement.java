@@ -1,9 +1,10 @@
 package LibrarySystem.library;
 
+import LibrarySystem.library.catalogue.Asset;
 import LibrarySystem.library.catalogue.Catalogue;
 import LibrarySystem.library.catalogue.CatalogueFactory;
 
-class LibraryManagement implements Library {
+class LibraryManagement implements Library, Catalogue {
     Catalogue catalogue;
     // The constructor of the LibraryManagement class creates a Catalogue object (really a
     // CatalogueManagement object that implements the Catalogue interface) by calling the
@@ -13,10 +14,35 @@ class LibraryManagement implements Library {
 
     public LibraryManagement() {
         catalogue = CatalogueFactory.createCatalogue("some,mock,csv,data");
-    };
+    }
 
     @Override
     public void addUser() {
 
+    }
+
+    @Override
+    public void addAuthor(String authorName) {
+        catalogue.addAuthor(authorName);
+    }
+
+    @Override
+    public void addAsset(Asset toAdd) {
+        catalogue.addAsset(toAdd);
+    }
+
+    @Override
+    public Asset reserveAsset(Asset toReserve) {
+        return catalogue.reserveAsset(toReserve);
+    }
+
+    @Override
+    public Asset borrowAsset(Asset toBorrow) {
+        return catalogue.borrowAsset(toBorrow);
+    }
+
+    @Override
+    public void returnAsset(Asset toReturn) {
+        catalogue.returnAsset(toReturn);
     }
 }

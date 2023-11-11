@@ -31,4 +31,17 @@ public abstract class StandardInput {
     public static int getAnyInt(String prompt) {
         return getValidNumber(prompt, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
+
+    public static String getValidString(String prompt, String responsePattern) {
+        var in = new Scanner(System.in);
+
+        System.out.print(prompt);
+        String userInput = in.nextLine();
+
+        if (userInput.matches(responsePattern))
+            return userInput;
+
+        System.out.println("WARNING - your input '" + userInput + "' is invalid!");
+        return getValidString(prompt, responsePattern);
+    }
 }
