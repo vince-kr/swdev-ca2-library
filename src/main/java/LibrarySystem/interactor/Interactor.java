@@ -17,8 +17,10 @@ class Interactor {
     private HashMap<String, Interaction> loadAllInteractions() {
         var allInteractions = new HashMap<String, Interaction>();
         allInteractions.put("main", new MainMenu());
-        allInteractions.put("user-management", new UserMenu());
-        allInteractions.put("asset-management", new AssetMenu());
+        allInteractions.put("common-operations", new OperationsMenu());
+        allInteractions.put("common-filters", new FiltersMenu());
+        allInteractions.put("manage-catalogue", new CatalogueMenu());
+        allInteractions.put("manage-users", new UserMenu());
         allInteractions.put("add-author", new AddAuthor());
         return allInteractions;
     }
