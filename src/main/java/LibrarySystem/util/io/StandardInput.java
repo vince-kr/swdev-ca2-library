@@ -25,7 +25,7 @@ public abstract class StandardInput {
             } else {
                 try {
                     choice = Integer.parseInt(userInput);
-                    if (min < choice && choice < max) {
+                    if (min <= choice && choice <= max) {
                         inputIsValid = true;
                     } else {
                         System.out.println(RED + " Number should only be in the range of : "+RESET+ min + " and " + max + "!");
