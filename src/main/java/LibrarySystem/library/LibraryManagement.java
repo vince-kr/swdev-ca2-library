@@ -5,8 +5,6 @@ import LibrarySystem.library.catalogue.Author;
 import LibrarySystem.library.catalogue.Catalogue;
 import LibrarySystem.library.catalogue.CatalogueFactory;
 
-import java.util.ArrayList;
-
 class LibraryManagement implements Library, Catalogue {
     final Catalogue catalogue;
     // The constructor of the LibraryManagement class creates a Catalogue object (really a
