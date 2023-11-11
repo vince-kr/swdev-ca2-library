@@ -17,7 +17,7 @@ abstract class Menu extends Interaction {
             System.out.println(fmtIndex + ".  " + menu[index]);
         }
 
-        int choice = StandardInput.getPositiveNumber(prompt, menu.length);
+        int choice = StandardInput.getPositiveInt(prompt, menu.length);
 
         nextReference = menu[--choice].nextInteractionReference();
     }
