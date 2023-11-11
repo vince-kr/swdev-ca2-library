@@ -1,8 +1,18 @@
 package LibrarySystem.library.catalogue;
 
-class CatalogueManagement implements Catalogue {
-    public CatalogueManagement(String csvCatalogueData) {
+import java.util.ArrayList;
 
+class CatalogueManagement implements Catalogue {
+
+    final ArrayList<Author> allAuthors;
+
+    public CatalogueManagement(String csvCatalogueData) {
+        allAuthors = new ArrayList<>();
+    }
+
+    @Override
+    public void addAuthor(String name) {
+        allAuthors.add(new Author(allAuthors.size(), name));
     }
 
     @Override

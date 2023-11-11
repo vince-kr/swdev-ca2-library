@@ -14,7 +14,7 @@ public class AddAuthor extends Interaction {
         System.out.println(header);
 
         String authorName = StandardInput.getValidString(prompt, responsePattern);
-        library.addAuthor(authorName);
+        // library.addAuthor(authorName);
 
         System.out.println(confirmation);
     }

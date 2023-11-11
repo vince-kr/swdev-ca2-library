@@ -15,11 +15,9 @@ class LibraryManagement implements Library, Catalogue {
     // assets, authors, etc. For now this is fake data, we will learn how to read from disk in our
     // next lecture.
 
-    final ArrayList<Author> allAuthors;
 
     public LibraryManagement() {
         catalogue = CatalogueFactory.createCatalogue("some,mock,csv,data");
-        allAuthors = new ArrayList<>();
     }
 
     // Library methods
@@ -28,12 +26,12 @@ class LibraryManagement implements Library, Catalogue {
 
     }
 
+    // Catalogue methods - their equivalents are called on the Catalogue object
     @Override
     public void addAuthor(String name) {
-        allAuthors.add(new Author(allAuthors.size(), name));
+        catalogue.addAuthor(name);
     }
 
-    // Catalogue methods - their equivalents are called on the Catalogue object
     @Override
     public void addAsset(Asset toAdd) {
         catalogue.addAsset(toAdd);
