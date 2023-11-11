@@ -2,6 +2,7 @@ package LibrarySystem.library.catalogue;
 
 import java.util.ArrayList;
 import LibrarySystem.library.Person;
+import LibrarySystem.library.catalogue.Asset;
 
 public class Producer extends Person{
     private ArrayList<Asset> assetProduced;

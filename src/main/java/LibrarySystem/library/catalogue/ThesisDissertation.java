@@ -1,7 +1,5 @@
 package LibrarySystem.library.catalogue;
 
-import java.util.Date;
-
 public class ThesisDissertation extends Asset{
     private Author author;
     private String topic;

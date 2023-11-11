@@ -4,13 +4,13 @@ import LibrarySystem.library.Library;
 import LibrarySystem.util.io.*;
 
 public class MainMenu extends Interaction {
-    String header = "MAIN MENU\n";
-    MenuItem[] menu = {
+    final String header = "MAIN MENU\n";
+    final MenuItem[] menu = {
             new MenuItem("Add an author", "add-author"),
             new MenuItem("Add an asset", "add-asset"),
             new MenuItem("Exit", "exit")
     };
-    String prompt = "Please make your choice: ";
+    final String prompt = "Please make your choice: ";
 
     @Override
     public void requestAndResponse(Library library) {

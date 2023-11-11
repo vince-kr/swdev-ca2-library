@@ -1,6 +1,7 @@
 package LibrarySystem.library.catalogue;
 
 import LibrarySystem.library.Person;
+import LibrarySystem.library.catalogue.Asset;
 
 import java.util.ArrayList;
 

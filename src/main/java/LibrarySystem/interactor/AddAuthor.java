@@ -4,10 +4,10 @@ import LibrarySystem.library.Library;
 import LibrarySystem.util.io.StandardInput;
 
 public class AddAuthor extends Interaction {
-    String header = "ADD AN AUTHOR\n";
-    String prompt = "Please enter the author's name.\nUpper- and lowercase letters, spaces, and hyphens are allowed: ";
-    String responsePattern = "^[\\p{L} -]+$";
-    String confirmation = "SUCCESS - new author added!";
+    final String header = "ADD AN AUTHOR\n";
+    final String prompt = "Please enter the author's name.\nUpper- and lowercase letters, spaces, and hyphens are allowed: ";
+    final String responsePattern = "^[\\p{L} -]+$";
+    final String confirmation = "SUCCESS - new author added!";
 
     @Override
     public void requestAndResponse(Library library) {

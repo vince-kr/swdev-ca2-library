@@ -5,8 +5,8 @@ import LibrarySystem.library.Library;
 import java.util.HashMap;
 
 class Interactor {
-    GetUpdateContinue currentInteraction;
-    HashMap<String, GetUpdateContinue> allInteractions;
+    Interaction currentInteraction;
+    final HashMap<String, Interaction> allInteractions;
     boolean isFinished;
 
     public Interactor() {
@@ -14,8 +14,8 @@ class Interactor {
         currentInteraction = allInteractions.get("main");
     }
 
-    private HashMap<String, GetUpdateContinue> loadAllInteractions() {
-        var allInteractions = new HashMap<String, GetUpdateContinue>();
+    private HashMap<String, Interaction> loadAllInteractions() {
+        var allInteractions = new HashMap<String, Interaction>();
         allInteractions.put("main", new MainMenu());
         allInteractions.put("add-author", new AddAuthor());
         return allInteractions;

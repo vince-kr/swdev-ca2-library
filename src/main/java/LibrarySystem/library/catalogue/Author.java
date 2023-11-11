@@ -1,13 +1,12 @@
 package LibrarySystem.library.catalogue;
 
 import LibrarySystem.library.Person;
+import LibrarySystem.library.catalogue.BookAudioBook;
 
 import java.util.ArrayList;
 
-public class Author extends Person{
+public class Author extends Person {
     private ArrayList<BookAudioBook> booksAuthored;
-
-
 
     public Author(int id, String name) {
         super(id, name);
