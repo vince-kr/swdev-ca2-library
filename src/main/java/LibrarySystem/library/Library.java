@@ -1,5 +1,7 @@
 package LibrarySystem.library;
 
 public interface Library {
-    void addUser();
+    void addUser(String name);
+    int getCustomerCount();
+    String getAllUsers();
 }

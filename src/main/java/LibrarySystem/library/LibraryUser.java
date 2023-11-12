@@ -4,7 +4,7 @@ import LibrarySystem.library.catalogue.Asset;
 
 import java.util.ArrayList;
 
-public class LibraryUser extends Person{
+public class LibraryUser extends Person {
     private ArrayList<Asset> borrowedBooks;
 
 
