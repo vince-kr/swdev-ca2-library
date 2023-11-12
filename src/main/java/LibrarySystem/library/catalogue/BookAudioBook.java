@@ -1,9 +1,16 @@
 package LibrarySystem.library.catalogue;
 
+import java.io.*;
+import java.util.ArrayList;
+
 public class BookAudioBook extends Asset{
     private Author author;
     private String isbn;
     private String publishedYear;
+    static final String RESET = "\u001B[0m";
+    static final String RED = "\u001B[31m";
+    static final String BLUE = "\u001b[34m";
+    static final String GREEN = "\u001B[32m";
 
 
 
@@ -12,6 +19,7 @@ public class BookAudioBook extends Asset{
         this.isbn = isbn;
         this.publishedYear = publishedYear;
         this.author = author;
+
     }
 
     public String getIsbn() {
@@ -43,5 +51,53 @@ public class BookAudioBook extends Asset{
     public String toString() {
 
         return String.format("Title: %s, Author: %s", getTitle(),author.getName());
+    }
+
+    @Override
+    public void printToFile(ArrayList<Asset> objects, String filePath) {
+        try {
+            FileWriter fr = new FileWriter(new File(filePath), true);
+            BufferedWriter br = new BufferedWriter(fr);
+            PrintWriter writer = new PrintWriter(br);
+            StringBuilder sb = new StringBuilder();
+            sb.append("BookId");
+            sb.append(",");
+            sb.append("Book Title");
+            sb.append(",");
+            sb.append("Book ISBN");
+            sb.append(",");
+            sb.append("Published Year");
+            sb.append(",");
+            sb.append("AuthorName");
+            sb.append(",");
+            sb.append("Status");
+            sb.append(",");
+            sb.append("\n");
+            if (!objects.isEmpty()){
+                for (Asset item:objects) {
+                    if (item instanceof BookAudioBook){
+                        sb.append(item.getId());
+                        sb.append(",");
+                        sb.append(item.getTitle());
+                        sb.append(",");
+                        sb.append(((BookAudioBook) item).getIsbn());
+                        sb.append(",");
+                        sb.append(((BookAudioBook) item).author.getName());
+                        sb.append(",");
+                        sb.append(item.getStatus());
+                        sb.append(",");
+                        sb.append("\n");
+                    }
+                }
+                writer.write(sb.toString());
+                writer.close();
+                fr.close();
+                br.close();
+                System.out.println(GREEN+" Successfully written to file!"+RESET);
+
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

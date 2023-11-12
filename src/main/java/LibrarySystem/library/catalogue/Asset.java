@@ -1,6 +1,8 @@
 package LibrarySystem.library.catalogue;
 
-public abstract class Asset {
+import LibrarySystem.library.Printable;
+
+public abstract class Asset implements Printable<Asset>{
     private int id;
     private String title;
     private String status;

@@ -1,11 +1,17 @@
 package LibrarySystem.library;
 
 import LibrarySystem.library.catalogue.Asset;
+import LibrarySystem.library.catalogue.Author;
 
+import java.io.*;
 import java.util.ArrayList;
 
-public class LibraryUser extends Person{
+public class LibraryUser extends Person implements Printable<LibraryUser>{
     private ArrayList<Asset> borrowedBooks;
+    static final String RESET = "\u001B[0m";
+    static final String RED = "\u001B[31m";
+    static final String BLUE = "\u001b[34m";
+    static final String GREEN = "\u001B[32m";
 
 
     public LibraryUser(int id, String name) {
@@ -24,5 +30,41 @@ public class LibraryUser extends Person{
     @Override
     public String toString() {
         return String.format("UserId: %d, UserName: %s",getId(),getName());
+    }
+
+    @Override
+    public void printToFile(ArrayList<LibraryUser> objects, String filePath) {
+        try {
+            FileWriter fr = new FileWriter(new File(filePath), true);
+            BufferedWriter br = new BufferedWriter(fr);
+            PrintWriter writer = new PrintWriter(br);
+            StringBuilder sb = new StringBuilder();
+            sb.append("UserId");
+            sb.append(",");
+            sb.append("UserName");
+            sb.append(",");
+            sb.append("Number of Books");
+            sb.append(",");
+            sb.append("\n");
+            if (!objects.isEmpty()){
+                for (LibraryUser user:objects) {
+                    sb.append(user.getId());
+                    sb.append(",");
+                    sb.append(user.getName());
+                    sb.append(",");
+                    sb.append(((LibraryUser) user).getBorrowedBooks().size());
+                    sb.append(",");
+                    sb.append("\n");
+                }
+                writer.write(sb.toString());
+                writer.close();
+                fr.close();
+                br.close();
+                System.out.println(GREEN+" Successfully written to file!"+RESET);
+
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
