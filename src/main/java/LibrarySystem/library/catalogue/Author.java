@@ -5,6 +5,8 @@ import LibrarySystem.library.Printable;
 import LibrarySystem.library.catalogue.BookAudioBook;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Author extends Person implements Printable<Author> {
@@ -34,11 +36,9 @@ public class Author extends Person implements Printable<Author> {
 
     @Override
     public void printToFile(ArrayList<Author> objects, String filePath) {
-        try {
-            FileWriter fr = new FileWriter(new File(filePath), true);
-            BufferedWriter br = new BufferedWriter(fr);
-            PrintWriter writer = new PrintWriter(br);
-            StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
+        if (Files.notExists(Path.of(filePath))){
+            File file = new File(filePath);
             sb.append("AuthorId");
             sb.append(",");
             sb.append("AuthorName");
@@ -46,6 +46,13 @@ public class Author extends Person implements Printable<Author> {
             sb.append("Number of Books");
             sb.append(",");
             sb.append("\n");
+        }
+
+        try {
+            FileWriter fr = new FileWriter(new File(filePath), true);
+            BufferedWriter br = new BufferedWriter(fr);
+            PrintWriter writer = new PrintWriter(br);
+
             if (!objects.isEmpty()){
                 for (Author author:objects) {
                     sb.append(author.getId());

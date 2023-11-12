@@ -3,6 +3,8 @@ package LibrarySystem.library.catalogue;
 import LibrarySystem.library.Printable;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class CdDvd extends Asset{
@@ -66,11 +68,9 @@ public class CdDvd extends Asset{
 
     @Override
     public void printToFile(ArrayList<Asset> objects, String filePath) {
-        try {
-            FileWriter fr = new FileWriter(new File(filePath), true);
-            BufferedWriter br = new BufferedWriter(fr);
-            PrintWriter writer = new PrintWriter(br);
-            StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
+        if (Files.notExists(Path.of(filePath))){
+            File file = new File(filePath);
             sb.append("CdDvdId");
             sb.append(",");
             sb.append("CdDvd Title");
@@ -86,6 +86,13 @@ public class CdDvd extends Asset{
             sb.append("Status");
             sb.append(",");
             sb.append("\n");
+        }
+
+        try {
+            FileWriter fr = new FileWriter(new File(filePath), true);
+            BufferedWriter br = new BufferedWriter(fr);
+            PrintWriter writer = new PrintWriter(br);
+
             if (!objects.isEmpty()){
                 for (Asset item:objects) {
                     if (item instanceof CdDvd){
