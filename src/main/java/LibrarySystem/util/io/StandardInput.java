@@ -1,5 +1,8 @@
 package LibrarySystem.util.io;
 
+import LibrarySystem.library.catalogue.Author;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class StandardInput {
@@ -50,7 +53,7 @@ public abstract class StandardInput {
     /*
      The response pattern regex in this method for
      name, title and topic are same:"[a-zA-Z -]+",
-     for the ISBN:"";
+     for the ISBN:"^(?:ISBN(?:-10)?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$)[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$";
      */
     public static String getValidString(String prompt, String responsePattern) {
         var in = new Scanner(System.in);
