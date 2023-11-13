@@ -107,4 +107,9 @@ public class BookAudioBook extends Asset{
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void readFromCsv(String csvFile) {
+
+    }
 }

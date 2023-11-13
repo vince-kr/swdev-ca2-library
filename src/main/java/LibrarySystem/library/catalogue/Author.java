@@ -74,4 +74,32 @@ public class Author extends Person implements Printable<Author> {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void readFromCsv(String csvFile) {
+        ArrayList<Author> authors = new ArrayList<>();
+        String line = "";
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(csvFile));
+            br.readLine();//read headers from file
+            while ((line = br.readLine()) != null){
+                String [] tokens = line.split(",");
+                if (tokens.length > 0){
+                    Author author = new Author(Integer.parseInt(tokens[0]), tokens[1]);
+                    authors.add(author);
+                }
+            }
+            System.out.println("==============================================================");
+            System.out.printf("%10s %10s %10s","AuthorId","AuthorName","Qty Books");
+            System.out.println("==============================================================");
+            for (Author auth:authors) {
+                String str = String.format("%10d %10s %10d", auth.getId(), auth.getName(),auth.getBooksAuthored().size());
+                System.out.println(str);
+            }
+            br.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

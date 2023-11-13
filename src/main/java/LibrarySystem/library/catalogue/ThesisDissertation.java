@@ -113,4 +113,8 @@ public class ThesisDissertation extends Asset{
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void readFromCsv(String csvFile) {
+    }
 }
