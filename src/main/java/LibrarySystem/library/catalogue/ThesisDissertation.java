@@ -62,6 +62,11 @@ public class ThesisDissertation extends Asset{
     }
 
     @Override
+    public String getAssetType() {
+        return "Thesis";
+    }
+
+    @Override
     public void printToFile(ArrayList<Asset> objects, String filePath) {
         StringBuilder sb = new StringBuilder();
         if (Files.notExists(Path.of(filePath))){

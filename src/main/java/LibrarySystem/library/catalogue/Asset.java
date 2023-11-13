@@ -37,4 +37,5 @@ public abstract class Asset implements Printable<Asset>{
         this.title = title;
     }
     public abstract String toString();
+    public abstract String getAssetType();
 }

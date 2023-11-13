@@ -64,6 +64,10 @@ public class CdDvd extends Asset{
         return String.format("Tile: %s, Producer: %s, ProductionYear: %s",getTitle(),producer.getName(),productionYear);
     }
 
+    @Override
+    public String getAssetType() {
+        return "CdDvd";
+    }
 
 
     @Override
@@ -123,5 +127,10 @@ public class CdDvd extends Asset{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void readFromCsv(String csvFile) {
+
     }
 }
