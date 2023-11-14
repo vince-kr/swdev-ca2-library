@@ -24,6 +24,11 @@ public class BookAudioBook extends Asset{
 
     }
 
+    @Override
+    public String getAssetType() {
+        return "book";
+    }
+
     public String getIsbn() {
         return isbn;
     }

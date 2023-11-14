@@ -1,7 +1,7 @@
 package LibrarySystem.library;
 
+import LibrarySystem.library.catalogue.Asset;
+
 public interface Library {
-    void addUser(String name);
-    int getCustomerCount();
-    String getAllUsers();
+    void addAsset(Asset toAdd);
 }

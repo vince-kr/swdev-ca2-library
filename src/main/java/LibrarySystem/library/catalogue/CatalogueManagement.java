@@ -5,38 +5,15 @@ import java.util.ArrayList;
 class CatalogueManagement implements Catalogue {
 
     final ArrayList<Author> allAuthors;
+    final ArrayList<Asset> allAssets;
 
     public CatalogueManagement(String csvCatalogueData) {
         allAuthors = new ArrayList<>();
-    }
-
-    @Override
-    public void addAuthor(String name) {
-        allAuthors.add(new Author(allAuthors.size(), name));
+        allAssets = new ArrayList<>();
     }
 
     @Override
     public void addAsset(Asset toAdd) {
-
+        allAssets.add(toAdd);
     }
-
-    @Override
-    public Asset reserveAsset(Asset toReserve) {
-        return null;
-    }
-
-    @Override
-    public Asset borrowAsset(Asset toBorrow) {
-        return null;
-    }
-
-    @Override
-    public void returnAsset(Asset toReturn) {
-
-    }
-
-
-
-
-
 }

@@ -93,7 +93,7 @@ public abstract class StandardInput {
             System.out.println(" Type 2 - CdDvd Asset");
             System.out.println(" Type 3 - ThesisDissertation Asset");
             System.out.println(" Type 4 - Exit");
-            select = getIntInRange("Choice:",1,4);
+            select = getIntInRange("Choice: ",1,4);
             switch (select){
                 case 1:
                     //create and return book asset
