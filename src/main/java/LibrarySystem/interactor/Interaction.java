@@ -1,6 +1,6 @@
 package LibrarySystem.interactor;
 
-abstract class Interaction implements GetUpdateContinue {
+abstract class Interaction implements AskUpdateContinue {
     String nextReference;
 
     public Interaction() {
