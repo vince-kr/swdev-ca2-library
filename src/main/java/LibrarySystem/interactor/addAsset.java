@@ -44,19 +44,19 @@ public class addAsset extends Interaction {
             case "Book/Audiobook":
                 String ISBN = askISBN();
                 Author bookAuthor = askAuthor();
-                newAsset = new BookAudioBook(1, title, ISBN, yearOfPublication, bookAuthor);
+                newAsset = new BookAudioBook(title, ISBN, yearOfPublication, bookAuthor);
                 break;
             case "CD/DVD":
                 Producer producer = askProducer();
                 Director director = askDirector();
                 int playTime = askPlaytime();
-                newAsset = new CdDvd(2, title, producer, director, playTime, yearOfPublication);
+                newAsset = new CdDvd(title, producer, director, playTime, yearOfPublication);
                 break;
             default:  // Thesis or dissertation
                 Author thesisAuthor = askAuthor();
                 String topic = askTopic();
                 String summary = askSummary();
-                newAsset = new ThesisDissertation(6, title, thesisAuthor, topic, summary, yearOfPublication);
+                newAsset = new ThesisDissertation(title, thesisAuthor, topic, summary, yearOfPublication);
                 break;
         }
 
