@@ -15,8 +15,8 @@ public class ThesisDissertation extends Asset{
     static final String BLUE = "\u001b[34m";
     static final String GREEN = "\u001B[32m";
 
-    public ThesisDissertation(int id, String title, Author author, String topic, String summary, String publishedDate) {
-        super(id, title);
+    public ThesisDissertation(String title, Author author, String topic, String summary, String publishedDate) {
+        super(title);
         this.author = author;
         this.topic = topic;
         this.summary = summary;
@@ -94,8 +94,6 @@ public class ThesisDissertation extends Asset{
             if (!objects.isEmpty()){
                 for (Asset item:objects) {
                     if (item instanceof ThesisDissertation){
-                        sb.append(item.getId());
-                        sb.append(",");
                         sb.append(item.getTitle());
                         sb.append(",");
                         sb.append(((ThesisDissertation) item).getTopic());

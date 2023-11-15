@@ -17,8 +17,8 @@ public class CdDvd extends Asset{
     static final String BLUE = "\u001b[34m";
     static final String GREEN = "\u001B[32m";
 
-    public CdDvd(int id, String title, Producer producer, Director director, int playTime, String productionYear) {
-        super(id, title);
+    public CdDvd(String title, Producer producer, Director director, int playTime, String productionYear) {
+        super(title);
         this.producer = producer;
         this.director = director;
         this.playTime = playTime;
@@ -100,8 +100,6 @@ public class CdDvd extends Asset{
             if (!objects.isEmpty()){
                 for (Asset item:objects) {
                     if (item instanceof CdDvd){
-                        sb.append(item.getId());
-                        sb.append(",");
                         sb.append(item.getTitle());
                         sb.append(",");
                         sb.append(((CdDvd) item).productionYear);

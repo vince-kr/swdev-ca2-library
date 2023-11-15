@@ -16,8 +16,8 @@ public class BookAudioBook extends Asset{
 
 
 
-    public BookAudioBook(int id, String title, String isbn,  String publishedYear, Author author) {
-        super(id, title);
+    public BookAudioBook(String title, String isbn,  String publishedYear, Author author) {
+        super(title);
         this.isbn = isbn;
         this.publishedYear = publishedYear;
         this.author = author;
@@ -88,8 +88,6 @@ public class BookAudioBook extends Asset{
             if (!objects.isEmpty()){
                 for (Asset item:objects) {
                     if (item instanceof BookAudioBook){
-                        sb.append(item.getId());
-                        sb.append(",");
                         sb.append(item.getTitle());
                         sb.append(",");
                         sb.append(((BookAudioBook) item).getIsbn());

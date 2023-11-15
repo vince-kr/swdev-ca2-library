@@ -3,13 +3,11 @@ package LibrarySystem.library.catalogue;
 import LibrarySystem.library.Printable;
 
 public abstract class Asset implements Printable<Asset>{
-    private int id;
     private String title;
     private String status;
 
 
-    public Asset(int id, String title) {
-        this.id = id;
+    public Asset(String title) {
         this.title = title;
         this.status = "available";
     }
@@ -20,13 +18,6 @@ public abstract class Asset implements Printable<Asset>{
 
     public void setStatus(String status) {
         this.status = status;
-    }
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {
