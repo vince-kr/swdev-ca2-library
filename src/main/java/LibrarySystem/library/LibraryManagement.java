@@ -27,4 +27,9 @@ class LibraryManagement implements Library {
     public void addAsset(Asset toAdd) {
         catalogue.addAsset(toAdd);
     }
+
+    @Override
+    public int getAssetCount() {
+        return catalogue.getAssetCount();
+    }
 }

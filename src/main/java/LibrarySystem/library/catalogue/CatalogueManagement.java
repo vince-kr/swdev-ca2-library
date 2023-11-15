@@ -12,7 +12,6 @@ class CatalogueManagement implements Catalogue {
     public CatalogueManagement(String csvCatalogueData) {
         allAuthors = new ArrayList<>();
         allAssets = new HashMap<>();
-        allAssets.put(10000000, new BookAudioBook("placeholder", "0-86140-324-X", "1983", new Author(2, "Terry Pratchett")));
     }
 
     @Override
@@ -22,7 +21,12 @@ class CatalogueManagement implements Catalogue {
     }
 
     private int computeNextAssetID() {
-        int currentLargestKey = Collections.max(allAssets.keySet());
+        int currentLargestKey = allAssets.isEmpty() ? 10000000 : Collections.max(allAssets.keySet());
         return currentLargestKey + 1;
+    }
+
+    @Override
+    public int getAssetCount() {
+        return allAssets.size();
     }
 }
