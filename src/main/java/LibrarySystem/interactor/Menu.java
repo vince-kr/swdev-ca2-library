@@ -3,10 +3,22 @@ package LibrarySystem.interactor;
 import LibrarySystem.library.Library;
 import LibrarySystem.util.io.StandardInput;
 
-abstract class Menu extends Interaction {
+class Menu extends Interaction {
     String header;
     MenuItem[] menu;
-    String prompt = "Please make your choice: ";
+    String prompt;
+
+    public Menu(String header, String prompt, MenuItem[] menu) {
+        this.header = header;
+        this.menu = menu;
+        this.prompt = prompt;
+    }
+
+    public Menu(String header, MenuItem[] menu) {
+        this.header = header;
+        this.menu = menu;
+        this.prompt = "Please make your choice: ";
+    }
 
     @Override
     public void requestAndResponse(Library library) {
