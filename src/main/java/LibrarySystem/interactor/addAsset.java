@@ -7,8 +7,14 @@ import LibrarySystem.util.io.StandardInput;
 import java.time.Year;
 
 public class addAsset extends Interaction {
+
     String header = "ADD AN ASSET\n";
 
+    String[] assetTypes = {
+            "Book/Audiobook",
+            "CD/DVD",
+            "Thesis/Dissertation"
+    };
 
     @Override
     public void requestAndResponse(Library library) {
@@ -24,10 +30,10 @@ public class addAsset extends Interaction {
         3. Once all information has been gathered, create a new Asset object of the correct type
             and call library.addAsset() with it
             ISSUE: in order for this to work, all Asset specialisations need to be made public
-         */
+        */
 
         System.out.println(header);
-        String assetType = askAssetType();
+        String assetType = askAssetType(assetTypes);
 
         Asset newAsset;
 
@@ -46,7 +52,7 @@ public class addAsset extends Interaction {
                 int playTime = askPlaytime();
                 newAsset = new CdDvd(2, title, producer, director, playTime, yearOfPublication);
                 break;
-            case "Thesis/Dissertation":
+            default:  // Thesis or dissertation
                 Author thesisAuthor = askAuthor();
                 String topic = askTopic();
                 String summary = askSummary();
@@ -54,11 +60,24 @@ public class addAsset extends Interaction {
                 break;
         }
 
-        try {
-            library.addAsset(newAsset);
-        } catch (NullPointerException np) {}
+        library.addAsset(newAsset);
 
         nextReference = "manage-catalogue";
+    }
+
+    private String askSummary() {
+        String prompt = "Enter summary: ";
+        String responsePattern = "^[\\p{L} '-]+$";
+
+        return StandardInput.getValidString(prompt, responsePattern);
+
+    }
+
+    private String askTopic() {
+        String prompt = "Enter topic: ";
+        String responsePattern = "^[\\p{L} '-]+$";
+
+        return StandardInput.getValidString(prompt, responsePattern);
     }
 
     private int askPlaytime() {
@@ -101,12 +120,7 @@ public class addAsset extends Interaction {
         return Integer.toString(StandardInput.getPositiveInt(prompt, max));
     }
 
-    private String askAssetType() {
-        String[] assetTypes = {
-                "Book/Audiobook",
-                "CD/DVD",
-                "Thesis/Dissertation"
-        };
+    private String askAssetType(String[] assetTypes) {
 
         for (int index = 0; index < assetTypes.length; index++) {
             int fmtIndex = index + 1;
