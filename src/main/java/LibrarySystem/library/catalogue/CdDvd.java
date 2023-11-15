@@ -16,20 +16,30 @@ public class CdDvd extends Asset{
     private LocalTime dateDue;
     private String overDue;
     private String productionYear;
+    private int quantity;
     static final String RESET = "\u001B[0m";
     static final String RED = "\u001B[31m";
     static final String BLUE = "\u001b[34m";
     static final String GREEN = "\u001B[32m";
 
-    public CdDvd(String title, Producer producer, Director director, int playTime, String productionYear) {
+    public CdDvd(String title, Producer producer, Director director, int playTime, String productionYear, int quantity) {
         super(title);
         this.producer = producer;
         this.director = director;
         this.playTime = playTime;
         this.productionYear = productionYear;
+        this.quantity = quantity;
         this.dateIssued = LocalTime.parse("00:00:00.000");
         this.dateDue = LocalTime.parse("00:00:00.000");
         this.overDue = " - ";
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Producer getProducer() {

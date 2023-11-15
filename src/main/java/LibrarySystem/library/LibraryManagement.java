@@ -32,4 +32,5 @@ class LibraryManagement implements Library {
     public int getAssetCount() {
         return catalogue.getAssetCount();
     }
+
 }

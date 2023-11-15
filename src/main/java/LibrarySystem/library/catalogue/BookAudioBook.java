@@ -13,21 +13,31 @@ public class BookAudioBook extends Asset{
     private LocalTime dateIssued;
     private LocalTime dateDue;
     private String overDue;
+    private int quantity;
     static final String RESET = "\u001B[0m";
     static final String RED = "\u001B[31m";
     static final String BLUE = "\u001b[34m";
     static final String GREEN = "\u001B[32m";
 
 
-    public BookAudioBook(String title, String isbn, String publishedYear, Author author) {
+    public BookAudioBook(String title, String isbn, String publishedYear, Author author,int quantity) {
         super(title);
         this.isbn = isbn;
         this.publishedYear = publishedYear;
         this.author = author;
+        this.quantity = quantity;
         this.dateIssued = LocalTime.parse("00:00:00.000");
         this.dateDue = LocalTime.parse("00:00:00.000");
         this.overDue = " - ";
 
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public LocalTime getDateIssued() {

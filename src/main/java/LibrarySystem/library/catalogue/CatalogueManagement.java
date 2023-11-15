@@ -12,6 +12,8 @@ class CatalogueManagement implements Catalogue {
     public CatalogueManagement(String csvCatalogueData) {
         allAuthors = new ArrayList<>();
         allAssets = new HashMap<>();
+
+        allAssets.put(10000000, new BookAudioBook("placeholder", "0-86140-324-X", "1983", new Author(2, "Terry Pratchett"),1));
     }
 
     @Override
@@ -28,5 +30,12 @@ class CatalogueManagement implements Catalogue {
     @Override
     public int getAssetCount() {
         return allAssets.size();
+    }
+    /*
+     return an asset
+     from allAssets hash map
+     */
+    public Asset findAssetByKey(int key){
+                return allAssets.get(key);
     }
 }

@@ -39,24 +39,25 @@ public class addAsset extends Interaction {
 
         String title = askTitle();
         String yearOfPublication = askYoP();
+        int quantity = askQuantity();
 
         switch (assetType) {
             case "Book/Audiobook":
                 String ISBN = askISBN();
                 Author bookAuthor = askAuthor();
-                newAsset = new BookAudioBook(title, ISBN, yearOfPublication, bookAuthor);
+                newAsset = new BookAudioBook(title, ISBN, yearOfPublication, bookAuthor, quantity);
                 break;
             case "CD/DVD":
                 Producer producer = askProducer();
                 Director director = askDirector();
                 int playTime = askPlaytime();
-                newAsset = new CdDvd(title, producer, director, playTime, yearOfPublication);
+                newAsset = new CdDvd(title, producer, director, playTime, yearOfPublication, quantity);
                 break;
             default:  // Thesis or dissertation
                 Author thesisAuthor = askAuthor();
                 String topic = askTopic();
                 String summary = askSummary();
-                newAsset = new ThesisDissertation(title, thesisAuthor, topic, summary, yearOfPublication);
+                newAsset = new ThesisDissertation(title, thesisAuthor, topic, summary, yearOfPublication, quantity);
                 break;
         }
 
@@ -83,9 +84,13 @@ public class addAsset extends Interaction {
     private int askPlaytime() {
         String prompt = "Enter play time in seconds: ";
 
-        return StandardInput.getAnyInt(prompt);
+        return StandardInput.getPositiveInt(prompt,18000);
     }
 
+    private int askQuantity(){
+        String prompt = "Enter quantity of asset: ";
+        return StandardInput.getPositiveInt(prompt, 50);
+    }
     private Director askDirector() {
         String prompt = "Enter director full name: ";
         String responsePattern = "^[\\p{L} '-]+$";
@@ -145,4 +150,5 @@ public class addAsset extends Interaction {
 
         return StandardInput.getValidString(prompt, responsePattern);
     }
+
 }
