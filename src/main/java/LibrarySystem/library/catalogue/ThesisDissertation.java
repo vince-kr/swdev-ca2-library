@@ -3,6 +3,7 @@ package LibrarySystem.library.catalogue;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class ThesisDissertation extends Asset{
@@ -10,6 +11,9 @@ public class ThesisDissertation extends Asset{
     private String topic;
     private String summary;
     private String publishedDate;
+    private LocalTime dateIssued;
+    private LocalTime dateDue;
+    private String overDue;
     static final String RESET = "\u001B[0m";
     static final String RED = "\u001B[31m";
     static final String BLUE = "\u001b[34m";
@@ -21,6 +25,9 @@ public class ThesisDissertation extends Asset{
         this.topic = topic;
         this.summary = summary;
         this.publishedDate = publishedDate;
+        this.dateIssued = LocalTime.parse("00:00:00.000");
+        this.dateDue = LocalTime.parse("00:00:00.000");
+        this.overDue = " - ";
     }
 
     public Author getAuthor() {
@@ -54,6 +61,30 @@ public class ThesisDissertation extends Asset{
 
     public void setPublishedDate(String publishedDate) {
         this.publishedDate = publishedDate;
+    }
+
+    public LocalTime getDateIssued() {
+        return dateIssued;
+    }
+
+    public void setDateIssued(LocalTime dateIssued) {
+        this.dateIssued = dateIssued;
+    }
+
+    public LocalTime getDateDue() {
+        return dateDue;
+    }
+
+    public void setDateDue(LocalTime dateDue) {
+        this.dateDue = dateDue;
+    }
+
+    public String getOverDue() {
+        return overDue;
+    }
+
+    public void setOverDue(String overDue) {
+        this.overDue = overDue;
     }
 
     @Override

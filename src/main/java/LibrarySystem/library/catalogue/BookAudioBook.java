@@ -3,26 +3,57 @@ package LibrarySystem.library.catalogue;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class BookAudioBook extends Asset{
     private Author author;
     private String isbn;
     private String publishedYear;
+    private LocalTime dateIssued;
+    private LocalTime dateDue;
+    private String overDue;
     static final String RESET = "\u001B[0m";
     static final String RED = "\u001B[31m";
     static final String BLUE = "\u001b[34m";
     static final String GREEN = "\u001B[32m";
 
 
-
-    public BookAudioBook(String title, String isbn,  String publishedYear, Author author) {
+    public BookAudioBook(String title, String isbn, String publishedYear, Author author) {
         super(title);
         this.isbn = isbn;
         this.publishedYear = publishedYear;
         this.author = author;
+        this.dateIssued = LocalTime.parse("00:00:00.000");
+        this.dateDue = LocalTime.parse("00:00:00.000");
+        this.overDue = " - ";
 
     }
+
+    public LocalTime getDateIssued() {
+        return dateIssued;
+    }
+
+    public void setDateIssued(LocalTime dateIssued) {
+        this.dateIssued = dateIssued;
+    }
+
+    public LocalTime getDateDue() {
+        return dateDue;
+    }
+
+    public void setDateDue(LocalTime dateDue) {
+        this.dateDue = dateDue;
+    }
+
+    public String getOverDue() {
+        return overDue;
+    }
+
+    public void setOverDue(String overDue) {
+        this.overDue = overDue;
+    }
+
 
     @Override
     public String getAssetType() {
