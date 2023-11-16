@@ -1,6 +1,7 @@
 package LibrarySystem.library.catalogue;
 
 import LibrarySystem.library.Person;
+import LibrarySystem.library.PersonException;
 import LibrarySystem.library.Printable;
 import LibrarySystem.library.catalogue.BookAudioBook;
 
@@ -16,7 +17,7 @@ public class Author extends Person implements Printable<Author> {
     static final String BLUE = "\u001b[34m";
     static final String GREEN = "\u001B[32m";
 
-    public Author(int id, String name) {
+    public Author(int id, String name) throws PersonException {
         super(id, name);
         this.booksAuthored = new ArrayList<>();
     }
@@ -99,6 +100,8 @@ public class Author extends Person implements Printable<Author> {
             br.close();
 
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (PersonException e) {
             throw new RuntimeException(e);
         }
     }

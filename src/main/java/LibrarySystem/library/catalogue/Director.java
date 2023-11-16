@@ -1,6 +1,7 @@
 package LibrarySystem.library.catalogue;
 
 import LibrarySystem.library.Person;
+import LibrarySystem.library.PersonException;
 import LibrarySystem.library.catalogue.Asset;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 public class Director extends Person{
     private ArrayList<Asset> assetsDirected;
 
-    public Director(int id, String name) {
+    public Director(int id, String name) throws PersonException {
         super(id, name);
         this.assetsDirected = new ArrayList<>();
     }

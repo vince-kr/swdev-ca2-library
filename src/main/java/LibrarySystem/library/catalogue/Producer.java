@@ -2,13 +2,14 @@ package LibrarySystem.library.catalogue;
 
 import java.util.ArrayList;
 import LibrarySystem.library.Person;
+import LibrarySystem.library.PersonException;
 import LibrarySystem.library.catalogue.Asset;
 
 public class Producer extends Person{
     private ArrayList<Asset> assetProduced;
 
 
-    public Producer(int id, String name) {
+    public Producer(int id, String name) throws PersonException {
         super(id, name);
         this.assetProduced = new ArrayList<>();
     }
