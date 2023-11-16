@@ -1,10 +1,14 @@
 package LibrarySystem.library.catalogue;
 
+import LibrarySystem.library.PersonException;
 import LibrarySystem.library.Printable;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import LibrarySystem.library.Printable;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.csv.CSVRecord;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -111,12 +115,59 @@ public class ThesisDissertation extends Asset implements Printable<ThesisDissert
 
 
     @Override
-    public void printToFile(ArrayList<ThesisDissertation> objects, String filePath) {
+    public void printToFile(ArrayList<ThesisDissertation> objects, String csvFilePath) {
+        try (FileWriter fr = new FileWriter(csvFilePath);
+             CSVPrinter csvPrinter = new CSVPrinter(fr, CSVFormat.DEFAULT.withHeader(
+                     "Title","Topic","Status",
+                     "Published Year","AuthorName","AuthorId",
+                     "OverDue","Quantity","Summary"))){
+            for (ThesisDissertation thesis:objects) {
 
+                csvPrinter.printRecord(
+                        thesis.getTitle(),
+                        thesis.getTopic(),
+                        thesis.getStatus(),
+                        thesis.getPublishedDate(),
+                        thesis.author.getName(),
+                        thesis.author.getId(),
+                        thesis.getOverDue(),
+                        thesis.getQuantity(),
+                        thesis.getSummary());
+
+            }
+            System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public ArrayList<ThesisDissertation> readFromCsv(String csvFile) {
-        return new ArrayList<>();
+        ArrayList<ThesisDissertation> dissertations = new ArrayList<>();
+        try (FileReader fr = new FileReader(csvFile);
+             CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
+            for (CSVRecord csvRecord:csvParser){
+                String title = csvRecord.get("Title");
+                String topic = csvRecord.get("Topic");
+                String year = csvRecord.get("Published Year");
+                String authorName = csvRecord.get("AuthorName");
+                int authorId = Integer.parseInt(csvRecord.get("AuthorId"));
+                String summary = csvRecord.get("Summary");
+                int qty = Integer.parseInt(csvRecord.get("Quantity"));
+                dissertations.add(new ThesisDissertation(
+                        title,
+                        new Author(authorId,authorName),
+                        topic,
+                        summary,
+                        year,
+                        qty));
+            }
+            System.out.println(GREEN+"\n\tDissertation objects successfully read from file: "+csvFile+RESET);
+        } catch (IOException | PersonException e) {
+            throw new RuntimeException(e);
+        }
+        return dissertations;
+
     }
 }
