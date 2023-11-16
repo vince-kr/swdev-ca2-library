@@ -7,7 +7,7 @@ package LibrarySystem.library;
 // much as possible.
 
 public class LibraryFactory {
-    public static Library createLibrary() {
+    public static Library createLibrary() throws PersonException {
         return new LibraryManagement();
     }
 }

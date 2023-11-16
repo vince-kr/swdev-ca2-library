@@ -16,7 +16,7 @@ public class LibraryUser extends Person implements Printable<LibraryUser>{
     static final String GREEN = "\u001B[32m";
 
 
-    public LibraryUser(int id, String name) {
+    public LibraryUser(int id, String name) throws PersonException {
         super(id, name);
         this.borrowedBooks = new ArrayList<>();
     }
@@ -76,30 +76,7 @@ public class LibraryUser extends Person implements Printable<LibraryUser>{
     }
 
     @Override
-    public void readFromCsv(String csvFile) {
-        ArrayList<LibraryUser> users = new ArrayList<>();
-        String line = "";
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(csvFile));
-            br.readLine();//read headers from file
-            while ((line = br.readLine()) != null){
-                String [] tokens = line.split(",");
-                if (tokens.length > 0){
-                    LibraryUser user = new LibraryUser(Integer.parseInt(tokens[0]), tokens[1]);
-                    users.add(user);
-                }
-            }
-            System.out.println("==============================================================");
-            System.out.printf("%10s %10s %10s","UserId","UserName","Qty Books");
-            System.out.println("==============================================================");
-            for (LibraryUser auth:users) {
-                String str = String.format("%10d %10s %10d", auth.getId(), auth.getName(),auth.getBorrowedBooks().size());
-                System.out.println(str);
-            }
-            br.close();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public ArrayList<LibraryUser> readFromCsv(String csvFile) {
+        return new ArrayList<>();
     }
 }

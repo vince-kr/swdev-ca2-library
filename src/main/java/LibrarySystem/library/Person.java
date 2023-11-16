@@ -5,7 +5,7 @@ public abstract class Person {
     private String name;
 
     public Person(int id, String name) throws PersonException {
-        if (name.length() <= 2 || name.length() >= 30) {
+        if (name.length() < 2 || name.length() >= 30) {
             throw new PersonException("Name should be between 2 and 30 characters in length");
         }
         this.id = id;

@@ -5,8 +5,4 @@ public class PersonException extends Exception {
         super(message);
     }
 
-    @Override
-    public String toString() {
-        return null;
-    }
 }

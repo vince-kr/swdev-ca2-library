@@ -1,12 +1,16 @@
 package LibrarySystem.library.catalogue;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
+
+import LibrarySystem.library.Printable;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.csv.CSVRecord;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class BookAudioBook extends Asset{
+public class BookAudioBook extends Asset implements Printable<BookAudioBook> {
     private Author author;
     private String isbn;
     private String publishedYear;
@@ -102,58 +106,31 @@ public class BookAudioBook extends Asset{
     }
 
     @Override
-    public void printToFile(ArrayList<Asset> objects, String filePath) {
-        StringBuilder sb = new StringBuilder();
-        if (Files.notExists(Path.of(filePath))){
-            File file = new File(filePath);
-            sb.append("BookId");
-            sb.append(",");
-            sb.append("Book Title");
-            sb.append(",");
-            sb.append("Book ISBN");
-            sb.append(",");
-            sb.append("Published Year");
-            sb.append(",");
-            sb.append("AuthorName");
-            sb.append(",");
-            sb.append("Status");
-            sb.append(",");
-            sb.append("\n");
-        }
+    public void printToFile(ArrayList<BookAudioBook> objects, String csvFilePath) {
+        try (FileWriter fr = new FileWriter(csvFilePath);
+        CSVPrinter csvPrinter = new CSVPrinter(fr, CSVFormat.DEFAULT.withHeader(
+                "Book Title","Book ISBN","Status",
+                "Published Year","AuthorName","OverDue"))){
+            for (BookAudioBook book:objects) {
 
-        try {
-            FileWriter fr = new FileWriter(new File(filePath), true);
-            BufferedWriter br = new BufferedWriter(fr);
-            PrintWriter writer = new PrintWriter(br);
-
-            if (!objects.isEmpty()){
-                for (Asset item:objects) {
-                    if (item instanceof BookAudioBook){
-                        sb.append(item.getTitle());
-                        sb.append(",");
-                        sb.append(((BookAudioBook) item).getIsbn());
-                        sb.append(",");
-                        sb.append(((BookAudioBook) item).author.getName());
-                        sb.append(",");
-                        sb.append(item.getStatus());
-                        sb.append(",");
-                        sb.append("\n");
-                    }
-                }
-                writer.write(sb.toString());
-                writer.close();
-                fr.close();
-                br.close();
-                System.out.println(GREEN+" Successfully written to file!"+RESET);
+               csvPrinter.printRecord(
+                       book.getTitle(),
+                       book.getIsbn(),
+                       book.getStatus(),
+                       book.getPublishedYear(),
+                       book.author.getName(),
+                       book.getOverDue());
 
             }
+            System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    public void readFromCsv(String csvFile) {
-
+    public ArrayList<BookAudioBook> readFromCsv(String csvFile) {
+        return new ArrayList<>();
     }
 }

@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
-public class CdDvd extends Asset{
+public class CdDvd extends Asset implements Printable<CdDvd>{
     private Producer producer;
     private Director director;
     private int playTime;
@@ -110,65 +110,14 @@ public class CdDvd extends Asset{
     }
 
 
+
     @Override
-    public void printToFile(ArrayList<Asset> objects, String filePath) {
-        StringBuilder sb = new StringBuilder();
-        if (Files.notExists(Path.of(filePath))){
-            File file = new File(filePath);
-            sb.append("CdDvdId");
-            sb.append(",");
-            sb.append("CdDvd Title");
-            sb.append(",");
-            sb.append("Production Year");
-            sb.append(",");
-            sb.append("ProducerName");
-            sb.append(",");
-            sb.append("DirectorName");
-            sb.append(",");
-            sb.append("PlayTime");
-            sb.append(",");
-            sb.append("Status");
-            sb.append(",");
-            sb.append("\n");
-        }
+    public void printToFile(ArrayList<CdDvd> objects, String filePath) {
 
-        try {
-            FileWriter fr = new FileWriter(new File(filePath), true);
-            BufferedWriter br = new BufferedWriter(fr);
-            PrintWriter writer = new PrintWriter(br);
-
-            if (!objects.isEmpty()){
-                for (Asset item:objects) {
-                    if (item instanceof CdDvd){
-                        sb.append(item.getTitle());
-                        sb.append(",");
-                        sb.append(((CdDvd) item).productionYear);
-                        sb.append(",");
-                        sb.append(((CdDvd) item).producer.getId());
-                        sb.append(",");
-                        sb.append(((CdDvd) item).director.getName());
-                        sb.append(",");
-                        sb.append(((CdDvd) item).getPlayTime());
-                        sb.append(",");
-                        sb.append(item.getStatus());
-                        sb.append(",");
-                        sb.append("\n");
-                    }
-                }
-                writer.write(sb.toString());
-                writer.close();
-                fr.close();
-                br.close();
-                System.out.println(GREEN+" Successfully written to file!"+RESET);
-
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
-    public void readFromCsv(String csvFile) {
-
+    public ArrayList<CdDvd> readFromCsv(String csvFile) {
+     return new ArrayList<>();
     }
 }

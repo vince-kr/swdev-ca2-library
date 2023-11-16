@@ -15,6 +15,9 @@ public class AddAssetTest {
     Asset dw2 = new BookAudioBook("The Light Fantastic", "0-86140-203-0", "1986", testAuthor, 1);
     Asset dw3 = new BookAudioBook("Equal Rites", "0-575-03950-7", "1987", testAuthor, 1);
 
+    public AddAssetTest() throws PersonException {
+    }
+
     @Test
     @DisplayName("Call public method to add asset")
     void testAddAsset() {

@@ -1,6 +1,7 @@
 package LibrarySystem.interactor;
 
 import LibrarySystem.library.Library;
+import LibrarySystem.library.PersonException;
 import LibrarySystem.library.catalogue.*;
 import LibrarySystem.util.io.StandardInput;
 
@@ -44,17 +45,37 @@ public class addAsset extends Interaction {
         switch (assetType) {
             case "Book/Audiobook":
                 String ISBN = askISBN();
-                Author bookAuthor = askAuthor();
+                Author bookAuthor = null;
+                try {
+                    bookAuthor = askAuthor();
+                } catch (PersonException e) {
+                    throw new RuntimeException(e);
+                }
                 newAsset = new BookAudioBook(title, ISBN, yearOfPublication, bookAuthor, quantity);
                 break;
             case "CD/DVD":
-                Producer producer = askProducer();
-                Director director = askDirector();
+                Producer producer = null;
+                try {
+                    producer = askProducer();
+                } catch (PersonException e) {
+                    throw new RuntimeException(e);
+                }
+                Director director = null;
+                try {
+                    director = askDirector();
+                } catch (PersonException e) {
+                    throw new RuntimeException(e);
+                }
                 int playTime = askPlaytime();
                 newAsset = new CdDvd(title, producer, director, playTime, yearOfPublication, quantity);
                 break;
             default:  // Thesis or dissertation
-                Author thesisAuthor = askAuthor();
+                Author thesisAuthor = null;
+                try {
+                    thesisAuthor = askAuthor();
+                } catch (PersonException e) {
+                    throw new RuntimeException(e);
+                }
                 String topic = askTopic();
                 String summary = askSummary();
                 newAsset = new ThesisDissertation(title, thesisAuthor, topic, summary, yearOfPublication, quantity);
@@ -91,7 +112,7 @@ public class addAsset extends Interaction {
         String prompt = "Enter quantity of asset: ";
         return StandardInput.getPositiveInt(prompt, 50);
     }
-    private Director askDirector() {
+    private Director askDirector() throws PersonException {
         String prompt = "Enter director full name: ";
         String responsePattern = "^[\\p{L} '-]+$";
 
@@ -100,7 +121,7 @@ public class addAsset extends Interaction {
         return new Director(5, directorName);
     }
 
-    private Producer askProducer() {
+    private Producer askProducer() throws PersonException {
         String prompt = "Enter producer full name: ";
         String responsePattern = "^[\\p{L} '-]+$";
 
@@ -109,7 +130,7 @@ public class addAsset extends Interaction {
         return new Producer(4, producerName);
     }
 
-    private Author askAuthor() {
+    private Author askAuthor() throws PersonException {
         String prompt = "Enter author full name: ";
         String responsePattern = "^[\\p{L} '-]+$";
 
