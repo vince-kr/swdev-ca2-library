@@ -2,7 +2,6 @@ package LibrarySystem.interactor;
 
 import LibrarySystem.library.Library;
 import LibrarySystem.library.LibraryFactory;
-import LibrarySystem.library.PersonException;
 
 public class Start {
     public static void main(String[] args) {
@@ -18,12 +17,7 @@ public class Start {
         // to make the LibraryManagement (plus other classes that it uses) public
         // The Library object (and the Catalogue object that it uses) know everything about maintaining
         // users, assets, authors, etc
-        Library library = null;
-        try {
-            library = LibraryFactory.createLibrary();
-        } catch (PersonException e) {
-            throw new RuntimeException(e);
-        }
+        Library library = LibraryFactory.createLibrary();
 
         // Create a new Interactor object - this is coming from our current package, so no need
         // to make it more complicated with a factory

@@ -19,7 +19,7 @@ class LibraryManagement implements Library {
      next lecture.
 */
 
-    public LibraryManagement() throws PersonException {
+    public LibraryManagement() {
         catalogue = CatalogueFactory.createCatalogue("some,mock,csv,data");
     }
 

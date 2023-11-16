@@ -1,7 +1,5 @@
 package LibrarySystem.library.catalogue;
 
-import LibrarySystem.library.PersonException;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,11 +9,9 @@ class CatalogueManagement implements Catalogue {
     final ArrayList<Author> allAuthors;
     final HashMap<Integer, Asset> allAssets;
 
-    public CatalogueManagement(String csvCatalogueData) throws PersonException {
+    public CatalogueManagement(String csvCatalogueData) {
         allAuthors = new ArrayList<>();
         allAssets = new HashMap<>();
-
-        allAssets.put(10000000, new BookAudioBook("placeholder", "0-86140-324-X", "1983", new Author(2, "Terry Pratchett"),1));
     }
 
     @Override

@@ -7,7 +7,7 @@ package LibrarySystem.library.catalogue;
 import LibrarySystem.library.PersonException;
 
 public abstract class CatalogueFactory {
-    public static Catalogue createCatalogue(String csvCatalogueData) throws PersonException {
+    public static Catalogue createCatalogue(String csvCatalogueData) {
         return new CatalogueManagement(csvCatalogueData);
     }
 }
