@@ -9,45 +9,35 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddAssetTest {
+    Library library = LibraryFactory.createLibrary();
+    Author testAuthor = new Author(420, "TP");
+    Asset dw1 = new BookAudioBook("The Colour of Magic", "0-86140-324-X", "1983", testAuthor);
+    Asset dw2 = new BookAudioBook("The Light Fantastic", "0-86140-203-0", "1986", testAuthor);
+    Asset dw3 = new BookAudioBook("Equal Rites", "0-575-03950-7", "1987", testAuthor);
 
     @Test
     @DisplayName("Call public method to add asset")
-    void addAsset() {
-        Library library = LibraryFactory.createLibrary();
-        Author testAuthor = new Author(420, "TP");
-        Asset testBook = new BookAudioBook("The Colour of Magic", "0-86140-324-X", "1983", testAuthor);
-        library.addAsset(testBook);
+    void testAddAsset() {
+        library.addAsset(dw1);
     }
 
     @Test
-    @DisplayName("After adding an asset, the library reports on total assets")
+    @DisplayName("After adding an asset, library reports total assets is 1")
     void givenLibrary_whenAssetIsAdded_thenTotalAssetsIsOne() {
-        Library library = LibraryFactory.createLibrary();
-        Author testAuthor = new Author(420, "TP");
-        Asset testBook = new BookAudioBook("The Colour of Magic", "0-86140-324-X", "1983", testAuthor);
-        library.addAsset(testBook);
+        library.addAsset(dw2);
 
-        int expected = 1;
         int actual = library.getAssetCount();
-
-        assertEquals(expected, actual);
+        assertEquals(1, actual);
     }
 
     @Test
     @DisplayName("After adding three assets, library reports total assets is 3")
     void givenLibrary_whenThreeAssetsAdded_thenTotalAssetsIsThree() {
-        Library library = LibraryFactory.createLibrary();
-        Author testAuthor = new Author(420, "TP");
-        Asset dw1 = new BookAudioBook("The Colour of Magic", "0-86140-324-X", "1983", testAuthor);
-        Asset dw2 = new BookAudioBook("The Light Fantastic", "0-86140-203-0", "1986", testAuthor);
-        Asset dw3 = new BookAudioBook("Equal Rites", "0-575-03950-7", "1987", testAuthor);
         library.addAsset(dw1);
         library.addAsset(dw2);
         library.addAsset(dw3);
 
-        int expected = 3;
         int actual = library.getAssetCount();
-
-        assertEquals(expected, actual);
+        assertEquals(3, actual);
     }
 }
