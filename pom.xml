@@ -14,30 +14,29 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>5.10.1</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!-- Apache Commons CSV -->
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-csv</artifactId>
-                <version>1.8</version> <!-- Use the latest version available -->
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
+        <dependency>
+            <!-- JUnit collection -->
+            <groupId>org.junit</groupId>
+            <artifactId>junit-bom</artifactId>
+            <version>5.10.1</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+
+        <!-- JUnit Jupiter -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
+            <version>5.10.1</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Apache Commons CSV -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.10.0</version>
         </dependency>
     </dependencies>
 
