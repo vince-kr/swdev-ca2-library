@@ -11,6 +11,7 @@ public class ThesisDissertation extends Asset{
     private String topic;
     private String summary;
     private String publishedDate;
+    private int quantity;
     private LocalTime dateIssued;
     private LocalTime dateDue;
     private String overDue;
@@ -19,15 +20,24 @@ public class ThesisDissertation extends Asset{
     static final String BLUE = "\u001b[34m";
     static final String GREEN = "\u001B[32m";
 
-    public ThesisDissertation(String title, Author author, String topic, String summary, String publishedDate) {
+    public ThesisDissertation(String title, Author author, String topic, String summary, String publishedDate,int quantity) {
         super(title);
         this.author = author;
         this.topic = topic;
         this.summary = summary;
         this.publishedDate = publishedDate;
+        this.quantity = quantity;
         this.dateIssued = LocalTime.parse("00:00:00.000");
         this.dateDue = LocalTime.parse("00:00:00.000");
         this.overDue = " - ";
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Author getAuthor() {

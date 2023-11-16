@@ -4,9 +4,13 @@ public abstract class Person {
     private int id;
     private String name;
 
-    public Person(int id, String name) {
-        this.id = id;
-        this.name = name;
+    public Person(int id, String name) throws PersonException {
+        if (name.length() >= 2 && name.length() <= 30) {
+            this.id = id;
+            this.name = name;
+        } else {
+            throw new PersonException("Student name should be between 2 and 30 characters in length");
+        }
     }
 
     public int getId() {
@@ -25,4 +29,5 @@ public abstract class Person {
         this.name = name;
     }
     public abstract String toString();
-}
+
+    }

@@ -11,9 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AddAssetTest {
     Library library = LibraryFactory.createLibrary();
     Author testAuthor = new Author(420, "TP");
-    Asset dw1 = new BookAudioBook("The Colour of Magic", "0-86140-324-X", "1983", testAuthor);
-    Asset dw2 = new BookAudioBook("The Light Fantastic", "0-86140-203-0", "1986", testAuthor);
-    Asset dw3 = new BookAudioBook("Equal Rites", "0-575-03950-7", "1987", testAuthor);
+    Asset dw1 = new BookAudioBook("The Colour of Magic", "0-86140-324-X", "1983", testAuthor, 1);
+    Asset dw2 = new BookAudioBook("The Light Fantastic", "0-86140-203-0", "1986", testAuthor, 1);
+    Asset dw3 = new BookAudioBook("Equal Rites", "0-575-03950-7", "1987", testAuthor, 1);
 
     @Test
     @DisplayName("Call public method to add asset")
