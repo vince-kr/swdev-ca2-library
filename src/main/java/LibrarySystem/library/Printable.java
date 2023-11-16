@@ -8,5 +8,5 @@ public interface Printable <T>{
      concrete classes to implement
      */
     void printToFile(ArrayList<T> objects, String filePath);
-    void readFromCsv(String csvFile);
+    ArrayList<T> readFromCsv(String csvFile);
 }
