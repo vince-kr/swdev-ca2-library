@@ -7,8 +7,10 @@ import LibrarySystem.library.Printable;
 import java.io.*;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Author extends Person implements Printable<Author> {
@@ -38,13 +40,40 @@ public class Author extends Person implements Printable<Author> {
 
     @Override
     public void printToFile(ArrayList<Author> objects, String csvFilePath) {
-        try (FileWriter fr = new FileWriter(csvFilePath);
-             CSVPrinter csvPrinter = new CSVPrinter(fr, CSVFormat.DEFAULT.withHeader("AuthorId","AuthorName","Number of Books"))) {
-            for (Author author:objects) {
-                csvPrinter.printRecord(author.getId(),author.getName(),author.getBooksAuthored().size());
+        StringBuilder sb = new StringBuilder();
+        if (Files.notExists(Path.of(csvFilePath))){
+            File file = new File(csvFilePath);
+            sb.append("AuthorId");
+            sb.append(",");
+            sb.append("AuthorName");
+            sb.append(",");
+            sb.append("Number of Assets");
+            sb.append(",");
+            sb.append("\r\n");
+
+        }
+
+        try {
+            FileWriter fr = new FileWriter(new File(csvFilePath), true);
+            BufferedWriter br = new BufferedWriter(fr);
+            PrintWriter writer = new PrintWriter(br);
+            if (!objects.isEmpty()){
+                for (Author object:objects) {
+                    sb.append(object.getId());
+                    sb.append(",");
+                    sb.append(object.getName());
+                    sb.append(",");
+                    sb.append(((Author) object).getBooksAuthored().size());
+                    sb.append(",");
+                    sb.append("\n");
+                }
+                writer.write(sb.toString());
+                writer.close();
+                fr.close();
+                br.close();
+                System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
             }
-            System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
-        }catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

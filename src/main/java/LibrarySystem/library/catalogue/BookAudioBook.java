@@ -8,6 +8,9 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -108,26 +111,58 @@ public class BookAudioBook extends Asset implements Printable<BookAudioBook> {
 
     @Override
     public void printToFile(ArrayList<BookAudioBook> objects, String csvFilePath) {
-        try (FileWriter fr = new FileWriter(csvFilePath);
-        CSVPrinter csvPrinter = new CSVPrinter(fr, CSVFormat.DEFAULT.withHeader(
-                "Book Title","Book ISBN","Status",
-                "Published Year","AuthorName","AuthorId",
-                "OverDue","Quantity"))){
-            for (BookAudioBook book:objects) {
+        StringBuilder sb = new StringBuilder();
+        if (Files.notExists(Path.of(csvFilePath))){
+            File file = new File(csvFilePath);
+            sb.append("Book Title");
+            sb.append(",");
+            sb.append("Book ISBN");
+            sb.append(",");
+            sb.append("Status");
+            sb.append(",");
+            sb.append("Published Year");
+            sb.append(",");
+            sb.append("AuthorName");
+            sb.append(",");
+            sb.append("AuthorId");
+            sb.append(",");
+            sb.append("OverDue");
+            sb.append(",");
+            sb.append("Quantity");
+            sb.append(",");
+            sb.append("\r\n");
 
-               csvPrinter.printRecord(
-                       book.getTitle(),
-                       book.getIsbn(),
-                       book.getStatus(),
-                       book.getPublishedYear(),
-                       book.author.getName(),
-                       book.author.getId(),
-                       book.getOverDue(),
-                       book.getQuantity());
-
+        }
+        try {
+            FileWriter fr = new FileWriter(new File(csvFilePath), true);
+            BufferedWriter br = new BufferedWriter(fr);
+            PrintWriter writer = new PrintWriter(br);
+            if (!objects.isEmpty()){
+                for (BookAudioBook book:objects) {
+                    sb.append(book.getTitle());
+                    sb.append(",");
+                    sb.append(book.getIsbn());
+                    sb.append(",");
+                    sb.append(book.getStatus());
+                    sb.append(",");
+                    sb.append(book.getPublishedYear());
+                    sb.append(",");
+                    sb.append(book.author.getName());
+                    sb.append(",");
+                    sb.append(book.author.getId());
+                    sb.append(",");
+                    sb.append(book.getOverDue());
+                    sb.append(",");
+                    sb.append(book.getQuantity());
+                    sb.append(",");
+                    sb.append("\n");
+                }
+                writer.write(sb.toString());
+                writer.close();
+                fr.close();
+                br.close();
+                System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
             }
-            System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

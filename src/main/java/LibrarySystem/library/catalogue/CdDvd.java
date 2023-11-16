@@ -8,6 +8,9 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -116,30 +119,70 @@ public class CdDvd extends Asset implements Printable<CdDvd>{
 
     @Override
     public void printToFile(ArrayList<CdDvd> objects, String csvFilePath) {
-        try (FileWriter fr = new FileWriter(csvFilePath);
-             CSVPrinter csvPrinter = new CSVPrinter(fr, CSVFormat.DEFAULT.withHeader(
-                     "Title","ProducerName","ProducerId","Status",
-                     "Production Year","DirectorName","DirectorId",
-                     "PlayTime","OverDue","Quantity"))){
-            for (CdDvd cd:objects) {
+        StringBuilder sb = new StringBuilder();
+        if (Files.notExists(Path.of(csvFilePath))){
+            File file = new File(csvFilePath);
+            sb.append("Title");
+            sb.append(",");
+            sb.append("ProducerName");
+            sb.append(",");
+            sb.append("ProductId");
+            sb.append(",");
+            sb.append("Status");
+            sb.append(",");
+            sb.append("Production Year");
+            sb.append(",");
+            sb.append("DirectorName");
+            sb.append(",");
+            sb.append("DirectorId");
+            sb.append(",");
+            sb.append("PlayTime");
+            sb.append(",");
+            sb.append("OverDue");
+            sb.append(",");
+            sb.append("Quantity");
+            sb.append(",");
+            sb.append("\r\n");
 
-                csvPrinter.printRecord(
-                        cd.getTitle(),
-                        cd.producer.getName(),
-                        cd.producer.getId(),
-                        cd.getStatus(),
-                        cd.getProductionYear(),
-                        cd.director.getName(),
-                        cd.director.getId(),
-                        cd.getPlayTime(),
-                        cd.getOverDue(),
-                        cd.getQuantity());
+        }
+        try {
+            FileWriter fr = new FileWriter(new File(csvFilePath), true);
+            BufferedWriter br = new BufferedWriter(fr);
+            PrintWriter writer = new PrintWriter(br);
+            if (!objects.isEmpty()){
+                for (CdDvd cDs:objects) {
+                    sb.append(cDs.getTitle());
+                    sb.append(",");
+                    sb.append(cDs.producer.getName());
+                    sb.append(",");
+                    sb.append(cDs.producer.getId());
+                    sb.append(",");
+                    sb.append(cDs.getStatus());
+                    sb.append(",");
+                    sb.append(cDs.getProductionYear());
+                    sb.append(",");
+                    sb.append(cDs.director.getName());
+                    sb.append(",");
+                    sb.append(cDs.director.getId());
+                    sb.append(",");
+                    sb.append(cDs.getPlayTime());
+                    sb.append(",");
+                    sb.append(cDs.getOverDue());
+                    sb.append(",");
+                    sb.append(cDs.getQuantity());
+                    sb.append(",");
+                    sb.append("\n");
+                }
+                writer.write(sb.toString());
+                writer.close();
+                fr.close();
+                br.close();
+                System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
             }
-            System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     @Override

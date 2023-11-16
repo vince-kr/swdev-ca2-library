@@ -9,6 +9,9 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -116,30 +119,66 @@ public class ThesisDissertation extends Asset implements Printable<ThesisDissert
 
     @Override
     public void printToFile(ArrayList<ThesisDissertation> objects, String csvFilePath) {
-        try (FileWriter fr = new FileWriter(csvFilePath);
-             CSVPrinter csvPrinter = new CSVPrinter(fr, CSVFormat.DEFAULT.withHeader(
-                     "Title","Topic","Status",
-                     "Published Year","AuthorName","AuthorId",
-                     "OverDue","Quantity","Summary"))){
-            for (ThesisDissertation thesis:objects) {
+        StringBuilder sb = new StringBuilder();
+        if (Files.notExists(Path.of(csvFilePath))){
+            File file = new File(csvFilePath);
+            sb.append("Title");
+            sb.append(",");
+            sb.append("Topic");
+            sb.append(",");
+            sb.append("Status");
+            sb.append(",");
+            sb.append("Published Year");
+            sb.append(",");
+            sb.append("AuthorName");
+            sb.append(",");
+            sb.append("AuthorId");
+            sb.append(",");
+            sb.append("OverDue");
+            sb.append(",");
+            sb.append("Quantity");
+            sb.append(",");
+            sb.append("Summary");
+            sb.append(",");
+            sb.append("\r\n");
 
-                csvPrinter.printRecord(
-                        thesis.getTitle(),
-                        thesis.getTopic(),
-                        thesis.getStatus(),
-                        thesis.getPublishedDate(),
-                        thesis.author.getName(),
-                        thesis.author.getId(),
-                        thesis.getOverDue(),
-                        thesis.getQuantity(),
-                        thesis.getSummary());
-
+        }
+        try {
+            FileWriter fr = new FileWriter(new File(csvFilePath), true);
+            BufferedWriter br = new BufferedWriter(fr);
+            PrintWriter writer = new PrintWriter(br);
+            if (!objects.isEmpty()){
+                for (ThesisDissertation thesis:objects) {
+                    sb.append(thesis.getTitle());
+                    sb.append(",");
+                    sb.append(thesis.getTopic());
+                    sb.append(",");
+                    sb.append(thesis.getStatus());
+                    sb.append(",");
+                    sb.append(thesis.getPublishedDate());
+                    sb.append(",");
+                    sb.append(thesis.author.getName());
+                    sb.append(",");
+                    sb.append(thesis.author.getId());
+                    sb.append(",");
+                    sb.append(thesis.getOverDue());
+                    sb.append(",");
+                    sb.append(thesis.getQuantity());
+                    sb.append(",");
+                    sb.append(thesis.getSummary());
+                    sb.append(",");
+                    sb.append("\n");
+                }
+                writer.write(sb.toString());
+                writer.close();
+                fr.close();
+                br.close();
+                System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
             }
-            System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     @Override
