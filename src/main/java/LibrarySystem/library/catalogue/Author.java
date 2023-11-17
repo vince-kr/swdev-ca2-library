@@ -21,7 +21,7 @@ public class Author extends Person implements Printable<Author> {
     static final String GREEN = "\u001B[32m";
 
     public Author(int id, String name) throws PersonException {
-        super(id, name);
+        super(name);
         this.booksAuthored = new ArrayList<>();
     }
 
@@ -35,7 +35,7 @@ public class Author extends Person implements Printable<Author> {
 
     @Override
     public String toString() {
-        return String.format("AuthorId: %d, AuthorName: %s", getId(), getName());
+        return String.format("AuthorName: %s", getName());
     }
 
     @Override
@@ -59,8 +59,6 @@ public class Author extends Person implements Printable<Author> {
             PrintWriter writer = new PrintWriter(br);
             if (!objects.isEmpty()){
                 for (Author object:objects) {
-                    sb.append(object.getId());
-                    sb.append(",");
                     sb.append(object.getName());
                     sb.append(",");
                     sb.append(((Author) object).getBooksAuthored().size());

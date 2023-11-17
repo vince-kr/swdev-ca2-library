@@ -149,8 +149,6 @@ public class BookAudioBook extends Asset implements Printable<BookAudioBook> {
                     sb.append(",");
                     sb.append(book.author.getName());
                     sb.append(",");
-                    sb.append(book.author.getId());
-                    sb.append(",");
                     sb.append(book.getOverDue());
                     sb.append(",");
                     sb.append(book.getQuantity());

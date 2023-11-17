@@ -94,6 +94,7 @@ class Interactor {
     private HashMap<String, Interaction> buildUserMenuWithOptions() {
         var userMenuInteractions = new HashMap<String, Interaction>();
         userMenuInteractions.put("manage-users", createUserMenu());
+        userMenuInteractions.put("add-customer", new addUser());
         return userMenuInteractions;
     }
 

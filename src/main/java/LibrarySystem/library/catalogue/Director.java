@@ -10,7 +10,7 @@ public class Director extends Person{
     private ArrayList<Asset> assetsDirected;
 
     public Director(int id, String name) throws PersonException {
-        super(id, name);
+        super(name);
         this.assetsDirected = new ArrayList<>();
     }
 
@@ -24,6 +24,6 @@ public class Director extends Person{
 
     @Override
     public String toString() {
-        return String.format("DirectorId: %d, DirectorName: %s", getId(), getName());
+        return String.format("DirectorName: %s", getName());
     }
 }

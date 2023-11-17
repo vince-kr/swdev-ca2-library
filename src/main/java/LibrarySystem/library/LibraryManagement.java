@@ -3,10 +3,12 @@ package LibrarySystem.library;
 import LibrarySystem.library.catalogue.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 class LibraryManagement implements Library {
 
-    ArrayList<LibraryUser> allUsers;
+    HashMap<Integer, LibraryUser> allUsers;
     final Catalogue catalogue;
 
 /*
@@ -19,6 +21,7 @@ class LibraryManagement implements Library {
 
     public LibraryManagement() {
         catalogue = CatalogueFactory.createCatalogue("some,mock,csv,data");
+        allUsers = new HashMap<>();
     }
 
     @Override
@@ -29,6 +32,17 @@ class LibraryManagement implements Library {
     @Override
     public void addAuthor(Author newAuthor) {
         catalogue.addAuthor(newAuthor);
+    }
+
+    @Override
+    public void addUser(LibraryUser libraryUser) {
+        int nextID = computeNextUserID();
+        allUsers.put(nextID, libraryUser);
+    }
+
+    private int computeNextUserID() {
+        int currentLargestKey = allUsers.isEmpty() ? 10000000 : Collections.max(allUsers.keySet());
+        return currentLargestKey + 1;
     }
 
     @Override

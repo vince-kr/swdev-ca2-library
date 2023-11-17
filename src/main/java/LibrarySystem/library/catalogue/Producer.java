@@ -10,7 +10,7 @@ public class Producer extends Person{
 
 
     public Producer(int id, String name) throws PersonException {
-        super(id, name);
+        super(name);
         this.assetProduced = new ArrayList<>();
     }
 
@@ -24,6 +24,6 @@ public class Producer extends Person{
 
     @Override
     public String toString() {
-        return String.format("ProducerId: %d, ProducerName: %s", getId(), getName());
+        return String.format("ProducerName: %s", getName());
     }
 }

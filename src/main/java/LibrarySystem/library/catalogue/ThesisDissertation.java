@@ -159,8 +159,6 @@ public class ThesisDissertation extends Asset implements Printable<ThesisDissert
                     sb.append(",");
                     sb.append(thesis.author.getName());
                     sb.append(",");
-                    sb.append(thesis.author.getId());
-                    sb.append(",");
                     sb.append(thesis.getOverDue());
                     sb.append(",");
                     sb.append(thesis.getQuantity());

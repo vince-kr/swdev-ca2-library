@@ -15,4 +15,6 @@ public interface Library {
     void addAuthor(Author toAdd);
 
     void loadSampleData();
+
+    void addUser(LibraryUser libraryUser);
 }

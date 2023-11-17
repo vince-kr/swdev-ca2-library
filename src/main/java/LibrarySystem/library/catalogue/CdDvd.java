@@ -155,15 +155,11 @@ public class CdDvd extends Asset implements Printable<CdDvd>{
                     sb.append(",");
                     sb.append(cDs.producer.getName());
                     sb.append(",");
-                    sb.append(cDs.producer.getId());
-                    sb.append(",");
                     sb.append(cDs.getStatus());
                     sb.append(",");
                     sb.append(cDs.getProductionYear());
                     sb.append(",");
                     sb.append(cDs.director.getName());
-                    sb.append(",");
-                    sb.append(cDs.director.getId());
                     sb.append(",");
                     sb.append(cDs.getPlayTime());
                     sb.append(",");

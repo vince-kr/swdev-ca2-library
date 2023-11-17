@@ -1,7 +1,6 @@
 package LibrarySystem.library;
 
 import LibrarySystem.library.catalogue.Asset;
-import LibrarySystem.library.catalogue.Author;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -16,8 +15,8 @@ public class LibraryUser extends Person implements Printable<LibraryUser>{
     static final String GREEN = "\u001B[32m";
 
 
-    public LibraryUser(int id, String name) throws PersonException {
-        super(id, name);
+    public LibraryUser(String name) throws PersonException {
+        super(name);
         this.borrowedBooks = new ArrayList<>();
     }
 
@@ -31,7 +30,7 @@ public class LibraryUser extends Person implements Printable<LibraryUser>{
 
     @Override
     public String toString() {
-        return String.format("UserId: %d, UserName: %s",getId(),getName());
+        return String.format("UserName: %s",getName());
     }
 
     @Override
@@ -55,8 +54,6 @@ public class LibraryUser extends Person implements Printable<LibraryUser>{
 
             if (!objects.isEmpty()){
                 for (LibraryUser user:objects) {
-                    sb.append(user.getId());
-                    sb.append(",");
                     sb.append(user.getName());
                     sb.append(",");
                     sb.append(((LibraryUser) user).getBorrowedBooks().size());
