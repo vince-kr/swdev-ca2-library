@@ -23,6 +23,7 @@ class Interactor {
         allInteractions.put("manage-users", createUserMenu());
         allInteractions.put("add-asset", new addAsset());
         allInteractions.put("add-author", new AddAuthor());
+        allInteractions.put("all-assets", new ListAllAssets());
         return allInteractions;
     }
 

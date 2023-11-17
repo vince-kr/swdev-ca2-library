@@ -5,6 +5,7 @@ import LibrarySystem.library.catalogue.Catalogue;
 import LibrarySystem.library.catalogue.CatalogueFactory;
 
 import java.util.ArrayList;
+import java.util.List;
 
 class LibraryManagement implements Library {
 
@@ -33,4 +34,8 @@ class LibraryManagement implements Library {
         return catalogue.getAssetCount();
     }
 
+    @Override
+    public String summariseAllAssets() {
+        return catalogue.summariseAllAssets();
+    }
 }
