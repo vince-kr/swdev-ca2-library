@@ -136,7 +136,7 @@ public class addAsset extends Interaction {
 
         String authorName = StandardInput.getValidString(prompt, responsePattern);
 
-        return new Author(3, authorName);
+        return new Author(authorName);
     }
 
     private String askYoP() {

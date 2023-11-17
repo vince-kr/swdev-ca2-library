@@ -20,7 +20,7 @@ public class Author extends Person implements Printable<Author> {
     static final String BLUE = "\u001b[34m";
     static final String GREEN = "\u001B[32m";
 
-    public Author(int id, String name) throws PersonException {
+    public Author(String name) throws PersonException {
         super(name);
         this.booksAuthored = new ArrayList<>();
     }
@@ -82,9 +82,9 @@ public class Author extends Person implements Printable<Author> {
         try (FileReader fr = new FileReader(csvFile);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
             for (CSVRecord csvRecord : csvParser) {
-                int authorId = Integer.parseInt(csvRecord.get("AuthorId"));
+                //int authorId = Integer.parseInt(csvRecord.get("AuthorId"));
                 String name = csvRecord.get("AuthorName");
-                authors.add(new Author(authorId, name));
+                authors.add(new Author(name));
             }
             System.out.println(GREEN+"\n\tAuthor objects successfully read from file: "+csvFile+RESET);
         } catch (IOException | PersonException e) {
