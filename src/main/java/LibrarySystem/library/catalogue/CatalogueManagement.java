@@ -1,28 +1,23 @@
 package LibrarySystem.library.catalogue;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 
 class CatalogueManagement implements Catalogue {
 
-    final ArrayList<Author> allAuthors;
+    final HashMap<Integer, Author> allAuthors;
     final HashMap<Integer, Asset> allAssets;
 
     public CatalogueManagement(String csvCatalogueData) {
-        allAuthors = new ArrayList<>();
+        allAuthors = new HashMap<>();
         allAssets = new HashMap<>();
     }
 
     @Override
     public void addAsset(Asset toAdd) {
-        int nextID = computeNextAssetID();
+        int nextID = computeNextID(allAssets.keySet());
         allAssets.put(nextID, toAdd);
-    }
-
-    private int computeNextAssetID() {
-        int currentLargestKey = allAssets.isEmpty() ? 10000000 : Collections.max(allAssets.keySet());
-        return currentLargestKey + 1;
     }
 
     @Override
@@ -41,7 +36,13 @@ class CatalogueManagement implements Catalogue {
 
     @Override
     public void addAuthor(Author toAdd) {
-        allAuthors.add(toAdd);
+        int nextID = computeNextID(allAuthors.keySet());
+        allAuthors.put(nextID, toAdd);
+    }
+
+    private int computeNextID(Collection<Integer> keys) {
+        int currentLargestKey = keys.isEmpty() ? 10000000 : Collections.max(keys);
+        return currentLargestKey + 1;
     }
 
     /*
