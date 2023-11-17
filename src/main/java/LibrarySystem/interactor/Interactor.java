@@ -16,16 +16,19 @@ class Interactor {
 
     private HashMap<String, Interaction> loadAllInteractions() {
         var allInteractions = new HashMap<String, Interaction>();
-        allInteractions.put("main", createMainMenu());
-        allInteractions.put("common-operations", createOperationsMenu());
-        allInteractions.put("common-filters", createFiltersMenu());
-        allInteractions.put("manage-catalogue", createCatalogueMenu());
-        allInteractions.put("manage-users", createUserMenu());
-        allInteractions.put("load-sample-data", new loadSampleData());
-        allInteractions.put("add-asset", new addAsset());
-        allInteractions.put("add-author", new AddAuthor());
-        allInteractions.put("all-assets", new ListAllAssets());
+        allInteractions.putAll(buildMainMenuWithOptions());
+        allInteractions.putAll(buildOperationsMenuWithOptions());
+        allInteractions.putAll(buildFiltersMenuWithOptions());
+        allInteractions.putAll(buildCatalogueMenuWithOptions());
+        allInteractions.putAll(buildUserMenuWithOptions());
         return allInteractions;
+    }
+
+    private HashMap<String, Interaction> buildMainMenuWithOptions() {
+        var mainMenuInteractions = new HashMap<String, Interaction>();
+        mainMenuInteractions.put("main", createMainMenu());
+        mainMenuInteractions.put("load-sample-data", new loadSampleData());
+        return mainMenuInteractions;
     }
 
     private Menu createMainMenu() {
@@ -39,12 +42,25 @@ class Interactor {
         });
     }
 
+    private HashMap<String, Interaction> buildOperationsMenuWithOptions() {
+        var operationsMenuInteractions = new HashMap<String, Interaction>();
+        operationsMenuInteractions.put("common-operations", createOperationsMenu());
+        return operationsMenuInteractions;
+    }
+
     private Menu createOperationsMenu() {
         return new Menu("OPERATIONS\n", new MenuItem[] {
                 new MenuItem("BORROW asset", "borrow-asset"),
                 new MenuItem("RETURN asset", "return-asset"),
                 new MenuItem("Back", "main")
         });
+    }
+
+    private HashMap<String, Interaction> buildFiltersMenuWithOptions() {
+        var filtersMenuInteractions = new HashMap<String, Interaction>();
+        filtersMenuInteractions.put("common-filters", createFiltersMenu());
+        filtersMenuInteractions.put("all-assets", new ListAllAssets());
+        return filtersMenuInteractions;
     }
 
     private Menu createFiltersMenu() {
@@ -58,6 +74,14 @@ class Interactor {
         });
     }
 
+    private HashMap<String, Interaction> buildCatalogueMenuWithOptions() {
+        var catalogueMenuInteractions = new HashMap<String, Interaction>();
+        catalogueMenuInteractions.put("manage-catalogue", createCatalogueMenu());
+        catalogueMenuInteractions.put("add-asset", new addAsset());
+        catalogueMenuInteractions.put("add-author", new AddAuthor());
+        return catalogueMenuInteractions;
+    }
+
     private Menu createCatalogueMenu() {
         return new Menu("MANAGE ASSETS\n", new MenuItem[]{
                 new MenuItem("ADD asset", "add-asset"),
@@ -65,6 +89,12 @@ class Interactor {
                 new MenuItem("add AUTHOR", "add-author"),
                 new MenuItem("Back", "main")
         });
+    }
+
+    private HashMap<String, Interaction> buildUserMenuWithOptions() {
+        var userMenuInteractions = new HashMap<String, Interaction>();
+        userMenuInteractions.put("manage-users", createUserMenu());
+        return userMenuInteractions;
     }
 
     private Menu createUserMenu() {
