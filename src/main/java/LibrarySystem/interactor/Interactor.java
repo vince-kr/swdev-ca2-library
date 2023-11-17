@@ -21,6 +21,7 @@ class Interactor {
         allInteractions.put("common-filters", createFiltersMenu());
         allInteractions.put("manage-catalogue", createCatalogueMenu());
         allInteractions.put("manage-users", createUserMenu());
+        allInteractions.put("load-sample-data", new loadSampleData());
         allInteractions.put("add-asset", new addAsset());
         allInteractions.put("add-author", new AddAuthor());
         allInteractions.put("all-assets", new ListAllAssets());
@@ -33,6 +34,7 @@ class Interactor {
                 new MenuItem("LISTS", "common-filters"),
                 new MenuItem("CATALOGUE management", "manage-catalogue"),
                 new MenuItem("USER management", "manage-users"),
+                new MenuItem("SAMPLE data", "load-sample-data"),
                 new MenuItem("Exit", "exit")
         });
     }

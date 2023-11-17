@@ -112,4 +112,17 @@ public abstract class StandardInput {
         }
         return null;
     }
+
+    public static boolean getYesNo(String prompt) {
+        var in = new Scanner(System.in);
+
+        System.out.print(prompt + "[y/n] ");
+        String userInput = in.nextLine();
+
+        if (userInput.matches("^[YyNn]$"))
+            return userInput.matches("[Yy]");
+
+        System.out.println("WARNING - Your input was not valid. Please enter Y or N.");
+        return getYesNo(prompt);
+    }
 }

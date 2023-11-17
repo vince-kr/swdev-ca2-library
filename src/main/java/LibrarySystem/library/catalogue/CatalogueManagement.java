@@ -3,7 +3,6 @@ package LibrarySystem.library.catalogue;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 class CatalogueManagement implements Catalogue {
 
@@ -35,15 +34,20 @@ class CatalogueManagement implements Catalogue {
     public String summariseAllAssets() {
         var assetsSummary = new StringBuilder();
         for (int assetID : this.allAssets.keySet())
-            assetsSummary.append(assetID + "\t" + allAssets.get(assetID));
+            assetsSummary.append(assetID + "\t" + allAssets.get(assetID) + "\n");
 
         return assetsSummary.toString();
     }
 
+    @Override
+    public void addAuthor(Author toAdd) {
+        allAuthors.add(toAdd);
+    }
+
     /*
-         return an asset
-         from allAssets hash map
-         */
+             return an asset
+             from allAssets hash map
+             */
     public Asset findAssetByKey(int key){
                 return allAssets.get(key);
     }

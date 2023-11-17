@@ -1,11 +1,8 @@
 package LibrarySystem.library;
 
-import LibrarySystem.library.catalogue.Asset;
-import LibrarySystem.library.catalogue.Catalogue;
-import LibrarySystem.library.catalogue.CatalogueFactory;
+import LibrarySystem.library.catalogue.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 class LibraryManagement implements Library {
 
@@ -30,6 +27,11 @@ class LibraryManagement implements Library {
     }
 
     @Override
+    public void addAuthor(Author newAuthor) {
+        catalogue.addAuthor(newAuthor);
+    }
+
+    @Override
     public int getAssetCount() {
         return catalogue.getAssetCount();
     }
@@ -37,5 +39,20 @@ class LibraryManagement implements Library {
     @Override
     public String summariseAllAssets() {
         return catalogue.summariseAllAssets();
+    }
+
+    @Override
+    public void loadSampleData() {
+        try {
+            Author sampleAuthor = new Author(420, "TP");
+            Asset dw1 = new BookAudioBook("The Colour of Magic", "0-86140-324-X", "1983", sampleAuthor, 1);
+            Asset dw2 = new BookAudioBook("The Light Fantastic", "0-86140-203-0", "1986", sampleAuthor, 1);
+            Asset dw3 = new BookAudioBook("Equal Rites", "0-575-03950-7", "1987", sampleAuthor, 1);
+
+            this.addAuthor(sampleAuthor);
+            this.addAsset(dw1);
+            this.addAsset(dw2);
+            this.addAsset(dw3);
+        } catch (PersonException pe) {}
     }
 }
