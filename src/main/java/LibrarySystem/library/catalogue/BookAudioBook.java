@@ -3,6 +3,7 @@ package LibrarySystem.library.catalogue;
 import java.io.*;
 
 import LibrarySystem.library.PersonException;
+import LibrarySystem.library.PrintMap;
 import LibrarySystem.library.Printable;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -12,9 +13,10 @@ import org.apache.commons.csv.CSVRecord;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalTime;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class BookAudioBook extends Asset implements Printable<BookAudioBook> {
+public class BookAudioBook extends Asset implements PrintMap<BookAudioBook> {
     private Author author;
     private String isbn;
     private String publishedYear;
@@ -110,7 +112,7 @@ public class BookAudioBook extends Asset implements Printable<BookAudioBook> {
     }
 
     @Override
-    public void printToFile(ArrayList<BookAudioBook> objects, String csvFilePath) {
+    public void printToFile(HashMap<Integer, BookAudioBook> objects, String csvFilePath) {
         StringBuilder sb = new StringBuilder();
         if (Files.notExists(Path.of(csvFilePath))){
             File file = new File(csvFilePath);
@@ -124,37 +126,41 @@ public class BookAudioBook extends Asset implements Printable<BookAudioBook> {
             sb.append(",");
             sb.append("AuthorName");
             sb.append(",");
-            sb.append("AuthorId");
+            sb.append("Id");
             sb.append(",");
             sb.append("OverDue");
             sb.append(",");
             sb.append("Quantity");
             sb.append(",");
             sb.append("\r\n");
-
         }
         try {
             FileWriter fr = new FileWriter(new File(csvFilePath), true);
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter writer = new PrintWriter(br);
             if (!objects.isEmpty()){
-                for (BookAudioBook book:objects) {
-                    sb.append(book.getTitle());
+                for (Map.Entry<Integer,BookAudioBook> book:objects.entrySet()){
+                    sb.append(book.getKey());
                     sb.append(",");
-                    sb.append(book.getIsbn());
+                    sb.append(book.getValue().getTitle());
                     sb.append(",");
-                    sb.append(book.getStatus());
+                    sb.append(book.getValue().getIsbn());
                     sb.append(",");
-                    sb.append(book.getPublishedYear());
+                    sb.append(book.getValue().getStatus());
                     sb.append(",");
-                    sb.append(book.author.getName());
+                    sb.append(book.getValue().getPublishedYear());
                     sb.append(",");
-                    sb.append(book.getOverDue());
+                    sb.append(book.getValue().author.getName());
                     sb.append(",");
-                    sb.append(book.getQuantity());
+                    sb.append(book.getKey());
+                    sb.append(",");
+                    sb.append(book.getValue().getOverDue());
+                    sb.append(",");
+                    sb.append(book.getValue().getQuantity());
                     sb.append(",");
                     sb.append("\n");
                 }
+
                 writer.write(sb.toString());
                 writer.close();
                 fr.close();
@@ -164,26 +170,34 @@ public class BookAudioBook extends Asset implements Printable<BookAudioBook> {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     @Override
-    public ArrayList<BookAudioBook> readFromCsv(String csvFile) {
-        ArrayList<BookAudioBook> books = new ArrayList<>();
-        try (FileReader fr = new FileReader(csvFile);
-            CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
+    public HashMap<Integer, BookAudioBook> readFromCsv(String csvFilePath) {
+        HashMap<Integer,BookAudioBook> books = new HashMap<>();
+        try (FileReader fr = new FileReader(csvFilePath);
+             CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
             for (CSVRecord csvRecord:csvParser){
+                int key = Integer.parseInt(csvRecord.get(Integer.parseInt("Id")));
                 String title = csvRecord.get("Book Title");
-                String Isbn = csvRecord.get("Book ISBN");
+                String isbn = csvRecord.get("Book ISBN");
                 String year = csvRecord.get("Published Year");
                 String authorName = csvRecord.get("AuthorName");
-                int authorId = Integer.parseInt(csvRecord.get("AuthorId"));
                 int qty = Integer.parseInt(csvRecord.get("Quantity"));
-                books.add(new BookAudioBook(title,Isbn,year,new Author(authorName),qty));
+                books.put(key,new BookAudioBook(
+                        title,
+                        isbn,
+                        year,
+                        new Author(authorName),
+                        qty));
             }
-            System.out.println(GREEN+"\n\tBook objects successfully read from file: "+csvFile+RESET);
-        } catch (IOException | PersonException  e) {
+            System.out.println(GREEN+"\n\tDissertation objects successfully read from file: "+csvFilePath+RESET);
+        } catch (IOException | PersonException e) {
             throw new RuntimeException(e);
         }
         return books;
+
     }
+
 }

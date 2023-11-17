@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Director extends Person{
     private ArrayList<Asset> assetsDirected;
 
-    public Director(int id, String name) throws PersonException {
+    public Director(String name) throws PersonException {
         super(name);
         this.assetsDirected = new ArrayList<>();
     }

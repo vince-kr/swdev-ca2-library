@@ -6,8 +6,9 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class LibraryUser extends Person implements Printable<LibraryUser>{
+public class LibraryUser extends Person implements PrintMap<LibraryUser>{
     private ArrayList<Asset> borrowedBooks;
     static final String RESET = "\u001B[0m";
     static final String RED = "\u001B[31m";
@@ -34,46 +35,14 @@ public class LibraryUser extends Person implements Printable<LibraryUser>{
     }
 
     @Override
-    public void printToFile(ArrayList<LibraryUser> objects, String filePath) {
-        StringBuilder sb = new StringBuilder();
-        if (Files.notExists(Path.of(filePath))){
-            File file = new File(filePath);
-            sb.append("UserId");
-            sb.append(",");
-            sb.append("UserName");
-            sb.append(",");
-            sb.append("Number of Books");
-            sb.append(",");
-            sb.append("\n");
-        }
+    public void printToFile(HashMap<Integer, LibraryUser> objects, String csvFilePath) {
 
-        try {
-            FileWriter fr = new FileWriter(new File(filePath), true);
-            BufferedWriter br = new BufferedWriter(fr);
-            PrintWriter writer = new PrintWriter(br);
-
-            if (!objects.isEmpty()){
-                for (LibraryUser user:objects) {
-                    sb.append(user.getName());
-                    sb.append(",");
-                    sb.append(((LibraryUser) user).getBorrowedBooks().size());
-                    sb.append(",");
-                    sb.append("\n");
-                }
-                writer.write(sb.toString());
-                writer.close();
-                fr.close();
-                br.close();
-                System.out.println(GREEN+" Successfully written to file!"+RESET);
-
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
-    public ArrayList<LibraryUser> readFromCsv(String csvFile) {
-        return new ArrayList<>();
+    public HashMap<Integer, LibraryUser> readFromCsv(String csvFilePath) {
+        return null;
     }
+
+
 }
