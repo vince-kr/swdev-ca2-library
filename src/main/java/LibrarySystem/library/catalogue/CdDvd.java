@@ -1,6 +1,7 @@
 package LibrarySystem.library.catalogue;
 
 import LibrarySystem.library.PersonException;
+import LibrarySystem.library.PrintMap;
 import LibrarySystem.library.Printable;
 
 import java.io.*;
@@ -13,8 +14,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class CdDvd extends Asset implements Printable<CdDvd>{
+public class CdDvd extends Asset implements PrintMap<CdDvd> {
     private Producer producer;
     private Director director;
     private int playTime;
@@ -115,30 +118,22 @@ public class CdDvd extends Asset implements Printable<CdDvd>{
         return "CdDvd";
     }
 
-
-
     @Override
-    public void printToFile(ArrayList<CdDvd> objects, String csvFilePath) {
+    public void printToFile(HashMap<Integer, CdDvd> objects, String csvFilePath) {
         StringBuilder sb = new StringBuilder();
         if (Files.notExists(Path.of(csvFilePath))){
             File file = new File(csvFilePath);
+            sb.append("Id");
+            sb.append(",");
             sb.append("Title");
             sb.append(",");
             sb.append("ProducerName");
-            sb.append(",");
-            sb.append("ProductId");
-            sb.append(",");
-            sb.append("Status");
             sb.append(",");
             sb.append("Production Year");
             sb.append(",");
             sb.append("DirectorName");
             sb.append(",");
-            sb.append("DirectorId");
-            sb.append(",");
             sb.append("PlayTime");
-            sb.append(",");
-            sb.append("OverDue");
             sb.append(",");
             sb.append("Quantity");
             sb.append(",");
@@ -150,22 +145,24 @@ public class CdDvd extends Asset implements Printable<CdDvd>{
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter writer = new PrintWriter(br);
             if (!objects.isEmpty()){
-                for (CdDvd cDs:objects) {
-                    sb.append(cDs.getTitle());
+                for (Map.Entry<Integer,CdDvd> cd: objects.entrySet()) {
+                    sb.append(cd.getKey());
                     sb.append(",");
-                    sb.append(cDs.producer.getName());
+                    sb.append(cd.getValue().producer.getName());
                     sb.append(",");
-                    sb.append(cDs.getStatus());
+                    sb.append(cd.getValue().getStatus());
                     sb.append(",");
-                    sb.append(cDs.getProductionYear());
+                    sb.append(cd.getValue().getProductionYear());
                     sb.append(",");
-                    sb.append(cDs.director.getName());
+                    sb.append(cd.getValue().director.getName());
                     sb.append(",");
-                    sb.append(cDs.getPlayTime());
+                    sb.append(cd.getValue().getPlayTime());
                     sb.append(",");
-                    sb.append(cDs.getOverDue());
+                    sb.append(cd.getValue().getOverDue());
                     sb.append(",");
-                    sb.append(cDs.getQuantity());
+                    sb.append(cd.getValue().getOverDue());
+                    sb.append(",");
+                    sb.append(cd.getValue().getQuantity());
                     sb.append(",");
                     sb.append("\n");
                 }
@@ -182,25 +179,33 @@ public class CdDvd extends Asset implements Printable<CdDvd>{
     }
 
     @Override
-    public ArrayList<CdDvd> readFromCsv(String csvFile) {
-        ArrayList<CdDvd> cDs = new ArrayList<>();
-        try (FileReader fr = new FileReader(csvFile);
+    public HashMap<Integer, CdDvd> readFromCsv(String csvFilePath) {
+        HashMap<Integer,CdDvd> cDs = new HashMap<>();
+        try (FileReader fr = new FileReader(csvFilePath);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
             for (CSVRecord csvRecord:csvParser){
+                int key = Integer.parseInt(csvRecord.get(Integer.parseInt("Id")));
                 String title = csvRecord.get("Title");
-                String prodName = csvRecord.get("ProducerName");
-                int prodId = Integer.parseInt(csvRecord.get("ProducerId"));
-                String year = csvRecord.get("Production Year");
-                String directName = csvRecord.get("DirectorName");
-                int directId = Integer.parseInt(csvRecord.get("DirectorId"));
+                String producerName = csvRecord.get("ProducerName");
+                String year = csvRecord.get("Published Year");
+                String directorName = csvRecord.get("DirectorName");
                 int playTime = Integer.parseInt(csvRecord.get("PlayTime"));
                 int qty = Integer.parseInt(csvRecord.get("Quantity"));
-                cDs.add(new CdDvd(title,new Producer(prodId,prodName),new Director(directId,directName),playTime,year,qty));
+                cDs.put(key, new CdDvd(
+                        title,
+                        new Producer(producerName),
+                        new Director(directorName),
+                        playTime,
+                        year,
+                        qty));
             }
-            System.out.println(GREEN+"\n\tCD objects successfully read from file: "+csvFile+RESET);
+            System.out.println(GREEN+"\n\tDissertation objects successfully read from file: "+csvFilePath+RESET);
         } catch (IOException | PersonException e) {
             throw new RuntimeException(e);
         }
         return cDs;
+
     }
+
+
 }

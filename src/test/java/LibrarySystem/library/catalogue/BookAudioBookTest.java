@@ -12,7 +12,7 @@ class BookAudioBookTest {
     private Author author;
     @BeforeEach
     void setUp() throws PersonException {
-        author = new Author(1,"king James");
+        author = new Author("king James");
         book = new BookAudioBook("Holy Bible","0-546-77123-9","2000",author,1);
     }
 

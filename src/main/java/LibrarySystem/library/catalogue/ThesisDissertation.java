@@ -1,6 +1,7 @@
 package LibrarySystem.library.catalogue;
 
 import LibrarySystem.library.PersonException;
+import LibrarySystem.library.PrintMap;
 import LibrarySystem.library.Printable;
 
 import java.io.*;
@@ -14,8 +15,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class ThesisDissertation extends Asset implements Printable<ThesisDissertation> {
+public class ThesisDissertation extends Asset implements PrintMap<ThesisDissertation> {
     private Author author;
     private String topic;
     private String summary;
@@ -116,12 +119,12 @@ public class ThesisDissertation extends Asset implements Printable<ThesisDissert
         return "Thesis";
     }
 
-
     @Override
-    public void printToFile(ArrayList<ThesisDissertation> objects, String csvFilePath) {
+    public void printToFile(HashMap<Integer, ThesisDissertation> objects, String csvFilePath) {
         StringBuilder sb = new StringBuilder();
         if (Files.notExists(Path.of(csvFilePath))){
             File file = new File(csvFilePath);
+            sb.append("Id");
             sb.append("Title");
             sb.append(",");
             sb.append("Topic");
@@ -132,8 +135,6 @@ public class ThesisDissertation extends Asset implements Printable<ThesisDissert
             sb.append(",");
             sb.append("AuthorName");
             sb.append(",");
-            sb.append("AuthorId");
-            sb.append(",");
             sb.append("OverDue");
             sb.append(",");
             sb.append("Quantity");
@@ -143,30 +144,33 @@ public class ThesisDissertation extends Asset implements Printable<ThesisDissert
             sb.append("\r\n");
 
         }
-        try {
+                try {
             FileWriter fr = new FileWriter(new File(csvFilePath), true);
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter writer = new PrintWriter(br);
             if (!objects.isEmpty()){
-                for (ThesisDissertation thesis:objects) {
-                    sb.append(thesis.getTitle());
+                for (Map.Entry<Integer,ThesisDissertation> thesis:objects.entrySet()){
+                    sb.append(thesis.getKey());
                     sb.append(",");
-                    sb.append(thesis.getTopic());
+                    sb.append(thesis.getValue().getTitle());
                     sb.append(",");
-                    sb.append(thesis.getStatus());
+                    sb.append(thesis.getValue().getTopic());
                     sb.append(",");
-                    sb.append(thesis.getPublishedDate());
+                    sb.append(thesis.getValue().getStatus());
                     sb.append(",");
-                    sb.append(thesis.author.getName());
+                    sb.append(thesis.getValue().getPublishedDate());
                     sb.append(",");
-                    sb.append(thesis.getOverDue());
+                    sb.append(thesis.getValue().author.getName());
                     sb.append(",");
-                    sb.append(thesis.getQuantity());
+                    sb.append(thesis.getValue().getOverDue());
                     sb.append(",");
-                    sb.append(thesis.getSummary());
+                    sb.append(thesis.getValue().getQuantity());
+                    sb.append(",");
+                    sb.append(thesis.getValue().getSummary());
                     sb.append(",");
                     sb.append("\n");
                 }
+
                 writer.write(sb.toString());
                 writer.close();
                 fr.close();
@@ -180,18 +184,19 @@ public class ThesisDissertation extends Asset implements Printable<ThesisDissert
     }
 
     @Override
-    public ArrayList<ThesisDissertation> readFromCsv(String csvFile) {
-        ArrayList<ThesisDissertation> dissertations = new ArrayList<>();
-        try (FileReader fr = new FileReader(csvFile);
+    public HashMap<Integer, ThesisDissertation> readFromCsv(String csvFilePath) {
+        HashMap<Integer,ThesisDissertation> dissertations = new HashMap<>();
+        try (FileReader fr = new FileReader(csvFilePath);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
             for (CSVRecord csvRecord:csvParser){
+                int key = Integer.parseInt(csvRecord.get(Integer.parseInt("Id")));
                 String title = csvRecord.get("Title");
                 String topic = csvRecord.get("Topic");
                 String year = csvRecord.get("Published Year");
                 String authorName = csvRecord.get("AuthorName");
                 String summary = csvRecord.get("Summary");
                 int qty = Integer.parseInt(csvRecord.get("Quantity"));
-                dissertations.add(new ThesisDissertation(
+                dissertations.put(key,new ThesisDissertation(
                         title,
                         new Author(authorName),
                         topic,
@@ -199,11 +204,15 @@ public class ThesisDissertation extends Asset implements Printable<ThesisDissert
                         year,
                         qty));
             }
-            System.out.println(GREEN+"\n\tDissertation objects successfully read from file: "+csvFile+RESET);
+            System.out.println(GREEN+"\n\tDissertation objects successfully read from file: "+csvFilePath+RESET);
         } catch (IOException | PersonException e) {
             throw new RuntimeException(e);
         }
         return dissertations;
 
     }
+
+
+
+
 }

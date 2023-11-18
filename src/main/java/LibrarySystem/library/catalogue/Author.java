@@ -82,7 +82,7 @@ public class Author extends Person implements Printable<Author> {
         try (FileReader fr = new FileReader(csvFile);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
             for (CSVRecord csvRecord : csvParser) {
-                int authorId = Integer.parseInt(csvRecord.get("AuthorId"));
+                //int authorId = Integer.parseInt(csvRecord.get("AuthorId"));
                 String name = csvRecord.get("AuthorName");
                 authors.add(new Author(name));
             }

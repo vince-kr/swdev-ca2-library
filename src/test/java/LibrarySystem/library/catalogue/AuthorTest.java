@@ -14,7 +14,7 @@ class AuthorTest {
     @BeforeEach
     void setUp() throws PersonException {
         try {
-            author = new Author(1,"King James");
+            author = new Author("King James");
         } catch (PersonException e) {
             throw new RuntimeException(e);
         }

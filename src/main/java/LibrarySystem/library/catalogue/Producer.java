@@ -9,7 +9,7 @@ public class Producer extends Person{
     private ArrayList<Asset> assetProduced;
 
 
-    public Producer(int id, String name) throws PersonException {
+    public Producer(String name) throws PersonException {
         super(name);
         this.assetProduced = new ArrayList<>();
     }

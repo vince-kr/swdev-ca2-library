@@ -118,7 +118,7 @@ public class addAsset extends Interaction {
 
         String directorName = StandardInput.getValidString(prompt, responsePattern);
 
-        return new Director(5, directorName);
+        return new Director(directorName);
     }
 
     private Producer askProducer() throws PersonException {
@@ -127,7 +127,7 @@ public class addAsset extends Interaction {
 
         String producerName = StandardInput.getValidString(prompt, responsePattern);
 
-        return new Producer(4, producerName);
+        return new Producer(producerName);
     }
 
     private Author askAuthor() throws PersonException {
@@ -136,7 +136,7 @@ public class addAsset extends Interaction {
 
         String authorName = StandardInput.getValidString(prompt, responsePattern);
 
-        return new Author(3, authorName);
+        return new Author(authorName);
     }
 
     private String askYoP() {
