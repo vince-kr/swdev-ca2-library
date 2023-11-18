@@ -178,7 +178,7 @@ public class BookAudioBook extends Asset implements Printable<BookAudioBook> {
                 String authorName = csvRecord.get("AuthorName");
                 int authorId = Integer.parseInt(csvRecord.get("AuthorId"));
                 int qty = Integer.parseInt(csvRecord.get("Quantity"));
-                books.add(new BookAudioBook(title,Isbn,year,new Author(authorId, authorName),qty));
+                books.add(new BookAudioBook(title,Isbn,year,new Author(authorName),qty));
             }
             System.out.println(GREEN+"\n\tBook objects successfully read from file: "+csvFile+RESET);
         } catch (IOException | PersonException  e) {

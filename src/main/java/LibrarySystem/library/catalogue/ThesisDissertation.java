@@ -189,12 +189,11 @@ public class ThesisDissertation extends Asset implements Printable<ThesisDissert
                 String topic = csvRecord.get("Topic");
                 String year = csvRecord.get("Published Year");
                 String authorName = csvRecord.get("AuthorName");
-                int authorId = Integer.parseInt(csvRecord.get("AuthorId"));
                 String summary = csvRecord.get("Summary");
                 int qty = Integer.parseInt(csvRecord.get("Quantity"));
                 dissertations.add(new ThesisDissertation(
                         title,
-                        new Author(authorId,authorName),
+                        new Author(authorName),
                         topic,
                         summary,
                         year,
