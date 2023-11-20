@@ -23,7 +23,7 @@ class AuthorTest {
 
     @Test
     void getBooksAuthored() {
-        ArrayList<BookAudioBook> books = new ArrayList<>();
+        ArrayList<Asset> books = new ArrayList<>();
         books.add(book);
         author.setBooksAuthored(books);
         assertEquals(1,author.getBooksAuthored().size());

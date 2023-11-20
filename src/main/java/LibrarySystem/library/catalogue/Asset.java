@@ -1,6 +1,5 @@
 package LibrarySystem.library.catalogue;
 
-import LibrarySystem.library.Printable;
 
 public abstract class Asset{
     private String title;
