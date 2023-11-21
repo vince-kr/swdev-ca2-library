@@ -4,7 +4,7 @@ import LibrarySystem.library.catalogue.Asset;
 
 import java.util.ArrayList;
 
-public class LibraryUser extends Person{
+public class LibraryUser extends Person implements Comparable<LibraryUser>{
     private ArrayList<Asset> borrowedBooks;
 
 
@@ -27,7 +27,12 @@ public class LibraryUser extends Person{
         return String.format("UserName: %s",getName());
     }
 
-
-
-
+    /*
+     Compare users by the number of assets
+     they borrowed
+     */
+    @Override
+    public int compareTo(LibraryUser o) {
+        return Integer.compare(this.borrowedBooks.size(),o.borrowedBooks.size());
+    }
 }

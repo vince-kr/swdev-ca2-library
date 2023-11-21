@@ -5,7 +5,7 @@ import LibrarySystem.library.PersonException;
 
 import java.util.ArrayList;
 
-public class Author extends Person{
+public class Author extends Person implements Comparable<Author>{
     private ArrayList<Asset> booksAuthored;
 
 
@@ -28,4 +28,12 @@ public class Author extends Person{
     }
 
 
+    /*
+     Compare authors by the number of books
+     they have written
+     */
+    @Override
+    public int compareTo(Author o) {
+        return Integer.compare(this.booksAuthored.size(),o.booksAuthored.size());
+    }
 }
