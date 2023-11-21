@@ -19,6 +19,7 @@ public class addUser extends Interaction {
         try {
             library.addUser(new LibraryUser(newUserFullName));
             System.out.println("User " + newUserFullName + " added successfully!\n");
+
         } catch (PersonException pe) {
             System.out.println(pe.getMessage());
         }

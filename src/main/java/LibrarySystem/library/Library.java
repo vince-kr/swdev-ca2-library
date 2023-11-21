@@ -9,7 +9,7 @@ public interface Library {
     int getAssetCount();
 
     String summariseAllAssets();
-
+    String summariseAllUsers();
     void addAsset(Asset toAdd);
 
     void addAuthor(Author toAdd);
@@ -17,4 +17,6 @@ public interface Library {
     void loadSampleData();
 
     void addUser(LibraryUser libraryUser);
+    Asset borrowAsset(int Id);
+    LibraryUser findUserByKey(int key);
 }

@@ -2,16 +2,12 @@ package LibrarySystem.library.catalogue;
 
 
 
-import java.time.LocalTime;
-
 
 public class BookAudioBook extends Asset{
     private Author author;
     private String isbn;
     private String publishedYear;
-    private LocalTime dateIssued;
-    private LocalTime dateDue;
-    private String overDue;
+
     private int quantity;
 
 
@@ -22,9 +18,7 @@ public class BookAudioBook extends Asset{
         this.publishedYear = publishedYear;
         this.author = author;
         this.quantity = quantity;
-        this.dateIssued = LocalTime.parse("00:00:00.000");
-        this.dateDue = LocalTime.parse("00:00:00.000");
-        this.overDue = " - ";
+
 
     }
 
@@ -36,29 +30,7 @@ public class BookAudioBook extends Asset{
         this.quantity = quantity;
     }
 
-    public LocalTime getDateIssued() {
-        return dateIssued;
-    }
 
-    public void setDateIssued(LocalTime dateIssued) {
-        this.dateIssued = dateIssued;
-    }
-
-    public LocalTime getDateDue() {
-        return dateDue;
-    }
-
-    public void setDateDue(LocalTime dateDue) {
-        this.dateDue = dateDue;
-    }
-
-    public String getOverDue() {
-        return overDue;
-    }
-
-    public void setOverDue(String overDue) {
-        this.overDue = overDue;
-    }
 
 
     @Override

@@ -40,6 +40,11 @@ class LibraryManagement implements Library {
         allUsers.put(nextID, libraryUser);
     }
 
+    @Override
+    public Asset borrowAsset(int Id) {
+        return catalogue.borrowAsset(Id);
+    }
+
     private int computeNextUserID() {
         int currentLargestKey = allUsers.isEmpty() ? 10000000 : Collections.max(allUsers.keySet());
         return currentLargestKey + 1;
@@ -56,6 +61,15 @@ class LibraryManagement implements Library {
     }
 
     @Override
+    public String summariseAllUsers() {
+        var usersSummary = new StringBuilder();
+        for (int userID : this.allUsers.keySet())
+            usersSummary.append(userID + "\t" + allUsers.get(userID) + "\n");
+
+        return usersSummary.toString();
+    }
+
+    @Override
     public void loadSampleData() {
         try {
             Author sampleAuthor = new Author("TP");
@@ -69,4 +83,10 @@ class LibraryManagement implements Library {
             this.addAsset(dw3);
         } catch (PersonException pe) {}
     }
+
+    @Override
+    public LibraryUser findUserByKey(int key){
+        return allUsers.get(key);
+    }
+
 }

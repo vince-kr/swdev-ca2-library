@@ -1,7 +1,6 @@
 package LibrarySystem.library.catalogue;
 
 
-import java.time.LocalTime;
 
 
 public class ThesisDissertation extends Asset{
@@ -10,9 +9,7 @@ public class ThesisDissertation extends Asset{
     private String summary;
     private String publishedDate;
     private int quantity;
-    private LocalTime dateIssued;
-    private LocalTime dateDue;
-    private String overDue;
+
 
 
     public ThesisDissertation(String title, Author author, String topic, String summary, String publishedDate,int quantity) {
@@ -22,9 +19,6 @@ public class ThesisDissertation extends Asset{
         this.summary = summary;
         this.publishedDate = publishedDate;
         this.quantity = quantity;
-        this.dateIssued = LocalTime.parse("00:00:00.000");
-        this.dateDue = LocalTime.parse("00:00:00.000");
-        this.overDue = " - ";
     }
 
     public int getQuantity() {
@@ -66,30 +60,6 @@ public class ThesisDissertation extends Asset{
 
     public void setPublishedDate(String publishedDate) {
         this.publishedDate = publishedDate;
-    }
-
-    public LocalTime getDateIssued() {
-        return dateIssued;
-    }
-
-    public void setDateIssued(LocalTime dateIssued) {
-        this.dateIssued = dateIssued;
-    }
-
-    public LocalTime getDateDue() {
-        return dateDue;
-    }
-
-    public void setDateDue(LocalTime dateDue) {
-        this.dateDue = dateDue;
-    }
-
-    public String getOverDue() {
-        return overDue;
-    }
-
-    public void setOverDue(String overDue) {
-        this.overDue = overDue;
     }
 
     @Override

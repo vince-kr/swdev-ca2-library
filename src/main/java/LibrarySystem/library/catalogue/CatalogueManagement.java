@@ -40,6 +40,11 @@ class CatalogueManagement implements Catalogue {
         allAuthors.put(nextID, toAdd);
     }
 
+    @Override
+    public Asset borrowAsset(int Id) {
+        return allAssets.get(Id);
+    }
+
     private int computeNextID(Collection<Integer> keys) {
         int currentLargestKey = keys.isEmpty() ? 10000000 : Collections.max(keys);
         return currentLargestKey + 1;
