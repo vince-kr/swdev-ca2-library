@@ -4,6 +4,8 @@ import LibrarySystem.library.PersonException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BookAudioBookTest {
@@ -24,20 +26,27 @@ class BookAudioBookTest {
 
     @Test
     void getDateIssued() {
+        LocalTime t1 = LocalTime.now();
+        book.setDateIssued(t1);
+        assertEquals(t1,book.getDateIssued());
     }
 
     @Test
     void getDateDue() {
+        LocalTime t = LocalTime.now().plusHours(3);
+        book.setDateDue(t);
+        assertEquals(t,book.getDateDue());
     }
 
     @Test
     void getOverDue() {
         book.setOverDue("OverDue");
-        assertEquals("OverDue".length(), book.getOverDue().length());
+        assertEquals("OverDue", book.getOverDue());
     }
 
     @Test
     void getIsbn() {
+        assertEquals("0-546-77123-9",book.getIsbn());
     }
 
     @Test

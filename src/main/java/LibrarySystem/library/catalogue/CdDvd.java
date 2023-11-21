@@ -93,7 +93,7 @@ public class CdDvd extends Asset {
     @Override
     public String toString() {
 
-        return String.format("Tile: %s, Producer: %s, ProductionYear: %s",getTitle(),producer.getName(),productionYear);
+        return String.format("Title: %s, Producer: %s, ProductionYear: %s",getTitle(),producer.getName(),productionYear);
     }
 
     @Override
