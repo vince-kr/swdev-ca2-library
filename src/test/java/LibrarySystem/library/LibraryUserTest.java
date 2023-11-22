@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryUserTest {
     private LibraryUser user;
+    private LibraryUser user1;
 
     private BookAudioBook book;
     private CdDvd cd;
@@ -17,6 +18,7 @@ class LibraryUserTest {
     @BeforeEach
     void setUp() throws PersonException {
         user = new LibraryUser("John Doe");
+        user1 = new LibraryUser("Jane Doe");
         Producer producer = new Producer("John Jones");
         Director director = new Director("Jane Doe");
         Author author = new Author("Adam Collins");
@@ -37,5 +39,20 @@ class LibraryUserTest {
     @Test
     void testToString() {
         assertEquals("UserName: John Doe",user.toString());
+    }
+
+
+
+    @Test
+    void compareTo() {
+        ArrayList<Asset> assets = new ArrayList<>();
+        //before borrowing assets
+        assertEquals(0,user.compareTo(user1));
+        assets.add(book);
+        assets.add(cd);
+        user.setBorrowedBooks(assets);
+        //after borrowing assets
+        assertEquals(1,user.compareTo(user1));
+
     }
 }

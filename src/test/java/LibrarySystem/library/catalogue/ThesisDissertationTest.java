@@ -59,4 +59,40 @@ class ThesisDissertationTest {
     void getAssetType() {
         assertEquals("Thesis",thesis.getAssetType());
     }
+
+    @Test
+    void setQuantity() {
+        thesis.setQuantity(5);
+        assertEquals(5,thesis.getQuantity());
+    }
+
+    @Test
+    void setAuthor() throws PersonException {
+        Author author1 = new Author("James Brown");
+        thesis.setAuthor(author1);
+        assertEquals("AuthorName: James Brown",thesis.getAuthor().toString());
+    }
+
+    @Test
+    void setTopic() {
+        thesis.setTopic("Knowledge");
+        assertEquals("Knowledge",thesis.getTopic());
+    }
+
+    @Test
+    void setSummary() {
+        thesis.setSummary("Get up, stand up don't give up the fight");
+        assertEquals("Get up, stand up don't give up the fight",thesis.getSummary());
+    }
+
+    @Test
+    void setPublishedDate() {
+        thesis.setPublishedDate("1899");
+        assertEquals("1899",thesis.getPublishedDate());
+    }
+    @Test
+    void testToString(){
+        String expectedString = "Author: Robert Boyle, Topic: Separating Components, Date: 1867";
+        assertEquals(expectedString,thesis.toString());
+    }
 }

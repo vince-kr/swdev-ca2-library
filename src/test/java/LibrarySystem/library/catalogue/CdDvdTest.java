@@ -24,6 +24,15 @@ class CdDvdTest {
     void getQuantity() {
         assertEquals(1,cd.getQuantity());
     }
+    @Test
+    void getStatus(){
+        assertEquals("available", cd.getStatus());
+    }
+
+    @Test
+    void getTitle(){
+     assertEquals("Life",cd.getTitle());
+    }
 
     @Test
     void getProducer() {
@@ -73,5 +82,46 @@ class CdDvdTest {
     @Test
     void getAssetType() {
         assertEquals("CdDvd",cd.getAssetType());
+    }
+
+    @Test
+    void setStatus(){
+      cd.setStatus("Not Available");
+      assertEquals("Not Available",cd.getStatus());
+    }
+    @Test
+    void setTitle(){
+        cd.setTitle("Great is the Lord");
+        assertEquals("Great is the Lord",cd.getTitle());
+    }
+    @Test
+    void setQuantity() {
+        cd.setQuantity(5);
+        assertEquals(5,cd.getQuantity());
+    }
+
+    @Test
+    void setProducer() throws PersonException {
+        Producer producer1 = new Producer("George Bush");
+        cd.setProducer(producer1);
+        assertEquals("ProducerName: George Bush",cd.getProducer().toString());
+    }
+
+    @Test
+    void setDirector() throws PersonException {
+        Director director1 = new Director("Garry Coleman");
+        cd.setDirector(director1);
+        assertEquals("DirectorName: Garry Coleman",cd.getDirector().toString());
+    }
+    @Test
+    void setPlayTime() {
+        cd.setPlayTime(45000);
+        assertEquals(45000,cd.getPlayTime());
+    }
+
+    @Test
+    void setProductionYear() {
+        cd.setProductionYear("2000");
+        assertEquals("2000",cd.getProductionYear());
     }
 }
