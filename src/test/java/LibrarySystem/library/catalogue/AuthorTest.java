@@ -55,10 +55,12 @@ class AuthorTest {
         ArrayList<Asset> books = new ArrayList<>();
         books.add(book);
         books.add(book1);
+        //given two authors with no books authored yet
+        assertEquals(0,author.compareTo(author1));
+        //after one author authored two books and the other none
         author.setBooksAuthored(books);
-        int t1 = author.getBooksAuthored().size();
-        int t2 = author1.getBooksAuthored().size();
-        assertEquals(1,Integer.compare(t1,t2));
+
+        assertEquals(1,author.compareTo(author1));
 
     }
 }

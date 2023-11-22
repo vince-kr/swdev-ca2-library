@@ -12,9 +12,10 @@ class BookAudioBookTest {
 
     private BookAudioBook book;
     private Author author;
+
     @BeforeEach
     void setUp() throws PersonException {
-        author = new Author("king James");
+        author = new Author("King James");
         book = new BookAudioBook("Holy Bible","0-546-77123-9","2000",author,1);
     }
 
@@ -59,5 +60,34 @@ class BookAudioBookTest {
     void getAuthor() {
         book.setAuthor(author);
         assertEquals(author, book.getAuthor());
+    }
+
+
+    @Test
+    void getAssetType() {
+        assertEquals("book",book.getAssetType());
+    }
+
+    @Test
+    void testGetIsbn() {
+        assertEquals("0-546-77123-9",book.getIsbn());
+    }
+
+    @Test
+    void setIsbn() {
+        book.setIsbn("0-556-77123-0");
+        assertEquals("0-556-77123-0",book.getIsbn());
+    }
+
+    @Test
+    void setAuthor() throws PersonException {
+        Author author1 = new Author("New King James");
+        book.setAuthor(author1);
+        assertEquals(author1,book.getAuthor());
+    }
+
+    @Test
+    void testToString() {
+        assertEquals("Title: Holy Bible, Author: King James", book.toString());
     }
 }
