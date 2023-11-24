@@ -17,11 +17,10 @@ public class BorrowAsset extends Interaction{
          /*
         Steps to borrow an asset:
         1. Get the user who is going to borrow
-        2.  Get the asset to borrow
+        2.  Get the asset to borrow and check status of asset to be available
         3. Once all information has been gathered, add asset to the list of borrowed assets
             of the user.
         4. Change status,quantity of asset and set a date issued and date due
-        5. Remove asset from list of allAssets
         */
         ArrayList<Asset> assets = new ArrayList<>();
         System.out.println(header);
@@ -31,7 +30,7 @@ public class BorrowAsset extends Interaction{
         int assetKey = askAssetKey();
         Asset asset = library.borrowAsset(assetKey);
 
-        if (!(user == null) && !(asset == null)){
+        if (!(user == null) && !(asset == null ) && asset.getStatus().equals("available")){
             asset.setDateIssued(LocalTime.now());
             asset.setDateDue(LocalTime.now().plusHours(24));
             assets.add(asset);
@@ -43,6 +42,7 @@ public class BorrowAsset extends Interaction{
             } else if (asset instanceof ThesisDissertation) {
                 ((ThesisDissertation) asset).setQuantity(((ThesisDissertation) asset).getQuantity() - 1);
             }
+            asset.setStatus("Not available");
             System.out.println(" Asset: "+asset.getTitle()+" borrowed by user: "+user.getName()+", successfully.");
         }
 
