@@ -26,27 +26,23 @@ public class BorrowAsset extends Interaction{
         ArrayList<Asset> assets = new ArrayList<>();
         System.out.println(header);
         int userKey = askUserKey();
+        //get user
         LibraryUser user = library.findUserByKey(userKey);
 
         int assetKey = askAssetKey();
+        //get asset
         Asset asset = library.borrowAsset(assetKey);
-
-        if (!(user == null) && !(asset == null ) && asset.getStatus().equals("available")){
+        if (user == null || asset == null){
+            System.out.println(" User or asset with the specified Id not in the system.");
+        }else{
+            asset.setStatus("Not available");
             asset.setDateIssued(LocalDateTime.now());
             asset.setDateDue(LocalDateTime.now().plusHours(24));
             assets.add(asset);
+            //add asset to borrowed asset list
             user.setBorrowedBooks(assets);
-            if (asset instanceof BookAudioBook){
-                ((BookAudioBook) asset).setQuantity(((BookAudioBook) asset).getQuantity() - 1);
-            } else if (asset instanceof CdDvd) {
-                ((CdDvd) asset).setQuantity(((CdDvd) asset).getQuantity() - 1);
-            } else if (asset instanceof ThesisDissertation) {
-                ((ThesisDissertation) asset).setQuantity(((ThesisDissertation) asset).getQuantity() - 1);
-            }
-            asset.setStatus("Not available");
             System.out.println(" Asset: "+asset.getTitle()+" borrowed by user: "+user.getName()+", successfully.");
         }
-
 
     }
 

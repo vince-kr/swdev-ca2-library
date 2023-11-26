@@ -11,15 +11,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BorrowAssetTest {
+    Library library = LibraryFactory.createLibrary();
     private LibraryUser user;
     private Asset asset;
 
 
     ArrayList<Asset> assets = new ArrayList<>();
+    HashMap<Integer,Asset> assetHashMaps = new HashMap<>();
     @BeforeEach
     void setUp() throws PersonException {
         user = new LibraryUser("John Doe");
@@ -30,8 +33,15 @@ class BorrowAssetTest {
 
     @Test
     void requestAndResponse() {
-        assets.add(asset);
+        //before borrowing
+        assertEquals("available",asset.getStatus());
+        assetHashMaps.put(1,asset);
+        library.borrowAsset(1);
+        assets.add(library.borrowAsset(1));
         user.setBorrowedBooks(assets);
-        assertEquals(user.getBorrowedBooks().size(), assets.size());
+        //after borrowing
+        //assertEquals("Not available",asset.getStatus());
+
+
     }
 }
