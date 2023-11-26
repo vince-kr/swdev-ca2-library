@@ -15,8 +15,8 @@ public abstract class Asset{
     public Asset(String title) {
         this.title = title;
         this.status = "available";
-        this.dateIssued = LocalDateTime.parse("2023-1-1T14:00:00");
-        this.dateDue = LocalDateTime.parse("2023-1-1T14:00:00");
+        this.dateIssued = LocalDateTime.now();
+        this.dateDue = LocalDateTime.now();
         this.overDue = " - ";
     }
 
