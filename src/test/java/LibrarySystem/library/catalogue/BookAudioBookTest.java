@@ -4,6 +4,7 @@ import LibrarySystem.library.PersonException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,14 +28,14 @@ class BookAudioBookTest {
 
     @Test
     void getDateIssued() {
-        LocalTime t1 = LocalTime.now();
+        LocalDateTime t1 = LocalDateTime.now();
         book.setDateIssued(t1);
         assertEquals(t1,book.getDateIssued());
     }
 
     @Test
     void getDateDue() {
-        LocalTime t = LocalTime.now().plusHours(3);
+        LocalDateTime t = LocalDateTime.now().plusHours(3);
         book.setDateDue(t);
         assertEquals(t,book.getDateDue());
     }

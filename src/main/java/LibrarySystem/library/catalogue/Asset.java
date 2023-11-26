@@ -1,37 +1,38 @@
 package LibrarySystem.library.catalogue;
 
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public abstract class Asset{
     private String title;
     private String status;
-    private LocalTime dateIssued;
-    private LocalTime dateDue;
+    private LocalDateTime dateIssued;
+    private LocalDateTime dateDue;
     private String overDue;
 
 
     public Asset(String title) {
         this.title = title;
         this.status = "available";
-        this.dateIssued = LocalTime.parse("00:00:00.000");
-        this.dateDue = LocalTime.parse("00:00:00.000");
+        this.dateIssued = LocalDateTime.parse("2023-1-1T14:00:00");
+        this.dateDue = LocalDateTime.parse("2023-1-1T14:00:00");
         this.overDue = " - ";
     }
 
-    public LocalTime getDateIssued() {
+    public LocalDateTime getDateIssued() {
         return dateIssued;
     }
 
-    public void setDateIssued(LocalTime dateIssued) {
+    public void setDateIssued(LocalDateTime dateIssued) {
         this.dateIssued = dateIssued;
     }
 
-    public LocalTime getDateDue() {
+    public LocalDateTime getDateDue() {
         return dateDue;
     }
 
-    public void setDateDue(LocalTime dateDue) {
+    public void setDateDue(LocalDateTime dateDue) {
         this.dateDue = dateDue;
     }
 

@@ -4,6 +4,7 @@ import LibrarySystem.library.PersonException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,7 +46,7 @@ class ThesisDissertationTest {
 
     @Test
     void getDateDue() {
-        LocalTime t1 = LocalTime.now().plusHours(3);
+        LocalDateTime t1 = LocalDateTime.now().plusHours(3);
         thesis.setDateDue(t1);
         assertEquals(t1,thesis.getDateDue());
     }

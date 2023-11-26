@@ -5,6 +5,7 @@ import LibrarySystem.library.LibraryUser;
 import LibrarySystem.library.catalogue.*;
 import LibrarySystem.util.io.StandardInput;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Year;
 import java.util.ArrayList;
@@ -31,8 +32,8 @@ public class BorrowAsset extends Interaction{
         Asset asset = library.borrowAsset(assetKey);
 
         if (!(user == null) && !(asset == null ) && asset.getStatus().equals("available")){
-            asset.setDateIssued(LocalTime.now());
-            asset.setDateDue(LocalTime.now().plusHours(24));
+            asset.setDateIssued(LocalDateTime.now());
+            asset.setDateDue(LocalDateTime.now().plusHours(24));
             assets.add(asset);
             user.setBorrowedBooks(assets);
             if (asset instanceof BookAudioBook){

@@ -4,6 +4,7 @@ import LibrarySystem.library.PersonException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,14 +47,14 @@ class CdDvdTest {
 
     @Test
     void getDateIssued() {
-        LocalTime t1 = LocalTime.now();
+        LocalDateTime t1 = LocalDateTime.now();
         cd.setDateIssued(t1);
         assertEquals(t1,cd.getDateIssued());
     }
 
     @Test
     void getDateDue() {
-        LocalTime t2 = LocalTime.now().plusHours(24);
+        LocalDateTime t2 = LocalDateTime.now().plusHours(24);
         cd.setDateDue(t2);
         assertEquals(t2,cd.getDateDue());
     }
