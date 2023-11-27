@@ -2,11 +2,10 @@ package LibrarySystem.library.catalogue;
 
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public abstract class Asset{
     private String title;
-    private String status;
+    private boolean isAvailable;
     private LocalDateTime dateIssued;
     private LocalDateTime dateDue;
     private String overDue;
@@ -14,7 +13,7 @@ public abstract class Asset{
 
     public Asset(String title) {
         this.title = title;
-        this.status = "available";
+        this.isAvailable = true;
         this.dateIssued = LocalDateTime.now();
         this.dateDue = LocalDateTime.now();
         this.overDue = " - ";
@@ -44,12 +43,12 @@ public abstract class Asset{
         this.overDue = overDue;
     }
 
-    public String getStatus() {
-        return status;
+    public boolean getAvailability() {
+        return isAvailable;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setAvailability(boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 
     public String getTitle() {

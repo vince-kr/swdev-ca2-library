@@ -27,7 +27,7 @@ class CdDvdTest {
     }
     @Test
     void getStatus(){
-        assertEquals("available", cd.getStatus());
+        assertTrue(cd.getAvailability());
     }
 
     @Test
@@ -87,8 +87,8 @@ class CdDvdTest {
 
     @Test
     void setStatus(){
-      cd.setStatus("Not Available");
-      assertEquals("Not Available",cd.getStatus());
+      cd.setAvailability(false);
+      assertFalse(cd.getAvailability());
     }
     @Test
     void setTitle(){

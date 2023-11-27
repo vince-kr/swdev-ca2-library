@@ -116,7 +116,7 @@ public abstract class Files {
                     sb.append(",");
                     sb.append(book.getValue().getIsbn());
                     sb.append(",");
-                    sb.append(book.getValue().getStatus());
+                    sb.append(book.getValue().getAvailability());
                     sb.append(",");
                     sb.append(book.getValue().getPublishedYear());
                     sb.append(",");
@@ -202,7 +202,7 @@ public abstract class Files {
                     sb.append(",");
                     sb.append(thesis.getValue().getTopic());
                     sb.append(",");
-                    sb.append(thesis.getValue().getStatus());
+                    sb.append(thesis.getValue().getAvailability());
                     sb.append(",");
                     sb.append(thesis.getValue().getPublishedDate());
                     sb.append(",");
@@ -292,7 +292,7 @@ public abstract class Files {
                     sb.append(",");
                     sb.append(cd.getValue().getProducer().getName());
                     sb.append(",");
-                    sb.append(cd.getValue().getStatus());
+                    sb.append(cd.getValue().getAvailability());
                     sb.append(",");
                     sb.append(cd.getValue().getProductionYear());
                     sb.append(",");

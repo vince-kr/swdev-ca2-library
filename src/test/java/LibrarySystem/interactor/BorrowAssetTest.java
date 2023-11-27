@@ -34,7 +34,7 @@ class BorrowAssetTest {
     @Test
     void requestAndResponse() {
         //before borrowing
-        assertEquals("available",asset.getStatus());
+        assertTrue(asset.getAvailability());
         assetHashMaps.put(1,asset);
         library.borrowAsset(1);
         assets.add(library.borrowAsset(1));

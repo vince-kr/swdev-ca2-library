@@ -10,7 +10,7 @@ import java.time.LocalTime;
 import java.time.Year;
 import java.util.ArrayList;
 
-public class BorrowAsset extends Interaction{
+public class BorrowAsset extends Interaction {
 
     String header = "Borrow AN ASSET\n";
     @Override
@@ -35,7 +35,7 @@ public class BorrowAsset extends Interaction{
         if (user == null || asset == null){
             System.out.println(" User or asset with the specified Id not in the system.");
         }else{
-            asset.setStatus("Not available");
+            asset.setAvailability(false);
             asset.setDateIssued(LocalDateTime.now());
             asset.setDateDue(LocalDateTime.now().plusHours(24));
             assets.add(asset);
