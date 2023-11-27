@@ -27,7 +27,7 @@ class Interactor {
     private HashMap<String, Interaction> buildMainMenuWithOptions() {
         var mainMenuInteractions = new HashMap<String, Interaction>();
         mainMenuInteractions.put("main", createMainMenu());
-        mainMenuInteractions.put("load-sample-data", new loadSampleData());
+        mainMenuInteractions.put("load-sample-data", new LoadSampleData());
         return mainMenuInteractions;
     }
 
@@ -77,7 +77,7 @@ class Interactor {
     private HashMap<String, Interaction> buildCatalogueMenuWithOptions() {
         var catalogueMenuInteractions = new HashMap<String, Interaction>();
         catalogueMenuInteractions.put("manage-catalogue", createCatalogueMenu());
-        catalogueMenuInteractions.put("add-asset", new addAsset());
+        catalogueMenuInteractions.put("add-asset", new AddAsset());
         catalogueMenuInteractions.put("add-author", new AddAuthor());
         return catalogueMenuInteractions;
     }
@@ -94,7 +94,7 @@ class Interactor {
     private HashMap<String, Interaction> buildUserMenuWithOptions() {
         var userMenuInteractions = new HashMap<String, Interaction>();
         userMenuInteractions.put("manage-users", createUserMenu());
-        userMenuInteractions.put("add-customer", new addUser());
+        userMenuInteractions.put("add-customer", new AddUser());
         return userMenuInteractions;
     }
 

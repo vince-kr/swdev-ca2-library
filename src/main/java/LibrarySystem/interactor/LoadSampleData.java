@@ -3,7 +3,7 @@ package LibrarySystem.interactor;
 import LibrarySystem.library.Library;
 import LibrarySystem.util.io.StandardInput;
 
-public class loadSampleData extends Interaction {
+public class LoadSampleData extends Interaction {
     String header = "LOAD SAMPLE DATA\n";
 
     @Override

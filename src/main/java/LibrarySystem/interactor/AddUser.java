@@ -5,7 +5,7 @@ import LibrarySystem.library.LibraryUser;
 import LibrarySystem.library.PersonException;
 import LibrarySystem.util.io.StandardInput;
 
-public class addUser extends Interaction {
+public class AddUser extends Interaction {
     String header = "ADD A LIBRARY CUSTOMER\n";
     String prompt = "Please enter the new user's full name: ";
     String responsePattern = "^[\\p{L} -]+$";

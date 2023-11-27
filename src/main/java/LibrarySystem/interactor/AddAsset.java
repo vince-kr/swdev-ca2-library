@@ -7,7 +7,7 @@ import LibrarySystem.util.io.StandardInput;
 
 import java.time.Year;
 
-public class addAsset extends Interaction {
+public class AddAsset extends Interaction {
 
     String header = "ADD AN ASSET\n";
 
