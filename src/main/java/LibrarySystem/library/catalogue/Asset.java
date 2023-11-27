@@ -58,6 +58,9 @@ public abstract class Asset{
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public abstract String getCreatorName();
+
     public abstract String toString();
     public abstract String getAssetType();
 }

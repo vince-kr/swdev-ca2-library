@@ -63,6 +63,11 @@ public class CdDvd extends Asset {
     }
 
     @Override
+    public String getCreatorName() {
+        return director.getName();
+    }
+
+    @Override
     public String toString() {
 
         return String.format("Title: %s, Producer: %s, ProductionYear: %s",getTitle(),producer.getName(),productionYear);

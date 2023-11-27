@@ -64,8 +64,12 @@ public class BookAudioBook extends Asset{
     }
 
     @Override
-    public String toString() {
+    public String getCreatorName() {
+        return author.getName();
+    }
 
+    @Override
+    public String toString() {
         return String.format("Title: %s, Author: %s", getTitle(),author.getName());
     }
 

@@ -10,8 +10,6 @@ public class ThesisDissertation extends Asset{
     private String publishedDate;
     private int quantity;
 
-
-
     public ThesisDissertation(String title, Author author, String topic, String summary, String publishedDate,int quantity) {
         super(title);
         this.author = author;
@@ -60,6 +58,11 @@ public class ThesisDissertation extends Asset{
 
     public void setPublishedDate(String publishedDate) {
         this.publishedDate = publishedDate;
+    }
+
+    @Override
+    public String getCreatorName() {
+        return author.getName();
     }
 
     @Override

@@ -32,9 +32,9 @@ public class BorrowAsset extends Interaction {
         int assetKey = askAssetKey();
         //get asset
         Asset asset = library.borrowAsset(assetKey);
-        if (user == null || asset == null){
+        if (user == null || asset == null) {
             System.out.println(" User or asset with the specified Id not in the system.");
-        }else{
+        } else {
             asset.setAvailability(false);
             asset.setDateIssued(LocalDateTime.now());
             asset.setDateDue(LocalDateTime.now().plusHours(24));
@@ -43,7 +43,6 @@ public class BorrowAsset extends Interaction {
             user.setBorrowedBooks(assets);
             System.out.println(" Asset: "+asset.getTitle()+" borrowed by user: "+user.getName()+", successfully.");
         }
-
     }
 
 
