@@ -89,7 +89,7 @@ public class AddAsset extends Interaction {
 
     private String askSummary() {
         String prompt = "Enter summary: ";
-        String responsePattern = "^[\\p{L} '-]+$";
+        String responsePattern = "^[\\p{L} ,.'-]+$";
 
         return StandardInput.getValidString(prompt, responsePattern);
 
@@ -97,14 +97,13 @@ public class AddAsset extends Interaction {
 
     private String askTopic() {
         String prompt = "Enter topic: ";
-        String responsePattern = "^[\\p{L} '-]+$";
+        String responsePattern = "^[\\p{L} ,.'-]+$";
 
         return StandardInput.getValidString(prompt, responsePattern);
     }
 
     private int askPlaytime() {
         String prompt = "Enter play time in seconds: ";
-
         return StandardInput.getPositiveInt(prompt,18000);
     }
 
@@ -112,6 +111,7 @@ public class AddAsset extends Interaction {
         String prompt = "Enter quantity of asset: ";
         return StandardInput.getPositiveInt(prompt, 50);
     }
+
     private Director askDirector() throws PersonException {
         String prompt = "Enter director full name: ";
         String responsePattern = "^[\\p{L} '-]+$";
@@ -160,7 +160,7 @@ public class AddAsset extends Interaction {
 
     private String askTitle() {
         String prompt = "Enter title: ";
-        String responsePattern = "^[\\p{L} '-]+$";
+        String responsePattern = "^[\\p{L} ,.'-]+$";
 
         return StandardInput.getValidString(prompt, responsePattern);
     }

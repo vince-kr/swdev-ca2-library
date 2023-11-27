@@ -1,9 +1,7 @@
 package LibrarySystem.util.io;
 
 import LibrarySystem.library.catalogue.Asset;
-import LibrarySystem.library.catalogue.Author;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class StandardInput {
@@ -60,14 +58,14 @@ public abstract class StandardInput {
         var in = new Scanner(System.in);
         boolean flag = false;
         String userInput;
-        System.out.print(prompt);
+
         do {
             switch (prompt) {
                 case "Title" -> System.out.print(" Enter Title: ");
                 case "Topic" -> System.out.print(" Enter Topic: ");
                 case "ISBN" -> System.out.print(" Enter ISBN: ");
                 case "Name" -> System.out.print(" Enter Name: ");
-                default -> System.out.print(" Enter valid input: ");
+                default -> System.out.print(prompt);
             }
             userInput = in.nextLine();
             if (userInput.isEmpty()){
@@ -79,8 +77,7 @@ public abstract class StandardInput {
             }else{
                 flag = userInput.matches(responsePattern);
             }
-
-        }while(!flag);
+        } while(!flag);
 
         return userInput;
     }
