@@ -1,6 +1,6 @@
 # Design
 
-## 1. User-facing design
+## User-facing design
 
 ```
 MAIN menu
@@ -90,4 +90,14 @@ Loan objects may be stored in some collection -- note this means they should als
 
 Objects of type `Person` may represent people associated with Assets: authors, producers, and directors. They may also represent Library *customers*.
 
+# Step-by-step
 
+## Creating a new feature
+
+I realise this is a very general description, but hear me out. Creating a new user-facing feature consists of multiple steps:
+
+1. Implement the actual feature  
+   As an example, let's say borrowing an asset. The Library and Catalogue systems need the appropriate methods and logic to handle the scenario of a library customer wanting to borrow an asset.
+2. Implement the menu logic  
+	In addition to the system logic, the feature must be accessible to the library customer through the menu. This involves various steps.
+3. Add the required reference to the Interactor class

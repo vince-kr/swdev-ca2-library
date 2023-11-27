@@ -45,6 +45,7 @@ class Interactor {
     private HashMap<String, Interaction> buildOperationsMenuWithOptions() {
         var operationsMenuInteractions = new HashMap<String, Interaction>();
         operationsMenuInteractions.put("common-operations", createOperationsMenu());
+        operationsMenuInteractions.put("borrow-asset", new BorrowAsset());
         return operationsMenuInteractions;
     }
 
