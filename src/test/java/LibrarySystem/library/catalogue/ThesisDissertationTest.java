@@ -16,7 +16,7 @@ class ThesisDissertationTest {
     @BeforeEach
     void setUp() throws PersonException {
         author = new Author("Robert Boyle");
-        thesis = new ThesisDissertation("Distillation",author,"Separating Components","some writings ...","1867",1);
+        thesis = new ThesisDissertation("Distillation",author,"Separating Components","some writings ...","1867");
     }
 
     @Test
@@ -95,5 +95,10 @@ class ThesisDissertationTest {
     void testToString(){
         String expectedString = "Author: Robert Boyle, Topic: Separating Components, Date: 1867";
         assertEquals(expectedString,thesis.toString());
+    }
+
+    @Test
+    void testGetCreatorName() {
+        assertEquals("Robert Boyle",thesis.getAuthor().getName());
     }
 }

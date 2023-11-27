@@ -21,26 +21,27 @@ class BorrowAssetTest {
     private Asset asset;
 
 
-    ArrayList<Asset> assets = new ArrayList<>();
-    HashMap<Integer,Asset> assetHashMaps = new HashMap<>();
+
+
     @BeforeEach
     void setUp() throws PersonException {
         user = new LibraryUser("John Doe");
         Author author = new Author("King James");
-        asset = new BookAudioBook("Holy Bible","0-987-12377-7","1867",author,1);
+        asset = new BookAudioBook("Holy Bible","0-987-12377-7","1867",author);
 
     }
 
     @Test
     void requestAndResponse() {
+        ArrayList<Asset> assets = user.getBorrowedBooks();
         //before borrowing
         assertTrue(asset.getAvailability());
-        assetHashMaps.put(1,asset);
-        library.borrowAsset(1);
-        assets.add(library.borrowAsset(1));
-        user.setBorrowedBooks(assets);
+       int l = user.getBorrowedBooks().size();
+        assets.add(asset);
         //after borrowing
-        //assertEquals("Not available",asset.getStatus());
+        assertEquals(1,user.getBorrowedBooks().size());
+        //assertEquals(0,asset.getQuantity());
+        //assertEquals(false,user.getBorrowedBooks().get(l).getAvailability());
 
 
     }

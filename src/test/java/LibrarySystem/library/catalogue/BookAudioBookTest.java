@@ -17,7 +17,7 @@ class BookAudioBookTest {
     @BeforeEach
     void setUp() throws PersonException {
         author = new Author("King James");
-        book = new BookAudioBook("Holy Bible","0-546-77123-9","2000",author,1);
+        book = new BookAudioBook("Holy Bible","0-546-77123-9","2000",author);
     }
 
     @Test
@@ -87,8 +87,17 @@ class BookAudioBookTest {
         assertEquals(author1,book.getAuthor());
     }
 
+
     @Test
     void testToString() {
         assertEquals("Title: Holy Bible, Author: King James", book.toString());
+    }
+
+
+
+
+    @Test
+    void getCreatorName() {
+        assertEquals("King James",book.getAuthor().getName());
     }
 }

@@ -22,8 +22,8 @@ class LibraryUserTest {
         Producer producer = new Producer("John Jones");
         Director director = new Director("Jane Doe");
         Author author = new Author("Adam Collins");
-        book = new BookAudioBook("Ecosystem","0-789-37569-1","1985",author,1);
-        cd = new CdDvd("Life",producer,director,3000,"1990",1);
+        book = new BookAudioBook("Ecosystem","0-789-37569-1","1985",author);
+        cd = new CdDvd("Life",producer,director,3000,"1990");
 
     }
 

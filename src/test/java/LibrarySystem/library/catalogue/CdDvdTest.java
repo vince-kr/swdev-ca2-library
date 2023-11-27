@@ -18,7 +18,7 @@ class CdDvdTest {
     void setUp() throws PersonException {
         producer = new Producer("Kevin Costner");
         director = new Director("Harry Barnes");
-        cd = new CdDvd("Life",producer,director,3000,"1990",1);
+        cd = new CdDvd("Life",producer,director,3000,"1990");
     }
 
     @Test
@@ -74,6 +74,7 @@ class CdDvdTest {
         assertEquals("1990",cd.getProductionYear());
     }
 
+
     @Test
     void testToString() {
         String expectedString = "Title: Life, Producer: Kevin Costner, ProductionYear: 1990";
@@ -124,5 +125,10 @@ class CdDvdTest {
     void setProductionYear() {
         cd.setProductionYear("2000");
         assertEquals("2000",cd.getProductionYear());
+    }
+
+    @Test
+    void testGetCreatorName() {
+        assertEquals("Harry Barnes",cd.getDirector().getName());
     }
 }

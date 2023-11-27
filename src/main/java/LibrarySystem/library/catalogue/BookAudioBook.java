@@ -8,28 +8,16 @@ public class BookAudioBook extends Asset{
     private String isbn;
     private String publishedYear;
 
-    private int quantity;
 
 
 
-    public BookAudioBook(String title, String isbn, String publishedYear, Author author,int quantity) {
+
+    public BookAudioBook(String title, String isbn, String publishedYear, Author author) {
         super(title);
         this.isbn = isbn;
         this.publishedYear = publishedYear;
         this.author = author;
-        this.quantity = quantity;
-
-
     }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
 
 
 
