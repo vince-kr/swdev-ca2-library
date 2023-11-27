@@ -5,7 +5,7 @@ import LibrarySystem.library.catalogue.Asset;
 import java.util.ArrayList;
 
 public class LibraryUser extends Person implements Comparable<LibraryUser>{
-    private ArrayList<Asset> borrowedBooks;
+    final private ArrayList<Asset> borrowedBooks;
 
 
 
@@ -18,8 +18,8 @@ public class LibraryUser extends Person implements Comparable<LibraryUser>{
         return borrowedBooks;
     }
 
-    public void setBorrowedBooks(ArrayList<Asset> borrowedBooks) {
-        this.borrowedBooks = borrowedBooks;
+    public void setBorrowedAssets(Asset borrowedAsset) {
+        borrowedBooks.add(borrowedAsset);
     }
 
     @Override

@@ -32,7 +32,8 @@ class LibraryUserTest {
         ArrayList<Asset> booksAuthored = new ArrayList<>();
         booksAuthored.add(book);
         booksAuthored.add(cd);
-        user.setBorrowedBooks(booksAuthored);
+        user.setBorrowedAssets(book);
+        user.setBorrowedAssets(cd);
         assertEquals(booksAuthored,user.getBorrowedBooks());
     }
 
@@ -50,7 +51,8 @@ class LibraryUserTest {
         assertEquals(0,user.compareTo(user1));
         assets.add(book);
         assets.add(cd);
-        user.setBorrowedBooks(assets);
+        user.setBorrowedAssets(book);
+        user.setBorrowedAssets(cd);
         //after borrowing assets
         assertEquals(1,user.compareTo(user1));
 

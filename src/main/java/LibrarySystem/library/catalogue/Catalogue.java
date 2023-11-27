@@ -5,5 +5,7 @@ public interface Catalogue {
     String summariseAllAssets();
     void addAsset(Asset toAdd);
     void addAuthor(Author toAdd);
-    Asset borrowAsset(int Id);
+    Asset getAsset(int Id);
+
+    int getLastID();
 }

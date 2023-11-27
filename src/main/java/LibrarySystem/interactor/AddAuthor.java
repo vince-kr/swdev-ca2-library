@@ -6,7 +6,7 @@ import LibrarySystem.util.io.StandardInput;
 public class AddAuthor extends Interaction {
     final String header = "ADD AN AUTHOR\n";
     final String prompt = "Please enter the author's name.\nUpper- and lowercase letters, spaces, and hyphens are allowed: ";
-    final String responsePattern = "^[\\p{L} -]+$";
+    final String responsePattern = "^[\\p{L} '-]+$";
     final String confirmation = "SUCCESS - new author added!";
 
     @Override

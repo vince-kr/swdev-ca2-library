@@ -6,8 +6,6 @@ import LibrarySystem.library.catalogue.*;
 import LibrarySystem.util.io.StandardInput;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.Year;
 import java.util.ArrayList;
 
 public class BorrowAsset extends Interaction {
@@ -23,39 +21,53 @@ public class BorrowAsset extends Interaction {
             of the user.
         4. Change status,quantity of asset and set a date issued and date due
         */
+
         System.out.println(header);
-        //list all users of the system
-        library.summariseAllUsers();
-        //get user from list
-        LibraryUser user = library.findUserByKey(askUserKey());
 
-        if (!(user == null)){
-            //get borrowed assets of user
-            ArrayList<Asset> assets = user.getBorrowedBooks();
-            //list all assets of the system
-            library.summariseAllAssets();
-            //get asset from list
-            Asset asset = library.borrowAsset(askAssetKey());
+        LibraryUser userWantsToBorrow = askLibraryUser(library);
+        Asset assetToBorrow = askAssetToBorrow(library);
 
-            if (!(asset == null)){
-                // do borrowing here
-                asset.setAvailability(false);
-                asset.setQuantity(0);
-                asset.setDateIssued(LocalDateTime.now());
-                asset.setDateDue(LocalDateTime.now().plusHours(24));
-                //add asset to borrowed user assets
-                assets.add(asset);
-                System.out.println(" Asset: "+asset.getTitle()+" borrowed by user: "+user.getName()+", successfully.");
-            }
-            askAssetKey();
-        }
-        askUserKey();
+        // do borrowing here
+        assetToBorrow.setQuantity(0);
+        assetToBorrow.setDateIssued(LocalDateTime.now());
+        assetToBorrow.setDateDue(LocalDateTime.now().plusHours(24));
 
+        //add asset to borrowed user assets
+        userWantsToBorrow.setBorrowedAssets(assetToBorrow);
+
+        System.out.println(" Asset: " + assetToBorrow.getTitle() + " borrowed by user: " + userWantsToBorrow.getName() + ", successfully.");
+    }
+
+    private Asset askAssetToBorrow(Library library) {
+        String allAssets = library.summariseAllAssets();
+        String prompt = "Please enter the required asset ID: ";
+
+        System.out.println(allAssets);
+        int assetID = StandardInput.getPositiveInt(prompt, library.getLastAssetID());
+
+        Asset selectedAsset = library.getAsset(assetID);
+        if (selectedAsset != null)
+            return selectedAsset;
+        else
+            return askAssetToBorrow(library);
+    }
+
+    private LibraryUser askLibraryUser(Library library) {
+        String allUsers = library.summariseAllUsers();
+        String prompt = "Please enter the required user ID: ";
+
+        System.out.println(allUsers);
+        int userID = StandardInput.getPositiveInt(prompt, library.getLastUserID());
+
+        LibraryUser selectedUser = library.getLibraryUser(userID);
+        if (selectedUser != null)
+            return selectedUser;
+        else
+            return askLibraryUser(library);
     }
 
 
-
-   private int askAssetKey(){
+    private int askAssetKey(){
         String prompt = "Enter AssetId: ";
         return StandardInput.getPositiveInt(prompt,1000);
    }

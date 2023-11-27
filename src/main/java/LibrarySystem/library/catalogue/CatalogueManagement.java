@@ -18,13 +18,18 @@ class CatalogueManagement implements Catalogue {
 
     @Override
     public void addAsset(Asset toAdd) {
-        int nextID = computeNextID(allAssets.keySet());
+        int nextID = computeCurrentID(allAssets.keySet());
         allAssets.put(nextID, toAdd);
     }
 
     @Override
     public int getAssetCount() {
         return allAssets.size();
+    }
+
+    @Override
+    public int getLastID() {
+        return computeCurrentID(allAssets.keySet());
     }
 
     @Override
@@ -48,18 +53,17 @@ class CatalogueManagement implements Catalogue {
 
     @Override
     public void addAuthor(Author toAdd) {
-        int nextID = computeNextID(allAuthors.keySet());
+        int nextID = computeCurrentID(allAuthors.keySet());
         allAuthors.put(nextID, toAdd);
     }
 
     @Override
-    public Asset borrowAsset(int Id) {
+    public Asset getAsset(int Id) {
         return allAssets.get(Id);
     }
 
-    private int computeNextID(Collection<Integer> keys) {
-        int currentLargestKey = keys.isEmpty() ? 10000000 : Collections.max(keys);
-        return currentLargestKey + 1;
+    private int computeCurrentID(Collection<Integer> keys) {
+        return keys.isEmpty() ? 10000 : Collections.max(keys);
     }
 
     /*

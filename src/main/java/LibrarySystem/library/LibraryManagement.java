@@ -2,14 +2,10 @@ package LibrarySystem.library;
 
 import LibrarySystem.library.catalogue.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-
 class LibraryManagement implements Library {
 
-    HashMap<Integer, LibraryUser> allUsers;
     final Catalogue catalogue;
+    final LibraryUserRegistry allUsers;
 
 /*
      The constructor of the LibraryManagement class creates a Catalogue object (really a
@@ -21,7 +17,12 @@ class LibraryManagement implements Library {
 
     public LibraryManagement() {
         catalogue = CatalogueFactory.createCatalogue("some,mock,csv,data");
-        allUsers = new HashMap<>();
+        allUsers = new LibraryUserRegistry();
+    }
+
+    @Override
+    public int getLastAssetID() {
+        return catalogue.getLastID();
     }
 
     @Override
@@ -35,19 +36,28 @@ class LibraryManagement implements Library {
     }
 
     @Override
-    public void addUser(LibraryUser libraryUser) {
-        int nextID = computeNextUserID();
-        allUsers.put(nextID, libraryUser);
+    public LibraryUser getLibraryUser(int id) {
+        return allUsers.get(id);
     }
 
     @Override
-    public Asset borrowAsset(int Id) {
-        return catalogue.borrowAsset(Id);
+    public void addUser(LibraryUser newUser) {
+        allUsers.addUser(newUser);
     }
 
-    private int computeNextUserID() {
-        int currentLargestKey = allUsers.isEmpty() ? 10000000 : Collections.max(allUsers.keySet());
-        return currentLargestKey + 1;
+    @Override
+    public String summariseAllUsers() {
+        return allUsers.summariseUsers();
+    }
+
+    @Override
+    public int getLastUserID() {
+        return allUsers.getLastID();
+    }
+
+    @Override
+    public Asset getAsset(int Id) {
+        return catalogue.getAsset(Id);
     }
 
     @Override
@@ -58,15 +68,6 @@ class LibraryManagement implements Library {
     @Override
     public String summariseAllAssets() {
         return catalogue.summariseAllAssets();
-    }
-
-    @Override
-    public String summariseAllUsers() {
-        var usersSummary = new StringBuilder();
-        for (int userID : this.allUsers.keySet())
-            usersSummary.append(userID + "\t" + allUsers.get(userID) + "\n");
-
-        return usersSummary.toString();
     }
 
     @Override
