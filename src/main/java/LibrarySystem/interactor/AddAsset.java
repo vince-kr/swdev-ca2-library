@@ -40,7 +40,6 @@ public class AddAsset extends Interaction {
 
         String title = askTitle();
         String yearOfPublication = askYoP();
-        int quantity = askQuantity();
 
         switch (assetType) {
             case "Book/Audiobook":
@@ -51,7 +50,7 @@ public class AddAsset extends Interaction {
                 } catch (PersonException e) {
                     throw new RuntimeException(e);
                 }
-                newAsset = new BookAudioBook(title, ISBN, yearOfPublication, bookAuthor, quantity);
+                newAsset = new BookAudioBook(title, ISBN, yearOfPublication, bookAuthor);
                 break;
             case "CD/DVD":
                 Producer producer = null;
@@ -67,7 +66,7 @@ public class AddAsset extends Interaction {
                     throw new RuntimeException(e);
                 }
                 int playTime = askPlaytime();
-                newAsset = new CdDvd(title, producer, director, playTime, yearOfPublication, quantity);
+                newAsset = new CdDvd(title, producer, director, playTime, yearOfPublication);
                 break;
             default:  // Thesis or dissertation
                 Author thesisAuthor = null;
@@ -78,7 +77,7 @@ public class AddAsset extends Interaction {
                 }
                 String topic = askTopic();
                 String summary = askSummary();
-                newAsset = new ThesisDissertation(title, thesisAuthor, topic, summary, yearOfPublication, quantity);
+                newAsset = new ThesisDissertation(title, thesisAuthor, topic, summary, yearOfPublication);
                 break;
         }
 
@@ -108,10 +107,7 @@ public class AddAsset extends Interaction {
         return StandardInput.getPositiveInt(prompt,18000);
     }
 
-    private int askQuantity(){
-        String prompt = "Enter quantity of asset: ";
-        return StandardInput.getPositiveInt(prompt, 50);
-    }
+
     private Director askDirector() throws PersonException {
         String prompt = "Enter director full name: ";
         String responsePattern = "^[\\p{L} '-]+$";

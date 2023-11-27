@@ -8,24 +8,17 @@ public class ThesisDissertation extends Asset{
     private String topic;
     private String summary;
     private String publishedDate;
-    private int quantity;
 
-    public ThesisDissertation(String title, Author author, String topic, String summary, String publishedDate,int quantity) {
+
+    public ThesisDissertation(String title, Author author, String topic, String summary, String publishedDate) {
         super(title);
         this.author = author;
         this.topic = topic;
         this.summary = summary;
         this.publishedDate = publishedDate;
-        this.quantity = quantity;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     public Author getAuthor() {
         return author;

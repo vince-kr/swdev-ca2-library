@@ -23,26 +23,34 @@ public class BorrowAsset extends Interaction {
             of the user.
         4. Change status,quantity of asset and set a date issued and date due
         */
-        ArrayList<Asset> assets = new ArrayList<>();
         System.out.println(header);
-        int userKey = askUserKey();
-        //get user
-        LibraryUser user = library.findUserByKey(userKey);
+        //list all users of the system
+        library.summariseAllUsers();
+        //get user from list
+        LibraryUser user = library.findUserByKey(askUserKey());
 
-        int assetKey = askAssetKey();
-        //get asset
-        Asset asset = library.borrowAsset(assetKey);
-        if (user == null || asset == null) {
-            System.out.println(" User or asset with the specified Id not in the system.");
-        } else {
-            asset.setAvailability(false);
-            asset.setDateIssued(LocalDateTime.now());
-            asset.setDateDue(LocalDateTime.now().plusHours(24));
-            assets.add(asset);
-            //add asset to borrowed asset list
-            user.setBorrowedBooks(assets);
-            System.out.println(" Asset: "+asset.getTitle()+" borrowed by user: "+user.getName()+", successfully.");
+        if (!(user == null)){
+            //get borrowed assets of user
+            ArrayList<Asset> assets = user.getBorrowedBooks();
+            //list all assets of the system
+            library.summariseAllAssets();
+            //get asset from list
+            Asset asset = library.borrowAsset(askAssetKey());
+
+            if (!(asset == null)){
+                // do borrowing here
+                asset.setAvailability(false);
+                asset.setQuantity(0);
+                asset.setDateIssued(LocalDateTime.now());
+                asset.setDateDue(LocalDateTime.now().plusHours(24));
+                //add asset to borrowed user assets
+                assets.add(asset);
+                System.out.println(" Asset: "+asset.getTitle()+" borrowed by user: "+user.getName()+", successfully.");
+            }
+            askAssetKey();
         }
+        askUserKey();
+
     }
 
 

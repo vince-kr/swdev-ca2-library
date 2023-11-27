@@ -8,25 +8,16 @@ public class CdDvd extends Asset {
     private int playTime;
 
     private String productionYear;
-    private int quantity;
 
 
-    public CdDvd(String title, Producer producer, Director director, int playTime, String productionYear, int quantity) {
+
+    public CdDvd(String title, Producer producer, Director director, int playTime, String productionYear) {
         super(title);
         this.producer = producer;
         this.director = director;
         this.playTime = playTime;
         this.productionYear = productionYear;
-        this.quantity = quantity;
 
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public Producer getProducer() {

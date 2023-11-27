@@ -9,6 +9,7 @@ public abstract class Asset{
     private LocalDateTime dateIssued;
     private LocalDateTime dateDue;
     private String overDue;
+    private int quantity;
 
 
     public Asset(String title) {
@@ -17,6 +18,15 @@ public abstract class Asset{
         this.dateIssued = LocalDateTime.now();
         this.dateDue = LocalDateTime.now();
         this.overDue = " - ";
+        this.quantity = 1;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public LocalDateTime getDateIssued() {

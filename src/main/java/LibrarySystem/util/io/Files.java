@@ -150,11 +150,9 @@ public abstract class Files {
                 int id = Integer.parseInt(csvRecord.get("Id"));
                 String title = csvRecord.get("Book Title");
                 String isbn = csvRecord.get("Book ISBN");
-                String status = csvRecord.get("Status");
                 String year = csvRecord.get("Published Year");
                 String name = csvRecord.get("AuthorName");
-                int quantity = Integer.parseInt(csvRecord.get("Quantity"));
-                books.put(id, new BookAudioBook(title,isbn,year,new Author(name),quantity));
+                books.put(id, new BookAudioBook(title,isbn,year,new Author(name)));
             }
         } catch (IOException | PersonException e) {
             throw new RuntimeException(e);
@@ -242,14 +240,13 @@ public abstract class Files {
                 String year = csvRecord.get("Published Year");
                 String authorName = csvRecord.get("AuthorName");
                 String summary = csvRecord.get("Summary");
-                int qty = Integer.parseInt(csvRecord.get("Quantity"));
+
                 dissertations.put(key,new ThesisDissertation(
                         title,
                         new Author(authorName),
                         topic,
                         summary,
-                        year,
-                        qty));
+                        year));
             }
             System.out.println(GREEN+"\n\tDissertation objects successfully read from file: "+csvFilePath+RESET);
         } catch (IOException | PersonException e) {
@@ -339,8 +336,7 @@ public abstract class Files {
                         new Producer(producerName),
                         new Director(directorName),
                         playTime,
-                        year,
-                        qty));
+                        year));
             }
             System.out.println(GREEN+"\n\tDissertation objects successfully read from file: "+csvFilePath+RESET);
         } catch (IOException | PersonException e) {
