@@ -19,8 +19,8 @@ class CatalogueManagement implements Catalogue {
 
     @Override
     public void addAsset(Asset toAdd) {
-        int nextID = computeCurrentID(allAssets.keySet());
-        allAssets.put(nextID, toAdd);
+        int currentID = computeCurrentID(allAssets.keySet());
+        allAssets.put(currentID + 1, toAdd);
     }
 
     @Override
