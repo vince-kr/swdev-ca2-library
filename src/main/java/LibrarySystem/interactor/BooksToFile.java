@@ -17,6 +17,7 @@ public class BooksToFile extends Interaction{
             2. call helper method to print to csv file
          */
         System.out.println(header);
+        HashMap<Integer,BookAudioBook> books = new HashMap<>();
         HashMap<Integer,Asset> assets = library.getAllAssets();
         if (!assets.isEmpty()){
             Files.printAssetsToFile(assets,"assets.csv");

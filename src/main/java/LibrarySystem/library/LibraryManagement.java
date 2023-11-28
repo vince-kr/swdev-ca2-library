@@ -4,6 +4,7 @@ import LibrarySystem.library.catalogue.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class LibraryManagement implements Library {
 
@@ -83,9 +84,11 @@ class LibraryManagement implements Library {
     }
 
     @Override
+
     public Author addAuthor(String name) throws PersonException {
         return catalogue.addAuthor(name);
     }
+
 
     @Override
     public void loadSampleData() {

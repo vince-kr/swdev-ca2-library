@@ -80,6 +80,7 @@ class CatalogueManagement implements Catalogue {
         return allAssets;
     }
 
+
     @Override
     public Author addAuthor(String name) throws PersonException {
         for (Author existingAuthor : allAuthors.values()) {

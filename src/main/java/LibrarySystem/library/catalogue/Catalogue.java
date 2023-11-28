@@ -19,4 +19,5 @@ public interface Catalogue {
 
     HashMap<Integer, Author> getAllAuthors();
     HashMap<Integer,Asset> getAllAssets();
+
 }
