@@ -16,8 +16,8 @@ class AuthorTest {
 
     @BeforeEach
     void setUp() throws PersonException {
-            author = new Author("King James");
-            author1 = new Author("John Doe");
+        author = new Author("King James");
+        author1 = new Author("John Doe");
         book = new BookAudioBook("Holy Bible","0-438-98147-1","1999",author);
         book1 = new BookAudioBook("Life","1-098-99632-9","1980",author);
     }
@@ -28,6 +28,7 @@ class AuthorTest {
         assertThrowsExactly(
                 PersonException.class,() -> new Author("J"),"Name should be between 2 and 30 characters in length");
     }
+
     @Test
     void getBooksAuthored() {
         ArrayList<Asset> books = new ArrayList<>();
@@ -36,9 +37,6 @@ class AuthorTest {
         author.setBooksAuthored(books);
         assertEquals(2,author.getBooksAuthored().size());
     }
-
-
-
 
     @Test
     void setBooksAuthored() {
@@ -69,6 +67,6 @@ class AuthorTest {
         author.setBooksAuthored(books);
 
         assertEquals(1,author.compareTo(author1));
-
     }
+
 }

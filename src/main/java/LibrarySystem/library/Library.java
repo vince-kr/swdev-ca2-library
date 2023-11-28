@@ -34,7 +34,7 @@ public interface Library {
     // Other catalogue operations
     HashMap<Integer, Author> getAllAuthors();
 
-    void addAuthor(String name);
+    Author addAuthor(String name) throws PersonException;
 
     void loadSampleData();
 }

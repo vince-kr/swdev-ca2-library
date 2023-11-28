@@ -43,4 +43,31 @@ public class AddAssetTest {
         int actual = library.getAssetCount();
         assertEquals(3, actual);
     }
+
+    @Test
+    @DisplayName("After adding one asset + on-the-fly author, number of authors is 1")
+    void givenNoAuthors_whenOneAuthorAdded_totalAuthorsIsOne() {
+        int numberOfAuthors = library.getAllAuthors().size();
+        assertEquals(0, numberOfAuthors);
+
+        try {
+            library.addAuthor("Nelson Mandela");
+        } catch (PersonException pe) {}
+        int newNumberOfAuthors = library.getAllAuthors().size();
+        assertEquals(1, newNumberOfAuthors);
+    }
+
+    @Test
+    @DisplayName("When adding the same author twice, number of authors is 1")
+    void givenNoAuthors_whenSameAuthorIsAddedTwice_totalAuthorsIsOne() {
+        int numberOfAuthors = library.getAllAuthors().size();
+        assertEquals(0, numberOfAuthors);
+
+        try {
+            library.addAuthor("Alex Horne");
+            library.addAuthor("Alex Horne");
+        } catch (PersonException pe) {}
+        int newNumberOfAuthors = library.getAllAuthors().size();
+        assertEquals(1, newNumberOfAuthors);
+    }
 }

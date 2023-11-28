@@ -79,10 +79,8 @@ class LibraryManagement implements Library {
     }
 
     @Override
-    public void addAuthor(String name) {
-        try {
-            catalogue.addAuthor(new Author(name));
-        } catch (PersonException pe) {}
+    public Author addAuthor(String name) throws PersonException {
+        return catalogue.addAuthor(name);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package LibrarySystem.library.catalogue;
 
+import LibrarySystem.library.PersonException;
 import LibrarySystem.util.format.StringFormat;
 
 import java.net.Inet4Address;
@@ -76,9 +77,20 @@ class CatalogueManagement implements Catalogue {
     }
 
     @Override
-    public void addAuthor(Author toAdd) {
+    public Author addAuthor(String name) throws PersonException {
+        for (Author existingAuthor : allAuthors.values()) {
+            String authorName = existingAuthor.getName();
+            if (authorName.equals(name))
+                // Existing author found
+                return existingAuthor;
+        }
+
+        // If this is reached, no existing author was found
         int currentID = computeCurrentID(allAuthors.keySet());
-        allAuthors.put(currentID + 1, toAdd);
+        var newAuthor = new Author(name);
+        allAuthors.put(currentID + 1, newAuthor);
+
+        return newAuthor;
     }
 
     @Override

@@ -6,7 +6,6 @@ import LibrarySystem.library.catalogue.*;
 import LibrarySystem.util.io.StandardInput;
 
 import java.time.Year;
-import java.util.HashMap;
 
 public class AddAsset extends Interaction {
 
@@ -92,7 +91,6 @@ public class AddAsset extends Interaction {
         String responsePattern = "^[\\p{L} ,.'-]+$";
 
         return StandardInput.getValidString(prompt, responsePattern);
-
     }
 
     private String askTopic() {
@@ -134,17 +132,9 @@ public class AddAsset extends Interaction {
         String prompt = "Enter author full name: ";
         String responsePattern = "^[\\p{L} '-]+$";
 
-        String newAuthorName = StandardInput.getValidString(prompt, responsePattern);
+        String authorName = StandardInput.getValidString(prompt, responsePattern);
 
-        HashMap<Integer, Author> allAuthors = library.getAllAuthors();
-
-        for (int authorID : allAuthors.keySet()) {
-            String authorName = allAuthors.get(authorID).getName();
-            if (newAuthorName.equals(authorName))
-                return allAuthors.get(authorID);
-        }
-
-        return new Author(newAuthorName);
+        return library.addAuthor(authorName);
     }
 
     private String askYoP() {
