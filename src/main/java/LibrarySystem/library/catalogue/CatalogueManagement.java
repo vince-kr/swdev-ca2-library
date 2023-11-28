@@ -6,8 +6,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 class CatalogueManagement implements Catalogue {
 
@@ -83,8 +81,8 @@ class CatalogueManagement implements Catalogue {
 
     @Override
     public void addAuthor(Author toAdd) {
-        int nextID = computeCurrentID(allAuthors.keySet());
-        allAuthors.put(nextID, toAdd);
+        int currentID = computeCurrentID(allAuthors.keySet());
+        allAuthors.put(currentID + 1, toAdd);
     }
 
     @Override

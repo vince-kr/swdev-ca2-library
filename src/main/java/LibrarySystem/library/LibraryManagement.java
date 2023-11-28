@@ -21,22 +21,7 @@ class LibraryManagement implements Library {
     }
 
     @Override
-    public int getLastAssetID() {
-        return catalogue.getLastID();
-    }
-
-    @Override
-    public void addAsset(Asset toAdd) {
-        catalogue.addAsset(toAdd);
-    }
-
-    @Override
-    public void addAuthor(Author newAuthor) {
-        catalogue.addAuthor(newAuthor);
-    }
-
-    @Override
-    public LibraryUser getLibraryUser(int id) {
+    public LibraryUser getUser(int id) {
         return allUsers.get(id);
     }
 
@@ -46,23 +31,33 @@ class LibraryManagement implements Library {
     }
 
     @Override
-    public String summariseAllUsers() {
-        return allUsers.summariseUsers();
-    }
-
-    @Override
     public int getLastUserID() {
         return allUsers.getLastID();
     }
 
     @Override
-    public Asset getAsset(int Id) {
-        return catalogue.getAsset(Id);
+    public String summariseAllUsers() {
+        return allUsers.summariseUsers();
+    }
+
+    @Override
+    public Asset getAsset(int id) {
+        return catalogue.getAsset(id);
+    }
+
+    @Override
+    public void addAsset(Asset toAdd) {
+        catalogue.addAsset(toAdd);
     }
 
     @Override
     public int getAssetCount() {
         return catalogue.getAssetCount();
+    }
+
+    @Override
+    public int getLastAssetID() {
+        return catalogue.getLastID();
     }
 
     @Override
@@ -76,9 +71,16 @@ class LibraryManagement implements Library {
     }
 
     @Override
+    public void addAuthor(String name) {
+        try {
+            catalogue.addAuthor(new Author(name));
+        } catch (PersonException pe) {}
+    }
+
+    @Override
     public void loadSampleData() {
         try {
-            Author sampleAuthor = new Author("TP");
+            Author sampleAuthor = new Author("Terry Pratchett");
             Producer sampleProducer = new Producer("Scott Litt");
             Director sampleDirector = new Director("Ridley Scott");
 
@@ -87,12 +89,11 @@ class LibraryManagement implements Library {
             Asset dw3 = new BookAudioBook("Equal Rites", "0-575-03950-7", "1987", sampleAuthor);
             Asset dw4 = new CdDvd("Out of time", sampleProducer, sampleDirector, 44*60+8, "1991");
 
-            this.addAuthor(sampleAuthor);
+            this.addAuthor("Terry Pratchett");
             this.addAsset(dw1);
             this.addAsset(dw2);
             this.addAsset(dw3);
             this.addAsset(dw4);
         } catch (PersonException pe) {}
     }
-
 }

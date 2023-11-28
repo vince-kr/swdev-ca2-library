@@ -6,7 +6,6 @@ import LibrarySystem.library.catalogue.*;
 import LibrarySystem.util.io.StandardInput;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class BorrowAsset extends Interaction {
 
@@ -45,7 +44,7 @@ public class BorrowAsset extends Interaction {
         System.out.println(allUsers);
         int userID = StandardInput.getPositiveInt(prompt, library.getLastUserID());
 
-        LibraryUser selectedUser = library.getLibraryUser(userID);
+        LibraryUser selectedUser = library.getUser(userID);
         if (selectedUser != null) {
             return selectedUser;
         }

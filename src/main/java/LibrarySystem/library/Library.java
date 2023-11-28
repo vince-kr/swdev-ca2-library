@@ -4,22 +4,32 @@ import LibrarySystem.library.catalogue.Asset;
 import LibrarySystem.library.catalogue.Author;
 
 public interface Library {
-    int getAssetCount();
+    // Users
+    LibraryUser getUser(int id);
 
-    String summariseAllAssets();
-    String summariseBorrowedAssets();
-    String summariseAllUsers();
+    void addUser(LibraryUser libraryUser);
+
     int getLastUserID();
-    LibraryUser getLibraryUser(int id);
+
+    String summariseAllUsers();
+
+
+    // Assets
+    Asset getAsset(int Id);
 
     void addAsset(Asset toAdd);
 
-    void addAuthor(Author toAdd);
-
-    void loadSampleData();
-
-    void addUser(LibraryUser libraryUser);
-    Asset getAsset(int Id);
+    int getAssetCount();
 
     int getLastAssetID();
+
+    String summariseAllAssets();
+
+    String summariseBorrowedAssets();
+
+
+    // Other catalogue operations
+    void addAuthor(String name);
+
+    void loadSampleData();
 }

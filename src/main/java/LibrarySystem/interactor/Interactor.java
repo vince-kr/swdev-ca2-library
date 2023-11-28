@@ -80,7 +80,6 @@ class Interactor {
         var catalogueMenuInteractions = new HashMap<String, Interaction>();
         catalogueMenuInteractions.put("manage-catalogue", createCatalogueMenu());
         catalogueMenuInteractions.put("add-asset", new AddAsset());
-        catalogueMenuInteractions.put("add-author", new AddAuthor());
         return catalogueMenuInteractions;
     }
 
@@ -88,7 +87,6 @@ class Interactor {
         return new Menu("MANAGE ASSETS\n", new MenuItem[]{
                 new MenuItem("ADD asset", "add-asset"),
                 new MenuItem("REMOVE asset", "remove-asset"),
-                new MenuItem("add AUTHOR", "add-author"),
                 new MenuItem("Back", "main")
         });
     }
