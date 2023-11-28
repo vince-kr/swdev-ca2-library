@@ -2,10 +2,9 @@ package LibrarySystem.library.catalogue;
 
 import LibrarySystem.util.format.StringFormat;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.net.Inet4Address;
+import java.util.*;
+import java.util.stream.Collectors;
 
 class CatalogueManagement implements Catalogue {
 
@@ -35,18 +34,34 @@ class CatalogueManagement implements Catalogue {
 
     @Override
     public String summariseAllAssets() {
+        return buildAssetSummary(this.allAssets);
+    }
+
+    @Override
+    public String summariseBorrowedAssets() {
+        var borrowedAssets = new HashMap<Integer, Asset>();
+
+        for (Map.Entry<Integer, Asset> assetEntry : this.allAssets.entrySet()) {
+            if (!assetEntry.getValue().getAvailability())
+                borrowedAssets.put(assetEntry.getKey(), assetEntry.getValue());
+        }
+
+        return buildAssetSummary(borrowedAssets);
+    }
+
+    private String buildAssetSummary(HashMap<Integer, Asset> assetsToSummarise) {
         var assetsSummary = new StringBuilder();
 
         assetsSummary.append(StringFormat.fixedLength("ID", 12));
-        assetsSummary.append(StringFormat.fixedLength("TYPE", 36));
+        assetsSummary.append(StringFormat.fixedLength("TYPE", 24));
         assetsSummary.append(StringFormat.fixedLength("TITLE", 36));
         assetsSummary.append(StringFormat.fixedLength("CREATOR", 36));
         assetsSummary.append("\n");
 
-        for (int assetID : this.allAssets.keySet()) {
+        for (int assetID : assetsToSummarise.keySet()) {
             Asset asset = allAssets.get(assetID);
             assetsSummary.append(StringFormat.fixedLength(assetID, 12));
-            assetsSummary.append(StringFormat.fixedLength(asset.getAssetType(), 36));
+            assetsSummary.append(StringFormat.fixedLength(asset.getAssetType(), 24));
             assetsSummary.append(StringFormat.fixedLength(asset.getTitle(), 36));
             assetsSummary.append(StringFormat.fixedLength(asset.getCreatorName(), 36));
             assetsSummary.append("\n");
@@ -56,27 +71,8 @@ class CatalogueManagement implements Catalogue {
     }
 
     @Override
-    public String summariseBorrowedAssets() {
-        var assetsSummary = new StringBuilder();
-
-        assetsSummary.append(StringFormat.fixedLength("ID", 12));
-        assetsSummary.append(StringFormat.fixedLength("TYPE", 36));
-        assetsSummary.append(StringFormat.fixedLength("TITLE", 36));
-        assetsSummary.append(StringFormat.fixedLength("CREATOR", 36));
-        assetsSummary.append("\n");
-
-        for (Map.Entry<Integer, Asset> assetEntry : this.allAssets.entrySet()) {
-            Asset asset = assetEntry.getValue();
-            if (!asset.getAvailability()) {
-                assetsSummary.append(StringFormat.fixedLength(assetEntry.getKey(), 12));
-                assetsSummary.append(StringFormat.fixedLength(asset.getAssetType(), 36));
-                assetsSummary.append(StringFormat.fixedLength(asset.getTitle(), 36));
-                assetsSummary.append(StringFormat.fixedLength(asset.getCreatorName(), 36));
-                assetsSummary.append("\n");
-            }
-        }
-
-        return assetsSummary.toString();
+    public HashMap<Integer, Author> getAllAuthors() {
+        return allAuthors;
     }
 
     @Override

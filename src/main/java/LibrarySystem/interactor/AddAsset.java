@@ -6,6 +6,7 @@ import LibrarySystem.library.catalogue.*;
 import LibrarySystem.util.io.StandardInput;
 
 import java.time.Year;
+import java.util.HashMap;
 
 public class AddAsset extends Interaction {
 
@@ -44,22 +45,22 @@ public class AddAsset extends Interaction {
         switch (assetType) {
             case "Book/Audiobook":
                 String ISBN = askISBN();
-                Author bookAuthor = null;
+                Author bookAuthor;
                 try {
-                    bookAuthor = askAuthor();
+                    bookAuthor = askAuthor(library);
                 } catch (PersonException e) {
                     throw new RuntimeException(e);
                 }
                 newAsset = new BookAudioBook(title, ISBN, yearOfPublication, bookAuthor);
                 break;
             case "CD/DVD":
-                Producer producer = null;
+                Producer producer;
                 try {
                     producer = askProducer();
                 } catch (PersonException e) {
                     throw new RuntimeException(e);
                 }
-                Director director = null;
+                Director director;
                 try {
                     director = askDirector();
                 } catch (PersonException e) {
@@ -69,9 +70,9 @@ public class AddAsset extends Interaction {
                 newAsset = new CdDvd(title, producer, director, playTime, yearOfPublication);
                 break;
             default:  // Thesis or dissertation
-                Author thesisAuthor = null;
+                Author thesisAuthor;
                 try {
-                    thesisAuthor = askAuthor();
+                    thesisAuthor = askAuthor(library);
                 } catch (PersonException e) {
                     throw new RuntimeException(e);
                 }
@@ -129,13 +130,21 @@ public class AddAsset extends Interaction {
         return new Producer(producerName);
     }
 
-    private Author askAuthor() throws PersonException {
+    private Author askAuthor(Library library) throws PersonException {
         String prompt = "Enter author full name: ";
         String responsePattern = "^[\\p{L} '-]+$";
 
-        String authorName = StandardInput.getValidString(prompt, responsePattern);
+        String newAuthorName = StandardInput.getValidString(prompt, responsePattern);
 
-        return new Author(authorName);
+        HashMap<Integer, Author> allAuthors = library.getAllAuthors();
+
+        for (int authorID : allAuthors.keySet()) {
+            String authorName = allAuthors.get(authorID).getName();
+            if (newAuthorName.equals(authorName))
+                return allAuthors.get(authorID);
+        }
+
+        return new Author(newAuthorName);
     }
 
     private String askYoP() {

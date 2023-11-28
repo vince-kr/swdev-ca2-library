@@ -1,5 +1,9 @@
 package LibrarySystem.library.catalogue;
 
+import java.net.Inet4Address;
+import java.util.HashMap;
+import java.util.List;
+
 public interface Catalogue {
     int getAssetCount();
     String summariseAllAssets();
@@ -10,4 +14,6 @@ public interface Catalogue {
     int getLastID();
 
     String summariseBorrowedAssets();
+
+    HashMap<Integer, Author> getAllAuthors();
 }

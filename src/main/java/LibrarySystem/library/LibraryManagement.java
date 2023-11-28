@@ -2,6 +2,9 @@ package LibrarySystem.library;
 
 import LibrarySystem.library.catalogue.*;
 
+import java.util.HashMap;
+import java.util.List;
+
 class LibraryManagement implements Library {
 
     final Catalogue catalogue;
@@ -68,6 +71,11 @@ class LibraryManagement implements Library {
     @Override
     public String summariseBorrowedAssets() {
         return catalogue.summariseBorrowedAssets();
+    }
+
+    @Override
+    public HashMap<Integer, Author> getAllAuthors() {
+        return catalogue.getAllAuthors();
     }
 
     @Override
