@@ -76,6 +76,11 @@ class CatalogueManagement implements Catalogue {
     }
 
     @Override
+    public HashMap<Integer, Asset> getAllAssets() {
+        return allAssets;
+    }
+
+    @Override
     public void addAuthor(Author toAdd) {
         int currentID = computeCurrentID(allAuthors.keySet());
         allAuthors.put(currentID + 1, toAdd);

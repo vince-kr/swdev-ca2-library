@@ -16,4 +16,5 @@ public interface Catalogue {
     String summariseBorrowedAssets();
 
     HashMap<Integer, Author> getAllAuthors();
+    HashMap<Integer,Asset> getAllAssets();
 }

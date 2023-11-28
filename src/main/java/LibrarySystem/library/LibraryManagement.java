@@ -79,6 +79,11 @@ class LibraryManagement implements Library {
     }
 
     @Override
+    public HashMap<Integer, Asset> getAllAssets() {
+        return catalogue.getAllAssets();
+    }
+
+    @Override
     public void addAuthor(String name) {
         try {
             catalogue.addAuthor(new Author(name));
