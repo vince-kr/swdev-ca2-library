@@ -11,7 +11,6 @@ public abstract class Asset{
     private String overDue;
     private int quantity;
 
-
     public Asset(String title) {
         this.title = title;
         this.isAvailable = true;

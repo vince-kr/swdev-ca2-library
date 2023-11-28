@@ -7,6 +7,7 @@ public interface Library {
     int getAssetCount();
 
     String summariseAllAssets();
+    String summariseBorrowedAssets();
     String summariseAllUsers();
     int getLastUserID();
     LibraryUser getLibraryUser(int id);

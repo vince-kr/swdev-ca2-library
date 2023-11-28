@@ -65,7 +65,7 @@ public class ThesisDissertation extends Asset{
 
     @Override
     public String getAssetType() {
-        return "Thesis";
+        return "Thesis / Dissertation";
     }
 
 

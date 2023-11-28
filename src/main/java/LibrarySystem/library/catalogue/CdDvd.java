@@ -66,7 +66,7 @@ public class CdDvd extends Asset {
 
     @Override
     public String getAssetType() {
-        return "CdDvd";
+        return "Cd / Dvd";
     }
 
 

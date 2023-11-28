@@ -28,7 +28,7 @@ public class BorrowAsset extends Interaction {
         Asset assetToBorrow = askAssetToBorrow(library);
 
         // do borrowing here
-        assetToBorrow.setQuantity(0);
+        assetToBorrow.setAvailability(false);
         assetToBorrow.setDateIssued(LocalDateTime.now());
         assetToBorrow.setDateDue(LocalDateTime.now().plusHours(24));
 
@@ -36,20 +36,6 @@ public class BorrowAsset extends Interaction {
         userWantsToBorrow.setBorrowedAssets(assetToBorrow);
 
         System.out.println(" Asset: " + assetToBorrow.getTitle() + " borrowed by user: " + userWantsToBorrow.getName() + ", successfully.");
-    }
-
-    private Asset askAssetToBorrow(Library library) {
-        String allAssets = library.summariseAllAssets();
-        String prompt = "Please enter the required asset ID: ";
-
-        System.out.println(allAssets);
-        int assetID = StandardInput.getPositiveInt(prompt, library.getLastAssetID());
-
-        Asset selectedAsset = library.getAsset(assetID);
-        if (selectedAsset != null)
-            return selectedAsset;
-        else
-            return askAssetToBorrow(library);
     }
 
     private LibraryUser askLibraryUser(Library library) {
@@ -67,6 +53,20 @@ public class BorrowAsset extends Interaction {
             System.out.println("User with given Id not found in the system!!!");
             return askLibraryUser(library);
         }
+    }
+
+    private Asset askAssetToBorrow(Library library) {
+        String allAssets = library.summariseAllAssets();
+        String prompt = "Please enter the required asset ID: ";
+
+        System.out.println(allAssets);
+        int assetID = StandardInput.getPositiveInt(prompt, library.getLastAssetID());
+
+        Asset selectedAsset = library.getAsset(assetID);
+        if (selectedAsset != null)
+            return selectedAsset;
+        else
+            return askAssetToBorrow(library);
     }
 
 }

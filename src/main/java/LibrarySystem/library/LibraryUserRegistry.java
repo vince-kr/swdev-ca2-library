@@ -1,5 +1,7 @@
 package LibrarySystem.library;
 
+import LibrarySystem.util.format.StringFormat;
+
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -10,8 +12,10 @@ public class LibraryUserRegistry extends HashMap<Integer, LibraryUser> {
 
     String summariseUsers() {
         var userSummary = new StringBuilder();
-        for (int userID : this.keySet())
-            userSummary.append(userID + ".  " + this.get(userID) + "\n");
+        for (int userID : this.keySet()) {
+            userSummary.append(StringFormat.fixedLength(userID, 12));
+            userSummary.append(StringFormat.fixedLength(this.get(userID).getName(), 36));
+        }
 
         return userSummary.toString();
     }

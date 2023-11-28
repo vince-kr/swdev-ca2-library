@@ -8,10 +8,6 @@ public class BookAudioBook extends Asset{
     private String isbn;
     private String publishedYear;
 
-
-
-
-
     public BookAudioBook(String title, String isbn, String publishedYear, Author author) {
         super(title);
         this.isbn = isbn;
@@ -19,11 +15,9 @@ public class BookAudioBook extends Asset{
         this.author = author;
     }
 
-
-
     @Override
     public String getAssetType() {
-        return "book";
+        return "Book / Audiobook";
     }
 
     public String getIsbn() {

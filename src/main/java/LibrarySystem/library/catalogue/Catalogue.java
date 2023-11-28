@@ -8,4 +8,6 @@ public interface Catalogue {
     Asset getAsset(int Id);
 
     int getLastID();
+
+    String summariseBorrowedAssets();
 }

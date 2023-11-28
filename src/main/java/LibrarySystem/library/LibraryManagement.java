@@ -71,17 +71,27 @@ class LibraryManagement implements Library {
     }
 
     @Override
+    public String summariseBorrowedAssets() {
+        return catalogue.summariseBorrowedAssets();
+    }
+
+    @Override
     public void loadSampleData() {
         try {
             Author sampleAuthor = new Author("TP");
+            Producer sampleProducer = new Producer("Scott Litt");
+            Director sampleDirector = new Director("Ridley Scott");
+
             Asset dw1 = new BookAudioBook("The Colour of Magic", "0-86140-324-X", "1983", sampleAuthor);
             Asset dw2 = new BookAudioBook("The Light Fantastic", "0-86140-203-0", "1986", sampleAuthor);
             Asset dw3 = new BookAudioBook("Equal Rites", "0-575-03950-7", "1987", sampleAuthor);
+            Asset dw4 = new CdDvd("Out of time", sampleProducer, sampleDirector, 44*60+8, "1991");
 
             this.addAuthor(sampleAuthor);
             this.addAsset(dw1);
             this.addAsset(dw2);
             this.addAsset(dw3);
+            this.addAsset(dw4);
         } catch (PersonException pe) {}
     }
 

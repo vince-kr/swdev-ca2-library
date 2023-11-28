@@ -6,6 +6,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 class CatalogueManagement implements Catalogue {
 
@@ -36,7 +38,9 @@ class CatalogueManagement implements Catalogue {
     @Override
     public String summariseAllAssets() {
         var assetsSummary = new StringBuilder();
+
         assetsSummary.append(StringFormat.fixedLength("ID", 12));
+        assetsSummary.append(StringFormat.fixedLength("TYPE", 36));
         assetsSummary.append(StringFormat.fixedLength("TITLE", 36));
         assetsSummary.append(StringFormat.fixedLength("CREATOR", 36));
         assetsSummary.append("\n");
@@ -44,11 +48,35 @@ class CatalogueManagement implements Catalogue {
         for (int assetID : this.allAssets.keySet()) {
             Asset asset = allAssets.get(assetID);
             assetsSummary.append(StringFormat.fixedLength(assetID, 12));
+            assetsSummary.append(StringFormat.fixedLength(asset.getAssetType(), 36));
             assetsSummary.append(StringFormat.fixedLength(asset.getTitle(), 36));
             assetsSummary.append(StringFormat.fixedLength(asset.getCreatorName(), 36));
             assetsSummary.append("\n");
         }
 
+        return assetsSummary.toString();
+    }
+
+    @Override
+    public String summariseBorrowedAssets() {
+        var assetsSummary = new StringBuilder();
+
+        assetsSummary.append(StringFormat.fixedLength("ID", 12));
+        assetsSummary.append(StringFormat.fixedLength("TYPE", 36));
+        assetsSummary.append(StringFormat.fixedLength("TITLE", 36));
+        assetsSummary.append(StringFormat.fixedLength("CREATOR", 36));
+        assetsSummary.append("\n");
+
+        for (Map.Entry<Integer, Asset> assetEntry : this.allAssets.entrySet()) {
+            Asset asset = assetEntry.getValue();
+            if (!asset.getAvailability()) {
+                assetsSummary.append(StringFormat.fixedLength(assetEntry.getKey(), 12));
+                assetsSummary.append(StringFormat.fixedLength(asset.getAssetType(), 36));
+                assetsSummary.append(StringFormat.fixedLength(asset.getTitle(), 36));
+                assetsSummary.append(StringFormat.fixedLength(asset.getCreatorName(), 36));
+                assetsSummary.append("\n");
+            }
+        }
 
         return assetsSummary.toString();
     }
