@@ -137,6 +137,7 @@ public abstract class Files {
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
             File file = new File(csvFilePath);
             sb.append("Id");
+            sb.append(",");
             sb.append("Book Title");
             sb.append(",");
             sb.append("Book ISBN");
@@ -216,6 +217,7 @@ public abstract class Files {
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
             File file = new File(csvFilePath);
             sb.append("Id");
+            sb.append(",");
             sb.append("Title");
             sb.append(",");
             sb.append("Topic");
@@ -403,7 +405,7 @@ public abstract class Files {
             sb.append(",");
             sb.append("UserName");
             sb.append(",");
-            sb.append("Borrowed of Assets");
+            sb.append("Borrowed Assets Count");
             sb.append(",");
             sb.append("\r\n");
 

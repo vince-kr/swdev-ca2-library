@@ -2,6 +2,7 @@ package LibrarySystem.library;
 
 import LibrarySystem.library.catalogue.Asset;
 import LibrarySystem.library.catalogue.Author;
+import LibrarySystem.library.catalogue.BookAudioBook;
 
 import java.util.HashMap;
 import java.util.List;

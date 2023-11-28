@@ -97,13 +97,17 @@ class Interactor {
         var fileOperationMenu = new HashMap<String, Interaction>();
         fileOperationMenu.put("file-menu", createFileOperationMenu());
         fileOperationMenu.put("authors-to-file", new AuthorsToFile());
-        fileOperationMenu.put("assets-to-file", new BooksToFile());
+        fileOperationMenu.put("books-to-file", new BooksToFile());
+        fileOperationMenu.put("assets-to-file", new AssetsToFile());
+        fileOperationMenu.put("thesis-to-file", new ThesisToFile());
         return fileOperationMenu;
     }
     private Menu createFileOperationMenu(){
         return new Menu("FILE OPERATIONS\n", new MenuItem[]{
            new MenuItem("Authors TO File", "authors-to-file"),
                 new MenuItem("Assets To File","assets-to-file"),
+                new MenuItem("Books TO File","books-to-file"),
+                new MenuItem("Thesis To File","thesis-to-file"),
                 new MenuItem("Back","main")
         });
     }

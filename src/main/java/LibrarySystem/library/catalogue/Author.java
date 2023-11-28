@@ -6,7 +6,7 @@ import LibrarySystem.library.PersonException;
 import java.util.ArrayList;
 
 public class Author extends Person implements Comparable<Author>{
-    private ArrayList<Asset> booksAuthored;
+    final private ArrayList<Asset> booksAuthored;
 
 
     public Author(String name) throws PersonException {
@@ -18,8 +18,8 @@ public class Author extends Person implements Comparable<Author>{
         return booksAuthored;
     }
 
-    public void setBooksAuthored(ArrayList<Asset> booksAuthored) {
-        this.booksAuthored = booksAuthored;
+    public void setBooksAuthored(Asset asset) {
+        this.booksAuthored.add(asset);
     }
 
     @Override
