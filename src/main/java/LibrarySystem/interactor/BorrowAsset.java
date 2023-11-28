@@ -60,21 +60,13 @@ public class BorrowAsset extends Interaction {
         int userID = StandardInput.getPositiveInt(prompt, library.getLastUserID());
 
         LibraryUser selectedUser = library.getLibraryUser(userID);
-        if (selectedUser != null)
+        if (selectedUser != null) {
             return selectedUser;
-        else
+        }
+        else {
+            System.out.println("User with given Id not found in the system!!!");
             return askLibraryUser(library);
+        }
     }
 
-
-    private int askAssetKey(){
-        String prompt = "Enter AssetId: ";
-        return StandardInput.getPositiveInt(prompt,1000);
-   }
-
-
-    private int askUserKey(){
-        String prompt = "Enter UserId: ";
-        return StandardInput.getPositiveInt(prompt,1000);
-    }
 }

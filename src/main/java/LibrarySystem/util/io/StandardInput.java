@@ -81,36 +81,7 @@ public abstract class StandardInput {
 
         return userInput;
     }
-    /*
-     get asset type
-     */
-    public static Asset getAssetType(){
-        int select = 0;
-        while(select == 0){
-            System.out.println("Select asset type you want to create:");
-            System.out.println(" Type 1 - Book Asset");
-            System.out.println(" Type 2 - CdDvd Asset");
-            System.out.println(" Type 3 - ThesisDissertation Asset");
-            System.out.println(" Type 4 - Exit");
-            select = getIntInRange("Choice: ",1,4);
-            switch (select){
-                case 1:
-                    //create and return book asset
-                    break;
-                case 2:
-                    //create and return cd asset
-                    break;
-                case 3:
-                    //create and return thesis asset
-                    break;
-                case 4:
-                    System.out.println(RED+" Choose a type of asset to create!!!"+RESET);
-                default:
-                    System.out.println(RED+" Invalid Choice, please follow instructions!!"+RESET);
-            }
-        }
-        return null;
-    }
+
 
     public static boolean getYesNo(String prompt) {
         var in = new Scanner(System.in);

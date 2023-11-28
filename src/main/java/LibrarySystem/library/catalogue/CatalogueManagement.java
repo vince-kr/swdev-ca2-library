@@ -5,6 +5,7 @@ import LibrarySystem.util.format.StringFormat;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 class CatalogueManagement implements Catalogue {
 
@@ -48,6 +49,7 @@ class CatalogueManagement implements Catalogue {
             assetsSummary.append("\n");
         }
 
+
         return assetsSummary.toString();
     }
 
@@ -66,11 +68,4 @@ class CatalogueManagement implements Catalogue {
         return keys.isEmpty() ? 10000 : Collections.max(keys);
     }
 
-    /*
-             return an asset
-             from allAssets hash map
-             */
-    public Asset findAssetByKey(int key){
-                return allAssets.get(key);
-    }
 }

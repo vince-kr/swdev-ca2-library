@@ -19,7 +19,6 @@ public interface Library {
 
     void addUser(LibraryUser libraryUser);
     Asset getAsset(int Id);
-    LibraryUser findUserByKey(int key);
 
     int getLastAssetID();
 }

@@ -85,9 +85,4 @@ class LibraryManagement implements Library {
         } catch (PersonException pe) {}
     }
 
-    @Override
-    public LibraryUser findUserByKey(int key){
-        return allUsers.get(key);
-    }
-
 }
