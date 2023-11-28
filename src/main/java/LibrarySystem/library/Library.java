@@ -33,6 +33,7 @@ public interface Library {
 
     // Other catalogue operations
     HashMap<Integer, Author> getAllAuthors();
+    HashMap<Integer,Asset> getAllAssets();
 
     Author addAuthor(String name) throws PersonException;
 

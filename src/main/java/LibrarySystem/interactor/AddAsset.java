@@ -105,10 +105,6 @@ public class AddAsset extends Interaction {
         return StandardInput.getPositiveInt(prompt,18000);
     }
 
-    private int askQuantity(){
-        String prompt = "Enter quantity of asset: ";
-        return StandardInput.getPositiveInt(prompt, 50);
-    }
 
     private Director askDirector() throws PersonException {
         String prompt = "Enter director full name: ";

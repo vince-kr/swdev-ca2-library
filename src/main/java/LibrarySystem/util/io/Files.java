@@ -58,6 +58,7 @@ public abstract class Files {
                 br.close();
                 System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
             }
+            System.out.println("No authors in the system");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -85,6 +86,52 @@ public abstract class Files {
      Print Book items to csv file
      */
 
+    public static void printAssetsToFile(HashMap<Integer,Asset> assets, String csvFilePath){
+        StringBuilder sb = new StringBuilder();
+        if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
+            File file = new File(csvFilePath);
+            sb.append("Id");
+            sb.append(",");
+            sb.append("Title");
+            sb.append(",");
+            sb.append("Status");
+            sb.append(",");
+            sb.append("Due Date");
+            sb.append(",");
+            sb.append("Quantity");
+            sb.append(",");
+            sb.append("\r\n");
+        }
+        try {
+            FileWriter fr = new FileWriter(new File(csvFilePath), true);
+            BufferedWriter br = new BufferedWriter(fr);
+            PrintWriter writer = new PrintWriter(br);
+            if (!assets.isEmpty()){
+                for (Map.Entry<Integer, Asset> asset:assets.entrySet()){
+                    sb.append(asset.getKey());
+                    sb.append(",");
+                    sb.append(asset.getValue().getTitle());
+                    sb.append(",");
+                    sb.append(asset.getValue().getAvailability());
+                    sb.append(",");
+                    sb.append(asset.getValue().getDateDue());
+                    sb.append(",");
+                    sb.append(asset.getValue().getQuantity());
+                    sb.append(",");
+                    sb.append("\n");
+                }
+
+                writer.write(sb.toString());
+                writer.close();
+                fr.close();
+                br.close();
+                System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
     public static void printBooksToFile(HashMap<Integer,BookAudioBook> books, String csvFilePath){
         StringBuilder sb = new StringBuilder();
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))){

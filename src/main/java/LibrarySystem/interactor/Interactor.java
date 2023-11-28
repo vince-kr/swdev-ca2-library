@@ -21,6 +21,7 @@ class Interactor {
         allInteractions.putAll(buildFiltersMenuWithOptions());
         allInteractions.putAll(buildCatalogueMenuWithOptions());
         allInteractions.putAll(buildUserMenuWithOptions());
+        allInteractions.putAll(buildFileOperationMenuOptions());
         return allInteractions;
     }
 
@@ -38,6 +39,7 @@ class Interactor {
                 new MenuItem("CATALOGUE management", "manage-catalogue"),
                 new MenuItem("USER management", "manage-users"),
                 new MenuItem("SAMPLE data", "load-sample-data"),
+                new MenuItem("FILE OPERATIONS","file-menu"),
                 new MenuItem("Exit", "exit")
         });
     }
@@ -91,6 +93,20 @@ class Interactor {
         });
     }
 
+    private HashMap<String, Interaction> buildFileOperationMenuOptions(){
+        var fileOperationMenu = new HashMap<String, Interaction>();
+        fileOperationMenu.put("file-menu", createFileOperationMenu());
+        fileOperationMenu.put("authors-to-file", new AuthorsToFile());
+        fileOperationMenu.put("assets-to-file", new BooksToFile());
+        return fileOperationMenu;
+    }
+    private Menu createFileOperationMenu(){
+        return new Menu("FILE OPERATIONS\n", new MenuItem[]{
+           new MenuItem("Authors TO File", "authors-to-file"),
+                new MenuItem("Assets To File","assets-to-file"),
+                new MenuItem("Back","main")
+        });
+    }
     private HashMap<String, Interaction> buildUserMenuWithOptions() {
         var userMenuInteractions = new HashMap<String, Interaction>();
         userMenuInteractions.put("manage-users", createUserMenu());

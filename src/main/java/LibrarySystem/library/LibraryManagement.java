@@ -48,6 +48,10 @@ class LibraryManagement implements Library {
         return catalogue.getAsset(id);
     }
 
+    public HashMap<Integer, Asset> getAllAssets() {
+        return catalogue.getAllAssets();
+    }
+
     @Override
     public void addAsset(Asset toAdd) {
         catalogue.addAsset(toAdd);
