@@ -66,7 +66,7 @@ class BookAudioBookTest {
 
     @Test
     void getAssetType() {
-        assertEquals("book",book.getAssetType());
+        assertEquals("Book / Audiobook",book.getAssetType());
     }
 
     @Test

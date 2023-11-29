@@ -68,7 +68,7 @@ public class AddAsset extends Interaction {
                     throw new RuntimeException(e);
                 }
                 int playTime = askPlaytime();
-                newAsset = new CdDvd(title, producer, director, playTime, yearOfPublication);
+                newAsset = new CdDvd(title, quantity, producer, director, playTime, yearOfPublication);
                 break;
             default:  // Thesis or dissertation
                 Author thesisAuthor;

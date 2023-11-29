@@ -29,6 +29,7 @@ public class CdsToFile extends Interaction{
 
         }
         if (!cds.isEmpty()){
+            System.out.println("Printing to file ...");
             Files.CdsToFile(cds,"cds.csv");
         }else {
             System.out.println(RED+" No cds in the system yet."+RESET);

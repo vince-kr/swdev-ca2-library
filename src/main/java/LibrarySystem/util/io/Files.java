@@ -274,7 +274,7 @@ public abstract class Files {
         try (FileReader fr = new FileReader(csvFile);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
             for (CSVRecord csvRecord:csvParser){
-                int key = Integer.parseInt(csvRecord.get(Integer.parseInt("Id")));
+                int key = Integer.parseInt(csvRecord.get("Id"));
                 String title = csvRecord.get("Title");
                 String quantity = csvRecord.get("Quantity");
                 String topic = csvRecord.get("Topic");
@@ -362,11 +362,11 @@ public abstract class Files {
         try (FileReader fr = new FileReader(csvFile);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
             for (CSVRecord csvRecord:csvParser){
-                int key = Integer.parseInt(csvRecord.get(Integer.parseInt("Id")));
+                int key = Integer.parseInt(csvRecord.get("Id"));
                 String title = csvRecord.get("Title");
                 String quantity = csvRecord.get("Quantity");
                 String producerName = csvRecord.get("ProducerName");
-                String year = csvRecord.get("Published Year");
+                String year = csvRecord.get("Production Year");
                 String directorName = csvRecord.get("DirectorName");
                 int playTime = Integer.parseInt(csvRecord.get("PlayTime"));
                 int qty = Integer.parseInt(csvRecord.get("Quantity"));
