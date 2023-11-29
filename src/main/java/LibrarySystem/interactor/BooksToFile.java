@@ -20,7 +20,10 @@ public class BooksToFile extends Interaction{
         System.out.println(header);
         HashMap<Integer, BookAudioBook> allBooks = new HashMap<>();
         for (Map.Entry<Integer, Asset> asset:library.getAllAssets().entrySet()){
+            if (asset.getValue() instanceof BookAudioBook)
             allBooks.put(asset.getKey(), (BookAudioBook) asset.getValue());
+            else
+                System.out.println("No book type in the assets.");
         }
         if (!allBooks.isEmpty()){
             Files.printBooksToFile(allBooks,"books.csv");

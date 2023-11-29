@@ -20,12 +20,15 @@ public class ThesisToFile extends Interaction{
         System.out.println(header);
         HashMap<Integer, ThesisDissertation> thesis = new HashMap<>();
         for (Map.Entry<Integer, Asset> asset: library.getAllAssets().entrySet()){
+            if (asset.getValue() instanceof ThesisDissertation)
             thesis.put(asset.getKey(), (ThesisDissertation) asset.getValue());
+            else
+                System.out.println("No thesis type in asset");
         }
         if (!thesis.isEmpty()){
             Files.DissertationsToFile(thesis,"thesis.csv");
         }else {
-            System.out.println("no thesis in the system yet.");
+            System.out.println("No thesis in the system yet.");
         }
 
     }
