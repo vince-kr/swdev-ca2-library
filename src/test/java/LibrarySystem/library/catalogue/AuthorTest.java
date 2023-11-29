@@ -31,18 +31,14 @@ class AuthorTest {
 
     @Test
     void getBooksAuthored() {
-        ArrayList<Asset> books = new ArrayList<>();
-        books.add(book);
-        books.add(book1);
-        author.setBooksAuthored(books);
+        author.setBooksAuthored(book);
+        author.setBooksAuthored(book1);
         assertEquals(2,author.getBooksAuthored().size());
     }
 
     @Test
     void setBooksAuthored() {
-        ArrayList<Asset> books = new ArrayList<>();
-        books.add(book);
-        author.setBooksAuthored(books);
+        author.setBooksAuthored(book);
         assertEquals(1,author.getBooksAuthored().size());
     }
 
@@ -58,13 +54,10 @@ class AuthorTest {
 
     @Test
     void compareTo() {
-        ArrayList<Asset> books = new ArrayList<>();
-        books.add(book);
-        books.add(book1);
         //given two authors with no books authored yet
         assertEquals(0,author.compareTo(author1));
         //after one author authored two books and the other none
-        author.setBooksAuthored(books);
+        author.setBooksAuthored(book);
 
         assertEquals(1,author.compareTo(author1));
     }

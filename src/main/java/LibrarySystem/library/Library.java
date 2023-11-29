@@ -2,6 +2,7 @@ package LibrarySystem.library;
 
 import LibrarySystem.library.catalogue.Asset;
 import LibrarySystem.library.catalogue.Author;
+import LibrarySystem.library.catalogue.BookAudioBook;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +17,7 @@ public interface Library {
 
     String summariseAllUsers();
 
-
+    HashMap<Integer, LibraryUser> getAllUsers();
     // Assets
     Asset getAsset(int Id);
 

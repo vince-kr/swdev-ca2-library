@@ -43,6 +43,11 @@ class LibraryManagement implements Library {
     }
 
     @Override
+    public HashMap<Integer, LibraryUser> getAllUsers() {
+        return allUsers;
+    }
+
+    @Override
     public Asset getAsset(int id) {
         return catalogue.getAsset(id);
     }
@@ -85,6 +90,7 @@ class LibraryManagement implements Library {
     public Author addAuthor(String name) throws PersonException {
         return catalogue.addAuthor(name);
     }
+
 
 
     @Override

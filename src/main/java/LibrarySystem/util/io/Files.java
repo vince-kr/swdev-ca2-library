@@ -136,6 +136,7 @@ public abstract class Files {
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
             File file = new File(csvFilePath);
             sb.append("Id");
+            sb.append(",");
             sb.append("Book Title");
             sb.append(",");
             sb.append("Book ISBN");
@@ -213,6 +214,7 @@ public abstract class Files {
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
             File file = new File(csvFilePath);
             sb.append("Id");
+            sb.append(",");
             sb.append("Title");
             sb.append(",");
             sb.append("Topic");
@@ -328,19 +330,15 @@ public abstract class Files {
                 for (Map.Entry<Integer,CdDvd> cd: objects.entrySet()) {
                     sb.append(cd.getKey());
                     sb.append(",");
-                    sb.append(cd.getValue().getProducer().getName());
+                    sb.append(cd.getValue().getTitle());
                     sb.append(",");
-                    sb.append(cd.getValue().getAvailability());
+                    sb.append(cd.getValue().getProducer().getName());
                     sb.append(",");
                     sb.append(cd.getValue().getProductionYear());
                     sb.append(",");
                     sb.append(cd.getValue().getDirector().getName());
                     sb.append(",");
                     sb.append(cd.getValue().getPlayTime());
-                    sb.append(",");
-                    sb.append(cd.getValue().getOverDue());
-                    sb.append(",");
-                    sb.append(cd.getValue().getOverDue());
                     sb.append(",");
                     sb.append(cd.getValue().getQuantity());
                     sb.append("\n");
@@ -396,7 +394,7 @@ public abstract class Files {
             sb.append(",");
             sb.append("UserName");
             sb.append(",");
-            sb.append("Borrowed of Assets");
+            sb.append("Borrowed Assets Count");
             sb.append("\r\n");
 
         }
