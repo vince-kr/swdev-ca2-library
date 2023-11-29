@@ -2,6 +2,7 @@ package LibrarySystem.interactor;
 
 import LibrarySystem.library.*;
 import LibrarySystem.library.catalogue.Asset;
+import LibrarySystem.library.catalogue.AssetsRegister;
 import LibrarySystem.util.io.StandardInput;
 
 import java.util.HashMap;
@@ -15,7 +16,7 @@ public class ListBorrowedByUser extends Interaction {
 
         LibraryUser libraryUser = askLibraryUser(library);
 
-        String borrowedByUser = library.getAssetsForUser(libraryUser);
+        AssetsRegister borrowedByUser = library.getAssetsForUser(libraryUser);
         System.out.println(borrowedByUser);
 
         nextReference = "common-filters";

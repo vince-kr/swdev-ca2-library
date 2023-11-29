@@ -9,7 +9,7 @@ public class ListBorrowedAssets extends Interaction {
     public void requestAndResponse(Library library) {
         System.out.println(header);
 
-        System.out.println(library.summariseBorrowedAssets());
+        System.out.println(library.getBorrowedAssets());
 
         this.nextReference = "common-filters";
     }

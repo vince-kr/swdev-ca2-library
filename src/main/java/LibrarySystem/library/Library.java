@@ -27,9 +27,9 @@ public interface Library {
 
     int getLastAssetID();
 
-    String summariseBorrowedAssets();
+    AssetsRegister getBorrowedAssets();
 
-    String getAssetsForUser(LibraryUser user);
+    AssetsRegister getAssetsForUser(LibraryUser user);
 
     // Loan operations
     LoanRegister getAllLoans();

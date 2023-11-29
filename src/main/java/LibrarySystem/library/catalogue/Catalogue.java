@@ -12,8 +12,6 @@ public interface Catalogue {
 
     int getLastID();
 
-    String summariseBorrowedAssets();
-
     HashMap<Integer, Author> getAllAuthors();
     AssetsRegister getAllAssets();
 

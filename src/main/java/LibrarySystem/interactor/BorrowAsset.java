@@ -6,8 +6,7 @@ import LibrarySystem.library.Loan;
 import LibrarySystem.library.catalogue.*;
 import LibrarySystem.util.io.StandardInput;
 
-import java.time.LocalDateTime;
-import java.util.Objects;
+import java.util.Map;
 
 public class BorrowAsset extends Interaction {
 
@@ -26,15 +25,11 @@ public class BorrowAsset extends Interaction {
         System.out.println(header);
 
         LibraryUser userWantsToBorrow = askLibraryUser(library);
-        Asset assetToBorrow = askAssetToBorrow(library);
+        AssetRegisterEntry assetEntry = askAssetToBorrow(library);
+        Asset assetToBorrow = assetEntry.getValue();
 
         // Record the loan
-        library.recordLoan(new Loan(userWantsToBorrow, assetToBorrow));
-
-        // do borrowing here
-        assetToBorrow.setAvailability(false);
-        assetToBorrow.setDateIssued(LocalDateTime.now());
-        assetToBorrow.setDateDue(LocalDateTime.now().plusHours(24));
+        library.recordLoan(new Loan(userWantsToBorrow, assetEntry));
 
         //add asset to borrowed user assets
         userWantsToBorrow.setBorrowedAssets(assetToBorrow);
@@ -59,15 +54,22 @@ public class BorrowAsset extends Interaction {
         }
     }
 
-    private Asset askAssetToBorrow(Library library) {
-        String allAssets = library.getAllAssets().toString();
+    private AssetRegisterEntry askAssetToBorrow(Library library) {
+        AssetsRegister allAssets = library.getAllAssets();
         String prompt = "Please enter the required asset ID: ";
 
         System.out.println(allAssets);
         int assetID = StandardInput.getIntInRange(prompt, 10000, library.getLastAssetID());
 
-        Asset selectedAsset = library.getAsset(assetID);
-        return Objects.requireNonNullElseGet(selectedAsset, () -> askAssetToBorrow(library));
+        for (Map.Entry<Integer, Asset> assetEntry : allAssets.entrySet()) {
+            int key = assetEntry.getKey();
+            if (key == assetID) {
+                return new AssetRegisterEntry(key, allAssets.get(key));
+            }
+        }
+
+        System.out.println("That asset ID is not valid. Please try again.");
+        return askAssetToBorrow(library);
     }
 
 }

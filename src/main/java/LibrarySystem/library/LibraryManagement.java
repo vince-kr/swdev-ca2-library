@@ -54,6 +54,16 @@ class LibraryManagement implements Library {
     }
 
     @Override
+    public AssetsRegister getBorrowedAssets() {
+        var borrowedAssets = new AssetsRegister();
+        for (Loan loan : allLoans) {
+            borrowedAssets.put(loan.getID(), loan.getAsset());
+        }
+
+        return borrowedAssets;
+    }
+
+    @Override
     public void addAsset(Asset toAdd) {
         catalogue.addAsset(toAdd);
     }
@@ -69,12 +79,7 @@ class LibraryManagement implements Library {
     }
 
     @Override
-    public String summariseBorrowedAssets() {
-        return catalogue.summariseBorrowedAssets();
-    }
-
-    @Override
-    public String getAssetsForUser(LibraryUser user) {
+    public AssetsRegister getAssetsForUser(LibraryUser user) {
         return allLoans.getAssetsForUser(user);
     }
 

@@ -1,17 +1,18 @@
 package LibrarySystem.library;
 
 import LibrarySystem.library.catalogue.Asset;
+import LibrarySystem.library.catalogue.AssetRegisterEntry;
 
 import java.time.LocalDate;
 
 public class Loan {
-    Asset toBorrow;
+    AssetRegisterEntry toBorrow;
     LibraryUser doingBorrowing;
     LocalDate dateIssued;
     LocalDate dateDue;
     boolean isActive;
 
-    public Loan(LibraryUser doingBorrowing, Asset toBorrow) {
+    public Loan(LibraryUser doingBorrowing, AssetRegisterEntry toBorrow) {
         this.doingBorrowing = doingBorrowing;
         this.toBorrow = toBorrow;
         this.dateIssued = LocalDate.now();
@@ -19,7 +20,15 @@ public class Loan {
         this.isActive = true;
     }
 
+    int getID() {
+        return toBorrow.getKey();
+    }
+
     Asset getAsset() {
+        return toBorrow.getValue();
+    }
+
+    AssetRegisterEntry getEntry() {
         return toBorrow;
     }
 
