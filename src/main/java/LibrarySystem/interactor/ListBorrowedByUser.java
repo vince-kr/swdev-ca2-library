@@ -22,7 +22,7 @@ public class ListBorrowedByUser extends Interaction {
     }
 
     private LibraryUser askLibraryUser(Library library) {
-        String allUsers = library.summariseAllUsers();
+        String allUsers = library.getAllUsers().toString();
         String prompt = "Please enter the required user ID: ";
 
         System.out.println(allUsers);

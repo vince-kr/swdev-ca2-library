@@ -40,12 +40,7 @@ class LibraryManagement implements Library {
     }
 
     @Override
-    public String summariseAllUsers() {
-        return allUsers.summariseUsers();
-    }
-
-    @Override
-    public HashMap<Integer, LibraryUser> getAllUsers() {
+    public LibraryUserRegister getAllUsers() {
         return allUsers;
     }
 
@@ -54,7 +49,7 @@ class LibraryManagement implements Library {
         return catalogue.getAsset(id);
     }
 
-    public HashMap<Integer, Asset> getAllAssets() {
+    public AssetsRegister getAllAssets() {
         return catalogue.getAllAssets();
     }
 
@@ -71,11 +66,6 @@ class LibraryManagement implements Library {
     @Override
     public int getLastAssetID() {
         return catalogue.getLastID();
-    }
-
-    @Override
-    public String summariseAllAssets() {
-        return catalogue.summariseAllAssets();
     }
 
     @Override

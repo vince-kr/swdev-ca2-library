@@ -3,18 +3,16 @@ package LibrarySystem.library.catalogue;
 import LibrarySystem.library.PersonException;
 import LibrarySystem.util.format.StringFormat;
 
-import java.net.Inet4Address;
 import java.util.*;
-import java.util.stream.Collectors;
 
 class CatalogueManagement implements Catalogue {
 
     final HashMap<Integer, Author> allAuthors;
-    final HashMap<Integer, Asset> allAssets;
+    final AssetsRegister allAssets;
 
     public CatalogueManagement(String csvCatalogueData) {
         allAuthors = new HashMap<>();
-        allAssets = new HashMap<>();
+        allAssets = new AssetsRegister();
     }
 
     @Override
@@ -31,11 +29,6 @@ class CatalogueManagement implements Catalogue {
     @Override
     public int getLastID() {
         return computeCurrentID(allAssets.keySet());
-    }
-
-    @Override
-    public String summariseAllAssets() {
-        return buildAssetSummary(this.allAssets);
     }
 
     @Override
@@ -76,7 +69,7 @@ class CatalogueManagement implements Catalogue {
         return allAuthors;
     }
 
-    public HashMap<Integer, Asset> getAllAssets() {
+    public AssetsRegister getAllAssets() {
         return allAssets;
     }
 

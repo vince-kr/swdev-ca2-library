@@ -43,7 +43,7 @@ public class BorrowAsset extends Interaction {
     }
 
     private LibraryUser askLibraryUser(Library library) {
-        String allUsers = library.summariseAllUsers();
+        String allUsers = library.getAllUsers().toString();
         String prompt = "Please enter the required user ID: ";
 
         System.out.println(allUsers);
@@ -60,7 +60,7 @@ public class BorrowAsset extends Interaction {
     }
 
     private Asset askAssetToBorrow(Library library) {
-        String allAssets = library.summariseAllAssets();
+        String allAssets = library.getAllAssets().toString();
         String prompt = "Please enter the required asset ID: ";
 
         System.out.println(allAssets);

@@ -10,8 +10,9 @@ public class LibraryUserRegister extends HashMap<Integer, LibraryUser> {
         this.put(getLastID() + 1, newUser);
     }
 
-    String summariseUsers() {
+    public String toString() {
         var userSummary = new StringBuilder();
+
         for (int userID : this.keySet()) {
             userSummary.append(StringFormat.fixedLength(userID, 12));
             userSummary.append(StringFormat.fixedLength(this.get(userID).getName(), 36));

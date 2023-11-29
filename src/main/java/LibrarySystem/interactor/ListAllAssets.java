@@ -9,7 +9,7 @@ public class ListAllAssets extends Interaction {
     public void requestAndResponse(Library library) {
         System.out.println(header);
 
-        System.out.println(library.summariseAllAssets());
+        System.out.println(library.getAllAssets());
 
         this.nextReference = "common-filters";
     }

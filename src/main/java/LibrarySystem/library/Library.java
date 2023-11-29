@@ -1,6 +1,7 @@
 package LibrarySystem.library;
 
 import LibrarySystem.library.catalogue.Asset;
+import LibrarySystem.library.catalogue.AssetsRegister;
 import LibrarySystem.library.catalogue.Author;
 
 import java.util.HashMap;
@@ -13,11 +14,11 @@ public interface Library {
 
     int getLastUserID();
 
-    String summariseAllUsers();
-
-    HashMap<Integer, LibraryUser> getAllUsers();
+    LibraryUserRegister getAllUsers();
 
     // Assets
+    AssetsRegister getAllAssets();
+
     Asset getAsset(int id);
 
     void addAsset(Asset toAdd);
@@ -25,8 +26,6 @@ public interface Library {
     int getAssetCount();
 
     int getLastAssetID();
-
-    String summariseAllAssets();
 
     String summariseBorrowedAssets();
 
@@ -39,8 +38,6 @@ public interface Library {
 
     // Other catalogue operations
     HashMap<Integer, Author> getAllAuthors();
-
-    HashMap<Integer,Asset> getAllAssets();
 
     Author addAuthor(String name) throws PersonException;
 
