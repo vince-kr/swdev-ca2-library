@@ -2,10 +2,12 @@ package LibrarySystem.interactor;
 
 import LibrarySystem.library.Library;
 import LibrarySystem.library.LibraryUser;
+import LibrarySystem.library.Loan;
 import LibrarySystem.library.catalogue.*;
 import LibrarySystem.util.io.StandardInput;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class BorrowAsset extends Interaction {
 
@@ -25,6 +27,9 @@ public class BorrowAsset extends Interaction {
 
         LibraryUser userWantsToBorrow = askLibraryUser(library);
         Asset assetToBorrow = askAssetToBorrow(library);
+
+        // Record the loan
+        library.recordLoan(new Loan(userWantsToBorrow, assetToBorrow));
 
         // do borrowing here
         assetToBorrow.setAvailability(false);
@@ -59,13 +64,10 @@ public class BorrowAsset extends Interaction {
         String prompt = "Please enter the required asset ID: ";
 
         System.out.println(allAssets);
-        int assetID = StandardInput.getPositiveInt(prompt, library.getLastAssetID());
+        int assetID = StandardInput.getIntInRange(prompt, 10000, library.getLastAssetID());
 
         Asset selectedAsset = library.getAsset(assetID);
-        if (selectedAsset != null)
-            return selectedAsset;
-        else
-            return askAssetToBorrow(library);
+        return Objects.requireNonNullElseGet(selectedAsset, () -> askAssetToBorrow(library));
     }
 
 }

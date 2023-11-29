@@ -112,4 +112,14 @@ class LibraryManagement implements Library {
             this.addAsset(dw4);
         } catch (PersonException pe) {}
     }
+
+    @Override
+    public LoanRegister getAllLoans() {
+        return allLoans;
+    }
+
+    @Override
+    public void recordLoan(Loan newLoan) {
+        allLoans.add(newLoan);
+    }
 }

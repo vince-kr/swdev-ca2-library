@@ -30,6 +30,11 @@ public interface Library {
 
     String summariseBorrowedAssets();
 
+    // Loan operations
+    LoanRegister getAllLoans();
+
+    void recordLoan(Loan newLoan);
+
     // Other catalogue operations
     HashMap<Integer, Author> getAllAuthors();
 
