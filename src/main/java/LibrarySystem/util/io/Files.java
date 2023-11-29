@@ -87,7 +87,8 @@ public abstract class Files {
      Print Book items to csv file
      */
 
-    public static void printAssetsToFile(HashMap<Integer,Asset> assets, String csvFilePath){
+    public static void printAssetsToFile(HashMap<Integer,Asset> assets, String csvFileName){
+        String csvFilePath = DATA_PREFIX + csvFileName;
         StringBuilder sb = new StringBuilder();
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
             File file = new File(csvFilePath);
@@ -131,7 +132,8 @@ public abstract class Files {
         }
 
     }
-    public static void printBooksToFile(HashMap<Integer,BookAudioBook> books, String csvFilePath){
+    public static void printBooksToFile(HashMap<Integer,BookAudioBook> books, String csvFileName){
+        String csvFilePath = DATA_PREFIX + csvFileName;
         StringBuilder sb = new StringBuilder();
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
             File file = new File(csvFilePath);
@@ -209,7 +211,8 @@ public abstract class Files {
      Print Dissertations to csv file
 
      */
-    public static void DissertationsToFile(HashMap<Integer, ThesisDissertation> objects,String csvFilePath){
+    public static void DissertationsToFile(HashMap<Integer, ThesisDissertation> objects,String csvFileName){
+        String csvFilePath = DATA_PREFIX + csvFileName;
         StringBuilder sb = new StringBuilder();
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
             File file = new File(csvFilePath);
@@ -273,7 +276,8 @@ public abstract class Files {
     /*
      Reads Dissertations from given csv file
      */
-    public static HashMap<Integer, ThesisDissertation> readThesisCsv(String csvFilePath) {
+    public static HashMap<Integer, ThesisDissertation> readThesisCsv(String csvFileName) {
+        String csvFilePath = DATA_PREFIX + csvFileName;
         HashMap<Integer,ThesisDissertation> dissertations = new HashMap<>();
         try (FileReader fr = new FileReader(csvFilePath);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
@@ -302,7 +306,8 @@ public abstract class Files {
     /*
         Print Cds to csv file
      */
-    public static void CdsToFile(HashMap<Integer, CdDvd> objects,String csvFilePath){
+    public static void CdsToFile(HashMap<Integer, CdDvd> objects,String csvFileName){
+        String csvFilePath = DATA_PREFIX + csvFileName;
         StringBuilder sb = new StringBuilder();
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
             File file = new File(csvFilePath);
@@ -357,7 +362,8 @@ public abstract class Files {
     /*
      Read Cds from a given csv file
      */
-    public static HashMap<Integer, CdDvd> readCdFromCsv(String csvFilePath){
+    public static HashMap<Integer, CdDvd> readCdFromCsv(String csvFileName){
+        String csvFilePath = DATA_PREFIX + csvFileName;
         HashMap<Integer,CdDvd> cDs = new HashMap<>();
         try (FileReader fr = new FileReader(csvFilePath);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
@@ -386,7 +392,8 @@ public abstract class Files {
     /*
         Print Users to csv file
      */
-    public static void printLibraryUserToFile(HashMap<Integer, LibraryUser> users,String csvFilePath){
+    public static void printLibraryUserToFile(HashMap<Integer, LibraryUser> users,String csvFileName){
+        String csvFilePath = DATA_PREFIX + csvFileName;
         StringBuilder sb = new StringBuilder();
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
             File file = new File(csvFilePath);
