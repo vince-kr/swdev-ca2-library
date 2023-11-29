@@ -5,7 +5,7 @@ import LibrarySystem.util.format.StringFormat;
 import java.util.Collections;
 import java.util.HashMap;
 
-public class LibraryUserRegistry extends HashMap<Integer, LibraryUser> {
+public class LibraryUserRegister extends HashMap<Integer, LibraryUser> {
     void addUser(LibraryUser newUser) {
         this.put(getLastID() + 1, newUser);
     }

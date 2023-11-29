@@ -7,7 +7,8 @@ import java.util.HashMap;
 class LibraryManagement implements Library {
 
     final Catalogue catalogue;
-    final LibraryUserRegistry allUsers;
+    final LibraryUserRegister allUsers;
+    final LoanRegister allLoans;
 
 /*
      The constructor of the LibraryManagement class creates a Catalogue object (really a
@@ -19,7 +20,8 @@ class LibraryManagement implements Library {
 
     public LibraryManagement() {
         catalogue = CatalogueFactory.createCatalogue("some,mock,csv,data");
-        allUsers = new LibraryUserRegistry();
+        allUsers = new LibraryUserRegister();
+        allLoans = new LoanRegister();
     }
 
     @Override
@@ -90,8 +92,6 @@ class LibraryManagement implements Library {
     public Author addAuthor(String name) throws PersonException {
         return catalogue.addAuthor(name);
     }
-
-
 
     @Override
     public void loadSampleData() {
