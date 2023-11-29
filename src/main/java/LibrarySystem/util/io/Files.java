@@ -57,7 +57,7 @@ public abstract class Files {
                 writer.close();
                 fr.close();
                 br.close();
-                System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath + RESET);
+                System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFileName + RESET);
             }
             System.out.println("No authors in the system");
         } catch (IOException e) {
@@ -70,6 +70,7 @@ public abstract class Files {
      */
     public static HashMap<Integer,Author> readAuthorCsv(String csvFile) throws PersonException {
         HashMap<Integer,Author> authors = new HashMap<>();
+        csvFile = DATA_PREFIX + csvFile;
         try (FileReader fr = new FileReader(csvFile);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
             for (CSVRecord csvRecord : csvParser) {
@@ -191,6 +192,7 @@ public abstract class Files {
 
     public static HashMap<Integer,BookAudioBook> readBookCsv(String csvFile){
         HashMap<Integer,BookAudioBook> books = new HashMap<>();
+        csvFile = DATA_PREFIX + csvFile;
         try (FileReader fr = new FileReader(csvFile);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
             for (CSVRecord csvRecord : csvParser) {
@@ -276,10 +278,10 @@ public abstract class Files {
     /*
      Reads Dissertations from given csv file
      */
-    public static HashMap<Integer, ThesisDissertation> readThesisCsv(String csvFileName) {
-        String csvFilePath = DATA_PREFIX + csvFileName;
+    public static HashMap<Integer, ThesisDissertation> readThesisCsv(String csvFile) {
+        csvFile = DATA_PREFIX + csvFile;
         HashMap<Integer,ThesisDissertation> dissertations = new HashMap<>();
-        try (FileReader fr = new FileReader(csvFilePath);
+        try (FileReader fr = new FileReader(csvFile);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
             for (CSVRecord csvRecord:csvParser){
                 int key = Integer.parseInt(csvRecord.get(Integer.parseInt("Id")));
@@ -296,7 +298,7 @@ public abstract class Files {
                         summary,
                         year));
             }
-            System.out.println(GREEN+"\n\tDissertation objects successfully read from file: "+csvFilePath+RESET);
+            System.out.println(GREEN+"\n\tDissertation objects successfully read from file: "+csvFile+RESET);
         } catch (IOException | PersonException e) {
             throw new RuntimeException(e);
         }
@@ -362,10 +364,10 @@ public abstract class Files {
     /*
      Read Cds from a given csv file
      */
-    public static HashMap<Integer, CdDvd> readCdFromCsv(String csvFileName){
-        String csvFilePath = DATA_PREFIX + csvFileName;
+    public static HashMap<Integer, CdDvd> readCdFromCsv(String csvFile){
+        csvFile = DATA_PREFIX + csvFile;
         HashMap<Integer,CdDvd> cDs = new HashMap<>();
-        try (FileReader fr = new FileReader(csvFilePath);
+        try (FileReader fr = new FileReader(csvFile);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
             for (CSVRecord csvRecord:csvParser){
                 int key = Integer.parseInt(csvRecord.get(Integer.parseInt("Id")));
@@ -382,7 +384,7 @@ public abstract class Files {
                         playTime,
                         year));
             }
-            System.out.println(GREEN+"\n\tDissertation objects successfully read from file: "+csvFilePath+RESET);
+            System.out.println(GREEN+"\n\tDissertation objects successfully read from file: "+csvFile+RESET);
         } catch (IOException | PersonException e) {
             throw new RuntimeException(e);
         }
@@ -434,9 +436,10 @@ public abstract class Files {
     /*
      Read Users from a given csv file
      */
-    public static HashMap<Integer,LibraryUser> readUserFromFile(String csvFilePath) throws PersonException {
+    public static HashMap<Integer,LibraryUser> readUserFromFile(String csvFile) throws PersonException {
         HashMap<Integer,LibraryUser> users = new HashMap<>();
-        try (FileReader fr = new FileReader(csvFilePath);
+        csvFile = DATA_PREFIX + csvFile;
+        try (FileReader fr = new FileReader(csvFile);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
             for (CSVRecord csvRecord : csvParser) {
                 String name = csvRecord.get("UserName");

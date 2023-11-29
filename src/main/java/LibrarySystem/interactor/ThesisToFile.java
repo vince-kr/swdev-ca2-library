@@ -28,6 +28,7 @@ public class ThesisToFile extends Interaction{
                 System.out.println(RED+" No thesis type in asset"+RESET);
         }
         if (!thesis.isEmpty()){
+            System.out.println("Printing to file ...");
             Files.DissertationsToFile(thesis,"thesis.csv");
         }else {
             System.out.println(RED+" No thesis in the system yet."+RESET);

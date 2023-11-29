@@ -22,6 +22,7 @@ class Interactor {
         allInteractions.putAll(buildCatalogueMenuWithOptions());
         allInteractions.putAll(buildUserMenuWithOptions());
         allInteractions.putAll(buildFileOperationMenuOptions());
+        allInteractions.putAll(buildFileReadOperationMenuOptions());
         return allInteractions;
     }
 
@@ -39,7 +40,8 @@ class Interactor {
                 new MenuItem("CATALOGUE management", "manage-catalogue"),
                 new MenuItem("USER management", "manage-users"),
                 new MenuItem("SAMPLE data", "load-sample-data"),
-                new MenuItem("FILE OPERATIONS","file-menu"),
+                new MenuItem("FILE PRINT OPERATIONS","file-print-menu"),
+                new MenuItem("FILE READ OPERATIONS","file-read-menu"),
                 new MenuItem("Exit", "exit")
         });
     }
@@ -96,7 +98,7 @@ class Interactor {
 
     private HashMap<String, Interaction> buildFileOperationMenuOptions(){
         var fileOperationMenu = new HashMap<String, Interaction>();
-        fileOperationMenu.put("file-menu", createFileOperationMenu());
+        fileOperationMenu.put("file-print-menu", createFileOperationMenu());
         fileOperationMenu.put("authors-to-file", new AuthorsToFile());
         fileOperationMenu.put("users-to-file", new UsersToFile());
         fileOperationMenu.put("books-to-file", new BooksToFile());
@@ -106,13 +108,35 @@ class Interactor {
         return fileOperationMenu;
     }
     private Menu createFileOperationMenu(){
-        return new Menu("FILE OPERATIONS\n", new MenuItem[]{
+        return new Menu("FILE PRINT OPERATIONS\n", new MenuItem[]{
            new MenuItem("Authors TO File", "authors-to-file"),
                 new MenuItem("Users TO File","users-to-file"),
                 new MenuItem("Assets To File","assets-to-file"),
                 new MenuItem("Books TO File","books-to-file"),
                 new MenuItem("Cds TO File","cds-to-file"),
                 new MenuItem("Thesis To File","thesis-to-file"),
+                new MenuItem("Back","main")
+        });
+    }
+
+    private HashMap<String,Interaction> buildFileReadOperationMenuOptions(){
+        var fileReadOperationMenu = new HashMap<String,Interaction>();
+        fileReadOperationMenu.put("file-read-menu", createFileReadOperationMenu());
+        fileReadOperationMenu.put("authors-from-file",new ReadFromAuthor());
+        fileReadOperationMenu.put("users-from-file",new UsersFromFile());
+        fileReadOperationMenu.put("books-from-file",new ReadFromBook());
+        fileReadOperationMenu.put("cds-from-file", new ReadFromCd());
+        fileReadOperationMenu.put("thesis-from-file",new ReadFromThesis());
+        return fileReadOperationMenu;
+    }
+
+    private Menu createFileReadOperationMenu(){
+        return new Menu("FILE READ OPERATIONS\n",new MenuItem[]{
+                new MenuItem("AUTHORS FROM FILE","authors-from-file"),
+                new MenuItem("USERS FROM FILE","users-from-file"),
+                new MenuItem("BOOKS FROM FILE","books-from-file"),
+                new MenuItem("CDS FROM FILE","cds-from-file"),
+                new MenuItem("THESIS FROM FILE","thesis-from-file"),
                 new MenuItem("Back","main")
         });
     }

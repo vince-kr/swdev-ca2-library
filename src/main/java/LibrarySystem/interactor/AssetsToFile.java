@@ -22,6 +22,7 @@ public class AssetsToFile extends Interaction{
         System.out.println(header);
         HashMap<Integer,Asset> assets = library.getAllAssets();
         if (!assets.isEmpty()){
+            System.out.println("Printing to file ...");
             Files.printAssetsToFile(assets,"assets.csv");
         }else{
             System.out.println(RED+" No assets in the system yet."+RESET);

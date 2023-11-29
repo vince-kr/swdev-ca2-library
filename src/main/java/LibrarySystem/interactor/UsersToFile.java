@@ -20,6 +20,7 @@ public class UsersToFile extends Interaction{
         System.out.println(header);
         HashMap<Integer, LibraryUser> users = library.getAllUsers();
         if (!users.isEmpty()){
+            System.out.println("Printing to file ...");
             Files.printLibraryUserToFile(users,"users.csv");
         }else{
             System.out.println(RED+" No users in the system yet."+RESET);
