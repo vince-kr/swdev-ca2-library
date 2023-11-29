@@ -1,6 +1,5 @@
 package LibrarySystem.library;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
-public class LoanRegister extends HashMap<Integer, Loan> {
-}
+public class LoanRegister extends ArrayList<Loan> {}
