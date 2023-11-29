@@ -1,5 +1,6 @@
 package LibrarySystem.util.format;
 
+import LibrarySystem.library.Loan;
 import LibrarySystem.library.catalogue.Asset;
 
 import java.util.ArrayList;
@@ -8,19 +9,23 @@ public class SortData {
 
     /*
      This method implements the merge sort algorithm
-     for arraylist of assets(e.g. the array list of borrowed assets)
-     returns a sorted list of assets given
+     for arraylist of Loans (borrowed assets)
+     returns a sorted list of assets
      */
-    public static ArrayList<Asset> mergeSort(ArrayList<Asset> objects) {
-        if (objects.size() <= 1) return objects;
-        ArrayList<Asset> left, right;
-        left = new ArrayList<Asset>();
-        right = new ArrayList<Asset>();
 
-        for (int i = 0; i < objects.size(); i++)
+    public static ArrayList<Loan> mergeSort(ArrayList<Loan> borrowedAssets) {
+        // Base case
+        if (borrowedAssets.size() <= 1) return borrowedAssets;
+
+        // Recursive case
+        ArrayList<Loan> left, right;
+        left = new ArrayList<Loan>();
+        right = new ArrayList<Loan>();
+
+        for (int i = 0; i < borrowedAssets.size(); i++)
         {
-            if (i % 2 != 0) left.add(objects.get(i));
-            else right.add(objects.get(i));
+            if (i % 2 != 0) left.add(borrowedAssets.get(i));
+            else right.add(borrowedAssets.get(i));
         }
 
         left = mergeSort(left);
@@ -30,20 +35,23 @@ public class SortData {
     }
 
 
-    public static ArrayList<Asset> merge(ArrayList<Asset> left, ArrayList<Asset> right) {
-        ArrayList<Asset> ret = new ArrayList<>();
+    public static ArrayList<Loan> merge(ArrayList<Loan> left, ArrayList<Loan> right) {
+        ArrayList<Loan> ret = new ArrayList<>();
 
         while (!left.isEmpty() && !right.isEmpty())
         {
-            //compares their date due hours to return asset
-            if (left.get(0).getDateDue().getHour() <= right.get(0).getDateDue().getHour())
+            Loan firstLeft = left.get(0);
+            Loan firstRight = right.get(0);
+
+            // Compares dates due to return asset
+            if (firstLeft.getDateDue().isBefore(firstRight.getDateDue()))
             {
-                ret.add(left.get(0));
+                ret.add(firstLeft);
                 left.remove(0);
             }
             else
             {
-                ret.add(right.get(0));
+                ret.add(firstRight);
                 right.remove(0);
             }
         }

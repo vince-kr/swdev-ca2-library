@@ -39,6 +39,7 @@ public class AddAsset extends Interaction {
         Asset newAsset;
 
         String title = askTitle();
+        int quantity = askQuantity();
         String yearOfPublication = askYoP();
 
         switch (assetType) {
@@ -50,7 +51,7 @@ public class AddAsset extends Interaction {
                 } catch (PersonException e) {
                     throw new RuntimeException(e);
                 }
-                newAsset = new BookAudioBook(title, ISBN, yearOfPublication, bookAuthor);
+                newAsset = new BookAudioBook(title, quantity, ISBN, yearOfPublication, bookAuthor);
                 bookAuthor.setBooksAuthored(newAsset);
                 break;
             case "CD/DVD":
@@ -78,7 +79,7 @@ public class AddAsset extends Interaction {
                 }
                 String topic = askTopic();
                 String summary = askSummary();
-                newAsset = new ThesisDissertation(title, thesisAuthor, topic, summary, yearOfPublication);
+                newAsset = new ThesisDissertation(title, quantity, thesisAuthor, topic, summary, yearOfPublication);
                 thesisAuthor.setBooksAuthored(newAsset);
                 break;
         }
@@ -86,6 +87,11 @@ public class AddAsset extends Interaction {
         library.addAsset(newAsset);
 
         nextReference = "manage-catalogue";
+    }
+
+    private int askQuantity() {
+        String prompt = "Enter the quantity of this item (max 50): ";
+        return StandardInput.getPositiveInt(prompt, 50);
     }
 
     private String askSummary() {

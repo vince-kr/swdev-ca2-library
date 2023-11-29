@@ -10,8 +10,8 @@ public class ThesisDissertation extends Asset{
     private String publishedDate;
 
 
-    public ThesisDissertation(String title, Author author, String topic, String summary, String publishedDate) {
-        super(title);
+    public ThesisDissertation(String title, int quantity, Author author, String topic, String summary, String publishedDate) {
+        super(title, quantity);
         this.author = author;
         this.topic = topic;
         this.summary = summary;

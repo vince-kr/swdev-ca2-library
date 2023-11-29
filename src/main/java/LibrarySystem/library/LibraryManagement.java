@@ -14,8 +14,7 @@ class LibraryManagement implements Library {
      The constructor of the LibraryManagement class creates a Catalogue object (really a
      CatalogueManagement object that implements the Catalogue interface) by calling the
      CatalogueFactory.createCatalogue method. It passes in CSV data that represents the Catalogue's
-     assets, authors, etc. For now this is fake data, we will learn how to read from disk in our
-     next lecture.
+     assets. For now this is fake data.
 */
 
     public LibraryManagement() {
@@ -64,6 +63,16 @@ class LibraryManagement implements Library {
     }
 
     @Override
+    public int getLoansOneAsset(Asset asset) {
+        int count = 0;
+        for (Loan loan : allLoans) {
+            if (loan.getAsset().equals(asset))
+                count++;
+        }
+        return count;
+    }
+
+    @Override
     public void addAsset(Asset toAdd) {
         catalogue.addAsset(toAdd);
     }
@@ -100,10 +109,10 @@ class LibraryManagement implements Library {
             Producer sampleProducer = new Producer("Scott Litt");
             Director sampleDirector = new Director("R.E.M.");
 
-            Asset dw1 = new BookAudioBook("The Colour of Magic", "0-86140-324-X", "1983", sampleAuthor);
-            Asset dw2 = new BookAudioBook("The Light Fantastic", "0-86140-203-0", "1986", sampleAuthor);
-            Asset dw3 = new BookAudioBook("Equal Rites", "0-575-03950-7", "1987", sampleAuthor);
-            Asset dw4 = new CdDvd("Out of time", sampleProducer, sampleDirector, 44*60+8, "1991");
+            Asset dw1 = new BookAudioBook("The Colour of Magic", 2, "0-86140-324-X", "1983", sampleAuthor);
+            Asset dw2 = new BookAudioBook("The Light Fantastic", 1, "0-86140-203-0", "1986", sampleAuthor);
+            Asset dw3 = new BookAudioBook("Equal Rites", 5, "0-575-03950-7", "1987", sampleAuthor);
+            Asset dw4 = new CdDvd("Out of time", 12, sampleProducer, sampleDirector, 44*60+8, "1991");
 
             this.addAuthor("Terry Pratchett");
             this.addAsset(dw1);

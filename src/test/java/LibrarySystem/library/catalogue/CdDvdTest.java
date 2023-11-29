@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,7 +26,7 @@ class CdDvdTest {
     }
     @Test
     void getStatus(){
-        assertTrue(cd.getAvailability());
+        assertTrue(cd.isAvailable());
     }
 
     @Test
@@ -89,7 +88,7 @@ class CdDvdTest {
     @Test
     void setStatus(){
       cd.setAvailability(false);
-      assertFalse(cd.getAvailability());
+      assertFalse(cd.isAvailable());
     }
     @Test
     void setTitle(){

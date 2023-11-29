@@ -3,13 +3,13 @@ package LibrarySystem.library.catalogue;
 
 
 
-public class BookAudioBook extends Asset{
+public class BookAudioBook extends Asset {
     private Author author;
     private String isbn;
     private String publishedYear;
 
-    public BookAudioBook(String title, String isbn, String publishedYear, Author author) {
-        super(title);
+    public BookAudioBook(String title, int quantity, String isbn, String publishedYear, Author author) {
+        super(title, quantity);
         this.isbn = isbn;
         this.publishedYear = publishedYear;
         this.author = author;

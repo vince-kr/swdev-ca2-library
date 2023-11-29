@@ -12,6 +12,7 @@ public class AssetsRegister extends HashMap<Integer, Asset> {
         assetsSummary.append(StringFormat.fixedLength("TYPE", 24));
         assetsSummary.append(StringFormat.fixedLength("TITLE", 36));
         assetsSummary.append(StringFormat.fixedLength("CREATOR", 36));
+        assetsSummary.append(StringFormat.fixedLength("QTY", 12));
         assetsSummary.append("\n");
 
         for (int assetID : this.keySet()) {
@@ -20,6 +21,7 @@ public class AssetsRegister extends HashMap<Integer, Asset> {
             assetsSummary.append(StringFormat.fixedLength(asset.getAssetType(), 24));
             assetsSummary.append(StringFormat.fixedLength(asset.getTitle(), 36));
             assetsSummary.append(StringFormat.fixedLength(asset.getCreatorName(), 36));
+            assetsSummary.append(StringFormat.fixedLength(asset.getQuantity(), 12));
             assetsSummary.append("\n");
         }
 

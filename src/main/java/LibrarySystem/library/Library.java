@@ -29,6 +29,8 @@ public interface Library {
 
     AssetsRegister getBorrowedAssets();
 
+    int getLoansOneAsset(Asset asset);
+
     AssetsRegister getAssetsForUser(LibraryUser user);
 
     // Loan operations

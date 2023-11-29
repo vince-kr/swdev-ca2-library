@@ -20,11 +20,15 @@ public class Loan {
         this.isActive = true;
     }
 
+    public LibraryUser getUser() {
+        return doingBorrowing;
+    }
+
     int getID() {
         return toBorrow.getKey();
     }
 
-    Asset getAsset() {
+    public Asset getAsset() {
         return toBorrow.getValue();
     }
 
@@ -32,8 +36,8 @@ public class Loan {
         return toBorrow;
     }
 
-    public LibraryUser getUser() {
-        return doingBorrowing;
+    public LocalDate getDateDue() {
+        return dateDue;
     }
 
     public boolean isActive() {

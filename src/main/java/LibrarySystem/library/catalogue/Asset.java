@@ -1,63 +1,12 @@
 package LibrarySystem.library.catalogue;
 
-
-import java.time.LocalDateTime;
-
 public abstract class Asset{
-    private String title;
-    private boolean isAvailable;
-    private LocalDateTime dateIssued;
-    private LocalDateTime dateDue;
-    private String overDue;
-    private int quantity;
+    String title;
+    int quantity;
 
-    public Asset(String title) {
+    public Asset(String title, int quantity) {
         this.title = title;
-        this.isAvailable = true;
-        this.dateIssued = LocalDateTime.now();
-        this.dateDue = LocalDateTime.now();
-        this.overDue = " - ";
-        this.quantity = 1;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public LocalDateTime getDateIssued() {
-        return dateIssued;
-    }
-
-    public void setDateIssued(LocalDateTime dateIssued) {
-        this.dateIssued = dateIssued;
-    }
-
-    public LocalDateTime getDateDue() {
-        return dateDue;
-    }
-
-    public void setDateDue(LocalDateTime dateDue) {
-        this.dateDue = dateDue;
-    }
-
-    public String getOverDue() {
-        return overDue;
-    }
-
-    public void setOverDue(String overDue) {
-        this.overDue = overDue;
-    }
-
-    public boolean getAvailability() {
-        return isAvailable;
-    }
-
-    public void setAvailability(boolean isAvailable) {
-        this.isAvailable = isAvailable;
     }
 
     public String getTitle() {
@@ -68,8 +17,17 @@ public abstract class Asset{
         this.title = title;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public abstract String getCreatorName();
 
     public abstract String toString();
+
     public abstract String getAssetType();
 }

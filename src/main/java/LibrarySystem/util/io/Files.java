@@ -10,7 +10,6 @@ import LibrarySystem.library.PersonException;
 import LibrarySystem.library.catalogue.*;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
 public abstract class Files {
     /*
@@ -114,10 +113,6 @@ public abstract class Files {
                     sb.append(",");
                     sb.append(asset.getValue().getTitle());
                     sb.append(",");
-                    sb.append(asset.getValue().getAvailability());
-                    sb.append(",");
-                    sb.append(asset.getValue().getDateDue());
-                    sb.append(",");
                     sb.append(asset.getValue().getQuantity());
                     sb.append("\n");
                 }
@@ -165,8 +160,6 @@ public abstract class Files {
                     sb.append(",");
                     sb.append(book.getValue().getIsbn());
                     sb.append(",");
-                    sb.append(book.getValue().getAvailability());
-                    sb.append(",");
                     sb.append(book.getValue().getPublishedYear());
                     sb.append(",");
                     sb.append(book.getValue().getAuthor().getName());
@@ -198,10 +191,11 @@ public abstract class Files {
             for (CSVRecord csvRecord : csvParser) {
                 int id = Integer.parseInt(csvRecord.get("Id"));
                 String title = csvRecord.get("Book Title");
+                String quantity = csvRecord.get("Book Quantity");
                 String isbn = csvRecord.get("Book ISBN");
                 String year = csvRecord.get("Published Year");
                 String name = csvRecord.get("AuthorName");
-                books.put(id, new BookAudioBook(title,isbn,year,new Author(name)));
+                books.put(id, new BookAudioBook(title, Integer.parseInt(quantity), isbn,year,new Author(name)));
             }
         } catch (IOException | PersonException e) {
             throw new RuntimeException(e);
@@ -250,13 +244,9 @@ public abstract class Files {
                     sb.append(",");
                     sb.append(thesis.getValue().getTopic());
                     sb.append(",");
-                    sb.append(thesis.getValue().getAvailability());
-                    sb.append(",");
                     sb.append(thesis.getValue().getPublishedDate());
                     sb.append(",");
                     sb.append(thesis.getValue().getAuthor().getName());
-                    sb.append(",");
-                    sb.append(thesis.getValue().getOverDue());
                     sb.append(",");
                     sb.append(thesis.getValue().getQuantity());
                     sb.append(",");
@@ -286,6 +276,7 @@ public abstract class Files {
             for (CSVRecord csvRecord:csvParser){
                 int key = Integer.parseInt(csvRecord.get(Integer.parseInt("Id")));
                 String title = csvRecord.get("Title");
+                String quantity = csvRecord.get("Quantity");
                 String topic = csvRecord.get("Topic");
                 String year = csvRecord.get("Published Year");
                 String authorName = csvRecord.get("AuthorName");
@@ -293,6 +284,7 @@ public abstract class Files {
 
                 dissertations.put(key,new ThesisDissertation(
                         title,
+                        Integer.parseInt(quantity),
                         new Author(authorName),
                         topic,
                         summary,
@@ -372,6 +364,7 @@ public abstract class Files {
             for (CSVRecord csvRecord:csvParser){
                 int key = Integer.parseInt(csvRecord.get(Integer.parseInt("Id")));
                 String title = csvRecord.get("Title");
+                String quantity = csvRecord.get("Quantity");
                 String producerName = csvRecord.get("ProducerName");
                 String year = csvRecord.get("Published Year");
                 String directorName = csvRecord.get("DirectorName");
@@ -379,6 +372,7 @@ public abstract class Files {
                 int qty = Integer.parseInt(csvRecord.get("Quantity"));
                 cDs.put(key, new CdDvd(
                         title,
+                        Integer.parseInt(quantity),
                         new Producer(producerName),
                         new Director(directorName),
                         playTime,

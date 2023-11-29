@@ -28,7 +28,14 @@ public class BorrowAsset extends Interaction {
         AssetRegisterEntry assetEntry = askAssetToBorrow(library);
         Asset assetToBorrow = assetEntry.getValue();
 
-        // Record the loan
+        // Check that the asset is available
+        if (assetToBorrow.getQuantity() < library.getLoansOneAsset(assetToBorrow)) {
+            System.out.println("Unfortunately this title is loaned out.");
+            System.out.println("Borrowing is not possible.");
+            return;
+        }
+
+        // If available, record the loan
         library.recordLoan(new Loan(userWantsToBorrow, assetEntry));
 
         //add asset to borrowed user assets

@@ -11,7 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,7 +34,7 @@ class BorrowAssetTest {
     void requestAndResponse() {
         ArrayList<Asset> assets = user.getBorrowedBooks();
         //before borrowing
-        assertTrue(asset.getAvailability());
+        assertTrue(asset.isAvailable());
        int l = user.getBorrowedBooks().size();
         assets.add(asset);
         //after borrowing
