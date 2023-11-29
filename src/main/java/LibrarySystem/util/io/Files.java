@@ -20,11 +20,14 @@ public abstract class Files {
      */
     static final String GREEN = "\u001B[32m";
     static final String RESET = "\u001B[0m";
+    static final String DATA_PREFIX = "data/";
+
     /*
         Print AuthorId, AuthorName and Number of assets
         authored in a csv file
      */
-    public static void printAuthorsToFile(HashMap<Integer,Author> authors, String csvFilePath){
+    public static void printAuthorsToFile(HashMap<Integer,Author> authors, String csvFileName){
+        String csvFilePath = DATA_PREFIX + csvFileName;
         StringBuilder sb = new StringBuilder();
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
             File file = new File(csvFilePath);
@@ -33,7 +36,6 @@ public abstract class Files {
             sb.append("AuthorName");
             sb.append(",");
             sb.append("Number of Assets");
-            sb.append(",");
             sb.append("\r\n");
 
         }
@@ -49,14 +51,13 @@ public abstract class Files {
                     sb.append(author.getValue().getName());
                     sb.append(",");
                     sb.append(author.getValue().getBooksAuthored().size());
-                    sb.append(",");
                     sb.append("\n");
                 }
                 writer.write(sb.toString());
                 writer.close();
                 fr.close();
                 br.close();
-                System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
+                System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath + RESET);
             }
             System.out.println("No authors in the system");
         } catch (IOException e) {
@@ -99,7 +100,6 @@ public abstract class Files {
             sb.append("Due Date");
             sb.append(",");
             sb.append("Quantity");
-            sb.append(",");
             sb.append("\r\n");
         }
         try {
@@ -117,7 +117,6 @@ public abstract class Files {
                     sb.append(asset.getValue().getDateDue());
                     sb.append(",");
                     sb.append(asset.getValue().getQuantity());
-                    sb.append(",");
                     sb.append("\n");
                 }
 
@@ -148,7 +147,6 @@ public abstract class Files {
             sb.append("AuthorName");
             sb.append(",");
             sb.append("Quantity");
-            sb.append(",");
             sb.append("\r\n");
         }
         try {
@@ -170,7 +168,6 @@ public abstract class Files {
                     sb.append(book.getValue().getAuthor().getName());
                     sb.append(",");
                     sb.append(book.getValue().getQuantity());
-                    sb.append(",");
                     sb.append("\n");
                 }
 
@@ -231,7 +228,6 @@ public abstract class Files {
             sb.append("Quantity");
             sb.append(",");
             sb.append("Summary");
-            sb.append(",");
             sb.append("\r\n");
 
         }
@@ -258,7 +254,6 @@ public abstract class Files {
                     sb.append(thesis.getValue().getQuantity());
                     sb.append(",");
                     sb.append(thesis.getValue().getSummary());
-                    sb.append(",");
                     sb.append("\n");
                 }
 
@@ -322,7 +317,6 @@ public abstract class Files {
             sb.append("PlayTime");
             sb.append(",");
             sb.append("Quantity");
-            sb.append(",");
             sb.append("\r\n");
 
         }
@@ -349,7 +343,6 @@ public abstract class Files {
                     sb.append(cd.getValue().getOverDue());
                     sb.append(",");
                     sb.append(cd.getValue().getQuantity());
-                    sb.append(",");
                     sb.append("\n");
                 }
                 writer.write(sb.toString());
@@ -404,7 +397,6 @@ public abstract class Files {
             sb.append("UserName");
             sb.append(",");
             sb.append("Borrowed of Assets");
-            sb.append(",");
             sb.append("\r\n");
 
         }
@@ -420,7 +412,6 @@ public abstract class Files {
                     sb.append(user.getValue().getName());
                     sb.append(",");
                     sb.append(user.getValue().getBorrowedBooks().size());
-                    sb.append(",");
                     sb.append("\n");
                 }
                 writer.write(sb.toString());

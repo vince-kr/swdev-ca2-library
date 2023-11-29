@@ -16,6 +16,7 @@ public class AuthorsToFile extends Interaction{
          2. call helper method to print csv file
          */
         System.out.println(header);
+
         HashMap<Integer, Author> authors = library.getAllAuthors();
         if (!authors.isEmpty())
             Files.printAuthorsToFile(authors,"authors.csv");
