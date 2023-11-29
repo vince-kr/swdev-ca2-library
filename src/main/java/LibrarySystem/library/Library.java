@@ -17,7 +17,7 @@ public interface Library {
 
     String summariseAllUsers();
 
-
+    HashMap<Integer, LibraryUser> getAllUsers();
     // Assets
     Asset getAsset(int Id);
 

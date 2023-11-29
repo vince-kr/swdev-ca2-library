@@ -336,19 +336,15 @@ public abstract class Files {
                 for (Map.Entry<Integer,CdDvd> cd: objects.entrySet()) {
                     sb.append(cd.getKey());
                     sb.append(",");
-                    sb.append(cd.getValue().getProducer().getName());
+                    sb.append(cd.getValue().getTitle());
                     sb.append(",");
-                    sb.append(cd.getValue().getAvailability());
+                    sb.append(cd.getValue().getProducer().getName());
                     sb.append(",");
                     sb.append(cd.getValue().getProductionYear());
                     sb.append(",");
                     sb.append(cd.getValue().getDirector().getName());
                     sb.append(",");
                     sb.append(cd.getValue().getPlayTime());
-                    sb.append(",");
-                    sb.append(cd.getValue().getOverDue());
-                    sb.append(",");
-                    sb.append(cd.getValue().getOverDue());
                     sb.append(",");
                     sb.append(cd.getValue().getQuantity());
                     sb.append(",");

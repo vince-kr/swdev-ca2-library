@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BooksToFile extends Interaction{
+    static final String RESET = "\u001B[0m";
+    static final String RED = "\u001B[31m";
     String header = "FILES\n";
     @Override
     public void requestAndResponse(Library library) {
@@ -23,12 +25,12 @@ public class BooksToFile extends Interaction{
             if (asset.getValue() instanceof BookAudioBook)
             allBooks.put(asset.getKey(), (BookAudioBook) asset.getValue());
             else
-                System.out.println("No book type in the assets.");
+                System.out.println(RED+" No book type in the assets."+RESET);
         }
         if (!allBooks.isEmpty()){
             Files.printBooksToFile(allBooks,"books.csv");
         }else{
-            System.out.println("No books in the system yet.");
+            System.out.println(RED+" No books in the system yet."+RESET);
         }
 
     }

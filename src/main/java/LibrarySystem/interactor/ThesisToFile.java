@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ThesisToFile extends Interaction{
+    static final String RESET = "\u001B[0m";
+    static final String RED = "\u001B[31m";
     String header = "FILES\n";
     @Override
     public void requestAndResponse(Library library) {
@@ -23,12 +25,12 @@ public class ThesisToFile extends Interaction{
             if (asset.getValue() instanceof ThesisDissertation)
             thesis.put(asset.getKey(), (ThesisDissertation) asset.getValue());
             else
-                System.out.println("No thesis type in asset");
+                System.out.println(RED+" No thesis type in asset"+RESET);
         }
         if (!thesis.isEmpty()){
             Files.DissertationsToFile(thesis,"thesis.csv");
         }else {
-            System.out.println("No thesis in the system yet.");
+            System.out.println(RED+" No thesis in the system yet."+RESET);
         }
 
     }

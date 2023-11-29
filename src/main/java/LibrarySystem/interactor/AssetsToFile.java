@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AssetsToFile extends Interaction{
+    static final String RESET = "\u001B[0m";
+    static final String RED = "\u001B[31m";
     String header = "FILES\n";
     @Override
     public void requestAndResponse(Library library) {
@@ -22,7 +24,7 @@ public class AssetsToFile extends Interaction{
         if (!assets.isEmpty()){
             Files.printAssetsToFile(assets,"assets.csv");
         }else{
-            System.out.println("No assets in the system yet.");
+            System.out.println(RED+" No assets in the system yet."+RESET);
         }
     }
 }

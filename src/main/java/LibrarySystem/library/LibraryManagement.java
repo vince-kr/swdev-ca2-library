@@ -45,6 +45,11 @@ class LibraryManagement implements Library {
     }
 
     @Override
+    public HashMap<Integer, LibraryUser> getAllUsers() {
+        return allUsers;
+    }
+
+    @Override
     public Asset getAsset(int id) {
         return catalogue.getAsset(id);
     }

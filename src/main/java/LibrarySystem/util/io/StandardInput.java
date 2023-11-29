@@ -2,6 +2,7 @@ package LibrarySystem.util.io;
 
 import LibrarySystem.library.catalogue.Asset;
 
+import javax.xml.validation.Validator;
 import java.util.Scanner;
 
 public abstract class StandardInput {
@@ -72,7 +73,7 @@ public abstract class StandardInput {
                 System.out.println(RED+" You did not enter a value!!"+RESET);
             } else if (!userInput.matches(responsePattern)) {
                 System.out.println(RED + " Please enter a valid input!!!" + RESET);
-            } else if(userInput.length() < 2 || userInput.length() > 30){
+            } else if(prompt.equals("Name") && (userInput.length() < 2 || userInput.length() > 30)){
                 System.out.println(RED+" Name must be between 2 and 30 characters long!!!"+RESET);
             }else{
                 flag = userInput.matches(responsePattern);
