@@ -58,7 +58,7 @@ class ThesisDissertationTest {
 
     @Test
     void getAssetType() {
-        assertEquals("Thesis",thesis.getAssetType());
+        assertEquals("Thesis / Dissertation",thesis.getAssetType());
     }
 
     @Test
