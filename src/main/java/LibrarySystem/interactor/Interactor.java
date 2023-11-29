@@ -62,8 +62,9 @@ class Interactor {
     private HashMap<String, Interaction> buildFiltersMenuWithOptions() {
         var filtersMenuInteractions = new HashMap<String, Interaction>();
         filtersMenuInteractions.put("common-filters", createFiltersMenu());
-        filtersMenuInteractions.put("all-assets", new ListAllAssets());
         filtersMenuInteractions.put("all-borrowed", new ListBorrowedAssets());
+        filtersMenuInteractions.put("borrowed-by", new ListBorrowedByUser());
+        filtersMenuInteractions.put("all-assets", new ListAllAssets());
         return filtersMenuInteractions;
     }
 

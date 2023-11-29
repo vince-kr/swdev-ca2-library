@@ -84,6 +84,11 @@ class LibraryManagement implements Library {
     }
 
     @Override
+    public String getAssetsForUser(LibraryUser user) {
+        return allLoans.getAssetsForUser(user);
+    }
+
+    @Override
     public HashMap<Integer, Author> getAllAuthors() {
         return catalogue.getAllAuthors();
     }
@@ -98,7 +103,7 @@ class LibraryManagement implements Library {
         try {
             Author sampleAuthor = new Author("Terry Pratchett");
             Producer sampleProducer = new Producer("Scott Litt");
-            Director sampleDirector = new Director("Ridley Scott");
+            Director sampleDirector = new Director("R.E.M.");
 
             Asset dw1 = new BookAudioBook("The Colour of Magic", "0-86140-324-X", "1983", sampleAuthor);
             Asset dw2 = new BookAudioBook("The Light Fantastic", "0-86140-203-0", "1986", sampleAuthor);

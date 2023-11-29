@@ -19,11 +19,24 @@ public class Loan {
         this.isActive = true;
     }
 
+    Asset getAsset() {
+        return toBorrow;
+    }
+
+    public LibraryUser getUser() {
+        return doingBorrowing;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
     public void returnAsset() {
         isActive = false;
     }
 
     public boolean loanOverdue() {
-        return isActive && dateDue.isBefore(LocalDate.now());
+        LocalDate today = LocalDate.now();
+        return this.isActive && today.isAfter(dateDue);
     }
 }

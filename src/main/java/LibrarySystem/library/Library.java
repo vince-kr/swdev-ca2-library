@@ -30,6 +30,8 @@ public interface Library {
 
     String summariseBorrowedAssets();
 
+    String getAssetsForUser(LibraryUser user);
+
     // Loan operations
     LoanRegister getAllLoans();
 
