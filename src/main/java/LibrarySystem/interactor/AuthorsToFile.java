@@ -18,9 +18,11 @@ public class AuthorsToFile extends Interaction{
         System.out.println(header);
 
         HashMap<Integer, Author> authors = library.getAllAuthors();
-        if (!authors.isEmpty())
-            Files.printAuthorsToFile(authors,"authors.csv");
-        else
+        if (!authors.isEmpty()) {
+            System.out.println("Printing to file ...");
+            Files.printAuthorsToFile(authors, "authors.csv");
+        }else {
             System.out.println("No authors yet in the system");
+        }
     }
 }

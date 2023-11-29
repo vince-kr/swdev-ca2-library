@@ -28,6 +28,7 @@ public class BooksToFile extends Interaction{
                 System.out.println(RED+" No book type in the assets."+RESET);
         }
         if (!allBooks.isEmpty()){
+            System.out.println("Printing to file ...");
             Files.printBooksToFile(allBooks,"books.csv");
         }else{
             System.out.println(RED+" No books in the system yet."+RESET);
