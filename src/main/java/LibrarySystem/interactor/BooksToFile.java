@@ -11,6 +11,8 @@ import java.util.Map;
 public class BooksToFile extends Interaction{
     static final String RESET = "\u001B[0m";
     static final String RED = "\u001B[31m";
+
+    static final String GREEN = "\u001B[32m";
     String header = "FILES\n";
     @Override
     public void requestAndResponse(Library library) {
@@ -24,11 +26,10 @@ public class BooksToFile extends Interaction{
         for (Map.Entry<Integer, Asset> asset:library.getAllAssets().entrySet()){
             if (asset.getValue() instanceof BookAudioBook)
             allBooks.put(asset.getKey(), (BookAudioBook) asset.getValue());
-            else
-                System.out.println(RED+" No book type in the assets."+RESET);
+
         }
         if (!allBooks.isEmpty()){
-            System.out.println("Printing to file ...");
+            System.out.println(GREEN+"Printing to file ..."+RESET);
             Files.printBooksToFile(allBooks,"books.csv");
         }else{
             System.out.println(RED+" No books in the system yet."+RESET);

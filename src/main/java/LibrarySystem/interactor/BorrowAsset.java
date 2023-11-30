@@ -9,7 +9,9 @@ import LibrarySystem.util.io.StandardInput;
 import java.util.Map;
 
 public class BorrowAsset extends Interaction {
-
+    static final String RESET = "\u001B[0m";
+    static final String RED = "\u001B[31m";
+    static final String GREEN = "\u001B[32m";
     String header = "Borrow AN ASSET\n";
     @Override
     public void requestAndResponse(Library library) {
@@ -23,25 +25,27 @@ public class BorrowAsset extends Interaction {
         */
 
         System.out.println(header);
+        if (!library.getAllUsers().isEmpty()) {
+            LibraryUser userWantsToBorrow = askLibraryUser(library);
+            AssetRegisterEntry assetEntry = askAssetToBorrow(library);
+            Asset assetToBorrow = assetEntry.getValue();
 
-        LibraryUser userWantsToBorrow = askLibraryUser(library);
-        AssetRegisterEntry assetEntry = askAssetToBorrow(library);
-        Asset assetToBorrow = assetEntry.getValue();
+            // Check that the asset is available
+            if (assetToBorrow.getQuantity() < library.getLoansOneAsset(assetToBorrow)) {
+                System.out.println(RED+"Unfortunately this title is loaned out."+RESET);
+                System.out.println(RED+"Borrowing is not possible."+RESET);
+                return;
+            }
 
-        // Check that the asset is available
-        if (assetToBorrow.getQuantity() < library.getLoansOneAsset(assetToBorrow)) {
-            System.out.println("Unfortunately this title is loaned out.");
-            System.out.println("Borrowing is not possible.");
-            return;
+            // If available, record the loan
+            library.recordLoan(new Loan(userWantsToBorrow, assetEntry));
+
+            //add asset to borrowed user assets
+            userWantsToBorrow.setBorrowedAssets(assetToBorrow);
+
+            System.out.println(GREEN+" Asset: " + assetToBorrow.getTitle() + " borrowed by user: " + userWantsToBorrow.getName() + ", successfully."+RESET);
         }
-
-        // If available, record the loan
-        library.recordLoan(new Loan(userWantsToBorrow, assetEntry));
-
-        //add asset to borrowed user assets
-        userWantsToBorrow.setBorrowedAssets(assetToBorrow);
-
-        System.out.println(" Asset: " + assetToBorrow.getTitle() + " borrowed by user: " + userWantsToBorrow.getName() + ", successfully.");
+        System.out.println(RED+"Create users before performing borrowing "+RESET);
     }
 
     private LibraryUser askLibraryUser(Library library) {
@@ -49,6 +53,7 @@ public class BorrowAsset extends Interaction {
         String prompt = "Please enter the required user ID: ";
 
         System.out.println(allUsers);
+
         int userID = StandardInput.getPositiveInt(prompt, library.getLastUserID());
 
         LibraryUser selectedUser = library.getUser(userID);
