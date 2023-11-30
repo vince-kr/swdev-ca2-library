@@ -20,6 +20,7 @@ public abstract class Files {
      and read from csv files depending on the
      object in question.
      */
+    static final String RED = "\u001B[31m";
     static final String GREEN = "\u001B[32m";
     static final String RESET = "\u001B[0m";
     static final String DATA_PREFIX = "data/";
@@ -63,7 +64,7 @@ public abstract class Files {
             writer.close();
             fr.close();
             br.close();
-            System.out.println(GREEN + "\n\tCSV file written successfully: " + csvFileName + RESET);
+            System.out.println(GREEN + "\n\tCSV file written successfully: " + csvFilePath + RESET);
 
             System.out.println("No authors in the system");
         } catch (
@@ -78,20 +79,24 @@ public abstract class Files {
      */
     public static HashMap<Integer, Author> readAuthorCsv(String csvFile) throws PersonException {
         HashMap<Integer, Author> authors = new HashMap<>();
-        csvFile = DATA_PREFIX + csvFile;
-        try (FileReader fr = new FileReader(csvFile);
-             CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
-            for (CSVRecord csvRecord : csvParser) {
-                String name = csvRecord.get("AuthorName");
-                int authorId = Integer.parseInt(csvRecord.get("AuthorId"));
-                authors.put(authorId, new Author(name));
+        if (java.nio.file.Files.exists(Path.of(csvFile))) {
+            csvFile = DATA_PREFIX + csvFile;
+            try (FileReader fr = new FileReader(csvFile);
+                 CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
+                for (CSVRecord csvRecord : csvParser) {
+                    String name = csvRecord.get("AuthorName");
+                    int authorId = Integer.parseInt(csvRecord.get("AuthorId"));
+                    authors.put(authorId, new Author(name));
+                }
+            } catch (
+                    IOException e) {
+                throw new RuntimeException(e);
             }
-        } catch (
-                IOException e) {
-            throw new RuntimeException(e);
-        }
 
-        return authors;
+            return authors;
+        }
+        System.out.println(RED+"File does not exits"+RESET);
+        return null;
     }
     /*
      Print Book items to csv file
@@ -196,24 +201,28 @@ public abstract class Files {
 
     public static HashMap<Integer, BookAudioBook> readBookCsv(String csvFile) {
         HashMap<Integer, BookAudioBook> books = new HashMap<>();
-        csvFile = DATA_PREFIX + csvFile;
-        try (FileReader fr = new FileReader(csvFile);
-             CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
-            for (CSVRecord csvRecord : csvParser) {
-                int id = Integer.parseInt(csvRecord.get("Id"));
-                String title = csvRecord.get("Book Title");
-                int quantity = Integer.parseInt(csvRecord.get("Quantity"));
-                String isbn = csvRecord.get("Book ISBN");
-                String year = csvRecord.get("Published Year");
-                String name = csvRecord.get("AuthorName");
-                books.put(id, new BookAudioBook(title, quantity, isbn, year, new Author(name)));
+        if (java.nio.file.Files.exists(Path.of(csvFile))) {
+            csvFile = DATA_PREFIX + csvFile;
+            try (FileReader fr = new FileReader(csvFile);
+                 CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
+                for (CSVRecord csvRecord : csvParser) {
+                    int id = Integer.parseInt(csvRecord.get("Id"));
+                    String title = csvRecord.get("Book Title");
+                    int quantity = Integer.parseInt(csvRecord.get("Quantity"));
+                    String isbn = csvRecord.get("Book ISBN");
+                    String year = csvRecord.get("Published Year");
+                    String name = csvRecord.get("AuthorName");
+                    books.put(id, new BookAudioBook(title, quantity, isbn, year, new Author(name)));
+                }
+            } catch (
+                    IOException |
+                    PersonException e) {
+                throw new RuntimeException(e);
             }
-        } catch (
-                IOException |
-                PersonException e) {
-            throw new RuntimeException(e);
+            return books;
         }
-        return books;
+        System.out.println(RED+"Files does not exist."+RESET);
+        return null;
     }
 
     /*
@@ -280,34 +289,38 @@ public abstract class Files {
      Reads Dissertations from given csv file
      */
     public static HashMap<Integer, ThesisDissertation> readThesisCsv(String csvFile) {
-        csvFile = DATA_PREFIX + csvFile;
         HashMap<Integer, ThesisDissertation> dissertations = new HashMap<>();
-        try (FileReader fr = new FileReader(csvFile);
-             CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
-            for (CSVRecord csvRecord : csvParser) {
-                int key = Integer.parseInt(csvRecord.get("Id"));
-                String title = csvRecord.get("Title");
-                String quantity = csvRecord.get("Quantity");
-                String topic = csvRecord.get("Topic");
-                String year = csvRecord.get("Published Year");
-                String authorName = csvRecord.get("AuthorName");
-                String summary = csvRecord.get("Summary");
+        csvFile = DATA_PREFIX + csvFile;
+        if (java.nio.file.Files.exists(Path.of(csvFile))) {
+            try (FileReader fr = new FileReader(csvFile);
+                 CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
+                for (CSVRecord csvRecord : csvParser) {
+                    int key = Integer.parseInt(csvRecord.get("Id"));
+                    String title = csvRecord.get("Title");
+                    String quantity = csvRecord.get("Quantity");
+                    String topic = csvRecord.get("Topic");
+                    String year = csvRecord.get("Published Year");
+                    String authorName = csvRecord.get("AuthorName");
+                    String summary = csvRecord.get("Summary");
 
-                dissertations.put(key, new ThesisDissertation(
-                        title,
-                        Integer.parseInt(quantity),
-                        new Author(authorName),
-                        topic,
-                        summary,
-                        year));
+                    dissertations.put(key, new ThesisDissertation(
+                            title,
+                            Integer.parseInt(quantity),
+                            new Author(authorName),
+                            topic,
+                            summary,
+                            year));
+                }
+                System.out.println(GREEN + "\n\tDissertation objects successfully read from file: " + csvFile + RESET);
+            } catch (
+                    IOException |
+                    PersonException e) {
+                throw new RuntimeException(e);
             }
-            System.out.println(GREEN + "\n\tDissertation objects successfully read from file: " + csvFile + RESET);
-        } catch (
-                IOException |
-                PersonException e) {
-            throw new RuntimeException(e);
+            return dissertations;
         }
-        return dissertations;
+        System.out.println(RED+"File does not exist."+RESET);
+        return null;
 
     }
 
@@ -372,34 +385,38 @@ public abstract class Files {
      Read Cds from a given csv file
      */
     public static HashMap<Integer, CdDvd> readCdFromCsv(String csvFile) {
-        csvFile = DATA_PREFIX + csvFile;
         HashMap<Integer, CdDvd> cDs = new HashMap<>();
-        try (FileReader fr = new FileReader(csvFile);
-             CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
-            for (CSVRecord csvRecord : csvParser) {
-                int key = Integer.parseInt(csvRecord.get("Id"));
-                String title = csvRecord.get("Title");
-                String quantity = csvRecord.get("Quantity");
-                String producerName = csvRecord.get("ProducerName");
-                String year = csvRecord.get("Production Year");
-                String directorName = csvRecord.get("DirectorName");
-                int playTime = Integer.parseInt(csvRecord.get("PlayTime"));
-                int qty = Integer.parseInt(csvRecord.get("Quantity"));
-                cDs.put(key, new CdDvd(
-                        title,
-                        Integer.parseInt(quantity),
-                        new Producer(producerName),
-                        new Director(directorName),
-                        playTime,
-                        year));
+        csvFile = DATA_PREFIX + csvFile;
+        if (java.nio.file.Files.exists(Path.of(csvFile))) {
+            try (FileReader fr = new FileReader(csvFile);
+                 CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
+                for (CSVRecord csvRecord : csvParser) {
+                    int key = Integer.parseInt(csvRecord.get("Id"));
+                    String title = csvRecord.get("Title");
+                    String quantity = csvRecord.get("Quantity");
+                    String producerName = csvRecord.get("ProducerName");
+                    String year = csvRecord.get("Production Year");
+                    String directorName = csvRecord.get("DirectorName");
+                    int playTime = Integer.parseInt(csvRecord.get("PlayTime"));
+                    int qty = Integer.parseInt(csvRecord.get("Quantity"));
+                    cDs.put(key, new CdDvd(
+                            title,
+                            Integer.parseInt(quantity),
+                            new Producer(producerName),
+                            new Director(directorName),
+                            playTime,
+                            year));
+                }
+                System.out.println(GREEN + "\n\tDissertation objects successfully read from file: " + csvFile + RESET);
+            } catch (
+                    IOException |
+                    PersonException e) {
+                throw new RuntimeException(e);
             }
-            System.out.println(GREEN + "\n\tDissertation objects successfully read from file: " + csvFile + RESET);
-        } catch (
-                IOException |
-                PersonException e) {
-            throw new RuntimeException(e);
+            return cDs;
         }
-        return cDs;
+        System.out.println(RED+"File does not exist."+RESET);
+        return null;
     }
 
     /*
@@ -451,18 +468,22 @@ public abstract class Files {
     public static HashMap<Integer, LibraryUser> readUserFromFile(String csvFile) throws PersonException {
         HashMap<Integer, LibraryUser> users = new HashMap<>();
         csvFile = DATA_PREFIX + csvFile;
-        try (FileReader fr = new FileReader(csvFile);
-             CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
-            for (CSVRecord csvRecord : csvParser) {
-                String name = csvRecord.get("UserName");
-                int authorId = Integer.parseInt(csvRecord.get("UserId"));
-                users.put(authorId, new LibraryUser(name));
+        if (java.nio.file.Files.exists(Path.of(csvFile))) {
+            try (FileReader fr = new FileReader(csvFile);
+                 CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
+                for (CSVRecord csvRecord : csvParser) {
+                    String name = csvRecord.get("UserName");
+                    int authorId = Integer.parseInt(csvRecord.get("UserId"));
+                    users.put(authorId, new LibraryUser(name));
+                }
+            } catch (
+                    IOException e) {
+                throw new RuntimeException(e);
             }
-        } catch (
-                IOException e) {
-            throw new RuntimeException(e);
+            return users;
         }
-        return users;
+        System.out.println(RED+"File does not exist."+RESET);
+        return null;
     }
 
 }

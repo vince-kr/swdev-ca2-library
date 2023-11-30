@@ -19,20 +19,22 @@ public class UsersFromFile extends Interaction{
     public void requestAndResponse(Library library) {
 
         try {
-            var sb = new StringBuilder();
             HashMap<Integer, LibraryUser> users = Files.readUserFromFile("users.csv");
-            sb.append(StringFormat.fixedLength(GREEN+"ID", 12));
-            sb.append(StringFormat.fixedLength("USER"+RESET, 24));
-            sb.append("\n");
-            if (!users.isEmpty()){
-                for (Map.Entry<Integer,LibraryUser> user: users.entrySet()){
-                    sb.append(StringFormat.fixedLength(user.getKey(),12));
-                    sb.append(StringFormat.fixedLength(user.getValue().getName(),24));
-                    sb.append("\n");
+            if (!(users == null)) {
+                var sb = new StringBuilder();
+                sb.append(StringFormat.fixedLength(GREEN + "ID", 12));
+                sb.append(StringFormat.fixedLength("USER" + RESET, 24));
+                sb.append("\n");
+                if (!users.isEmpty()) {
+                    for (Map.Entry<Integer, LibraryUser> user : users.entrySet()) {
+                        sb.append(StringFormat.fixedLength(user.getKey(), 12));
+                        sb.append(StringFormat.fixedLength(user.getValue().getName(), 24));
+                        sb.append("\n");
+                    }
+                    System.out.println(sb);
+                } else {
+                    System.out.println(RED + " No users from the file." + RESET);
                 }
-                System.out.println(sb);
-            }else{
-                System.out.println(RED+" No users from the file."+RESET);
             }
         } catch (PersonException e) {
             throw new RuntimeException(e);

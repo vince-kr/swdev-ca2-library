@@ -11,6 +11,7 @@ import java.util.Map;
 public class ThesisToFile extends Interaction{
     static final String RESET = "\u001B[0m";
     static final String RED = "\u001B[31m";
+    static final String GREEN = "\u001B[32m";
     String header = "FILES\n";
     @Override
     public void requestAndResponse(Library library) {
@@ -22,13 +23,12 @@ public class ThesisToFile extends Interaction{
         System.out.println(header);
         HashMap<Integer, ThesisDissertation> thesis = new HashMap<>();
         for (Map.Entry<Integer, Asset> asset: library.getAllAssets().entrySet()){
-            if (asset.getValue() instanceof ThesisDissertation)
-            thesis.put(asset.getKey(), (ThesisDissertation) asset.getValue());
-            else
-                System.out.println(RED+" No thesis type in asset"+RESET);
+            if (asset.getValue() instanceof ThesisDissertation) {
+                thesis.put(asset.getKey(), (ThesisDissertation) asset.getValue());
+            }
         }
         if (!thesis.isEmpty()){
-            System.out.println("Printing to file ...");
+            System.out.println(GREEN+"Printing to file ..."+RESET);
             Files.DissertationsToFile(thesis,"thesis.csv");
         }else {
             System.out.println(RED+" No thesis in the system yet."+RESET);

@@ -21,7 +21,7 @@ public class CreatorsToFile extends Interaction{
         System.out.println(header);
 
         if (!library.getAllCreators().isEmpty()) {
-            System.out.println("Printing to file ...");
+            System.out.println(GREEN+"Printing to file ..."+RESET);
             Files.printCreatorsToFile(library, "authors.csv");
         } else {
             System.out.println(RED+"No authors yet in the system"+RESET);

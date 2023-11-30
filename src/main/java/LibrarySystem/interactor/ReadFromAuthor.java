@@ -18,20 +18,22 @@ public class ReadFromAuthor extends Interaction{
     public void requestAndResponse(Library library) {
         try {
             HashMap<Integer, Author> authors = Files.readAuthorCsv("authors.csv");
-            var sb = new StringBuilder();
-            sb.append(StringFormat.fixedLength(GREEN+"ID", 12));
-            sb.append(StringFormat.fixedLength("AUTHOR"+RESET, 24));
-            sb.append("\n");
+            if (!(authors == null)) {
+                var sb = new StringBuilder();
+                sb.append(StringFormat.fixedLength(GREEN + "ID", 12));
+                sb.append(StringFormat.fixedLength("AUTHOR" + RESET, 24));
+                sb.append("\n");
 
-            if (!authors.isEmpty()){
-                for (Map.Entry<Integer,Author> author:authors.entrySet()){
-                    sb.append(StringFormat.fixedLength(author.getKey(),12));
-                    sb.append(StringFormat.fixedLength(author.getValue().getName(),24));
-                    sb.append("\n");
+                if (!authors.isEmpty()) {
+                    for (Map.Entry<Integer, Author> author : authors.entrySet()) {
+                        sb.append(StringFormat.fixedLength(author.getKey(), 12));
+                        sb.append(StringFormat.fixedLength(author.getValue().getName(), 24));
+                        sb.append("\n");
+                    }
+                    System.out.println(sb);
+                } else {
+                    System.out.println(RED + " No authors in the file." + RESET);
                 }
-                System.out.println(sb);
-            }else{
-                System.out.println(RED+" No authors in the file."+RESET);
             }
         } catch (PersonException e) {
             throw new RuntimeException(e);

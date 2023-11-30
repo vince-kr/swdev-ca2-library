@@ -24,8 +24,9 @@ public class BooksToFile extends Interaction{
         System.out.println(header);
         HashMap<Integer, BookAudioBook> allBooks = new HashMap<>();
         for (Map.Entry<Integer, Asset> asset:library.getAllAssets().entrySet()){
-            if (asset.getValue() instanceof BookAudioBook)
-            allBooks.put(asset.getKey(), (BookAudioBook) asset.getValue());
+            if (asset.getValue() instanceof BookAudioBook) {
+                allBooks.put(asset.getKey(), (BookAudioBook) asset.getValue());
+            }
 
         }
         if (!allBooks.isEmpty()){

@@ -11,6 +11,7 @@ import java.util.Map;
 public class AssetsToFile extends Interaction{
     static final String RESET = "\u001B[0m";
     static final String RED = "\u001B[31m";
+    static final String GREEN = "\u001B[32m";
     String header = "FILES\n";
     @Override
     public void requestAndResponse(Library library) {
@@ -22,7 +23,7 @@ public class AssetsToFile extends Interaction{
         System.out.println(header);
         HashMap<Integer,Asset> assets = library.getAllAssets();
         if (!assets.isEmpty()){
-            System.out.println("Printing to file ...");
+            System.out.println(GREEN+"Printing to file ..."+RESET);
             Files.printAssetsToFile(assets,"assets.csv");
         }else{
             System.out.println(RED+" No assets in the system yet."+RESET);
