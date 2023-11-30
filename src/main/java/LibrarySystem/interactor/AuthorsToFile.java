@@ -8,6 +8,9 @@ import java.util.HashMap;
 
 public class AuthorsToFile extends Interaction{
     String header = "FILES\n";
+    static final String RESET = "\u001B[0m";
+    static final String RED = "\u001B[31m";
+    static final String GREEN = "\u001B[32m";
     @Override
     public void requestAndResponse(Library library) {
         /*
@@ -19,10 +22,10 @@ public class AuthorsToFile extends Interaction{
 
         HashMap<Integer, Author> authors = library.getAllAuthors();
         if (!authors.isEmpty()) {
-            System.out.println("Printing to file ...");
+            System.out.println(GREEN+"Printing to file ..."+RESET);
             Files.printAuthorsToFile(authors, "authors.csv");
         }else {
-            System.out.println("No authors yet in the system");
+            System.out.println(RED+"No authors yet in the system"+RESET);
         }
     }
 }
