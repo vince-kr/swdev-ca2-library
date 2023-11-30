@@ -1,6 +1,7 @@
 package LibrarySystem.interactor;
 
 import LibrarySystem.library.Library;
+import LibrarySystem.library.PersonException;
 import LibrarySystem.library.catalogue.BookAudioBook;
 import LibrarySystem.util.format.StringFormat;
 import LibrarySystem.util.io.Files;
@@ -15,32 +16,33 @@ public class ReadFromBook extends Interaction{
     String header = "FILES\n";
     @Override
     public void requestAndResponse(Library library) {
-        HashMap<Integer, BookAudioBook> books = Files.readBookCsv("books.csv");
-
-        var sb = new StringBuilder();
-        sb.append("=======================================================================\n");
-        sb.append(StringFormat.fixedLength(GREEN+"ID",15));
-        sb.append(StringFormat.fixedLength("TITLE",15));
-        sb.append(StringFormat.fixedLength("ISBN",15));
-        sb.append(StringFormat.fixedLength("YEAR",15));
-        sb.append(StringFormat.fixedLength("AUTHOR"+RESET,15));
-        sb.append("\n");
-        sb.append("=======================================================================\n");
-
-
-        if (!books.isEmpty()){
-           for (Map.Entry<Integer,BookAudioBook> book:books.entrySet()){
-               sb.append(StringFormat.fixedLength(book.getKey(),15));
-               sb.append(StringFormat.fixedLength(book.getValue().getTitle(),15));
-               sb.append(StringFormat.fixedLength(book.getValue().getIsbn(),15));
-               sb.append(StringFormat.fixedLength(book.getValue().getPublishedYear(),15));
-               sb.append(StringFormat.fixedLength(book.getValue().getAuthor().getName(),15));
-               System.out.println(sb);
-           }
-        }else{
-            System.out.println(RED+"The File is empty."+RESET);
-        }
+            HashMap<Integer, BookAudioBook> books = Files.readBookCsv("books.csv");
+            var sb = new StringBuilder();
+            sb.append(StringFormat.fixedLength(GREEN+"ID", 12));
+            sb.append(StringFormat.fixedLength("TITLE", 24));
+            sb.append(StringFormat.fixedLength("ISBN", 15));
+            sb.append(StringFormat.fixedLength("YEAR", 12));
+            sb.append(StringFormat.fixedLength("AUTHOR", 24));
+            sb.append(StringFormat.fixedLength("QUANTITY"+RESET, 12));
+            sb.append("\n");
+            if (!books.isEmpty()){
+                for (Map.Entry<Integer,BookAudioBook> book:books.entrySet()){
+                    sb.append(StringFormat.fixedLength(book.getKey(),12));
+                    sb.append(StringFormat.fixedLength(book.getValue().getTitle(),24));
+                    sb.append(StringFormat.fixedLength(book.getValue().getIsbn(),15));
+                    sb.append(StringFormat.fixedLength(book.getValue().getPublishedYear(),12));
+                    sb.append(StringFormat.fixedLength(book.getValue().getAuthor().getName(),24));
+                    sb.append(StringFormat.fixedLength(book.getValue().getQuantity(),12));
+                    sb.append("\n");
+                }
+                System.out.println(sb);
+            }else{
+                System.out.println(RED+"The File is empty."+RESET);
+            }
 
 
+//        }catch (Exception e){
+//            throw new RuntimeException(e);
+//        }
     }
 }

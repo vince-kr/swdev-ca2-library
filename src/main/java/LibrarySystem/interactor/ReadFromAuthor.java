@@ -19,18 +19,17 @@ public class ReadFromAuthor extends Interaction{
         try {
             HashMap<Integer, Author> authors = Files.readAuthorCsv("authors.csv");
             var sb = new StringBuilder();
-            sb.append("=======================================================================\n");
-            sb.append(StringFormat.fixedLength(GREEN+"ID",15));
-            sb.append(StringFormat.fixedLength("AUTHOR"+RESET,15));
+            sb.append(StringFormat.fixedLength(GREEN+"ID", 12));
+            sb.append(StringFormat.fixedLength("AUTHOR"+RESET, 24));
             sb.append("\n");
-            sb.append("=======================================================================\n");
 
             if (!authors.isEmpty()){
                 for (Map.Entry<Integer,Author> author:authors.entrySet()){
-                    sb.append(StringFormat.fixedLength(author.getKey(),15));
-                    sb.append(StringFormat.fixedLength(author.getValue().getName(),15));
-                    System.out.println(sb);
+                    sb.append(StringFormat.fixedLength(author.getKey(),12));
+                    sb.append(StringFormat.fixedLength(author.getValue().getName(),24));
+                    sb.append("\n");
                 }
+                System.out.println(sb);
             }else{
                 System.out.println(RED+" No authors in the file."+RESET);
             }

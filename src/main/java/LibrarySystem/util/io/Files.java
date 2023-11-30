@@ -139,8 +139,6 @@ public abstract class Files {
             sb.append(",");
             sb.append("Book ISBN");
             sb.append(",");
-            sb.append("Status");
-            sb.append(",");
             sb.append("Published Year");
             sb.append(",");
             sb.append("AuthorName");
@@ -191,11 +189,11 @@ public abstract class Files {
             for (CSVRecord csvRecord : csvParser) {
                 int id = Integer.parseInt(csvRecord.get("Id"));
                 String title = csvRecord.get("Book Title");
-                String quantity = csvRecord.get("Book Quantity");
+                int quantity = Integer.parseInt(csvRecord.get("Quantity"));
                 String isbn = csvRecord.get("Book ISBN");
                 String year = csvRecord.get("Published Year");
                 String name = csvRecord.get("AuthorName");
-                books.put(id, new BookAudioBook(title, Integer.parseInt(quantity), isbn,year,new Author(name)));
+                books.put(id, new BookAudioBook(title, quantity, isbn,year,new Author(name)));
             }
         } catch (IOException | PersonException e) {
             throw new RuntimeException(e);
@@ -218,13 +216,9 @@ public abstract class Files {
             sb.append(",");
             sb.append("Topic");
             sb.append(",");
-            sb.append("Status");
-            sb.append(",");
             sb.append("Published Year");
             sb.append(",");
             sb.append("AuthorName");
-            sb.append(",");
-            sb.append("OverDue");
             sb.append(",");
             sb.append("Quantity");
             sb.append(",");
