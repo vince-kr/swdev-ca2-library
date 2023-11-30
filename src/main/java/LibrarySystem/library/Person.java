@@ -1,5 +1,7 @@
 package LibrarySystem.library;
 
+import LibrarySystem.library.catalogue.AssetsRegister;
+
 public abstract class Person {
     private int id;
     private String name;
@@ -9,7 +11,6 @@ public abstract class Person {
             throw new PersonException("Name should be between 2 and 30 characters in length");
         }
         this.name = name;
-
     }
 
     public String getName() {
@@ -20,5 +21,4 @@ public abstract class Person {
         this.name = name;
     }
     public abstract String toString();
-
     }

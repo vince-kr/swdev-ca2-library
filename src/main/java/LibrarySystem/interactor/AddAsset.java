@@ -52,7 +52,6 @@ public class AddAsset extends Interaction {
                     throw new RuntimeException(e);
                 }
                 newAsset = new BookAudioBook(title, quantity, ISBN, yearOfPublication, bookAuthor);
-                bookAuthor.setBooksAuthored(newAsset);
                 break;
             case "CD/DVD":
                 Producer producer;
@@ -80,7 +79,6 @@ public class AddAsset extends Interaction {
                 String topic = askTopic();
                 String summary = askSummary();
                 newAsset = new ThesisDissertation(title, quantity, thesisAuthor, topic, summary, yearOfPublication);
-                thesisAuthor.setBooksAuthored(newAsset);
                 break;
         }
 

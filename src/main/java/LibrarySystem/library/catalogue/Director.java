@@ -2,24 +2,10 @@ package LibrarySystem.library.catalogue;
 
 import LibrarySystem.library.Person;
 import LibrarySystem.library.PersonException;
-import LibrarySystem.library.catalogue.Asset;
-
-import java.util.ArrayList;
 
 public class Director extends Person{
-    private ArrayList<Asset> assetsDirected;
-
     public Director(String name) throws PersonException {
         super(name);
-        this.assetsDirected = new ArrayList<>();
-    }
-
-    public ArrayList<Asset> getAssetsDirected() {
-        return assetsDirected;
-    }
-
-    public void setAssetsDirected(ArrayList<Asset> assetsDirected) {
-        this.assetsDirected = assetsDirected;
     }
 
     @Override

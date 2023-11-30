@@ -7,8 +7,6 @@ import java.util.ArrayList;
 public class LibraryUser extends Person implements Comparable<LibraryUser>{
     final private ArrayList<Asset> borrowedBooks;
 
-
-
     public LibraryUser(String name) throws PersonException {
         super(name);
         this.borrowedBooks = new ArrayList<>();

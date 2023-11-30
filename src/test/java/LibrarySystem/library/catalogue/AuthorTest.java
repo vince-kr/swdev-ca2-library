@@ -4,8 +4,6 @@ import LibrarySystem.library.PersonException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class AuthorTest {
@@ -30,23 +28,11 @@ class AuthorTest {
     }
 
     @Test
-    void getBooksAuthored() {
-        author.setBooksAuthored(book);
-        author.setBooksAuthored(book1);
-        assertEquals(2,author.getBooksAuthored().size());
-    }
-
-    @Test
-    void setBooksAuthored() {
-        author.setBooksAuthored(book);
-        assertEquals(1,author.getBooksAuthored().size());
-    }
-
-    @Test
     void setName(){
         author.setName("Michael Jordan");
         assertEquals("Michael Jordan",author.getName());
     }
+
     @Test
     void testToString() {
         assertEquals("AuthorName: King James",author.toString());
@@ -54,11 +40,7 @@ class AuthorTest {
 
     @Test
     void compareTo() {
-        //given two authors with no books authored yet
-        assertEquals(0,author.compareTo(author1));
-        //after one author authored two books and the other none
-        author.setBooksAuthored(book);
-
+        // "John Doe" should appear before "King James" alphabetically
         assertEquals(1,author.compareTo(author1));
     }
 

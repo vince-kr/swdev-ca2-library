@@ -65,6 +65,7 @@ class Interactor {
         var filtersMenuInteractions = new HashMap<String, Interaction>();
         filtersMenuInteractions.put("common-filters", createFiltersMenu());
         filtersMenuInteractions.put("all-borrowed", new ListBorrowedAssets());
+        filtersMenuInteractions.put("created-by", new ListCreatedBy());
         filtersMenuInteractions.put("borrowed-by", new ListBorrowedByUser());
         filtersMenuInteractions.put("all-assets", new ListAllAssets());
         return filtersMenuInteractions;
@@ -99,7 +100,7 @@ class Interactor {
     private HashMap<String, Interaction> buildFileOperationMenuOptions(){
         var fileOperationMenu = new HashMap<String, Interaction>();
         fileOperationMenu.put("file-print-menu", createFileOperationMenu());
-        fileOperationMenu.put("authors-to-file", new AuthorsToFile());
+        fileOperationMenu.put("authors-to-file", new CreatorsToFile());
         fileOperationMenu.put("users-to-file", new UsersToFile());
         fileOperationMenu.put("books-to-file", new BooksToFile());
         fileOperationMenu.put("assets-to-file", new AssetsToFile());

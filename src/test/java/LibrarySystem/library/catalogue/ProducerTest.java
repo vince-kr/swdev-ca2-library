@@ -20,22 +20,6 @@ class ProducerTest {
     }
 
     @Test
-    void getAssetProduced() {
-        ArrayList<Asset> assets = new ArrayList<>();
-        assets.add(cd);
-        producer.setAssetProduced(assets);
-        assertEquals(1,producer.getAssetProduced().size());
-    }
-
-    @Test
-    void setAssetProduced() {
-        ArrayList<Asset> assets = new ArrayList<>();
-        assets.add(cd);
-        producer.setAssetProduced(assets);
-        assertEquals(1,producer.getAssetProduced().size());
-    }
-
-    @Test
     void testToString() {
         assertEquals("ProducerName: Angela McDonald",producer.toString());
     }

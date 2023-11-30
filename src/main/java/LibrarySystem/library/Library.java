@@ -1,8 +1,6 @@
 package LibrarySystem.library;
 
-import LibrarySystem.library.catalogue.Asset;
-import LibrarySystem.library.catalogue.AssetsRegister;
-import LibrarySystem.library.catalogue.Author;
+import LibrarySystem.library.catalogue.*;
 
 import java.util.HashMap;
 
@@ -39,9 +37,15 @@ public interface Library {
     void recordLoan(Loan newLoan);
 
     // Other catalogue operations
-    HashMap<Integer, Author> getAllAuthors();
+    HashMap<Integer, Person> getAllCreators();
+
+    int getLastCreatorID();
 
     Author addAuthor(String name) throws PersonException;
+    Producer addProducer(String name) throws PersonException;
+    Director addDirector(String name) throws PersonException;
 
     void loadSampleData();
+
+    AssetsRegister getAssetsForCreator(Person creator);
 }

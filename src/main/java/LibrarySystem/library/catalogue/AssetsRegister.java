@@ -1,6 +1,7 @@
 package LibrarySystem.library.catalogue;
 
 import LibrarySystem.util.format.StringFormat;
+import LibrarySystem.library.Person;
 
 import java.util.HashMap;
 
@@ -26,5 +27,16 @@ public class AssetsRegister extends HashMap<Integer, Asset> {
         }
 
         return assetsSummary.toString();
+    }
+
+    public AssetsRegister byCreator(Person creator) {
+        var selectedAssets = new AssetsRegister();
+
+        for (Entry<Integer, Asset> assetEntry : this.entrySet()) {
+            if (assetEntry.getValue().getCreatorName().equals(creator.getName()))
+                selectedAssets.put(assetEntry.getKey(), assetEntry.getValue());
+        }
+
+        return selectedAssets;
     }
 }

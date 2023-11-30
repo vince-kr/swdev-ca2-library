@@ -1,12 +1,12 @@
 package LibrarySystem.interactor;
 
 import LibrarySystem.library.Library;
-import LibrarySystem.library.catalogue.Author;
+import LibrarySystem.library.Person;
 import LibrarySystem.util.io.Files;
 
 import java.util.HashMap;
 
-public class AuthorsToFile extends Interaction{
+public class CreatorsToFile extends Interaction{
     String header = "FILES\n";
     @Override
     public void requestAndResponse(Library library) {
@@ -17,11 +17,10 @@ public class AuthorsToFile extends Interaction{
          */
         System.out.println(header);
 
-        HashMap<Integer, Author> authors = library.getAllAuthors();
-        if (!authors.isEmpty()) {
+        if (!library.getAllCreators().isEmpty()) {
             System.out.println("Printing to file ...");
-            Files.printAuthorsToFile(authors, "authors.csv");
-        }else {
+            Files.printCreatorsToFile(library, "authors.csv");
+        } else {
             System.out.println("No authors yet in the system");
         }
     }

@@ -5,12 +5,15 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
+import LibrarySystem.library.Library;
 import LibrarySystem.library.LibraryUser;
+import LibrarySystem.library.Person;
 import LibrarySystem.library.PersonException;
 import LibrarySystem.library.catalogue.*;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+
 public abstract class Files {
     /*
      with static methods to write to a csv file
@@ -25,10 +28,13 @@ public abstract class Files {
         Print AuthorId, AuthorName and Number of assets
         authored in a csv file
      */
-    public static void printAuthorsToFile(HashMap<Integer,Author> authors, String csvFileName){
+    public static void printCreatorsToFile(Library library, String csvFileName) {
         String csvFilePath = DATA_PREFIX + csvFileName;
+        var assets = library.getAllAssets();
+        var creators = library.getAllCreators();
+
         StringBuilder sb = new StringBuilder();
-        if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
+        if (java.nio.file.Files.notExists(Path.of(csvFilePath))) {
             File file = new File(csvFilePath);
             sb.append("AuthorId");
             sb.append(",");
@@ -42,42 +48,46 @@ public abstract class Files {
             FileWriter fr = new FileWriter(new File(csvFilePath), true);
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter writer = new PrintWriter(br);
-            if (!authors.isEmpty()){
 
-                for (Map.Entry<Integer,Author> author:authors.entrySet()){
-                    sb.append(author.getKey());
-                    sb.append(",");
-                    sb.append(author.getValue().getName());
-                    sb.append(",");
-                    sb.append(author.getValue().getBooksAuthored().size());
-                    sb.append("\n");
-                }
-                writer.write(sb.toString());
-                writer.close();
-                fr.close();
-                br.close();
-                System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFileName + RESET);
+            for (Map.Entry<Integer, Person> creatorEntry : creators.entrySet()) {
+                Person creator = creatorEntry.getValue();
+                sb.append(creatorEntry.getKey());
+                sb.append(",");
+                sb.append(creator.getName());
+                sb.append(",");
+                sb.append(assets.byCreator(creator).size());
+                sb.append("\n");
             }
+
+            writer.write(sb.toString());
+            writer.close();
+            fr.close();
+            br.close();
+            System.out.println(GREEN + "\n\tCSV file written successfully: " + csvFileName + RESET);
+
             System.out.println("No authors in the system");
-        } catch (IOException e) {
+        } catch (
+                IOException e) {
             throw new RuntimeException(e);
         }
 
     }
+
     /*
      Reads Authors from the csv file given
      */
-    public static HashMap<Integer,Author> readAuthorCsv(String csvFile) throws PersonException {
-        HashMap<Integer,Author> authors = new HashMap<>();
+    public static HashMap<Integer, Author> readAuthorCsv(String csvFile) throws PersonException {
+        HashMap<Integer, Author> authors = new HashMap<>();
         csvFile = DATA_PREFIX + csvFile;
         try (FileReader fr = new FileReader(csvFile);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
             for (CSVRecord csvRecord : csvParser) {
                 String name = csvRecord.get("AuthorName");
                 int authorId = Integer.parseInt(csvRecord.get("AuthorId"));
-                authors.put(authorId,new Author(name));
+                authors.put(authorId, new Author(name));
             }
-        } catch (IOException e) {
+        } catch (
+                IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -87,10 +97,10 @@ public abstract class Files {
      Print Book items to csv file
      */
 
-    public static void printAssetsToFile(HashMap<Integer,Asset> assets, String csvFileName){
+    public static void printAssetsToFile(HashMap<Integer, Asset> assets, String csvFileName) {
         String csvFilePath = DATA_PREFIX + csvFileName;
         StringBuilder sb = new StringBuilder();
-        if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
+        if (java.nio.file.Files.notExists(Path.of(csvFilePath))) {
             File file = new File(csvFilePath);
             sb.append("Id");
             sb.append(",");
@@ -107,8 +117,8 @@ public abstract class Files {
             FileWriter fr = new FileWriter(new File(csvFilePath), true);
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter writer = new PrintWriter(br);
-            if (!assets.isEmpty()){
-                for (Map.Entry<Integer, Asset> asset:assets.entrySet()){
+            if (!assets.isEmpty()) {
+                for (Map.Entry<Integer, Asset> asset : assets.entrySet()) {
                     sb.append(asset.getKey());
                     sb.append(",");
                     sb.append(asset.getValue().getTitle());
@@ -121,17 +131,19 @@ public abstract class Files {
                 writer.close();
                 fr.close();
                 br.close();
-                System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
+                System.out.println(GREEN + "\n\tCSV file written successfully: " + csvFilePath + RESET);
             }
-        } catch (IOException e) {
+        } catch (
+                IOException e) {
             throw new RuntimeException(e);
         }
 
     }
-    public static void printBooksToFile(HashMap<Integer,BookAudioBook> books, String csvFileName){
+
+    public static void printBooksToFile(HashMap<Integer, BookAudioBook> books, String csvFileName) {
         String csvFilePath = DATA_PREFIX + csvFileName;
         StringBuilder sb = new StringBuilder();
-        if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
+        if (java.nio.file.Files.notExists(Path.of(csvFilePath))) {
             File file = new File(csvFilePath);
             sb.append("Id");
             sb.append(",");
@@ -150,8 +162,8 @@ public abstract class Files {
             FileWriter fr = new FileWriter(new File(csvFilePath), true);
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter writer = new PrintWriter(br);
-            if (!books.isEmpty()){
-                for (Map.Entry<Integer, BookAudioBook> book:books.entrySet()){
+            if (!books.isEmpty()) {
+                for (Map.Entry<Integer, BookAudioBook> book : books.entrySet()) {
                     sb.append(book.getKey());
                     sb.append(",");
                     sb.append(book.getValue().getTitle());
@@ -170,9 +182,10 @@ public abstract class Files {
                 writer.close();
                 fr.close();
                 br.close();
-                System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
+                System.out.println(GREEN + "\n\tCSV file written successfully: " + csvFilePath + RESET);
             }
-        } catch (IOException e) {
+        } catch (
+                IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -181,8 +194,8 @@ public abstract class Files {
         Reads fBooks from csv file given
      */
 
-    public static HashMap<Integer,BookAudioBook> readBookCsv(String csvFile){
-        HashMap<Integer,BookAudioBook> books = new HashMap<>();
+    public static HashMap<Integer, BookAudioBook> readBookCsv(String csvFile) {
+        HashMap<Integer, BookAudioBook> books = new HashMap<>();
         csvFile = DATA_PREFIX + csvFile;
         try (FileReader fr = new FileReader(csvFile);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
@@ -193,9 +206,11 @@ public abstract class Files {
                 String isbn = csvRecord.get("Book ISBN");
                 String year = csvRecord.get("Published Year");
                 String name = csvRecord.get("AuthorName");
-                books.put(id, new BookAudioBook(title, quantity, isbn,year,new Author(name)));
+                books.put(id, new BookAudioBook(title, quantity, isbn, year, new Author(name)));
             }
-        } catch (IOException | PersonException e) {
+        } catch (
+                IOException |
+                PersonException e) {
             throw new RuntimeException(e);
         }
         return books;
@@ -205,10 +220,10 @@ public abstract class Files {
      Print Dissertations to csv file
 
      */
-    public static void DissertationsToFile(HashMap<Integer, ThesisDissertation> objects,String csvFileName){
+    public static void DissertationsToFile(HashMap<Integer, ThesisDissertation> objects, String csvFileName) {
         String csvFilePath = DATA_PREFIX + csvFileName;
         StringBuilder sb = new StringBuilder();
-        if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
+        if (java.nio.file.Files.notExists(Path.of(csvFilePath))) {
             File file = new File(csvFilePath);
             sb.append("Id");
             sb.append(",");
@@ -230,8 +245,8 @@ public abstract class Files {
             FileWriter fr = new FileWriter(new File(csvFilePath), true);
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter writer = new PrintWriter(br);
-            if (!objects.isEmpty()){
-                for (Map.Entry<Integer,ThesisDissertation> thesis:objects.entrySet()){
+            if (!objects.isEmpty()) {
+                for (Map.Entry<Integer, ThesisDissertation> thesis : objects.entrySet()) {
                     sb.append(thesis.getKey());
                     sb.append(",");
                     sb.append(thesis.getValue().getTitle());
@@ -252,22 +267,24 @@ public abstract class Files {
                 writer.close();
                 fr.close();
                 br.close();
-                System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
+                System.out.println(GREEN + "\n\tCSV file written successfully: " + csvFilePath + RESET);
             }
-        } catch (IOException e) {
+        } catch (
+                IOException e) {
             throw new RuntimeException(e);
         }
 
     }
+
     /*
      Reads Dissertations from given csv file
      */
     public static HashMap<Integer, ThesisDissertation> readThesisCsv(String csvFile) {
         csvFile = DATA_PREFIX + csvFile;
-        HashMap<Integer,ThesisDissertation> dissertations = new HashMap<>();
+        HashMap<Integer, ThesisDissertation> dissertations = new HashMap<>();
         try (FileReader fr = new FileReader(csvFile);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
-            for (CSVRecord csvRecord:csvParser){
+            for (CSVRecord csvRecord : csvParser) {
                 int key = Integer.parseInt(csvRecord.get("Id"));
                 String title = csvRecord.get("Title");
                 String quantity = csvRecord.get("Quantity");
@@ -276,7 +293,7 @@ public abstract class Files {
                 String authorName = csvRecord.get("AuthorName");
                 String summary = csvRecord.get("Summary");
 
-                dissertations.put(key,new ThesisDissertation(
+                dissertations.put(key, new ThesisDissertation(
                         title,
                         Integer.parseInt(quantity),
                         new Author(authorName),
@@ -284,20 +301,23 @@ public abstract class Files {
                         summary,
                         year));
             }
-            System.out.println(GREEN+"\n\tDissertation objects successfully read from file: "+csvFile+RESET);
-        } catch (IOException | PersonException e) {
+            System.out.println(GREEN + "\n\tDissertation objects successfully read from file: " + csvFile + RESET);
+        } catch (
+                IOException |
+                PersonException e) {
             throw new RuntimeException(e);
         }
         return dissertations;
 
     }
+
     /*
         Print Cds to csv file
      */
-    public static void CdsToFile(HashMap<Integer, CdDvd> objects,String csvFileName){
+    public static void CdsToFile(HashMap<Integer, CdDvd> objects, String csvFileName) {
         String csvFilePath = DATA_PREFIX + csvFileName;
         StringBuilder sb = new StringBuilder();
-        if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
+        if (java.nio.file.Files.notExists(Path.of(csvFilePath))) {
             File file = new File(csvFilePath);
             sb.append("Id");
             sb.append(",");
@@ -319,8 +339,8 @@ public abstract class Files {
             FileWriter fr = new FileWriter(new File(csvFilePath), true);
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter writer = new PrintWriter(br);
-            if (!objects.isEmpty()){
-                for (Map.Entry<Integer,CdDvd> cd: objects.entrySet()) {
+            if (!objects.isEmpty()) {
+                for (Map.Entry<Integer, CdDvd> cd : objects.entrySet()) {
                     sb.append(cd.getKey());
                     sb.append(",");
                     sb.append(cd.getValue().getTitle());
@@ -340,9 +360,10 @@ public abstract class Files {
                 writer.close();
                 fr.close();
                 br.close();
-                System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
+                System.out.println(GREEN + "\n\tCSV file written successfully: " + csvFilePath + RESET);
             }
-        } catch (IOException e) {
+        } catch (
+                IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -350,12 +371,12 @@ public abstract class Files {
     /*
      Read Cds from a given csv file
      */
-    public static HashMap<Integer, CdDvd> readCdFromCsv(String csvFile){
+    public static HashMap<Integer, CdDvd> readCdFromCsv(String csvFile) {
         csvFile = DATA_PREFIX + csvFile;
-        HashMap<Integer,CdDvd> cDs = new HashMap<>();
+        HashMap<Integer, CdDvd> cDs = new HashMap<>();
         try (FileReader fr = new FileReader(csvFile);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
-            for (CSVRecord csvRecord:csvParser){
+            for (CSVRecord csvRecord : csvParser) {
                 int key = Integer.parseInt(csvRecord.get("Id"));
                 String title = csvRecord.get("Title");
                 String quantity = csvRecord.get("Quantity");
@@ -372,8 +393,10 @@ public abstract class Files {
                         playTime,
                         year));
             }
-            System.out.println(GREEN+"\n\tDissertation objects successfully read from file: "+csvFile+RESET);
-        } catch (IOException | PersonException e) {
+            System.out.println(GREEN + "\n\tDissertation objects successfully read from file: " + csvFile + RESET);
+        } catch (
+                IOException |
+                PersonException e) {
             throw new RuntimeException(e);
         }
         return cDs;
@@ -382,10 +405,10 @@ public abstract class Files {
     /*
         Print Users to csv file
      */
-    public static void printLibraryUserToFile(HashMap<Integer, LibraryUser> users,String csvFileName){
+    public static void printLibraryUserToFile(HashMap<Integer, LibraryUser> users, String csvFileName) {
         String csvFilePath = DATA_PREFIX + csvFileName;
         StringBuilder sb = new StringBuilder();
-        if (java.nio.file.Files.notExists(Path.of(csvFilePath))){
+        if (java.nio.file.Files.notExists(Path.of(csvFilePath))) {
             File file = new File(csvFilePath);
             sb.append("UserId");
             sb.append(",");
@@ -399,9 +422,9 @@ public abstract class Files {
             FileWriter fr = new FileWriter(new File(csvFilePath), true);
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter writer = new PrintWriter(br);
-            if (!users.isEmpty()){
+            if (!users.isEmpty()) {
 
-                for (Map.Entry<Integer,LibraryUser> user:users.entrySet()){
+                for (Map.Entry<Integer, LibraryUser> user : users.entrySet()) {
                     sb.append(user.getKey());
                     sb.append(",");
                     sb.append(user.getValue().getName());
@@ -413,9 +436,10 @@ public abstract class Files {
                 writer.close();
                 fr.close();
                 br.close();
-                System.out.println(GREEN+"\n\tCSV file written successfully: " + csvFilePath+RESET);
+                System.out.println(GREEN + "\n\tCSV file written successfully: " + csvFilePath + RESET);
             }
-        } catch (IOException e) {
+        } catch (
+                IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -424,17 +448,18 @@ public abstract class Files {
     /*
      Read Users from a given csv file
      */
-    public static HashMap<Integer,LibraryUser> readUserFromFile(String csvFile) throws PersonException {
-        HashMap<Integer,LibraryUser> users = new HashMap<>();
+    public static HashMap<Integer, LibraryUser> readUserFromFile(String csvFile) throws PersonException {
+        HashMap<Integer, LibraryUser> users = new HashMap<>();
         csvFile = DATA_PREFIX + csvFile;
         try (FileReader fr = new FileReader(csvFile);
              CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
             for (CSVRecord csvRecord : csvParser) {
                 String name = csvRecord.get("UserName");
                 int authorId = Integer.parseInt(csvRecord.get("UserId"));
-                users.put(authorId,new LibraryUser(name));
+                users.put(authorId, new LibraryUser(name));
             }
-        } catch (IOException e) {
+        } catch (
+                IOException e) {
             throw new RuntimeException(e);
         }
         return users;

@@ -84,7 +84,7 @@ class LibraryManagement implements Library {
 
     @Override
     public int getLastAssetID() {
-        return catalogue.getLastID();
+        return catalogue.getLastAssetID();
     }
 
     @Override
@@ -93,13 +93,33 @@ class LibraryManagement implements Library {
     }
 
     @Override
-    public HashMap<Integer, Author> getAllAuthors() {
-        return catalogue.getAllAuthors();
+    public AssetsRegister getAssetsForCreator(Person creator) {
+        return catalogue.getAssetsForCreator(creator);
+    }
+
+    @Override
+    public HashMap<Integer, Person> getAllCreators() {
+        return catalogue.getAllCreators();
+    }
+
+    @Override
+    public int getLastCreatorID() {
+        return catalogue.getLastCreatorID();
     }
 
     @Override
     public Author addAuthor(String name) throws PersonException {
         return catalogue.addAuthor(name);
+    }
+
+    @Override
+    public Producer addProducer(String name) throws PersonException {
+        return catalogue.addProducer(name);
+    }
+
+    @Override
+    public Director addDirector(String name) throws PersonException {
+        return catalogue.addDirector(name);
     }
 
     @Override
@@ -115,6 +135,7 @@ class LibraryManagement implements Library {
             Asset dw4 = new CdDvd("Out of time", 12, sampleProducer, sampleDirector, 44*60+8, "1991");
 
             this.addAuthor("Terry Pratchett");
+            this.addDirector("R.E.M.");
             this.addAsset(dw1);
             this.addAsset(dw2);
             this.addAsset(dw3);
