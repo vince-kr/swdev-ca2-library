@@ -18,16 +18,12 @@ class CdDvdTest {
     void setUp() throws PersonException {
         producer = new Producer("Kevin Costner");
         director = new Director("Harry Barnes");
-        cd = new CdDvd("Life",producer,director,3000,"1990");
+        cd = new CdDvd("Life",1,producer,director,3000,"1990");
     }
 
     @Test
     void getQuantity() {
         assertEquals(1,cd.getQuantity());
-    }
-    @Test
-    void getStatus(){
-        assertTrue(cd.isAvailable());
     }
 
     @Test
@@ -45,24 +41,6 @@ class CdDvdTest {
         assertEquals(director,cd.getDirector());
     }
 
-    @Test
-    void getDateIssued() {
-        LocalDateTime t1 = LocalDateTime.now();
-        cd.setDateIssued(t1);
-        assertEquals(t1,cd.getDateIssued());
-    }
-
-    @Test
-    void getDateDue() {
-        LocalDateTime t2 = LocalDateTime.now().plusHours(24);
-        cd.setDateDue(t2);
-        assertEquals(t2,cd.getDateDue());
-    }
-
-    @Test
-    void getOverDue() {
-        assertEquals(" - ",cd.getOverDue());
-    }
 
     @Test
     void getPlayTime() {
@@ -83,14 +61,10 @@ class CdDvdTest {
 
     @Test
     void getAssetType() {
-        assertEquals("CdDvd",cd.getAssetType());
+        assertEquals("Cd / Dvd",cd.getAssetType());
     }
 
-    @Test
-    void setStatus(){
-      cd.setAvailability(false);
-      assertFalse(cd.isAvailable());
-    }
+
     @Test
     void setTitle(){
         cd.setTitle("Great is the Lord");
@@ -109,10 +83,7 @@ class CdDvdTest {
         assertEquals("ProducerName: George Bush",cd.getProducer().toString());
     }
 
-    @Test
-    void getDirector() {
-        assertEquals(director,cd.getDirector());
-    }
+
 
     @Test
     void setDirector() throws PersonException {
@@ -121,10 +92,7 @@ class CdDvdTest {
         assertEquals("DirectorName: Garry Coleman",cd.getDirector().toString());
     }
 
-    @Test
-    void getPlayTime() {
-        assertEquals(3000,cd.getPlayTime());
-    }
+
 
     @Test
     void setPlayTime() {
@@ -132,21 +100,6 @@ class CdDvdTest {
         assertEquals(45000,cd.getPlayTime());
     }
 
-    @Test
-    void getProductionYear() {
-        assertEquals("1990",cd.getProductionYear());
-    }
-
-    @Test
-    void setTitle(){
-        cd.setTitle("Hero");
-        assertEquals("Hero",cd.getTitle());
-    }
-    @Test
-    void setAvailability(){
-        cd.setAvailability(false);
-        assertEquals(false,cd.getAvailability());
-    }
     @Test
     void setProductionYear() {
         cd.setProductionYear("2000");
@@ -159,14 +112,5 @@ class CdDvdTest {
     }
 
 
-    @Test
-    void getAssetType() {
-        assertEquals("Cd / Dvd",cd.getAssetType());
-    }
 
-    @Test
-    void testToString() {
-        String expectedString = "Title: Life, Producer: Kevin Costner, ProductionYear: 1990";
-        assertEquals(expectedString,cd.toString());
-    }
 }

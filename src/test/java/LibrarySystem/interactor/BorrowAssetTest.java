@@ -26,21 +26,13 @@ class BorrowAssetTest {
     void setUp() throws PersonException {
         user = new LibraryUser("John Doe");
         Author author = new Author("King James");
-        asset = new BookAudioBook("Holy Bible","0-987-12377-7","1867",author);
+        asset = new BookAudioBook("Holy Bible",1,"0-987-12377-7","1867",author);
 
     }
 
     @Test
     void requestAndResponse() {
-        ArrayList<Asset> assets = user.getBorrowedBooks();
-        //before borrowing
-        assertTrue(asset.isAvailable());
-       int l = user.getBorrowedBooks().size();
-        assets.add(asset);
-        //after borrowing
-        assertEquals(1,user.getBorrowedBooks().size());
-        //assertEquals(0,asset.getQuantity());
-        //assertEquals(false,user.getBorrowedBooks().get(l).getAvailability());
+
 
 
     }

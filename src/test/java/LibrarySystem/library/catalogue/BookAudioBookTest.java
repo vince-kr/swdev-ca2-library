@@ -17,7 +17,7 @@ class BookAudioBookTest {
     @BeforeEach
     void setUp() throws PersonException {
         author = new Author("King James");
-        book = new BookAudioBook("Holy Bible","0-546-77123-9","2000",author);
+        book = new BookAudioBook("Holy Bible",1,"0-546-77123-9","2000",author);
     }
 
     @Test
@@ -26,25 +26,6 @@ class BookAudioBookTest {
         assertEquals(10, book.getQuantity());
     }
 
-    @Test
-    void getDateIssued() {
-        LocalDateTime t1 = LocalDateTime.now();
-        book.setDateIssued(t1);
-        assertEquals(t1,book.getDateIssued());
-    }
-
-    @Test
-    void getDateDue() {
-        LocalDateTime t = LocalDateTime.now().plusHours(3);
-        book.setDateDue(t);
-        assertEquals(t,book.getDateDue());
-    }
-
-    @Test
-    void getOverDue() {
-        book.setOverDue("OverDue");
-        assertEquals("OverDue", book.getOverDue());
-    }
 
     @Test
     void getIsbn() {

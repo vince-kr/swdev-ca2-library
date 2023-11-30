@@ -16,7 +16,7 @@ class ProducerTest {
     void setUp() throws PersonException {
         Director director = new Director("Steve Jobs");
         producer = new Producer("Angela McDonald");
-        cd = new CdDvd("Ever Loving",producer,director,45000,"1979");
+        cd = new CdDvd("Ever Loving",1,producer,director,45000,"1979");
     }
 
     @Test

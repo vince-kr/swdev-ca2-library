@@ -18,8 +18,8 @@ class AuthorTest {
     void setUp() throws PersonException {
         author = new Author("King James");
         author1 = new Author("John Doe");
-        book = new BookAudioBook("Holy Bible","0-438-98147-1","1999",author);
-        book1 = new BookAudioBook("Life","1-098-99632-9","1980",author);
+        book = new BookAudioBook("Holy Bible",1,"0-438-98147-1","1999",author);
+        book1 = new BookAudioBook("Life",1,"1-098-99632-9","1980",author);
     }
 
 

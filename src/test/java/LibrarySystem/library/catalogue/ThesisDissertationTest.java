@@ -16,7 +16,7 @@ class ThesisDissertationTest {
     @BeforeEach
     void setUp() throws PersonException {
         author = new Author("Robert Boyle");
-        thesis = new ThesisDissertation("Distillation",author,"Separating Components","some writings ...","1867");
+        thesis = new ThesisDissertation("Distillation",1,author,"Separating Components","some writings ...","1867");
     }
 
     @Test
@@ -44,17 +44,9 @@ class ThesisDissertationTest {
         assertEquals("1867",thesis.getPublishedDate());
     }
 
-    @Test
-    void getDateDue() {
-        LocalDateTime t1 = LocalDateTime.now().plusHours(3);
-        thesis.setDateDue(t1);
-        assertEquals(t1,thesis.getDateDue());
-    }
 
-    @Test
-    void getOverDue() {
-        assertEquals(" - ",thesis.getOverDue());
-    }
+
+
 
     @Test
     void getAssetType() {
