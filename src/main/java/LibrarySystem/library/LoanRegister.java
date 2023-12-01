@@ -26,7 +26,7 @@ public class LoanRegister extends ArrayList<Loan> {
         int count = 0;
 
         for (Loan loan : this) {
-            if (loan.getAsset().equals(asset))
+            if (loan.isActive() && loan.getAsset().equals(asset))
                 count++;
         }
 
