@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ListCreatedBy extends Interaction {
+    static final String RED = "\u001B[31m";
+    static final String GREEN = "\u001B[32m";
+    static final String RESET = "\u001B[0m";
     String header = "ASSETS CREATED BY AUTHOR\n";
 
     @Override
@@ -19,7 +22,7 @@ public class ListCreatedBy extends Interaction {
         System.out.println(header);
 
         if (library.getAllCreators().isEmpty()) {
-            System.out.println("No authors exist in the system yet.");
+            System.out.println(RED+"No authors exist in the system yet."+RESET);
             return;
         }
 
@@ -41,7 +44,7 @@ public class ListCreatedBy extends Interaction {
             return selectedCreator;
         }
         else {
-            System.out.println("User with given Id not found in the system!");
+            System.out.println(RED+"User with given Id not found in the system!"+RESET);
             return askCreator(library);
         }
     }

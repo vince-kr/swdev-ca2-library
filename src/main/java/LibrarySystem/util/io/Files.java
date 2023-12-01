@@ -37,6 +37,10 @@ public abstract class Files {
         StringBuilder sb = new StringBuilder();
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))) {
             File file = new File(csvFilePath);
+            File parent = file.getParentFile();
+            if (parent != null && !parent.exists() && !parent.mkdirs()) {
+                throw new IllegalStateException(RED+"Couldn't create dir: "+RESET + parent);
+            }
             sb.append("AuthorId");
             sb.append(",");
             sb.append("AuthorName");
@@ -107,6 +111,10 @@ public abstract class Files {
         StringBuilder sb = new StringBuilder();
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))) {
             File file = new File(csvFilePath);
+            File parent = file.getParentFile();
+            if (parent != null && !parent.exists() && !parent.mkdirs()) {
+                throw new IllegalStateException(RED+"Couldn't create dir: "+RESET + parent);
+            }
             sb.append("Id");
             sb.append(",");
             sb.append("Title");
@@ -150,6 +158,10 @@ public abstract class Files {
         StringBuilder sb = new StringBuilder();
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))) {
             File file = new File(csvFilePath);
+            File parent = file.getParentFile();
+            if (parent != null && !parent.exists() && !parent.mkdirs()) {
+                throw new IllegalStateException(RED+"Couldn't create dir: "+RESET + parent);
+            }
             sb.append("Id");
             sb.append(",");
             sb.append("Book Title");
@@ -234,6 +246,10 @@ public abstract class Files {
         StringBuilder sb = new StringBuilder();
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))) {
             File file = new File(csvFilePath);
+            File parent = file.getParentFile();
+            if (parent != null && !parent.exists() && !parent.mkdirs()) {
+                throw new IllegalStateException(RED+"Couldn't create dir: "+RESET + parent);
+            }
             sb.append("Id");
             sb.append(",");
             sb.append("Title");
@@ -332,6 +348,10 @@ public abstract class Files {
         StringBuilder sb = new StringBuilder();
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))) {
             File file = new File(csvFilePath);
+            File parent = file.getParentFile();
+            if (parent != null && !parent.exists() && !parent.mkdirs()) {
+                throw new IllegalStateException(RED+"Couldn't create dir: "+RESET + parent);
+            }
             sb.append("Id");
             sb.append(",");
             sb.append("Title");
@@ -427,6 +447,10 @@ public abstract class Files {
         StringBuilder sb = new StringBuilder();
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))) {
             File file = new File(csvFilePath);
+            File parent = file.getParentFile();
+            if (parent != null && !parent.exists() && !parent.mkdirs()) {
+                throw new IllegalStateException(RED+"Couldn't create dir: "+RESET + parent);
+            }
             sb.append("UserId");
             sb.append(",");
             sb.append("UserName");

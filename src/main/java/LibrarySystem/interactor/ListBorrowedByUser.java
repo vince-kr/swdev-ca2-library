@@ -8,6 +8,9 @@ import LibrarySystem.util.io.StandardInput;
 import java.util.HashMap;
 
 public class ListBorrowedByUser extends Interaction {
+    static final String RED = "\u001B[31m";
+    static final String GREEN = "\u001B[32m";
+    static final String RESET = "\u001B[0m";
     String header = "ASSETS BORROWED BY USER\n";
 
     @Override
@@ -27,16 +30,20 @@ public class ListBorrowedByUser extends Interaction {
         String prompt = "Please enter the required user ID: ";
 
         System.out.println(allUsers);
-        int userID = StandardInput.getPositiveInt(prompt, library.getLastUserID());
+        if (!(allUsers.isEmpty())) {
 
-        LibraryUser selectedUser = library.getUser(userID);
-        if (selectedUser != null) {
-            return selectedUser;
+            int userID = StandardInput.getPositiveInt(prompt, library.getLastUserID());
+
+            LibraryUser selectedUser = library.getUser(userID);
+            if (selectedUser != null) {
+                return selectedUser;
+            } else {
+                System.out.println(RED+"User with given Id not found in the system!"+RESET);
+                return askLibraryUser(library);
+            }
         }
-        else {
-            System.out.println("User with given Id not found in the system!");
-            return askLibraryUser(library);
-        }
+        System.out.println(RED+"No users yet in the system."+RESET);
+        return null;
     }
 
 }
