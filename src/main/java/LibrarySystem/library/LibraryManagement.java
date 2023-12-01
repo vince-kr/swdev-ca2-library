@@ -104,7 +104,7 @@ class LibraryManagement implements Library {
 
     @Override
     public AssetsRegister getAssetsForUser(LibraryUser user) {
-        return allLoans.getAssetsForUser(user);
+        return allLoans.getLoansForUser(user);
     }
 
     @Override

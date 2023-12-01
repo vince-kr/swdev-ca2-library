@@ -6,7 +6,7 @@ import LibrarySystem.library.catalogue.AssetsRegister;
 import java.util.ArrayList;
 
 public class LoanRegister extends ArrayList<Loan> {
-    public AssetsRegister getAssetsForUser(LibraryUser user) {
+    public AssetsRegister getLoansForUser(LibraryUser user) {
         // Select all loans where
         // 1. loan.isActive()
         // 2. loan.getUser().equals(user)
