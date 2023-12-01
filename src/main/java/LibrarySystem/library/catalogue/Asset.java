@@ -1,6 +1,6 @@
 package LibrarySystem.library.catalogue;
 
-public abstract class Asset{
+public abstract class Asset {
     String title;
     int quantity;
 

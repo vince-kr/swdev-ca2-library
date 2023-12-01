@@ -442,7 +442,7 @@ public abstract class Files {
     /*
         Print Users to csv file
      */
-    public static void printLibraryUserToFile(HashMap<Integer, LibraryUser> users, String csvFileName) {
+    public static void printLibraryUserToFile(Library library, String csvFileName) {
         String csvFilePath = DATA_PREFIX + csvFileName;
         StringBuilder sb = new StringBuilder();
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))) {
@@ -463,14 +463,14 @@ public abstract class Files {
             FileWriter fr = new FileWriter(new File(csvFilePath), true);
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter writer = new PrintWriter(br);
-            if (!users.isEmpty()) {
+            if (library.getAllUsers().isEmpty()) {
 
-                for (Map.Entry<Integer, LibraryUser> user : users.entrySet()) {
+                for (Map.Entry<Integer, LibraryUser> user : library.getAllUsers().entrySet()) {
                     sb.append(user.getKey());
                     sb.append(",");
                     sb.append(user.getValue().getName());
                     sb.append(",");
-                    sb.append(user.getValue().getBorrowedBooks().size());
+                    sb.append(library.getAssetsForUser(user.getValue()).size());
                     sb.append("\n");
                 }
                 writer.write(sb.toString());

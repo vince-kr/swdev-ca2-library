@@ -3,6 +3,7 @@ package LibrarySystem.library;
 import LibrarySystem.library.catalogue.*;
 
 import java.util.HashMap;
+import java.util.Map;
 
 class LibraryManagement implements Library {
 
@@ -50,6 +51,20 @@ class LibraryManagement implements Library {
 
     public AssetsRegister getAllAssets() {
         return catalogue.getAllAssets();
+    }
+
+    @Override
+    public AssetsRegister getAvailableAssets() {
+        var availableAssets = new AssetsRegister();
+
+        for (Map.Entry<Integer, Asset> assetEntry : getAllAssets().entrySet()) {
+            Asset asset = assetEntry.getValue();
+
+            if (asset.getQuantity() > allLoans.countActiveLoans(asset))
+                availableAssets.put(assetEntry.getKey(), asset);
+        }
+
+        return availableAssets;
     }
 
     @Override

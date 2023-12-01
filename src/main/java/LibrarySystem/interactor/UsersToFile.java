@@ -22,10 +22,9 @@ public class UsersToFile extends Interaction{
         HashMap<Integer, LibraryUser> users = library.getAllUsers();
         if (!users.isEmpty()){
             System.out.println("Printing to file ...");
-            Files.printLibraryUserToFile(users,"users.csv");
-        }else{
+            Files.printLibraryUserToFile(library,"users.csv");
+        } else {
             System.out.println(RED+" No users in the system yet."+RESET);
         }
-
     }
 }

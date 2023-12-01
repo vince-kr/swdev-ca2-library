@@ -25,6 +25,8 @@ public interface Library {
 
     int getLastAssetID();
 
+    AssetsRegister getAvailableAssets();
+
     AssetsRegister getBorrowedAssets();
 
     int getLoansOneAsset(Asset asset);

@@ -9,32 +9,34 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryUserTest {
+    private Library library;
     private LibraryUser user;
     private LibraryUser user1;
-
     private BookAudioBook book;
     private CdDvd cd;
 
     @BeforeEach
     void setUp() throws PersonException {
         user = new LibraryUser("John Doe");
-        user1 = new LibraryUser("Jane Doe");
+        user1 = new LibraryUser("Kane Doe");
         Producer producer = new Producer("John Jones");
         Director director = new Director("Jane Doe");
         Author author = new Author("Adam Collins");
         book = new BookAudioBook("Ecosystem",1,"0-789-37569-1","1985",author);
         cd = new CdDvd("Life",1,producer,director,3000,"1990");
-
+        library = LibraryFactory.createLibrary();
     }
 
     @Test
     void getBorrowedBooks() {
-        ArrayList<Asset> booksAuthored = new ArrayList<>();
-        booksAuthored.add(book);
-        booksAuthored.add(cd);
-        user.setBorrowedAssets(book);
-        user.setBorrowedAssets(cd);
-        assertEquals(booksAuthored,user.getBorrowedBooks());
+        var booksBorrowed = new AssetsRegister();
+        booksBorrowed.put(101, book);
+        booksBorrowed.put(102, cd);
+
+        library.recordLoan(new Loan(user, new AssetRegisterEntry(101, book)));
+        library.recordLoan(new Loan(user, new AssetRegisterEntry(102, cd)));
+
+        assertEquals(booksBorrowed,library.getAssetsForUser(user));
     }
 
     @Test
@@ -46,15 +48,8 @@ class LibraryUserTest {
 
     @Test
     void compareTo() {
-        ArrayList<Asset> assets = new ArrayList<>();
-        //before borrowing assets
-        assertEquals(0,user.compareTo(user1));
-        assets.add(book);
-        assets.add(cd);
-        user.setBorrowedAssets(book);
-        user.setBorrowedAssets(cd);
-        //after borrowing assets
+        // Lexicographical difference between user and user1 should be 1
+        // First letters are J and K
         assertEquals(1,user.compareTo(user1));
-
     }
 }

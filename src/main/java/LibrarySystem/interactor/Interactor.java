@@ -64,20 +64,22 @@ class Interactor {
     private HashMap<String, Interaction> buildFiltersMenuWithOptions() {
         var filtersMenuInteractions = new HashMap<String, Interaction>();
         filtersMenuInteractions.put("common-filters", createFiltersMenu());
-        filtersMenuInteractions.put("all-borrowed", new ListBorrowedAssets());
-        filtersMenuInteractions.put("created-by", new ListCreatedBy());
-        filtersMenuInteractions.put("borrowed-by", new ListBorrowedByUser());
         filtersMenuInteractions.put("all-assets", new ListAllAssets());
+        filtersMenuInteractions.put("all-available", new ListAvailableAssets());
+        filtersMenuInteractions.put("all-borrowed", new ListBorrowedAssets());
+        filtersMenuInteractions.put("borrowed-by", new ListBorrowedByUser());
+        filtersMenuInteractions.put("created-by", new ListCreatedBy());
         return filtersMenuInteractions;
     }
 
     private Menu createFiltersMenu() {
         return new Menu("LISTS\n", new MenuItem[] {
-                new MenuItem("all BORROWED", "all-borrowed"),
-                new MenuItem("CREATED BY", "created-by"),
-                new MenuItem("BORROWED BY", "borrowed-by"),
-                new MenuItem("ALL OVERDUE", "all-overdue"),
                 new MenuItem("ALL assets", "all-assets"),
+                new MenuItem("all AVAILABLE", "all-available"),
+                new MenuItem("all BORROWED", "all-borrowed"),
+                new MenuItem("all OVERDUE", "all-overdue"),
+                new MenuItem("BORROWED by", "borrowed-by"),
+                new MenuItem("CREATED by", "created-by"),
                 new MenuItem("Back", "main")
         });
     }

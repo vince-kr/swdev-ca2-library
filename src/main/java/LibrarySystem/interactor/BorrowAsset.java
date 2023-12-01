@@ -25,27 +25,20 @@ public class BorrowAsset extends Interaction {
         */
 
         System.out.println(header);
-        if (!library.getAllUsers().isEmpty()) {
-            LibraryUser userWantsToBorrow = askLibraryUser(library);
-            AssetRegisterEntry assetEntry = askAssetToBorrow(library);
-            Asset assetToBorrow = assetEntry.getValue();
 
-            // Check that the asset is available
-            if (assetToBorrow.getQuantity() < library.getLoansOneAsset(assetToBorrow)) {
-                System.out.println(RED+"Unfortunately this title is loaned out."+RESET);
-                System.out.println(RED+"Borrowing is not possible."+RESET);
-                return;
-            }
-
-            // If available, record the loan
-            library.recordLoan(new Loan(userWantsToBorrow, assetEntry));
-
-            //add asset to borrowed user assets
-            userWantsToBorrow.setBorrowedAssets(assetToBorrow);
-
-            System.out.println(GREEN+" Asset: " + assetToBorrow.getTitle() + " borrowed by user: " + userWantsToBorrow.getName() + ", successfully."+RESET);
+        if (library.getAllUsers().isEmpty()) {
+            System.out.println(RED + "Create users before performing borrowing " + RESET);
+            return;
         }
-        System.out.println(RED+"Create users before performing borrowing "+RESET);
+
+        LibraryUser userWantsToBorrow = askLibraryUser(library);
+        AssetRegisterEntry assetEntry = askAssetToBorrow(library);
+        Asset assetToBorrow = assetEntry.getValue();
+
+        // Record the loan
+        library.recordLoan(new Loan(userWantsToBorrow, assetEntry));
+
+        System.out.println(GREEN+" Asset: " + assetToBorrow.getTitle() + " borrowed by user: " + userWantsToBorrow.getName() + ", successfully."+RESET);
     }
 
     private LibraryUser askLibraryUser(Library library) {
@@ -67,16 +60,16 @@ public class BorrowAsset extends Interaction {
     }
 
     private AssetRegisterEntry askAssetToBorrow(Library library) {
-        AssetsRegister allAssets = library.getAllAssets();
+        AssetsRegister availableAssets = library.getAvailableAssets();
         String prompt = "Please enter the required asset ID: ";
 
-        System.out.println(allAssets);
-        int assetID = StandardInput.getIntInRange(prompt, 10000, library.getLastAssetID());
+        System.out.println(availableAssets);
+        int assetID = StandardInput.getIntInRange(prompt, 10001, library.getLastAssetID());
 
-        for (Map.Entry<Integer, Asset> assetEntry : allAssets.entrySet()) {
+        for (Map.Entry<Integer, Asset> assetEntry : availableAssets.entrySet()) {
             int key = assetEntry.getKey();
             if (key == assetID) {
-                return new AssetRegisterEntry(key, allAssets.get(key));
+                return new AssetRegisterEntry(key, availableAssets.get(key));
             }
         }
 
