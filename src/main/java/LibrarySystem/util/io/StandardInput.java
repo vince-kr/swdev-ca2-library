@@ -31,10 +31,10 @@ public abstract class StandardInput {
                     if (min <= choice && choice <= max) {
                         inputIsValid = true;
                     } else {
-                        System.out.println(RED + " Number should only be in the range of : "+RESET+ min + " and " + max + "!");
+                        System.out.println(RED + " Number should only be in the range of : "+ min + " and " + max + "!"+RESET);
                     }
                 } catch (NumberFormatException nf) {
-                    System.out.println(" NumberFormatException: - your input '"+RED + userInput + "' is invalid!"+RESET);
+                    System.out.println(RED+" NumberFormatException: - your input '" + userInput + "' is invalid!"+RESET);
                 }
             }
         }

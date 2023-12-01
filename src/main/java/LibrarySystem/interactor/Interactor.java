@@ -50,6 +50,7 @@ class Interactor {
         var operationsMenuInteractions = new HashMap<String, Interaction>();
         operationsMenuInteractions.put("common-operations", createOperationsMenu());
         operationsMenuInteractions.put("borrow-asset", new BorrowAsset());
+        operationsMenuInteractions.put("return-asset",new ReturnAsset());
         return operationsMenuInteractions;
     }
 
