@@ -1,22 +1,29 @@
 package LibrarySystem.library.catalogue;
 
+import LibrarySystem.library.Library;
+import LibrarySystem.library.LibraryFactory;
 import LibrarySystem.library.PersonException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ThesisDissertationTest {
 
+    private Library library;
     private Author author;
     private ThesisDissertation thesis;
+    private ArrayList<String> assetNames;
     @BeforeEach
     void setUp() throws PersonException {
         author = new Author("Robert Boyle");
         thesis = new ThesisDissertation("Distillation",1,author,"Separating Components","some writings ...","1867");
+        library = LibraryFactory.createLibrary();
+        assetNames = new ArrayList<>();
     }
 
     @Test
@@ -92,5 +99,13 @@ class ThesisDissertationTest {
     @Test
     void testGetCreatorName() {
         assertEquals("Robert Boyle",thesis.getAuthor().getName());
+    }
+    @Test
+    void getSearchableFields(){
+        library.addAsset(thesis);
+        assetNames.add(thesis.getTitle());
+        assetNames.add(thesis.getCreatorName());
+        assetNames.add(thesis.getAssetType());
+        assertEquals(assetNames,thesis.getSearchableFields());
     }
 }

@@ -59,9 +59,6 @@ class LibraryUserTest {
         library.addUser(user);
         library.addUser(user1);
         userNames.add(user.getName());
-        //userNames.add(user1.getName());
-     LibraryUserRegister users = library.getAllUsers();
-
      assertEquals(userNames,user.getSearchableFields());
 
     }

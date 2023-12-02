@@ -1,17 +1,22 @@
 package LibrarySystem.library.catalogue;
 
+import LibrarySystem.library.Library;
+import LibrarySystem.library.LibraryFactory;
 import LibrarySystem.library.PersonException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CdDvdTest {
+    private Library library;
     private Producer producer;
     private Director director;
     private CdDvd cd;
+    private ArrayList<String> assetNames;
 
 
     @BeforeEach
@@ -19,6 +24,8 @@ class CdDvdTest {
         producer = new Producer("Kevin Costner");
         director = new Director("Harry Barnes");
         cd = new CdDvd("Life",1,producer,director,3000,"1990");
+        assetNames = new ArrayList<>();
+        library = LibraryFactory.createLibrary();
     }
 
     @Test
@@ -111,6 +118,13 @@ class CdDvdTest {
         assertEquals("Harry Barnes",cd.getDirector().getName());
     }
 
-
+    @Test
+    void getSearchableFields(){
+        library.addAsset(cd);
+        assetNames.add(cd.title);
+        assetNames.add(cd.getCreatorName());
+        assetNames.add(cd.getAssetType());
+        assertEquals(assetNames,cd.getSearchableFields());
+    }
 
 }
