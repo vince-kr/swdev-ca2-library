@@ -8,12 +8,6 @@ class Menu extends Interaction {
     MenuItem[] menu;
     String prompt;
 
-    public Menu(String header, String prompt, MenuItem[] menu) {
-        this.header = header;
-        this.menu = menu;
-        this.prompt = prompt;
-    }
-
     public Menu(String header, MenuItem[] menu) {
         this.header = header;
         this.menu = menu;
