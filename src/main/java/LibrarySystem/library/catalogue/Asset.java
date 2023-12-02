@@ -31,7 +31,12 @@ public abstract class Asset implements Searchable {
 
     @Override
     public Iterable<String> getSearchableFields() {
-        return new ArrayList<>(List.of(this.title, this.getCreatorName(), this.getAssetType()));
+        return () -> Arrays.asList(
+                this.title,
+                this.getCreatorName(),
+                this.getAssetType()
+                )
+                .iterator();
     }
 
     public abstract String getCreatorName();

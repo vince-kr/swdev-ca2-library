@@ -1,7 +1,6 @@
 package LibrarySystem.library;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 public abstract class Person implements Searchable {
     private String name;
@@ -23,7 +22,7 @@ public abstract class Person implements Searchable {
 
     @Override
     public Iterable<String> getSearchableFields() {
-        return new ArrayList<>(List.of(this.name));
+        return () -> Collections.singleton(this.name).iterator();
     }
 
     public abstract String toString();
