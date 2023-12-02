@@ -50,6 +50,6 @@ class LibraryUserTest {
     void compareTo() {
         // Lexicographical difference between user and user1 should be 1
         // First letters are J and K
-        assertEquals(1,user.compareTo(user1));
+        assertEquals(1,user1.compareTo(user));
     }
 }
