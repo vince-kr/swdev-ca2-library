@@ -106,13 +106,15 @@ class Interactor {
         var searchMenuInterface = new HashMap<String,Interaction>();
         searchMenuInterface.put("search-menu", createSearchMenu());
         searchMenuInterface.put("search-user", new SearchUser());
+        searchMenuInterface.put("search-asset", new SearchAsset());
+        searchMenuInterface.put("search-author",new SearchAuthor());
 
         return searchMenuInterface;
     }
     private Menu createSearchMenu(){
         return new Menu("SEARCH MENU\n",new MenuItem[]{
                 new MenuItem("SEARCH USER","search-user"),
-                new MenuItem("SEARCH ASSET","search-title"),
+                new MenuItem("SEARCH ASSET","search-asset"),
                 new MenuItem("SEARCH AUTHOR","search-author"),
                 new MenuItem("Back","main")
         });

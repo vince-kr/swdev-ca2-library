@@ -2,12 +2,14 @@ package LibrarySystem.interactor;
 
 import LibrarySystem.library.LibraryUser;
 import LibrarySystem.library.LibraryUserRegister;
+import LibrarySystem.library.Person;
 import LibrarySystem.library.catalogue.Asset;
 import LibrarySystem.library.catalogue.AssetRegisterEntry;
 import LibrarySystem.library.catalogue.AssetsRegister;
 import LibrarySystem.util.Search;
 import LibrarySystem.util.io.StandardInput;
 
+import java.util.HashMap;
 import java.util.Map;
 
 abstract class AssetOperation extends Interaction {
@@ -30,7 +32,35 @@ abstract class AssetOperation extends Interaction {
         LibraryUserRegister filteredUsers = filterLibraryUsers(allUsers);
         System.out.println(filteredUsers);
         return filteredUsers;
+    }
 
+    static AssetsRegister searchLibraryCatalogue(AssetsRegister availableAssets){
+        AssetsRegister filteredAssets = filterAssets(availableAssets);
+        System.out.println(filteredAssets);
+        return filteredAssets;
+    }
+
+    static HashMap<Integer, Person> searchAuthors(HashMap<Integer,Person> allAuthors){
+        HashMap<Integer,Person> filteredAuthors = filterAuthors((allAuthors));
+        System.out.println(filteredAuthors);
+        return filteredAuthors;
+    }
+    private static HashMap<Integer, Person> filterAuthors(HashMap<Integer,Person> allAuthors){
+        var filteredAuthors = new HashMap<Integer,Person>();
+        String prompt = "Enter your search term -- asterisk * can be used as a wildcard: ";
+        String responsePattern = "^[\\p{L} \\*\\.,'-]+$";
+        String query = StandardInput.getValidString(prompt, responsePattern);
+        for (Map.Entry<Integer,Person> userEntry:allAuthors.entrySet()){
+            Person author = userEntry.getValue();
+            if (Search.matchQuery(author,query)){
+                filteredAuthors.put(userEntry.getKey(),author);
+            }
+        }
+        if (filteredAuthors.isEmpty()){
+            System.out.println("This search did not return any results.");
+            return filterAuthors(allAuthors);
+        }
+        return filteredAuthors;
     }
     private static LibraryUserRegister filterLibraryUsers(LibraryUserRegister allUsers) {
         var filteredUsers = new LibraryUserRegister();
