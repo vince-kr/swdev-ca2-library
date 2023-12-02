@@ -25,7 +25,7 @@ public class BorrowAsset extends AssetOperation {
         System.out.println(header);
 
         if (!library.hasUsers()) {
-            System.out.println(RED + "Create users before performing borrowing " + RESET);
+            System.out.println(RED + "Create users before performing borrowing." + RESET);
             return;
         }
 

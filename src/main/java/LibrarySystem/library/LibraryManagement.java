@@ -71,7 +71,8 @@ class LibraryManagement implements Library {
     public AssetsRegister getBorrowedAssets() {
         var borrowedAssets = new AssetsRegister();
         for (Loan loan : allLoans) {
-            borrowedAssets.put(loan.getAssetID(), loan.getAsset());
+            if (loan.isActive())
+                borrowedAssets.put(loan.getAssetID(), loan.getAsset());
         }
 
         return borrowedAssets;

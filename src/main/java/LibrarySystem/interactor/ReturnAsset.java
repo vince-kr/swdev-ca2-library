@@ -23,7 +23,7 @@ public class ReturnAsset extends AssetOperation {
         System.out.println(header);
 
         if (!library.hasUsers()) {
-            System.out.println(RED + "Create users before performing return" + RESET);
+            System.out.println(RED + "Create users before performing return." + RESET);
             return;
         }
 
