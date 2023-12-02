@@ -1,10 +1,12 @@
 package LibrarySystem.library.catalogue;
 
+import LibrarySystem.library.Searchable;
 import LibrarySystem.util.format.StringFormat;
 import LibrarySystem.library.Person;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 public class AssetsRegister extends HashMap<Integer, Asset> {
     public String toString() {

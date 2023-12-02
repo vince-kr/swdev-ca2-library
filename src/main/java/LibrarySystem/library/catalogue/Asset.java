@@ -1,6 +1,10 @@
 package LibrarySystem.library.catalogue;
 
-public abstract class Asset {
+import LibrarySystem.library.Searchable;
+
+import java.util.*;
+
+public abstract class Asset implements Searchable {
     String title;
     int quantity;
 
@@ -23,6 +27,11 @@ public abstract class Asset {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public Iterable<String> getSearchableFields() {
+        return new ArrayList<>(List.of(this.title));
     }
 
     public abstract String getCreatorName();

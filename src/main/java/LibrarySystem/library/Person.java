@@ -1,9 +1,9 @@
 package LibrarySystem.library;
 
-import LibrarySystem.library.catalogue.AssetsRegister;
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class Person {
-    private int id;
+public abstract class Person implements Searchable {
     private String name;
 
     public Person(String name) throws PersonException {
@@ -20,5 +20,11 @@ public abstract class Person {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public Iterable<String> getSearchableFields() {
+        return new ArrayList<>(List.of(this.name));
+    }
+
     public abstract String toString();
     }

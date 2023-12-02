@@ -5,6 +5,7 @@ import LibrarySystem.library.LibraryUserRegister;
 import LibrarySystem.library.catalogue.Asset;
 import LibrarySystem.library.catalogue.AssetRegisterEntry;
 import LibrarySystem.library.catalogue.AssetsRegister;
+import LibrarySystem.util.Search;
 import LibrarySystem.util.io.StandardInput;
 
 import java.util.Map;
@@ -15,19 +16,38 @@ abstract class AssetOperation extends Interaction {
     static final String RESET = "\u001B[0m";
 
     static LibraryUser askLibraryUser(LibraryUserRegister allUsers) {
-        String prompt = "Please enter the required user ID: ";
+        String prompt = "Enter your search term -- asterisk * can be used as a wildcard: ";
+        String responsePattern = "^[\\p{L} \\*\\.,'-]+$";
 
-        System.out.println(allUsers);
+        LibraryUser selectedUser = null;
 
-        int userID = StandardInput.getPositiveInt(prompt, allUsers.getLastID());
+        while (selectedUser == null) {
+            var usersToPrint = new LibraryUserRegister();
+            String query = StandardInput.getValidString(prompt, responsePattern);
 
-        LibraryUser selectedUser = allUsers.getUser(userID);
-        if (selectedUser != null) {
-            return selectedUser;
-        } else {
-            System.out.println(RED + "User with given ID not found in the system!" + RESET);
-            return askLibraryUser(allUsers);
+            for (Map.Entry<Integer, LibraryUser> userEntry : allUsers.entrySet()) {
+                LibraryUser user = userEntry.getValue();
+                if (Search.matchQuery(user, query))
+                    usersToPrint.put(userEntry.getKey(), user);
+            }
+
+            if (usersToPrint.isEmpty()) {
+                System.out.println("This search did not return any results.");
+                continue;
+            }
+
+            System.out.println(usersToPrint);
+
+            String newPrompt = "Enter the required user ID, or 0 to do another search: ";
+            int userID = StandardInput.getIntInRange(newPrompt, 0, usersToPrint.getLastID());
+
+            if (userID == 0)
+                continue;
+
+            selectedUser = allUsers.getUser(userID);
         }
+
+        return selectedUser;
     }
 
     static AssetRegisterEntry askAsset(AssetsRegister availableAssets) {

@@ -17,10 +17,7 @@
 4. Sorting & Searching
     1. Implement a sort and search facility for books, authors and users
     2. Consider the various sorting and searching algorithms available and justify the appropriateness of your selected algorithms and data structures in terms of complexity and performance profile when compared to others
-5. Implement methods to perform the following library operations:
-   1. Return a book (update book availability and library user's borrowed books)
-   2. List available books
-6. Include a report that explains the design decisions, classes, interfaces, source code, external files and Maven dependencies used in the project
+5. Include a report that explains the design decisions, classes, interfaces, source code, external files and Maven dependencies used in the project
 
 ### Done
 
@@ -39,8 +36,10 @@
    2. Add an author to the library
    3. Add a library user to the system
    4. Borrow a book (update book availability and library user's borrowed books)
-   5. List books borrowed by a user
-   6. List books authored by an author
+   5. Return a book (update book availability and library user's borrowed books)
+   6. List books borrowed by a user
+   7. List books authored by an author
+   8. List available books
 6. Implement the following Maven Dependencies:
    1. External library for reading and writing to external files
    2. JUnit to thoroughly test the program
