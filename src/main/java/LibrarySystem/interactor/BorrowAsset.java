@@ -1,9 +1,10 @@
 package LibrarySystem.interactor;
 
-import LibrarySystem.library.Library;
-import LibrarySystem.library.LibraryUser;
-import LibrarySystem.library.Loan;
+import LibrarySystem.library.*;
 import LibrarySystem.library.catalogue.*;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class BorrowAsset extends AssetOperation {
     static final String RESET = "\u001B[0m";
@@ -28,7 +29,16 @@ public class BorrowAsset extends AssetOperation {
             System.out.println(RED + "Create users before performing borrowing." + RESET);
             return;
         }
-
+        //lambda implementation
+        Searchable userInNeed = () ->{
+            LibraryUserRegister users = library.getAllUsers();
+            ArrayList<String> usersName = new ArrayList<>();
+            for (Map.Entry<Integer,LibraryUser> user:users.entrySet()){
+                usersName.add(user.getValue().getName());
+            }
+            return usersName;
+        };
+        userInNeed.getSearchableFields(); // end of lambda
         AssetsRegister availableAssets = library.getAvailableAssets();
         if (availableAssets.isEmpty()) {
             System.out.println(RED + "There are no assets available for borrowing." + RESET);

@@ -23,6 +23,7 @@ class Interactor {
         allInteractions.putAll(buildUserMenuWithOptions());
         allInteractions.putAll(buildFileOperationMenuOptions());
         allInteractions.putAll(buildFileReadOperationMenuOptions());
+        //allInteractions.putAll(buildSearchMenuOptions());
         return allInteractions;
     }
 
@@ -42,6 +43,7 @@ class Interactor {
                 new MenuItem("SAMPLE data", "load-sample-data"),
                 new MenuItem("FILE PRINT OPERATIONS","file-print-menu"),
                 new MenuItem("FILE READ OPERATIONS","file-read-menu"),
+                //new MenuItem("SEARCH MENU","search-menu"),
                 new MenuItem("Exit", "exit")
         });
     }
@@ -100,6 +102,21 @@ class Interactor {
         });
     }
 
+//    private HashMap<String,Interaction> buildSearchMenuOptions(){
+//        var searchMenuInterface = new HashMap<String,Interaction>();
+//        searchMenuInterface.put("search-menu", createSearchMenu());
+//        searchMenuInterface.put("search-user", new SearchUser());
+//
+//        return searchMenuInterface;
+//    }
+//    private Menu createSearchMenu(){
+//        return new Menu("SEARCH MENU\n",new MenuItem[]{
+//                new MenuItem("SEARCH USER","search-user"),
+//                new MenuItem("SEARCH ASSET","search-title"),
+//                new MenuItem("SEARCH AUTHOR","search-author"),
+//                new MenuItem("Back","main")
+//        });
+//    }
     private HashMap<String, Interaction> buildFileOperationMenuOptions(){
         var fileOperationMenu = new HashMap<String, Interaction>();
         fileOperationMenu.put("file-print-menu", createFileOperationMenu());
