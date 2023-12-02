@@ -12,6 +12,8 @@ public interface Library {
 
     LibraryUserRegister getAllUsers();
 
+    boolean hasUsers();
+
     // Assets
     AssetsRegister getAllAssets();
 
@@ -46,4 +48,6 @@ public interface Library {
     void loadSampleData();
 
     AssetsRegister getAssetsForCreator(Person creator);
+
+    Loan getLoan(Asset assetToReturn);
 }

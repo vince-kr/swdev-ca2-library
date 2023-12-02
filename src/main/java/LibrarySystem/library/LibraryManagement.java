@@ -40,6 +40,11 @@ class LibraryManagement implements Library {
     }
 
     @Override
+    public boolean hasUsers() {
+        return !allUsers.isEmpty();
+    }
+
+    @Override
     public Asset getAsset(int id) {
         return catalogue.getAsset(id);
     }
@@ -158,5 +163,12 @@ class LibraryManagement implements Library {
         allLoans.add(newLoan);
     }
 
-
+    @Override
+    public Loan getLoan(Asset asset) {
+        for (Loan loan : allLoans) {
+            if (loan.getAsset().equals(asset))
+                return loan;
+        }
+        return null;
+    }
 }
