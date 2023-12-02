@@ -35,11 +35,6 @@ class LibraryManagement implements Library {
     }
 
     @Override
-    public int getLastUserID() {
-        return allUsers.getLastID();
-    }
-
-    @Override
     public LibraryUserRegister getAllUsers() {
         return allUsers;
     }
@@ -95,11 +90,6 @@ class LibraryManagement implements Library {
     @Override
     public int getAssetCount() {
         return catalogue.getAssetCount();
-    }
-
-    @Override
-    public int getLastAssetID() {
-        return catalogue.getLastAssetID();
     }
 
     @Override

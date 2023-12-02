@@ -10,8 +10,6 @@ public interface Library {
 
     void addUser(LibraryUser libraryUser);
 
-    int getLastUserID();
-
     LibraryUserRegister getAllUsers();
 
     // Assets
@@ -22,8 +20,6 @@ public interface Library {
     void addAsset(Asset toAdd);
 
     int getAssetCount();
-
-    int getLastAssetID();
 
     AssetsRegister getAvailableAssets();
 

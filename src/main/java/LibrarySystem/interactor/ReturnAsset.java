@@ -47,9 +47,8 @@ public class ReturnAsset extends Interaction{
                 System.out.println(GREEN+"Asset: "+asset+" returned by user: "+userToReturn+RESET);
             }
         }
-
-
     }
+
     private LibraryUser askLibraryUser(Library library) {
         String allUsers = library.getAllUsers().toString();
         String prompt = "Please enter the required user ID: ";

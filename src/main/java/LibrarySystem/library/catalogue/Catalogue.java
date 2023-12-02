@@ -15,8 +15,6 @@ public interface Catalogue {
 
     AssetsRegister getAllAssets();
 
-    int getLastAssetID();
-
     HashMap<Integer, Person> getAllCreators();
 
     int getLastCreatorID();

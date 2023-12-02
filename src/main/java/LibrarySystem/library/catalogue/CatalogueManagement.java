@@ -27,11 +27,6 @@ class CatalogueManagement implements Catalogue {
     }
 
     @Override
-    public int getLastAssetID() {
-        return computeCurrentID(allAssets.keySet());
-    }
-
-    @Override
     public HashMap<Integer, Person> getAllCreators() {
         return allCreators;
     }

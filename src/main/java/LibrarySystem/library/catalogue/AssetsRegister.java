@@ -3,6 +3,7 @@ package LibrarySystem.library.catalogue;
 import LibrarySystem.util.format.StringFormat;
 import LibrarySystem.library.Person;
 
+import java.util.Collections;
 import java.util.HashMap;
 
 public class AssetsRegister extends HashMap<Integer, Asset> {
@@ -38,5 +39,9 @@ public class AssetsRegister extends HashMap<Integer, Asset> {
         }
 
         return selectedAssets;
+    }
+
+    public int getGreatestID() {
+        return this.isEmpty() ? 10000 : Collections.max(this.keySet());
     }
 }

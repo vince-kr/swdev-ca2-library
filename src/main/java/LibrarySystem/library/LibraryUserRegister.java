@@ -6,6 +6,10 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class LibraryUserRegister extends HashMap<Integer, LibraryUser> {
+    public LibraryUser getUser(int id) {
+        return this.get(id);
+    }
+
     void addUser(LibraryUser newUser) {
         this.put(getLastID() + 1, newUser);
     }
@@ -21,7 +25,7 @@ public class LibraryUserRegister extends HashMap<Integer, LibraryUser> {
         return userSummary.toString();
     }
 
-    int getLastID() {
+    public int getLastID() {
         return this.isEmpty() ? 20000 : Collections.max(this.keySet());
     }
 }

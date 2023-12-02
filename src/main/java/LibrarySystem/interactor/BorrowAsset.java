@@ -2,6 +2,7 @@ package LibrarySystem.interactor;
 
 import LibrarySystem.library.Library;
 import LibrarySystem.library.LibraryUser;
+import LibrarySystem.library.LibraryUserRegister;
 import LibrarySystem.library.Loan;
 import LibrarySystem.library.catalogue.*;
 import LibrarySystem.util.io.StandardInput;
@@ -26,13 +27,20 @@ public class BorrowAsset extends Interaction {
 
         System.out.println(header);
 
-        if (library.getAllUsers().isEmpty()) {
+        LibraryUserRegister allUsers = library.getAllUsers();
+        if (allUsers.isEmpty()) {
             System.out.println(RED + "Create users before performing borrowing " + RESET);
             return;
         }
 
-        LibraryUser userWantsToBorrow = askLibraryUser(library);
-        AssetRegisterEntry assetEntry = askAssetToBorrow(library);
+        AssetsRegister availableAssets = library.getAvailableAssets();
+        if (availableAssets.isEmpty()) {
+            System.out.println(RED + "There are no assets available for borrowing." + RESET);
+            return;
+        }
+
+        LibraryUser userWantsToBorrow = askLibraryUser(allUsers);
+        AssetRegisterEntry assetEntry = askAssetToBorrow(availableAssets);
         Asset assetToBorrow = assetEntry.getValue();
 
         // Record the loan
@@ -41,30 +49,28 @@ public class BorrowAsset extends Interaction {
         System.out.println(GREEN+" Asset: " + assetToBorrow.getTitle() + " borrowed by user: " + userWantsToBorrow.getName() + ", successfully."+RESET);
     }
 
-    private LibraryUser askLibraryUser(Library library) {
-        String allUsers = library.getAllUsers().toString();
+    private LibraryUser askLibraryUser(LibraryUserRegister allUsers) {
         String prompt = "Please enter the required user ID: ";
 
         System.out.println(allUsers);
 
-        int userID = StandardInput.getPositiveInt(prompt, library.getLastUserID());
+        int userID = StandardInput.getPositiveInt(prompt, allUsers.getLastID());
 
-        LibraryUser selectedUser = library.getUser(userID);
+        LibraryUser selectedUser = allUsers.getUser(userID);
         if (selectedUser != null) {
             return selectedUser;
         }
         else {
             System.out.println("User with given Id not found in the system!!!");
-            return askLibraryUser(library);
+            return askLibraryUser(allUsers);
         }
     }
 
-    private AssetRegisterEntry askAssetToBorrow(Library library) {
-        AssetsRegister availableAssets = library.getAvailableAssets();
+    private AssetRegisterEntry askAssetToBorrow(AssetsRegister availableAssets) {
         String prompt = "Please enter the required asset ID: ";
 
         System.out.println(availableAssets);
-        int assetID = StandardInput.getIntInRange(prompt, 10001, library.getLastAssetID());
+        int assetID = StandardInput.getIntInRange(prompt, 10001, availableAssets.getGreatestID());
 
         for (Map.Entry<Integer, Asset> assetEntry : availableAssets.entrySet()) {
             int key = assetEntry.getKey();
@@ -74,7 +80,7 @@ public class BorrowAsset extends Interaction {
         }
 
         System.out.println("That asset ID is not valid. Please try again.");
-        return askAssetToBorrow(library);
+        return askAssetToBorrow(availableAssets);
     }
 
 }
