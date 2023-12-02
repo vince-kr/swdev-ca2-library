@@ -1,14 +1,16 @@
 package LibrarySystem.library.catalogue;
 
-import LibrarySystem.library.Searchable;
 import LibrarySystem.util.format.StringFormat;
 import LibrarySystem.library.Person;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 public class AssetsRegister extends HashMap<Integer, Asset> {
+    public Asset getAsset(int id) {
+        return this.get(id);
+    }
+
     public String toString() {
         var assetsSummary = new StringBuilder();
 
@@ -43,7 +45,7 @@ public class AssetsRegister extends HashMap<Integer, Asset> {
         return selectedAssets;
     }
 
-    public int getGreatestID() {
+    public int getLastID() {
         return this.isEmpty() ? 10000 : Collections.max(this.keySet());
     }
 }

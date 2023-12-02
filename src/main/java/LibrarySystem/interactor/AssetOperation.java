@@ -41,7 +41,7 @@ abstract class AssetOperation extends Interaction {
 
         if (filteredUsers.isEmpty()) {
             System.out.println("This search did not return any results.");
-            filterLibraryUsers(allUsers);
+            return filterLibraryUsers(allUsers);
         }
 
         return filteredUsers;
@@ -66,19 +66,58 @@ abstract class AssetOperation extends Interaction {
     }
 
     static AssetRegisterEntry askAsset(AssetsRegister availableAssets) {
-        String prompt = "Please enter the required asset ID: ";
+        Asset selectedAsset = null;
 
-        System.out.println(availableAssets);
-        int assetID = StandardInput.getIntInRange(prompt, 10001, availableAssets.getGreatestID());
-
-        for (Map.Entry<Integer, Asset> assetEntry : availableAssets.entrySet()) {
-            int key = assetEntry.getKey();
-            if (key == assetID) {
-                return new AssetRegisterEntry(key, availableAssets.get(key));
-            }
+        while (selectedAsset == null) {
+            AssetsRegister filteredAssets = filterAssets(availableAssets);
+            selectedAsset = chooseAsset(filteredAssets);
         }
 
-        System.out.println(RED + "That asset ID is not valid. Please try again." + RESET);
-        return askAsset(availableAssets);
+        for (Map.Entry<Integer, Asset> assetEntry : availableAssets.entrySet()) {
+            if (assetEntry.getValue().equals(selectedAsset))
+                return new AssetRegisterEntry(assetEntry.getKey(), assetEntry.getValue());
+        }
+
+        return null;
     }
+
+    private static AssetsRegister filterAssets(AssetsRegister assets) {
+        var filteredAssets = new AssetsRegister();
+
+        String prompt = "Enter your search term -- asterisk * can be used as a wildcard: ";
+        String responsePattern = "^[\\p{L} \\*\\.,'-]+$";
+        String query = StandardInput.getValidString(prompt, responsePattern);
+
+        for (Map.Entry<Integer, Asset> assetEntry : assets.entrySet()) {
+            Asset asset = assetEntry.getValue();
+            if (Search.matchQuery(asset, query))
+                filteredAssets.put(assetEntry.getKey(), asset);
+        }
+
+        if (filteredAssets.isEmpty()) {
+            System.out.println("This search did not return any results.");
+            return filterAssets(assets);
+        }
+
+        return filteredAssets;
+    }
+
+    private static Asset chooseAsset(AssetsRegister assets) {
+        String prompt = "Enter the required asset ID, or 0 to do another search: ";
+
+        System.out.println(assets);
+        int assetID = StandardInput.getIntInRange(prompt, 0, assets.getLastID());
+
+        if (assetID == 0)
+            return null;
+
+        Asset selectedAsset = assets.getAsset(assetID);
+        if (selectedAsset == null) {
+            System.out.println(RED + "No asset with that ID exists!" + RESET);
+            return chooseAsset(assets);
+        }
+
+        return selectedAsset;
+    }
+
 }
