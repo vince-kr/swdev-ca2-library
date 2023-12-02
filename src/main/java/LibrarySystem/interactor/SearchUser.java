@@ -8,6 +8,9 @@ import LibrarySystem.library.Searchable;
 import java.util.ArrayList;
 import java.util.Map;
 
+import static LibrarySystem.interactor.AssetOperation.askLibraryUser;
+import static LibrarySystem.interactor.AssetOperation.searchLibraryUser;
+
 public class SearchUser extends Interaction{
     static final String RESET = "\u001B[0m";
     static final String RED = "\u001B[31m";
@@ -30,8 +33,11 @@ public class SearchUser extends Interaction{
             return userNames;
         };
 
-        System.out.println(userToFind.getSearchableFields());;
-        //this.nextReference = "search-menu";
+        if (userToFind.getSearchableFields().equals("")){
+            System.out.println("User not found");
+        }
+        userToFind.getSearchableFields();
+        searchLibraryUser(library.getAllUsers());
 
     }
 }

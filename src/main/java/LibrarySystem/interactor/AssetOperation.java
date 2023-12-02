@@ -26,6 +26,12 @@ abstract class AssetOperation extends Interaction {
         return selectedUser;
     }
 
+    static LibraryUserRegister searchLibraryUser(LibraryUserRegister allUsers){
+        LibraryUserRegister filteredUsers = filterLibraryUsers(allUsers);
+        System.out.println(filteredUsers);
+        return filteredUsers;
+
+    }
     private static LibraryUserRegister filterLibraryUsers(LibraryUserRegister allUsers) {
         var filteredUsers = new LibraryUserRegister();
 

@@ -13,6 +13,7 @@ class LibraryUserTest {
     private LibraryUser user;
     private LibraryUser user1;
     private BookAudioBook book;
+    private ArrayList<String> userNames;
     private CdDvd cd;
 
     @BeforeEach
@@ -25,6 +26,7 @@ class LibraryUserTest {
         book = new BookAudioBook("Ecosystem",1,"0-789-37569-1","1985",author);
         cd = new CdDvd("Life",1,producer,director,3000,"1990");
         library = LibraryFactory.createLibrary();
+        userNames = new ArrayList<>();
     }
 
     @Test
@@ -51,5 +53,13 @@ class LibraryUserTest {
         // Lexicographical difference between user and user1 should be 1
         // First letters are J and K
         assertEquals(1,user1.compareTo(user));
+    }
+    @Test
+    void getSearchableField(){
+        library.addUser(user);
+        library.addUser(user1);
+        userNames.add(user.getName());
+     assertEquals(userNames,user.getSearchableFields());
+
     }
 }

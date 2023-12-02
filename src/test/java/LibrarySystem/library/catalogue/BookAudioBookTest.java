@@ -1,23 +1,30 @@
 package LibrarySystem.library.catalogue;
 
+import LibrarySystem.library.Library;
+import LibrarySystem.library.LibraryFactory;
 import LibrarySystem.library.PersonException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BookAudioBookTest {
 
+    private Library library;
     private BookAudioBook book;
     private Author author;
+    private ArrayList<String> assetNames;
 
     @BeforeEach
     void setUp() throws PersonException {
         author = new Author("King James");
         book = new BookAudioBook("Holy Bible",1,"0-546-77123-9","2000",author);
+        library = LibraryFactory.createLibrary();
+        assetNames = new ArrayList<>();
     }
 
     @Test
@@ -75,10 +82,16 @@ class BookAudioBookTest {
     }
 
 
-
-
     @Test
     void getCreatorName() {
         assertEquals("King James",book.getAuthor().getName());
+    }
+    @Test
+    void getSearchableFields(){
+        library.addAsset(book);
+        assetNames.add(book.getTitle());
+        assetNames.add(book.getCreatorName());
+        assetNames.add(book.getAssetType());
+        assertEquals(assetNames,book.getSearchableFields());
     }
 }
