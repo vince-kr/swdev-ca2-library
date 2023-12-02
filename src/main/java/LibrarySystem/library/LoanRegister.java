@@ -14,7 +14,7 @@ public class LoanRegister extends ArrayList<Loan> {
 
         for (Loan loan : this) {
             if (loan.isActive() && loan.getUser().equals(user)) {
-                selectedAssets.put(loan.getID(), loan.getAsset());
+                selectedAssets.put(loan.getAssetID(), loan.getAsset());
             }
         }
 

@@ -24,7 +24,7 @@ public class Loan {
         return doingBorrowing;
     }
 
-    int getID() {
+    int getAssetID() {
         return toBorrow.getKey();
     }
 

@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,7 +40,7 @@ class LoanTest {
 
     @Test
     void getID() {
-        assertEquals(1001,loan.getID());
+        assertEquals(1001,loan.getAssetID());
     }
 
     @Test
