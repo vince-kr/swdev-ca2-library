@@ -16,35 +16,50 @@ abstract class AssetOperation extends Interaction {
     static final String RESET = "\u001B[0m";
 
     static LibraryUser askLibraryUser(LibraryUserRegister allUsers) {
-        String prompt = "Enter your search term -- asterisk * can be used as a wildcard: ";
-        String responsePattern = "^[\\p{L} \\*\\.,'-]+$";
-
         LibraryUser selectedUser = null;
 
         while (selectedUser == null) {
-            var usersToPrint = new LibraryUserRegister();
-            String query = StandardInput.getValidString(prompt, responsePattern);
+            LibraryUserRegister filteredUsers = filterLibraryUsers(allUsers);
+            selectedUser = chooseLibraryUser(filteredUsers);
+        }
 
-            for (Map.Entry<Integer, LibraryUser> userEntry : allUsers.entrySet()) {
-                LibraryUser user = userEntry.getValue();
-                if (Search.matchQuery(user, query))
-                    usersToPrint.put(userEntry.getKey(), user);
-            }
+        return selectedUser;
+    }
 
-            if (usersToPrint.isEmpty()) {
-                System.out.println("This search did not return any results.");
-                continue;
-            }
+    private static LibraryUserRegister filterLibraryUsers(LibraryUserRegister allUsers) {
+        var filteredUsers = new LibraryUserRegister();
 
-            System.out.println(usersToPrint);
+        String prompt = "Enter your search term -- asterisk * can be used as a wildcard: ";
+        String responsePattern = "^[\\p{L} \\*\\.,'-]+$";
+        String query = StandardInput.getValidString(prompt, responsePattern);
 
-            String newPrompt = "Enter the required user ID, or 0 to do another search: ";
-            int userID = StandardInput.getIntInRange(newPrompt, 0, usersToPrint.getLastID());
+        for (Map.Entry<Integer, LibraryUser> userEntry : allUsers.entrySet()) {
+            LibraryUser user = userEntry.getValue();
+            if (Search.matchQuery(user, query))
+                filteredUsers.put(userEntry.getKey(), user);
+        }
 
-            if (userID == 0)
-                continue;
+        if (filteredUsers.isEmpty()) {
+            System.out.println("This search did not return any results.");
+            filterLibraryUsers(allUsers);
+        }
 
-            selectedUser = allUsers.getUser(userID);
+        return filteredUsers;
+    }
+
+    private static LibraryUser chooseLibraryUser(LibraryUserRegister filteredUsers) {
+        String prompt = "Enter the required user ID, or 0 to do another search: ";
+
+        System.out.println(filteredUsers);
+        int userID = StandardInput.getIntInRange(prompt, 0, filteredUsers.getLastID());
+
+        if (userID == 0)
+            return null;
+
+        LibraryUser selectedUser = filteredUsers.getUser(userID);
+        if (selectedUser == null) {
+            System.out.println(RED + "No user with that ID exists!" + RESET);
+            return chooseLibraryUser(filteredUsers);
         }
 
         return selectedUser;
