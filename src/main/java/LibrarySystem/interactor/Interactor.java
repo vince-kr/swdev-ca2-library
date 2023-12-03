@@ -98,7 +98,6 @@ class Interactor {
     private Menu createCatalogueMenu() {
         return new Menu("MANAGE ASSETS\n", new MenuItem[]{
                 new MenuItem("ADD asset", "add-asset"),
-                new MenuItem("REMOVE asset", "remove-asset"),
                 new MenuItem("Back", "main")
         });
     }
