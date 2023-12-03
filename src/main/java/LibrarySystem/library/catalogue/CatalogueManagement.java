@@ -6,7 +6,6 @@ import LibrarySystem.library.PersonException;
 import java.util.*;
 
 class CatalogueManagement implements Catalogue {
-
     final HashMap<Integer, Person> allCreators;
     final AssetsRegister allAssets;
 
@@ -104,5 +103,4 @@ class CatalogueManagement implements Catalogue {
     private int computeCurrentID(Collection<Integer> keys) {
         return keys.isEmpty() ? 10000 : Collections.max(keys);
     }
-
 }

@@ -23,6 +23,5 @@ public class AddUser extends Interaction {
         } catch (PersonException pe) {
             System.out.println(pe.getMessage());
         }
-
     }
 }

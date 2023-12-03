@@ -1,14 +1,10 @@
 package LibrarySystem.library.catalogue;
 
-
-
-
 public class ThesisDissertation extends Asset{
     private Author author;
     private String topic;
     private String summary;
     private String publishedDate;
-
 
     public ThesisDissertation(String title, int quantity, Author author, String topic, String summary, String publishedDate) {
         super(title, quantity);
@@ -17,8 +13,6 @@ public class ThesisDissertation extends Asset{
         this.summary = summary;
         this.publishedDate = publishedDate;
     }
-
-
 
     public Author getAuthor() {
         return author;
@@ -35,7 +29,6 @@ public class ThesisDissertation extends Asset{
     public void setTopic(String topic) {
         this.topic = topic;
     }
-
 
     public String getSummary() {
         return summary;
@@ -67,8 +60,4 @@ public class ThesisDissertation extends Asset{
     public String getAssetType() {
         return "Thesis / Dissertation";
     }
-
-
-
-
 }

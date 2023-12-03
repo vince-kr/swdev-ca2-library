@@ -17,9 +17,17 @@ public class LibraryUserRegister extends HashMap<Integer, LibraryUser> {
     public String toString() {
         var userSummary = new StringBuilder();
 
+        userSummary.append(StringFormat.fixedLength("ID", 12));
+        userSummary.append(StringFormat.fixedLength("NAME", 36));
+        userSummary.append(StringFormat.fixedLength("STATE", 12));
+        userSummary.append("\n");
+
         for (int userID : this.keySet()) {
+            LibraryUser user = this.get(userID);
             userSummary.append(StringFormat.fixedLength(userID, 12));
-            userSummary.append(StringFormat.fixedLength(this.get(userID).getName(), 36));
+            userSummary.append(StringFormat.fixedLength(user.getName(), 36));
+            userSummary.append(StringFormat.fixedLength(user.isActive() ? "Active" : "Inactive", 12));
+            userSummary.append("\n");
         }
 
         return userSummary.toString();

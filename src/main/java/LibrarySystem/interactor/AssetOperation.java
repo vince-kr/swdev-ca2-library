@@ -63,14 +63,14 @@ abstract class AssetOperation extends Interaction {
         }
         return filteredAuthors;
     }
-    private static LibraryUserRegister filterLibraryUsers(LibraryUserRegister allUsers) {
+    private static LibraryUserRegister filterLibraryUsers(LibraryUserRegister activeUsers) {
         var filteredUsers = new LibraryUserRegister();
 
-        String prompt = "Enter your search term -- asterisk * can be used as a wildcard: ";
+        String prompt = "Enter (part of) the user's name -- asterisk * can be used as a wildcard: ";
         String responsePattern = "^[\\p{L} \\*\\.,'-]+$";
         String query = StandardInput.getValidString(prompt, responsePattern);
 
-        for (Map.Entry<Integer, LibraryUser> userEntry : allUsers.entrySet()) {
+        for (Map.Entry<Integer, LibraryUser> userEntry : activeUsers.entrySet()) {
             LibraryUser user = userEntry.getValue();
             if (Search.matchQuery(user, query))
                 filteredUsers.put(userEntry.getKey(), user);
@@ -78,7 +78,7 @@ abstract class AssetOperation extends Interaction {
 
         if (filteredUsers.isEmpty()) {
             System.out.println("This search did not return any results.");
-            return filterLibraryUsers(allUsers);
+            return filterLibraryUsers(activeUsers);
         }
 
         return filteredUsers;
@@ -121,7 +121,7 @@ abstract class AssetOperation extends Interaction {
     private static AssetsRegister filterAssets(AssetsRegister assets) {
         var filteredAssets = new AssetsRegister();
 
-        String prompt = "Enter your search term -- asterisk * can be used as a wildcard: ";
+        String prompt = "Enter (part of) the asset name, creator's name, or type (such as 'book') -- asterisk * can be used as a wildcard: ";
         String responsePattern = "^[\\p{L} \\*\\.,'-]+$";
         String query = StandardInput.getValidString(prompt, responsePattern);
 

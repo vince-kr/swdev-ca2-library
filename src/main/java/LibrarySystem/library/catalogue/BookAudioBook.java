@@ -1,8 +1,5 @@
 package LibrarySystem.library.catalogue;
 
-
-
-
 public class BookAudioBook extends Asset {
     private Author author;
     private String isbn;
@@ -54,7 +51,4 @@ public class BookAudioBook extends Asset {
     public String toString() {
         return String.format("Title: %s, Author: %s", getTitle(),author.getName());
     }
-
-
-
 }

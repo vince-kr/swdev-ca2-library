@@ -12,7 +12,9 @@ public interface Library {
 
     LibraryUserRegister getAllUsers();
 
-    boolean hasUsers();
+    LibraryUserRegister getActiveUsers();
+
+    boolean hasNoUsers();
 
     // Assets
     AssetsRegister getAllAssets();

@@ -11,13 +11,12 @@ public class ListBorrowedByUser extends AssetOperation {
         nextReference = "common-filters";
 
         System.out.println(header);
-        if (library.getAllUsers().isEmpty()){
-            System.out.println(RED+"No asset borrowed by users."+RESET);
+        if (library.hasNoUsers()) {
+            System.out.println(RED + "No library users exist in the system." + RESET);
             return;
         }
 
-        LibraryUser libraryUser = askLibraryUser(library.getAllUsers());
-
+        LibraryUser libraryUser = askLibraryUser(library.getActiveUsers());
         AssetsRegister borrowedByUser = library.getAssetsForUser(libraryUser);
         System.out.println(borrowedByUser);
     }

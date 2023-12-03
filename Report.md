@@ -35,5 +35,9 @@ Menu items are objects of type MenuItem. Each MenuItem takes a `String descripti
 
 ## Package `library`: system logic
 
+### Overview
+
+This package contains the system logic that is used by the interactor package. In order to maintain separation, most 
+
 ## Package `util`: utility classes
 

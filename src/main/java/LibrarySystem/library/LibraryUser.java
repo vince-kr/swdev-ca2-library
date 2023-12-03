@@ -1,8 +1,19 @@
 package LibrarySystem.library;
 
 public class LibraryUser extends Person implements Comparable<LibraryUser>{
+    boolean isActive;
+
     public LibraryUser(String name) throws PersonException {
         super(name);
+        this.isActive = true;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void deactivate() {
+        isActive = false;
     }
 
     @Override

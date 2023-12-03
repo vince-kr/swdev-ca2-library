@@ -168,6 +168,7 @@ class Interactor {
         var userMenuInteractions = new HashMap<String, Interaction>();
         userMenuInteractions.put("manage-users", createUserMenu());
         userMenuInteractions.put("add-customer", new AddUser());
+        userMenuInteractions.put("deactivate-customer", new DeactivateUser());
         return userMenuInteractions;
     }
 

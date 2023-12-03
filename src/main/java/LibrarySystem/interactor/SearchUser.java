@@ -8,7 +8,6 @@ import LibrarySystem.library.Searchable;
 import java.util.ArrayList;
 import java.util.Map;
 
-import static LibrarySystem.interactor.AssetOperation.askLibraryUser;
 import static LibrarySystem.interactor.AssetOperation.searchLibraryUser;
 
 public class SearchUser extends Interaction{
@@ -16,10 +15,11 @@ public class SearchUser extends Interaction{
     static final String RED = "\u001B[31m";
     static final String GREEN = "\u001B[32m";
     String header = "SEARCH FOR A USER\n";
+
     @Override
     public void requestAndResponse(Library library) {
         System.out.println(header);
-        if (!library.hasUsers()) {
+        if (library.hasNoUsers()) {
             System.out.println(RED + "No users in the system." + RESET);
             return;
         }

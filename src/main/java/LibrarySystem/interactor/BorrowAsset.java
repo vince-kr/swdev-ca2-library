@@ -25,13 +25,13 @@ public class BorrowAsset extends AssetOperation {
 
         System.out.println(header);
 
-        if (!library.hasUsers()) {
+        if (library.hasNoUsers()) {
             System.out.println(RED + "Create users before performing borrowing." + RESET);
             return;
         }
         //lambda implementation
-        Searchable userInNeed = () ->{
-            LibraryUserRegister users = library.getAllUsers();
+        Searchable userInNeed = () -> {
+            LibraryUserRegister users = library.getActiveUsers();
             ArrayList<String> usersName = new ArrayList<>();
             for (Map.Entry<Integer,LibraryUser> user:users.entrySet()){
                 usersName.add(user.getValue().getName());
@@ -45,7 +45,7 @@ public class BorrowAsset extends AssetOperation {
             return;
         }
 
-        LibraryUser userWantsToBorrow = askLibraryUser(library.getAllUsers());
+        LibraryUser userWantsToBorrow = askLibraryUser(library.getActiveUsers());
         AssetRegisterEntry assetEntry = askAsset(availableAssets);
         Asset assetToBorrow = assetEntry.getValue();
 

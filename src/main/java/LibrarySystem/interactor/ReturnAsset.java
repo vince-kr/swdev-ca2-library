@@ -22,13 +22,13 @@ public class ReturnAsset extends AssetOperation {
          */
         System.out.println(header);
 
-        if (!library.hasUsers()) {
+        if (library.hasNoUsers()) {
             System.out.println(RED + "Create users before performing return." + RESET);
             return;
         }
 
         // get user by Id
-        LibraryUser userDoingReturn = askLibraryUser(library.getAllUsers());
+        LibraryUser userDoingReturn = askLibraryUser(library.getActiveUsers());
 
         AssetsRegister availableAssets = library.getAssetsForUser(userDoingReturn);
         if (availableAssets.isEmpty()) {

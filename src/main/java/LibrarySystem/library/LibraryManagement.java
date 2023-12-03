@@ -39,9 +39,20 @@ class LibraryManagement implements Library {
         return allUsers;
     }
 
+    public LibraryUserRegister getActiveUsers() {
+        var activeUsers = new LibraryUserRegister();
+
+        for (Map.Entry<Integer, LibraryUser> userEntry : allUsers.entrySet()) {
+            if (userEntry.getValue().isActive())
+                activeUsers.put(userEntry.getKey(), userEntry.getValue());
+        }
+
+        return activeUsers;
+    }
+
     @Override
-    public boolean hasUsers() {
-        return !allUsers.isEmpty();
+    public boolean hasNoUsers() {
+        return getActiveUsers().isEmpty();
     }
 
     @Override

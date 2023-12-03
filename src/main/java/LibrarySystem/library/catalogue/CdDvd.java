@@ -6,10 +6,7 @@ public class CdDvd extends Asset {
     private Producer producer;
     private Director director;
     private int playTime;
-
     private String productionYear;
-
-
 
     public CdDvd(String title, int quantity, Producer producer, Director director, int playTime, String productionYear) {
         super(title, quantity);
@@ -36,7 +33,6 @@ public class CdDvd extends Asset {
         this.director = director;
     }
 
-
     public int getPlayTime() {
         return playTime;
     }
@@ -60,7 +56,6 @@ public class CdDvd extends Asset {
 
     @Override
     public String toString() {
-
         return String.format("Title: %s, Producer: %s, ProductionYear: %s",getTitle(),producer.getName(),productionYear);
     }
 
@@ -68,7 +63,4 @@ public class CdDvd extends Asset {
     public String getAssetType() {
         return "Cd / Dvd";
     }
-
-
-
 }
