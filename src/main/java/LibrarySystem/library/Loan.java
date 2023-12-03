@@ -48,7 +48,7 @@ public class Loan {
         isActive = false;
     }
 
-    public boolean loanOverdue() {
+    public boolean isOverdue() {
         LocalDate today = LocalDate.now();
         return this.isActive && today.isAfter(dateDue);
     }

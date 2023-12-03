@@ -28,13 +28,10 @@ public interface Library {
     AssetsRegister getBorrowedAssets();
 
     AssetsRegister getOverDueLoans();
-    int getLoansOneAsset(Asset asset);
 
     AssetsRegister getAssetsForUser(LibraryUser user);
 
     // Loan operations
-    LoanRegister getAllLoans();
-
     void recordLoan(Loan newLoan);
 
     // Other catalogue operations
@@ -50,5 +47,5 @@ public interface Library {
 
     AssetsRegister getAssetsForCreator(Person creator);
 
-    Loan getLoan(Asset assetToReturn);
+    Loan getLoan(LibraryUser libraryUser, Asset assetToReturn);
 }

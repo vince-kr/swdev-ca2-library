@@ -41,7 +41,7 @@ public class ReturnAsset extends AssetOperation {
         Asset assetToReturn = assetEntry.getValue();
 
         // Get loan for selected asset and return it
-        library.getLoan(assetToReturn).returnAsset();
+        library.getLoan(userDoingReturn, assetToReturn).returnAsset();
 
         System.out.println(GREEN + "Asset: " + assetToReturn + " returned by user: " + userDoingReturn + RESET);
     }

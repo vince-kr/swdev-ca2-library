@@ -82,21 +82,11 @@ class LibraryManagement implements Library {
     public AssetsRegister getOverDueLoans() {
         var overDueLoans = new AssetsRegister();
         for (Loan loan:allLoans){
-            if (loan.isActive() && loan.loanOverdue()){
+            if (loan.isActive() && loan.isOverdue()){
               overDueLoans.put(loan.getAssetID(), loan.getAsset());
             }
         }
         return overDueLoans;
-    }
-
-    @Override
-    public int getLoansOneAsset(Asset asset) {
-        int count = 0;
-        for (Loan loan : allLoans) {
-            if (loan.getAsset().equals(asset))
-                count++;
-        }
-        return count;
     }
 
     @Override
@@ -166,19 +156,14 @@ class LibraryManagement implements Library {
     }
 
     @Override
-    public LoanRegister getAllLoans() {
-        return allLoans;
-    }
-
-    @Override
     public void recordLoan(Loan newLoan) {
         allLoans.add(newLoan);
     }
 
     @Override
-    public Loan getLoan(Asset asset) {
+    public Loan getLoan(LibraryUser libraryUser, Asset asset) {
         for (Loan loan : allLoans) {
-            if (loan.getAsset().equals(asset))
+            if (loan.getUser().equals(libraryUser) && loan.getAsset().equals(asset))
                 return loan;
         }
         return null;
