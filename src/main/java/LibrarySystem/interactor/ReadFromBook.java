@@ -19,10 +19,11 @@ public class ReadFromBook extends Interaction{
             HashMap<Integer, BookAudioBook> books = Files.readBookCsv("books.csv");
             if (!(books == null)) {
                 var sb = new StringBuilder();
-                sb.append(StringFormat.fixedLength(GREEN + "ID", 12));
+                sb.append(GREEN);
+                sb.append(StringFormat.fixedLength("ID", 12));
                 sb.append(StringFormat.fixedLength("TITLE", 24));
-                sb.append(StringFormat.fixedLength("ISBN", 15));
-                sb.append(StringFormat.fixedLength("YEAR", 12));
+                sb.append(StringFormat.fixedLength("ISBN", 20));
+                sb.append(StringFormat.fixedLength("YEAR", 8));
                 sb.append(StringFormat.fixedLength("AUTHOR", 24));
                 sb.append(StringFormat.fixedLength("QUANTITY" + RESET, 12));
                 sb.append("\n");
@@ -30,8 +31,8 @@ public class ReadFromBook extends Interaction{
                     for (Map.Entry<Integer, BookAudioBook> book : books.entrySet()) {
                         sb.append(StringFormat.fixedLength(book.getKey(), 12));
                         sb.append(StringFormat.fixedLength(book.getValue().getTitle(), 24));
-                        sb.append(StringFormat.fixedLength(book.getValue().getIsbn(), 15));
-                        sb.append(StringFormat.fixedLength(book.getValue().getPublishedYear(), 12));
+                        sb.append(StringFormat.fixedLength(book.getValue().getIsbn(), 20));
+                        sb.append(StringFormat.fixedLength(book.getValue().getPublishedYear(), 8));
                         sb.append(StringFormat.fixedLength(book.getValue().getAuthor().getName(), 24));
                         sb.append(StringFormat.fixedLength(book.getValue().getQuantity(), 12));
                         sb.append("\n");

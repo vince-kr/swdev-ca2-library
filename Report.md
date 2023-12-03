@@ -39,6 +39,8 @@ Menu items are objects of type MenuItem. Each MenuItem takes a `String descripti
 
 This package contains the system logic that is used by the interactor package. The library interface defines methods that can be called on the `Library` type which gets passed into every event loop call. These methods are implemented by `LibraryManagement`. Methods that interact with the catalogue of assets are passed on to the library's copy of the `Catalogue` object.
 
+The `LibraryManagement` and `Catalogue` classes also hold the collections of users, assets, and creators (authors/directors/producers). These collections are all `HashMap` with a little bit of extra functionality. Maps are great at retrieving and updating records, which is expected to happen often over the program's lifetime. Iterating over the `Entry` of each element's ID + the element itself provides a simple way of accessing an element plus the associated ID.
+
 ### Loans as a class
 
 While a loan is not a real-world object, defining the occurrence of a loan as a type simplifies development. Once a Loan object exists, there is no reason to differentiate between items in the *catalogue* -- which represents a record of what the library has available -- and the actual *books on shelves*.
