@@ -1,5 +1,6 @@
 package LibrarySystem.interactor;
 
+import LibrarySystem.library.LibraryAuthorUser;
 import LibrarySystem.library.LibraryUser;
 import LibrarySystem.library.LibraryUserRegister;
 import LibrarySystem.library.Person;
@@ -41,19 +42,19 @@ abstract class AssetOperation extends Interaction {
     }
 
     static HashMap<Integer, Person> searchAuthors(HashMap<Integer,Person> allAuthors){
-        HashMap<Integer,Person> filteredAuthors = filterAuthors((allAuthors));
+        LibraryAuthorUser filteredAuthors = filterAuthors((allAuthors));
         System.out.println(filteredAuthors);
         return filteredAuthors;
     }
-    private static HashMap<Integer, Person> filterAuthors(HashMap<Integer,Person> allAuthors){
-        var filteredAuthors = new HashMap<Integer,Person>();
+    private static LibraryAuthorUser filterAuthors(HashMap<Integer,Person> allAuthors){
+        var filteredAuthors = new LibraryAuthorUser();
         String prompt = "Enter your search term -- asterisk * can be used as a wildcard: ";
         String responsePattern = "^[\\p{L} \\*\\.,'-]+$";
         String query = StandardInput.getValidString(prompt, responsePattern);
         for (Map.Entry<Integer,Person> userEntry:allAuthors.entrySet()){
             Person author = userEntry.getValue();
             if (Search.matchQuery(author,query)){
-                filteredAuthors.put(userEntry.getKey(),author);
+                filteredAuthors.put(userEntry.getKey(), author);
             }
         }
         if (filteredAuthors.isEmpty()){

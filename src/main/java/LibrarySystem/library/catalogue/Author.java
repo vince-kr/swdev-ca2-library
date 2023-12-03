@@ -2,6 +2,9 @@ package LibrarySystem.library.catalogue;
 
 import LibrarySystem.library.Person;
 import LibrarySystem.library.PersonException;
+import LibrarySystem.util.format.StringFormat;
+
+import java.util.HashMap;
 
 public class Author extends Person implements Comparable<Author> {
     public Author(String name) throws PersonException {
@@ -12,6 +15,7 @@ public class Author extends Person implements Comparable<Author> {
     public String toString() {
         return String.format("AuthorName: %s", getName());
     }
+
 
     /*
      Compare authors by name

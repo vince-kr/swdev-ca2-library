@@ -1,6 +1,9 @@
 package LibrarySystem.library;
 
+import LibrarySystem.util.format.StringFormat;
+
 import java.util.Collections;
+import java.util.HashMap;
 
 public abstract class Person implements Searchable {
     private String name;
@@ -24,6 +27,7 @@ public abstract class Person implements Searchable {
     public Iterable<String> getSearchableFields() {
         return () -> Collections.singleton(this.name).iterator();
     }
+
 
     public abstract String toString();
     }

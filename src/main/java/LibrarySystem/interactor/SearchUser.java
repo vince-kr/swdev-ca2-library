@@ -34,7 +34,7 @@ public class SearchUser extends Interaction{
         };
 
         if (userToFind.getSearchableFields().equals("")){
-            System.out.println("User not found");
+            System.out.println(RED+"User not found"+RESET);
         }
         userToFind.getSearchableFields();
         searchLibraryUser(library.getAllUsers());
