@@ -1,6 +1,7 @@
 # Library catalogue system (LCS)
 
 ## Introduction
+![alt class diagram](src/images/LibraryManagementSystem.jpg "class diagram")
 
 The library catalogue system consists of three distinct packages: `interactor`, `library`, and `util`. Each is described at a high level and some design decisions are explained in a little more detail.
 
