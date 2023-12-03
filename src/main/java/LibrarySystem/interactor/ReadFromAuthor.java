@@ -1,6 +1,7 @@
 package LibrarySystem.interactor;
 
 import LibrarySystem.library.Library;
+import LibrarySystem.library.Person;
 import LibrarySystem.library.PersonException;
 import LibrarySystem.library.catalogue.Author;
 import LibrarySystem.util.format.StringFormat;
@@ -16,27 +17,26 @@ public class ReadFromAuthor extends Interaction{
     String header = "FILES\n";
     @Override
     public void requestAndResponse(Library library) {
-        try {
-            HashMap<Integer, Author> authors = Files.readAuthorCsv("authors.csv");
-            if (!(authors == null)) {
-                var sb = new StringBuilder();
-                sb.append(StringFormat.fixedLength(GREEN + "ID", 12));
-                sb.append(StringFormat.fixedLength("AUTHOR" + RESET, 24));
-                sb.append("\n");
+        HashMap<Integer,Person> authors = library.getAllCreators();
+        var assets = library.getAllAssets();
+        if (!(authors == null)) {
+            var sb = new StringBuilder();
+            sb.append(StringFormat.fixedLength(GREEN + "ID", 12));
+            sb.append(StringFormat.fixedLength("AUTHOR", 24));
+            sb.append(StringFormat.fixedLength("No of Assets"+ RESET,24));
+            sb.append("\n");
 
-                if (!authors.isEmpty()) {
-                    for (Map.Entry<Integer, Author> author : authors.entrySet()) {
-                        sb.append(StringFormat.fixedLength(author.getKey(), 12));
-                        sb.append(StringFormat.fixedLength(author.getValue().getName(), 24));
-                        sb.append("\n");
-                    }
-                    System.out.println(sb);
-                } else {
-                    System.out.println(RED + " No authors in the file." + RESET);
+            if (!authors.isEmpty()) {
+                for (Map.Entry<Integer, Person> author : authors.entrySet()) {
+                    sb.append(StringFormat.fixedLength(author.getKey(), 12));
+                    sb.append(StringFormat.fixedLength(author.getValue().getName(), 24));
+                    sb.append(StringFormat.fixedLength(assets.byCreator(author.getValue()).size(),24));
+                    sb.append("\n");
                 }
+                System.out.println(sb);
+            } else {
+                System.out.println(RED + " No authors in the file." + RESET);
             }
-        } catch (PersonException e) {
-            throw new RuntimeException(e);
         }
 
     }

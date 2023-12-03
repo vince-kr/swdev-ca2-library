@@ -38,7 +38,7 @@ public class ReadFromBook extends Interaction{
                     }
                     System.out.println(sb);
                 } else {
-                    System.out.println(RED + "The File is empty." + RESET);
+                    System.out.println(RED + "No books from file." + RESET);
                 }
 
             }

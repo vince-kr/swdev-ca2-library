@@ -27,7 +27,6 @@ public class BooksToFile extends Interaction{
             if (asset.getValue() instanceof BookAudioBook) {
                 allBooks.put(asset.getKey(), (BookAudioBook) asset.getValue());
             }
-
         }
         if (!allBooks.isEmpty()){
             System.out.println(GREEN+"Printing to file ..."+RESET);

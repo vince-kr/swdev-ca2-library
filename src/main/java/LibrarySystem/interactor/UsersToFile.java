@@ -2,6 +2,7 @@ package LibrarySystem.interactor;
 
 import LibrarySystem.library.Library;
 import LibrarySystem.library.LibraryUser;
+import LibrarySystem.library.LibraryUserRegister;
 import LibrarySystem.util.io.Files;
 
 import java.util.HashMap;
@@ -19,9 +20,9 @@ public class UsersToFile extends Interaction{
           2. call helper method to print to csv file
         */
         System.out.println(header);
-        HashMap<Integer, LibraryUser> users = library.getAllUsers();
-        if (!users.isEmpty()){
-            System.out.println("Printing to file ...");
+        //LibraryUserRegister users = library.getAllUsers();
+        if (!library.getAllUsers().isEmpty()){
+            System.out.println(GREEN+"Printing to file ..."+RESET);
             Files.printLibraryUserToFile(library,"users.csv");
         } else {
             System.out.println(RED+" No users in the system yet."+RESET);
