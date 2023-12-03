@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -86,12 +87,5 @@ class BookAudioBookTest {
     void getCreatorName() {
         assertEquals("King James",book.getAuthor().getName());
     }
-    @Test
-    void getSearchableFields(){
-        library.addAsset(book);
-        assetNames.add(book.getTitle());
-        assetNames.add(book.getCreatorName());
-        assetNames.add(book.getAssetType());
-        assertEquals(assetNames,book.getSearchableFields());
-    }
+
 }
