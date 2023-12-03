@@ -5,10 +5,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
-import LibrarySystem.library.Library;
-import LibrarySystem.library.LibraryUser;
-import LibrarySystem.library.Person;
-import LibrarySystem.library.PersonException;
+import LibrarySystem.library.*;
 import LibrarySystem.library.catalogue.*;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -24,6 +21,7 @@ public abstract class Files {
     static final String GREEN = "\u001B[32m";
     static final String RESET = "\u001B[0m";
     static final String DATA_PREFIX = "data/";
+    static private Library library;
 
     /*
         Print AuthorId, AuthorName and Number of assets
@@ -78,11 +76,12 @@ public abstract class Files {
 
     }
 
+
     /*
      Reads Authors from the csv file given
      */
-    public static HashMap<Integer, Author> readAuthorCsv(String csvFile) throws PersonException {
-        HashMap<Integer, Author> authors = new HashMap<>();
+    public static HashMap<Integer, Person> readAuthorCsv(String csvFile) throws PersonException {
+        HashMap<Integer, Person> authors = new HashMap<>();
         if (java.nio.file.Files.exists(Path.of(csvFile))) {
             csvFile = DATA_PREFIX + csvFile;
             try (FileReader fr = new FileReader(csvFile);
@@ -92,11 +91,11 @@ public abstract class Files {
                     int authorId = Integer.parseInt(csvRecord.get("AuthorId"));
                     authors.put(authorId, new Author(name));
                 }
+                System.out.println(GREEN+"Author object successfully read from file."+RESET);
             } catch (
                     IOException e) {
                 throw new RuntimeException(e);
             }
-
             return authors;
         }
         System.out.println(RED+"File does not exits"+RESET);
@@ -208,7 +207,7 @@ public abstract class Files {
 
     }
     /*
-        Reads fBooks from csv file given
+        Reads Books from csv file given
      */
 
     public static HashMap<Integer, BookAudioBook> readBookCsv(String csvFile) {
@@ -226,6 +225,7 @@ public abstract class Files {
                     String name = csvRecord.get("AuthorName");
                     books.put(id, new BookAudioBook(title, quantity, isbn, year, new Author(name)));
                 }
+                System.out.println(GREEN + "\n\tBook objects successfully read from file: " + csvFile + RESET);
             } catch (
                     IOException |
                     PersonException e) {
@@ -418,7 +418,6 @@ public abstract class Files {
                     String year = csvRecord.get("Production Year");
                     String directorName = csvRecord.get("DirectorName");
                     int playTime = Integer.parseInt(csvRecord.get("PlayTime"));
-                    int qty = Integer.parseInt(csvRecord.get("Quantity"));
                     cDs.put(key, new CdDvd(
                             title,
                             Integer.parseInt(quantity),
@@ -445,6 +444,7 @@ public abstract class Files {
     public static void printLibraryUserToFile(Library library, String csvFileName) {
         String csvFilePath = DATA_PREFIX + csvFileName;
         StringBuilder sb = new StringBuilder();
+        var users = library.getAllUsers();
         if (java.nio.file.Files.notExists(Path.of(csvFilePath))) {
             File file = new File(csvFilePath);
             File parent = file.getParentFile();
@@ -463,9 +463,9 @@ public abstract class Files {
             FileWriter fr = new FileWriter(new File(csvFilePath), true);
             BufferedWriter br = new BufferedWriter(fr);
             PrintWriter writer = new PrintWriter(br);
-            if (library.getAllUsers().isEmpty()) {
+            if (!users.isEmpty()) {
 
-                for (Map.Entry<Integer, LibraryUser> user : library.getAllUsers().entrySet()) {
+                for (Map.Entry<Integer, LibraryUser> user : users.entrySet()) {
                     sb.append(user.getKey());
                     sb.append(",");
                     sb.append(user.getValue().getName());
@@ -486,6 +486,7 @@ public abstract class Files {
 
     }
 
+
     /*
      Read Users from a given csv file
      */
@@ -500,6 +501,7 @@ public abstract class Files {
                     int authorId = Integer.parseInt(csvRecord.get("UserId"));
                     users.put(authorId, new LibraryUser(name));
                 }
+                System.out.println(GREEN+"User object successfully read from file."+RESET);
             } catch (
                     IOException e) {
                 throw new RuntimeException(e);

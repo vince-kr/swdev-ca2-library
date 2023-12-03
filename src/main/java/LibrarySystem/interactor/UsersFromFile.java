@@ -20,6 +20,7 @@ public class UsersFromFile extends Interaction{
 
         try {
             HashMap<Integer, LibraryUser> users = Files.readUserFromFile("users.csv");
+
             if (!(users == null)) {
                 var sb = new StringBuilder();
                 sb.append(StringFormat.fixedLength(GREEN + "ID", 12));
