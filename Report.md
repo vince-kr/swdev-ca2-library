@@ -1,5 +1,7 @@
 # Library catalogue system (LCS)
 
+Software development - Continuous Assessment 2 - Library management system
+
 ## Introduction
 ![class diagram](src/images/LibraryManagementSystem.jpg "class diagram")
 
