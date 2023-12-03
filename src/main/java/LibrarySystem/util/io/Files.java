@@ -212,7 +212,7 @@ public abstract class Files {
 
     public static HashMap<Integer, BookAudioBook> readBookCsv(String csvFile) {
         HashMap<Integer, BookAudioBook> books = new HashMap<>();
-        if (java.nio.file.Files.exists(Path.of(csvFile))) {
+        if (java.nio.file.Files.notExists(Path.of(csvFile))) {
             csvFile = DATA_PREFIX + csvFile;
             try (FileReader fr = new FileReader(csvFile);
                  CSVParser csvParser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(fr)) {
