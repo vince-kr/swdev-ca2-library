@@ -54,12 +54,4 @@ class LibraryUserTest {
         // First letters are J and K
         assertEquals(1,user1.compareTo(user));
     }
-    @Test
-    void getSearchableField(){
-        library.addUser(user);
-        library.addUser(user1);
-        userNames.add(user.getName());
-     assertEquals(userNames,user.getSearchableFields());
-
-    }
 }

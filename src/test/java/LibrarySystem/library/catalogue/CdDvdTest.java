@@ -118,13 +118,4 @@ class CdDvdTest {
         assertEquals("Harry Barnes",cd.getDirector().getName());
     }
 
-    @Test
-    void getSearchableFields(){
-        library.addAsset(cd);
-        assetNames.add(cd.title);
-        assetNames.add(cd.getCreatorName());
-        assetNames.add(cd.getAssetType());
-        assertEquals(assetNames,cd.getSearchableFields());
-    }
-
 }

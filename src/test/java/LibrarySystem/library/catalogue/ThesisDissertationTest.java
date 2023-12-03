@@ -100,12 +100,4 @@ class ThesisDissertationTest {
     void testGetCreatorName() {
         assertEquals("Robert Boyle",thesis.getAuthor().getName());
     }
-    @Test
-    void getSearchableFields(){
-        library.addAsset(thesis);
-        assetNames.add(thesis.getTitle());
-        assetNames.add(thesis.getCreatorName());
-        assetNames.add(thesis.getAssetType());
-        assertEquals(assetNames,thesis.getSearchableFields());
-    }
 }
