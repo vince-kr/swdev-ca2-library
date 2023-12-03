@@ -30,7 +30,7 @@ Interaction objects are split into two general categories:
 
 User menus are created in the Interactor class. This class is instantiated exactly once, in the program's main method, and handles all user interaction. Its constructor calls a private method that builds up the HashMap of interactions by instantiating a unique class for each menu Interaction or functionality Interaction. The main menu and the main menu's submenus are each constructed in a dedicated method for the sake of organisation.
 
-Menu items are objects of type MenuItem. Each MenuItem takes a String description -- which is presented to the user -- and a String nextInteractionReference which is a key in the allInteractions HashMap. When the user enters their choice for a given menu option, the nextInteractionReference field of the menu is set to the value of the chosen menu item. On the next iteration of the event loop, that new Interaction is presented.
+Menu items are objects of type MenuItem. Each MenuItem takes a `String description`, which is presented to the user, and a `String nextInteractionReference` which is a key in the allInteractions HashMap. When the user enters their choice for a given menu option, the nextInteractionReference field of the menu is set to the value of the chosen menu item. On the next iteration of the event loop, that new Interaction is presented.
 
 ## Package `library`: system logic
 
