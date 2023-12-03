@@ -1,8 +1,5 @@
 package LibrarySystem.util.io;
 
-import LibrarySystem.library.catalogue.Asset;
-
-import javax.xml.validation.Validator;
 import java.util.Scanner;
 
 public abstract class StandardInput {

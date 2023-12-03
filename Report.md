@@ -1,7 +1,7 @@
 # Library catalogue system (LCS)
 
 ## Introduction
-![alt class diagram](src/images/LibraryManagementSystem.jpg "class diagram")
+![class diagram](src/images/LibraryManagementSystem.jpg "class diagram")
 
 The library catalogue system consists of three distinct packages: `interactor`, `library`, and `util`. Each is described at a high level and some design decisions are explained in a little more detail.
 
@@ -37,7 +37,43 @@ Menu items are objects of type MenuItem. Each MenuItem takes a `String descripti
 
 ### Overview
 
-This package contains the system logic that is used by the interactor package. In order to maintain separation, most 
+This package contains the system logic that is used by the interactor package. The library interface defines methods that can be called on the `Library` type which gets passed into every event loop call. These methods are implemented by `LibraryManagement`. Methods that interact with the catalogue of assets are passed on to the library's copy of the `Catalogue` object.
+
+### Loans as a class
+
+While a loan is not a real-world object, defining the occurrence of a loan as a type simplifies development. Once a Loan object exists, there is no reason to differentiate between items in the *catalogue* -- which represents a record of what the library has available -- and the actual *books on shelves*.
+
+An entry in the library catalogue will have a title, creator, and quantity, as well as other fields such as an ISBN number (book) or play time (CD). However, such an entry itself cannot be loaned out -- only the actual asset can.
+
+The choice was the following:
+
+1. Treat each record in the catalogue as *also* representing the actual books
+2. Record loans of assets separately from the catalogue
+
+The `catalogue` package and its `Catalogue` interface are only a catalogue, and not a record of loans. This again ensures separation of concerns. Now when the library needs to check whether a given item in the catalogue is available, it just checks that asset against all currently active loans and counts how many times the asset is already loaned out. If that number is less than the total quantity of the asset in the catalogue, the asset must be available.
 
 ## Package `util`: utility classes
 
+### Overview
+
+The utility package is a collection of loosely related classes with exclusively static methods. Such methods can be used for common operations that do not need to know the current state of an object, but only turn a given input into output according to internal rules.
+
+### `StringFormat`
+
+There are many instances where some list of assets or users needs to be prefixed with a header row and printed in a uniform way. Thanks to the StringFormat class, this is easy and straightforward to do.
+
+### `io`: input/output
+
+#### Standard input
+
+User input from stdin has a habit of making program logic difficult to follow, which in turn makes it difficult to improve. Instead of having `System.out.println()` sprinkled through the business logic, it's much nicer to be able to call a static method that takes a prompt and a response pattern as input and only returns once the user's input matches the provided response pattern.
+
+#### Files
+
+Reading and writing files is not *as* messy as user input, but it does involve something that user input typically doesn't: exception handling. Calling a read or write operation can obviously result in exceptions being thrown: the file does not exist, the user does not have sufficient access, etc.
+
+### `Search`
+
+Finally, having a flexible method for searching any collection keeps the search logic and ugly iterations out of the business logic. `public static boolean matchQuery(Searchable haystack, String needle)` is an example of a straightforward function that simply matches a String query to any of the fields that are exposed by the `Searchable` type. If any field matches, return true; if not, return false. This method is used to filter collections of authors, users, and assets.
+
+Similar functionality can be achieved using Java's `stream()` API by linking calls to `filter()` and `collect()`.
