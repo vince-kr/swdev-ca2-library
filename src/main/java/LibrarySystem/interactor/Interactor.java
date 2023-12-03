@@ -72,6 +72,7 @@ class Interactor {
         filtersMenuInteractions.put("all-borrowed", new ListBorrowedAssets());
         filtersMenuInteractions.put("borrowed-by", new ListBorrowedByUser());
         filtersMenuInteractions.put("created-by", new ListCreatedBy());
+        filtersMenuInteractions.put("all-overdue",new ListLoanOverDue());
         return filtersMenuInteractions;
     }
 

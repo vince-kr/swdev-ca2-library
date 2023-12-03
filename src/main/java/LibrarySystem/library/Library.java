@@ -27,6 +27,7 @@ public interface Library {
 
     AssetsRegister getBorrowedAssets();
 
+    AssetsRegister getOverDueLoans();
     int getLoansOneAsset(Asset asset);
 
     AssetsRegister getAssetsForUser(LibraryUser user);
